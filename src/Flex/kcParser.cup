@@ -1,0 +1,22 @@
+package Flex;
+import java_cup.runtime.*; 
+import java.io.*;
+import java.util.*;
+
+
+terminal PARENC,PARENA,IF,ASIGN,SUMA,MULTP,DIV;
+terminal Integer INT;
+terminal String ID;
+non terminal exp, op, val, return,else;
+start with exp;
+exp ::= PARENA IF PARENA ASIGN val val PARENC return PARENA else PARENC PARENC;
+op	::=	SUMA
+	|MULTP
+	|DIV;
+val	::=	ID
+	|INT;
+return	::= exp
+		|val;
+else	::=exp
+		|op val val
+		|val;

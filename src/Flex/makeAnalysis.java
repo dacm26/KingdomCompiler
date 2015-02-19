@@ -11,12 +11,15 @@ import java.io.File;
  *
  * @author Daniel
  */
-public class MakeLexer {
+public class makeAnalysis {
 
     public static void main(String[] args) {
         try {
-            File file = new File("./src/Flex/kingdomCompiler.flex");
+            String values[] = new String[1];
+            values[0] = "./src/Flex/kcParser.cup";
+            File file = new File("./src/Flex/kcScanner.flex");
             jflex.Main.generate(file);
+            java_cup.Main.main(values);
         } catch (Exception e) {
             System.err.println(e);
         }
