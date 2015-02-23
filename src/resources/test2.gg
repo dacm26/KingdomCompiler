@@ -1,16 +1,12 @@
-#Hola Ingeniero#
-#Proyecto
-Compiladores
-I
-$%&/#
-
-int daniel = 29;
-KChain var = "Testing String";
+ifnt $daniel = 29;
+KChain var = $"Testing String";
 bool test = true;
 bool dasdasd = false;
-char c = 't';
+#Holaasdsadsadasda
+
+char c = 'tla';
 munny d = 27.98;
-munny d2 = 39;
+munny d2 = 2L.98;
 
 for ( false ) {
 	
@@ -48,6 +44,6 @@ Kchain Ability daniel(int x, int y, int z){
 		x = (y <= z)true:false;
 		x = (y != z)true:false;
 	if (var == true || var == false && var != true)
-		print('h');
+		print('hsdfsd');
 	}
 }

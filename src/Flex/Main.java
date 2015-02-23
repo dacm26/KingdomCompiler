@@ -25,9 +25,9 @@ public class Main {
             lex = new kcScanner(new InputStreamReader(new FileInputStream("./src/resources/test.gg")));
             Symbol symbol;
             while ((symbol = lex.next_token()).sym != sym.EOF) {
-                System.out.print(sym.terminalNames[symbol.sym]);
+                System.out.print("Token Name: "+sym.terminalNames[symbol.sym]);
                 if (symbol.value != null) {
-                    System.out.print(" " + symbol.value);
+                    System.out.print(" | Value:" + symbol.value);
                 }
 
                 System.out.println("");
