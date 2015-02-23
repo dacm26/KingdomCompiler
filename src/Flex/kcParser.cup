@@ -1,22 +1,64 @@
 package Flex;
 import java_cup.runtime.*; 
-import java.io.*;
-import java.util.*;
 
+parser code {:
+    public Parser(java.io.Reader input) {
+        super(new Lexer(input));
+    }
+:}
 
-terminal PARENC,PARENA,IF,ASIGN,SUMA,MULTP,DIV;
-terminal Integer INT;
+/* Variables */
+terminal INTEGER, BOOLEAN, DOUBLE, CHAR, STRING;
+
+/* Boolean types */
+terminal TRUE, FALSE;
+
+/* Iterations Structures */
+terminal FOR, WHILE;
+
+/* Decision Structures */
+terminal IF, ELSIF, ELSE, SWITCH, CASE, DEFAULT, BREAK, CONTINUE;
+
+/* Functions */
+terminal MAIN, FUNCTION, RETURN;
+
+/* I/O */
+terminal PRINT, SCAN;
+
+/* Others */
+terminal COMMA, END;
+
+/* Arithmetic operators */
+terminal ADD, MIN, MUL, DIV;
+
+/* Grouping symbols */
+terminal OPAR, CPAR, OCBRA, CCBRA;
+
+/* Arithmetic operators */
+terminal GREATEREQ, LESSEQ, GREATER, LESS;
+
+/* Logic operators */
+terminal NOT, OR, AND, NEQU, EQU;
+
+/* Assignment operator */
+terminal ASSIGN;
+
+/* Values */
 terminal String ID;
-non terminal exp, op, val, return,else;
-start with exp;
-exp ::= PARENA IF PARENA ASIGN val val PARENC return PARENA else PARENC PARENC;
-op	::=	SUMA
-	|MULTP
-	|DIV;
-val	::=	ID
-	|INT;
-return	::= exp
-		|val;
-else	::=exp
-		|op val val
-		|val;
+terminal Integer INT;
+terminal Double DOUBLE;
+terminal Character CHARCONTENT;
+terminal String STRINGCONTENT;
+
+/* Non terminals */
+non terminal exp;
+
+/* Precedences */
+precedence left ADD, MIN;
+precedence left MUL, DIV;
+
+exp ::= exp ADD         {: System.out.println("Hola"); :}
+    | exp FUNCTION      {: System.out.println("Función"); :}
+    | exp INTEGER       {: System.out.println("Entero"); :}
+    | /* Lambda */
+;

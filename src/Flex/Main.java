@@ -5,7 +5,6 @@
  */
 package Flex;
 
-import Flex.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,7 +24,7 @@ public class Main {
         try {
             lex = new kcScanner(new InputStreamReader(new FileInputStream("./src/resources/test.gg")));
             Symbol symbol;
-            while ((symbol = lex.next_token()) != null) {
+            while ((symbol = lex.next_token()).sym != sym.EOF) {
                 System.out.print(sym.terminalNames[symbol.sym]);
                 if (symbol.value != null) {
                     System.out.print(" " + symbol.value);
