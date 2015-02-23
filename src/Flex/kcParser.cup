@@ -2,8 +2,8 @@ package Flex;
 import java_cup.runtime.*; 
 
 parser code {:
-    public Parser(java.io.Reader input) {
-        super(new Lexer(input));
+    public parser(java.io.Reader input) {
+        super(new kcScanner(input));
     }
 :}
 
@@ -26,7 +26,7 @@ terminal MAIN, FUNCTION, RETURN;
 terminal PRINT, SCAN;
 
 /* Others */
-terminal COMMA, END;
+terminal COMMA, END, COLON;
 
 /* Arithmetic operators */
 terminal ADD, MIN, MUL, DIV;
@@ -46,7 +46,7 @@ terminal ASSIGN;
 /* Values */
 terminal String ID;
 terminal Integer INT;
-terminal Double DOUBLE;
+terminal Double DOUBLEVALUE;
 terminal Character CHARCONTENT;
 terminal String STRINGCONTENT;
 

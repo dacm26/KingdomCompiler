@@ -73,6 +73,7 @@ LINEBREAK = \n | \t | \s | \r
 	"scan"                  {return symbol(sym.SCAN);}
 
 	","                     {return symbol(sym.COMMA);}
+        ":"                      {return symbol(sym.COLON);}
 	";"                     {return symbol(sym.END);}
 
 	"+"                     {return symbol(sym.ADD);}
@@ -101,7 +102,7 @@ LINEBREAK = \n | \t | \s | \r
 
 
 	{INT} 			{return symbol(sym.INT, new Integer(Integer.parseInt(yytext())));}
-	{DOUBLE}                 {return symbol(sym.DOUBLE, new Double(Double.parseDouble(yytext())));}
+	{DOUBLE}                 {return symbol(sym.DOUBLEVALUE, new Double(Double.parseDouble(yytext())));}
 	{ID} 			{return symbol(sym.ID, yytext());}
 	{SDELIMITER}            {yybegin(KCHAIN);}
 	{CDELIMITER}            {yybegin(KCHAR);}

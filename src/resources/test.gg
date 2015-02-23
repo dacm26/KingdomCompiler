@@ -1,1 +1,47 @@
-if(snusnu=1)
+int daniel = 29;
+KChain pelamela = "Besame papaito hermoso";
+bool test = true;
+bool dasdasd = false;
+char c = 't';
+munny d = 27.98;
+munny d2 = 39;
+
+for ( false ) {
+	
+}
+
+while (true){
+	if (true){
+
+	} elsif (false){
+
+	} else {
+
+	}
+}
+
+switch (pene){
+	case 1: 
+	ragnarok;
+	default:
+	secondChance;
+}
+
+KChain KingdomHearts(){
+	giff 0;
+}
+
+Kchain Ability daniel(int x, int y, int z){
+	print("besame");
+	scan(x, y + z);	
+	if (var == true){
+		x = y*z;
+		x = y/z;
+		x = y-z;
+		x = (y >= z)true:false;
+		x = (y <= z)true:false;
+		x = (y != z)true:false;
+	if (var == true || var == false && var != true)
+		print('h');
+	}
+}
