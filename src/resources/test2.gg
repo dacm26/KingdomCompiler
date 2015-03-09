@@ -22,7 +22,7 @@ while (true){
 	}
 }
 
-switch (pene){
+switch (asd){
 	case 1: 
 	ragnarok;
 	default:

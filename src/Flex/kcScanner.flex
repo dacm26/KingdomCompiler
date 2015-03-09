@@ -36,7 +36,7 @@ INT = {DIGIT}+
 DOUBLE = ({DIGIT}+.{DIGIT}+)
 COMMENT = #(.|[\r\n])*?#
 STRINGCONTENT = (\\.|[^\"])*
-CHARCONTENT = (\\.|[^\'])
+CHARCONTENT = (\\.|[^\'])*
 
 LINEBREAK = \n | \t | \s | \r
 %state KCHAIN
@@ -122,6 +122,11 @@ LINEBREAK = \n | \t | \s | \r
 
 <KCHAR> {
     {CDELIMITER}            { yybegin(YYINITIAL);                         }
-    {CHARCONTENT}           { return symbol(sym.CHARCONTENT, new Character(yytext().charAt(0))); }
+    {CHARCONTENT}           {   if(yytext().length()>1){
+                                    System.err.println("A char can't handle that kind of darkness <" + yytext() + "> at line: " + (yyline + 1) + " column: " + (yycolumn + 1));
+                                }else{
+                                   return symbol(sym.CHARCONTENT, new Character(yytext().charAt(0))); }
+                                }
+                                
     .                       { System.err.println("Illegal character <" + yytext() + "> at line: " + (yyline + 1) + " column: " + (yycolumn + 1)); }
 }

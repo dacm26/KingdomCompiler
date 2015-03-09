@@ -22,7 +22,7 @@ public class Main {
     public static void main(String[] args) {
         kcScanner lex;
         try {
-            lex = new kcScanner(new InputStreamReader(new FileInputStream("./src/resources/test.gg")));
+            lex = new kcScanner(new InputStreamReader(new FileInputStream("./src/resources/test2.gg")));
             Symbol symbol;
             while ((symbol = lex.next_token()).sym != sym.EOF) {
                 System.out.print("Token Name: "+sym.terminalNames[symbol.sym]);
