@@ -38,11 +38,11 @@ public class parser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\006\000\012\002\ufffd\004\ufffd\026\ufffd\035\ufffd\001" +
-    "\002\000\012\002\007\004\005\026\010\035\006\001\002" +
-    "\000\012\002\ufffe\004\ufffe\026\ufffe\035\ufffe\001\002\000" +
-    "\012\002\001\004\001\026\001\035\001\001\002\000\004" +
-    "\002\000\001\002\000\012\002\uffff\004\uffff\026\uffff\035" +
+    "\000\006\000\012\002\ufffd\004\ufffd\027\ufffd\036\ufffd\001" +
+    "\002\000\012\002\007\004\005\027\010\036\006\001\002" +
+    "\000\012\002\ufffe\004\ufffe\027\ufffe\036\ufffe\001\002\000" +
+    "\012\002\001\004\001\027\001\036\001\001\002\000\004" +
+    "\002\000\001\002\000\012\002\uffff\004\uffff\027\uffff\036" +
     "\uffff\001\002" });
 
   /** Access to parse-action table. */

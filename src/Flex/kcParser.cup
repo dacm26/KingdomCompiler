@@ -8,7 +8,7 @@ parser code {:
 :}
 
 /* Variables */
-terminal INTEGER, BOOLEAN, DOUBLE, CHAR, STRING;
+terminal INTEGER, BOOLEAN, DOUBLE, CHAR, STRING, VOID;
 
 /* Boolean types */
 terminal TRUE, FALSE;

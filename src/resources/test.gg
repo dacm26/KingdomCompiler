@@ -33,7 +33,7 @@ switch (asdsd){
 	secondChance;
 }
 
-KChain KingdomHearts(){
+void KingdomHearts(){
 	giff 0;
 }
 

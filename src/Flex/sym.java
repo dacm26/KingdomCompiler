@@ -8,56 +8,57 @@ package Flex;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int CHARCONTENT = 48;
-  public static final int FUNCTION = 20;
-  public static final int CCBRA = 34;
-  public static final int OPAR = 31;
+  public static final int CHARCONTENT = 49;
+  public static final int FUNCTION = 21;
+  public static final int CCBRA = 35;
+  public static final int OPAR = 32;
   public static final int CHAR = 5;
-  public static final int ELSIF = 12;
-  public static final int DOUBLEVALUE = 47;
-  public static final int CASE = 15;
-  public static final int CPAR = 32;
+  public static final int ELSIF = 13;
+  public static final int DOUBLEVALUE = 48;
+  public static final int CASE = 16;
+  public static final int CPAR = 33;
   public static final int DOUBLE = 4;
   public static final int INTEGER = 2;
-  public static final int GREATER = 37;
-  public static final int CONTINUE = 18;
-  public static final int INT = 46;
-  public static final int LESS = 38;
-  public static final int FOR = 9;
-  public static final int SCAN = 23;
-  public static final int AND = 41;
-  public static final int NOT = 39;
-  public static final int OR = 40;
-  public static final int COMMA = 24;
-  public static final int DIV = 30;
-  public static final int ASSIGN = 44;
-  public static final int LESSEQ = 36;
-  public static final int MIN = 28;
-  public static final int MAIN = 19;
-  public static final int IF = 11;
-  public static final int ID = 45;
+  public static final int GREATER = 38;
+  public static final int CONTINUE = 19;
+  public static final int INT = 47;
+  public static final int LESS = 39;
+  public static final int FOR = 10;
+  public static final int SCAN = 24;
+  public static final int AND = 42;
+  public static final int NOT = 40;
+  public static final int OR = 41;
+  public static final int COMMA = 25;
+  public static final int DIV = 31;
+  public static final int ASSIGN = 45;
+  public static final int LESSEQ = 37;
+  public static final int MIN = 29;
+  public static final int MAIN = 20;
+  public static final int IF = 12;
+  public static final int ID = 46;
   public static final int EOF = 0;
   public static final int BOOLEAN = 3;
-  public static final int RETURN = 21;
-  public static final int TRUE = 7;
+  public static final int RETURN = 22;
+  public static final int TRUE = 8;
   public static final int error = 1;
-  public static final int MUL = 29;
-  public static final int ADD = 27;
-  public static final int BREAK = 17;
-  public static final int SWITCH = 14;
-  public static final int EQU = 43;
-  public static final int COLON = 26;
-  public static final int NEQU = 42;
-  public static final int ELSE = 13;
-  public static final int WHILE = 10;
-  public static final int DEFAULT = 16;
-  public static final int OCBRA = 33;
-  public static final int END = 25;
-  public static final int GREATEREQ = 35;
+  public static final int MUL = 30;
+  public static final int ADD = 28;
+  public static final int BREAK = 18;
+  public static final int VOID = 7;
+  public static final int SWITCH = 15;
+  public static final int EQU = 44;
+  public static final int COLON = 27;
+  public static final int NEQU = 43;
+  public static final int ELSE = 14;
+  public static final int WHILE = 11;
+  public static final int DEFAULT = 17;
+  public static final int OCBRA = 34;
+  public static final int END = 26;
+  public static final int GREATEREQ = 36;
   public static final int STRING = 6;
-  public static final int FALSE = 8;
-  public static final int STRINGCONTENT = 49;
-  public static final int PRINT = 22;
+  public static final int FALSE = 9;
+  public static final int STRINGCONTENT = 50;
+  public static final int PRINT = 23;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -66,6 +67,7 @@ public class sym {
   "DOUBLE",
   "CHAR",
   "STRING",
+  "VOID",
   "TRUE",
   "FALSE",
   "FOR",

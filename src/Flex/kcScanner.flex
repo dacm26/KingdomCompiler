@@ -49,6 +49,7 @@ LINEBREAK = \n | \t | \s | \r
 	"munny"                 {return symbol(sym.DOUBLE);}
 	"char"                  {return symbol(sym.CHAR);}
 	"KChain"                {return symbol(sym.STRING);}
+	"void"                {return symbol(sym.VOID);}
 
 	"true"                  {return symbol(sym.TRUE);}
 	"false"                 {return symbol(sym.FALSE);}
