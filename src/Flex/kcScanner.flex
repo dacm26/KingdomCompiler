@@ -33,12 +33,12 @@ CDELIMITER = [\']
 
 ID = (_|{LETTER})(_|{LETTER}|{DIGIT})*
 INT = {DIGIT}+
-DOUBLE = ({DIGIT}+.{DIGIT}+)
+DOUBLE = ({DIGIT}+\.{DIGIT}+)
 COMMENT = #(.|[\r\n])*?#
 STRINGCONTENT = (\\.|[^\"])*
 CHARCONTENT = (\\.|[^\'])*
 
-LINEBREAK = \n | \t | \s | \r
+LINEBREAK = [ \n\t\r\s]
 %state KCHAIN
 %state KCHAR
 
@@ -101,14 +101,14 @@ LINEBREAK = \n | \t | \s | \r
 	"="                     {return symbol(sym.ASSIGN);}
 
 
-
+        {LINEBREAK}             {}
 	{INT} 			{return symbol(sym.INT, new Integer(Integer.parseInt(yytext())));}
-	{DOUBLE}                 {return symbol(sym.DOUBLEVALUE, new Double(Double.parseDouble(yytext())));}
+	{DOUBLE}                {return symbol(sym.DOUBLEVALUE, new Double(Double.parseDouble(yytext())));}
 	{ID} 			{return symbol(sym.ID, yytext());}
 	{SDELIMITER}            {yybegin(KCHAIN);}
 	{CDELIMITER}            {yybegin(KCHAR);}
 
-	{LINEBREAK}             {}
+	
 	{COMMENT}               {}
 	.                       { System.err.println("Illegal character <" + yytext() + "> at line: " + (yyline + 1) + " column: " + (yycolumn + 1)); }
 

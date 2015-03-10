@@ -22,10 +22,10 @@ public class Main {
     public static void main(String[] args) {
         kcScanner lex;
         try {
-            lex = new kcScanner(new InputStreamReader(new FileInputStream("./src/resources/test.gg")));
             Symbol symbol;
-            while ((symbol = lex.next_token()).sym != sym.EOF) {
-                System.out.print("Token Name: "+sym.terminalNames[symbol.sym]);
+            parser par = new parser(new InputStreamReader(new FileInputStream("./src/resources/test3.gg")));
+            while ((symbol = par.parse()).sym != sym.EOF) {
+                System.out.print("Token Name: " + sym.terminalNames[symbol.sym]);
                 if (symbol.value != null) {
                     System.out.print(" | Value:" + symbol.value);
                 }
@@ -37,6 +37,8 @@ public class Main {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
