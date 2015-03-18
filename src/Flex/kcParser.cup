@@ -2,10 +2,11 @@ package Flex;
 import java_cup.runtime.*; 
 
 parser code {:
-    public parser(java.io.Reader input) {
-        super(new kcScanner(input));
-    }
-:}
+  public parser (java.io.Reader input) {
+    super(new kcScanner(input));
+  }
+:};
+
 
 /* Variables */
 terminal INTEGER, BOOLEAN, DOUBLE, CHAR, STRING, VOID;
@@ -51,14 +52,29 @@ terminal Character CHARCONTENT;
 terminal String STRINGCONTENT;
 
 /* Non terminals */
-non terminal exp;
+non terminal OPM_E, OPM_T, OPM_F;
 
 /* Precedences */
 precedence left ADD, MIN;
 precedence left MUL, DIV;
 
-exp ::= exp ADD         {: System.out.println("Hola"); :}
-    | exp FUNCTION      {: System.out.println("Función"); :}
-    | exp INTEGER       {: System.out.println("Entero"); :}
-    | /* Lambda */
+
+
+/* Operaciones matematicas  */
+
+OPM_E ::=   OPM_E ADD OPM_T         {: System.out.println("Sumando..."); :}
+      |     OPM_E MIN OPM_T         {: System.out.println("Restando..."); :}
+      |     OPM_T                   {: System.out.println("E->T..."); :}
+;
+
+OPM_T ::=   OPM_T MUL OPM_F         {: System.out.println("Multiplicando..."); :}
+      |     OPM_T DIV OPM_F         {: System.out.println("Dividiendo..."); :}
+      |     OPM_F                   {: System.out.println("T->F..."); :}
+
+;
+
+OPM_F ::=   INT                     {: System.out.println("F->num..."); :}
+      |     ID                      {: System.out.println("F->id..."); :}
+      |     OPAR OPM_E CPAR         {: System.out.println("F->(E)..."); :}
+
 ;
