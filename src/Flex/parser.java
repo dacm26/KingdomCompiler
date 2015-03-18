@@ -29,9 +29,17 @@ public class parser extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\007\000\002\002\003\000\002\002\004\000\002\002" +
+    "\000\040\000\002\007\003\000\002\002\004\000\002\010" +
+    "\005\000\002\010\005\000\002\010\003\000\002\011\005" +
+    "\000\002\011\005\000\002\011\003\000\002\012\003\000" +
+    "\002\012\005\000\002\003\003\000\002\003\003\000\002" +
+    "\003\003\000\002\003\003\000\002\003\003\000\002\003" +
+    "\003\000\002\003\003\000\002\006\003\000\002\005\003" +
+    "\000\002\005\003\000\002\005\003\000\002\005\003\000" +
+    "\002\004\003\000\002\004\003\000\002\004\003\000\002" +
+    "\004\003\000\002\002\003\000\002\002\003\000\002\002" +
     "\003\000\002\002\003\000\002\002\003\000\002\002\003" +
-    "\000\002\002\003" });
+    "" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -39,12 +47,37 @@ public class parser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\011\000\016\004\004\005\012\006\005\007\007\010" +
-    "\006\011\010\001\002\000\004\002\uffff\001\002\000\004" +
-    "\002\ufffe\001\002\000\004\002\ufffd\001\002\000\004\002" +
-    "\001\001\002\000\004\002\ufffb\001\002\000\004\002\013" +
-    "\001\002\000\004\002\ufffc\001\002\000\004\002\000\001" +
-    "\002" });
+    "\000\031\000\022\012\006\013\013\042\012\060\015\061" +
+    "\004\062\011\063\010\064\016\001\002\000\016\002\ufff6" +
+    "\036\ufff6\037\ufff6\040\ufff6\041\ufff6\043\ufff6\001\002\000" +
+    "\016\002\ufffd\036\ufffd\037\ufffd\040\024\041\025\043\ufffd" +
+    "\001\002\000\016\002\ufff2\036\ufff2\037\ufff2\040\ufff2\041" +
+    "\ufff2\043\ufff2\001\002\000\004\002\033\001\002\000\016" +
+    "\002\ufff3\036\ufff3\037\ufff3\040\ufff3\041\ufff3\043\ufff3\001" +
+    "\002\000\016\002\ufff5\036\ufff5\037\ufff5\040\ufff5\041\ufff5" +
+    "\043\ufff5\001\002\000\022\012\006\013\013\042\012\060" +
+    "\015\061\004\062\011\063\010\064\016\001\002\000\016" +
+    "\002\ufff1\036\ufff1\037\ufff1\040\ufff1\041\ufff1\043\ufff1\001" +
+    "\002\000\016\002\ufff9\036\ufff9\037\ufff9\040\ufff9\041\ufff9" +
+    "\043\ufff9\001\002\000\016\002\ufff7\036\ufff7\037\ufff7\040" +
+    "\ufff7\041\ufff7\043\ufff7\001\002\000\016\002\ufff4\036\ufff4" +
+    "\037\ufff4\040\ufff4\041\ufff4\043\ufff4\001\002\000\016\002" +
+    "\ufffa\036\ufffa\037\ufffa\040\ufffa\041\ufffa\043\ufffa\001\002" +
+    "\000\010\002\001\036\022\037\021\001\002\000\022\012" +
+    "\006\013\013\042\012\060\015\061\004\062\011\063\010" +
+    "\064\016\001\002\000\022\012\006\013\013\042\012\060" +
+    "\015\061\004\062\011\063\010\064\016\001\002\000\016" +
+    "\002\uffff\036\uffff\037\uffff\040\024\041\025\043\uffff\001" +
+    "\002\000\022\012\006\013\013\042\012\060\015\061\004" +
+    "\062\011\063\010\064\016\001\002\000\022\012\006\013" +
+    "\013\042\012\060\015\061\004\062\011\063\010\064\016" +
+    "\001\002\000\016\002\ufffb\036\ufffb\037\ufffb\040\ufffb\041" +
+    "\ufffb\043\ufffb\001\002\000\016\002\ufffc\036\ufffc\037\ufffc" +
+    "\040\ufffc\041\ufffc\043\ufffc\001\002\000\016\002\ufffe\036" +
+    "\ufffe\037\ufffe\040\024\041\025\043\ufffe\001\002\000\010" +
+    "\036\022\037\021\043\032\001\002\000\016\002\ufff8\036" +
+    "\ufff8\037\ufff8\040\ufff8\041\ufff8\043\ufff8\001\002\000\004" +
+    "\002\000\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -52,10 +85,17 @@ public class parser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\011\000\004\002\010\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\000\031\000\014\003\013\007\006\010\017\011\004\012" +
+    "\016\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001" });
+    "\001\000\012\003\013\010\030\011\004\012\016\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\010" +
+    "\003\013\011\027\012\016\001\001\000\010\003\013\011" +
+    "\022\012\016\001\001\000\002\001\001\000\006\003\013" +
+    "\012\026\001\001\000\006\003\013\012\025\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -124,16 +164,16 @@ class CUP$parser$actions {
       switch (CUP$parser$act_num)
         {
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 0: // type_specifier ::= CHAR 
+          case 0: // OPM_S ::= OPM_E 
             {
               Object RESULT =null;
-		 System.out.println("type_specifier: char"); 
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("type_specifier",0, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+		 System.out.println("OPM_S = OPM_E"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("OPM_S",5, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 1: // $START ::= type_specifier EOF 
+          case 1: // $START ::= OPM_S EOF 
             {
               Object RESULT =null;
 		int start_valleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
@@ -147,7 +187,232 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 2: // type_specifier ::= INTEGER 
+          case 2: // OPM_E ::= OPM_E ADD OPM_T 
+            {
+              Object RESULT =null;
+		 System.out.println("OPM_E: Sumando"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("OPM_E",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 3: // OPM_E ::= OPM_E MIN OPM_T 
+            {
+              Object RESULT =null;
+		 System.out.println("OPM_E: Restando"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("OPM_E",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 4: // OPM_E ::= OPM_T 
+            {
+              Object RESULT =null;
+		 System.out.println("OPM_E: OPM_T"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("OPM_E",6, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 5: // OPM_T ::= OPM_T MUL OPM_F 
+            {
+              Object RESULT =null;
+		 System.out.println("OPM_T: Multiplicando"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("OPM_T",7, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 6: // OPM_T ::= OPM_T DIV OPM_F 
+            {
+              Object RESULT =null;
+		 System.out.println("OPM_T: Dividiendo"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("OPM_T",7, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 7: // OPM_T ::= OPM_F 
+            {
+              Object RESULT =null;
+		 System.out.println("OPM_T: OPM_F"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("OPM_T",7, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 8: // OPM_F ::= type_value 
+            {
+              Object RESULT =null;
+		 System.out.println("OPM_F: type_value"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("OPM_F",8, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 9: // OPM_F ::= OPAR OPM_E CPAR 
+            {
+              Object RESULT =null;
+		 System.out.println("OPM_F: (E)"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("OPM_F",8, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 10: // type_value ::= ID 
+            {
+              Object RESULT =null;
+		 System.out.println("type_value: id"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("type_value",1, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 11: // type_value ::= INT 
+            {
+              Object RESULT =null;
+		 System.out.println("type_specifier: int value"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("type_value",1, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 12: // type_value ::= DOUBLEVALUE 
+            {
+              Object RESULT =null;
+		 System.out.println("type_specifier: double value"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("type_value",1, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 13: // type_value ::= STRINGCONTENT 
+            {
+              Object RESULT =null;
+		 System.out.println("type_specifier: string content"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("type_value",1, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 14: // type_value ::= CHARCONTENT 
+            {
+              Object RESULT =null;
+		 System.out.println("type_specifier: char content"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("type_value",1, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 15: // type_value ::= TRUE 
+            {
+              Object RESULT =null;
+		 System.out.println("type_specifier: true"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("type_value",1, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 16: // type_value ::= FALSE 
+            {
+              Object RESULT =null;
+		 System.out.println("type_specifier: false"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("type_value",1, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 17: // equals_operator ::= EQU 
+            {
+              Object RESULT =null;
+		 System.out.println("equals_operator: equal"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("equals_operator",4, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 18: // arithmetic_operator ::= GREATEREQ 
+            {
+              Object RESULT =null;
+		 System.out.println("arithmetic_operator: great or equal"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("arithmetic_operator",3, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 19: // arithmetic_operator ::= LESSEQ 
+            {
+              Object RESULT =null;
+		 System.out.println("arithmetic_operator: less or equal"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("arithmetic_operator",3, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 20: // arithmetic_operator ::= GREATER 
+            {
+              Object RESULT =null;
+		 System.out.println("arithmetic_operator: greater"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("arithmetic_operator",3, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 21: // arithmetic_operator ::= LESS 
+            {
+              Object RESULT =null;
+		 System.out.println("arithmetic_operator: less"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("arithmetic_operator",3, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 22: // logical_operator ::= NOT 
+            {
+              Object RESULT =null;
+		 System.out.println("logical_operator: not"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("logical_operator",2, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 23: // logical_operator ::= OR 
+            {
+              Object RESULT =null;
+		 System.out.println("logical_operator: or"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("logical_operator",2, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 24: // logical_operator ::= AND 
+            {
+              Object RESULT =null;
+		 System.out.println("logical_operator: and"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("logical_operator",2, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 25: // logical_operator ::= NEQU 
+            {
+              Object RESULT =null;
+		 System.out.println("logical_operator: notEqual"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("logical_operator",2, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 26: // type_specifier ::= CHAR 
+            {
+              Object RESULT =null;
+		 System.out.println("type_specifier: char"); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("type_specifier",0, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 27: // type_specifier ::= INTEGER 
             {
               Object RESULT =null;
 		 System.out.println("type_specifier: integer"); 
@@ -156,7 +421,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 3: // type_specifier ::= DOUBLE 
+          case 28: // type_specifier ::= DOUBLE 
             {
               Object RESULT =null;
 		 System.out.println("type_specifier: double"); 
@@ -165,7 +430,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 4: // type_specifier ::= STRING 
+          case 29: // type_specifier ::= STRING 
             {
               Object RESULT =null;
 		 System.out.println("type_specifier: string"); 
@@ -174,7 +439,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 5: // type_specifier ::= BOOLEAN 
+          case 30: // type_specifier ::= BOOLEAN 
             {
               Object RESULT =null;
 		 System.out.println("type_specifier: bool"); 
@@ -183,7 +448,7 @@ class CUP$parser$actions {
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 6: // type_specifier ::= VOID 
+          case 31: // type_specifier ::= VOID 
             {
               Object RESULT =null;
 		 System.out.println("type_specifier: void"); 
