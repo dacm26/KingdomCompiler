@@ -52,7 +52,8 @@ terminal Character CHARCONTENT;
 terminal String STRINGCONTENT;
 
 /* Non terminals */
-non terminal OPM_E, OPM_T, OPM_F;
+non terminal primary_expression, expression, assignment_expression, assignment_operator, conditional_expression;
+non terminal logical_or_expression, logical_and_expression, inclusive_or_expression;
 
 /* Precedences */
 precedence left ADD, MIN;
@@ -60,21 +61,11 @@ precedence left MUL, DIV;
 
 
 
-/* Operaciones matematicas  */
+/*Primary Expression*/
+primary_expression ::=  ID:identifierValue {: System.out.println(identifierValue); :}
+      |   INT:integerContent               {: System.out.println(integerContent); :}
+      |   STRINGCONTENT:stringContent      {: System.out.println(stringContent); :}
+      |   DOUBLEVALUE:doubleContent        {: System.out.println(doubleContent); :}
+      |   CHARCONTENT:charContent          {: System.out.println(charContent); :}
+      ;
 
-OPM_E ::=   OPM_E ADD OPM_T         {: System.out.println("Sumando..."); :}
-      |     OPM_E MIN OPM_T         {: System.out.println("Restando..."); :}
-      |     OPM_T                   {: System.out.println("E->T..."); :}
-;
-
-OPM_T ::=   OPM_T MUL OPM_F         {: System.out.println("Multiplicando..."); :}
-      |     OPM_T DIV OPM_F         {: System.out.println("Dividiendo..."); :}
-      |     OPM_F                   {: System.out.println("T->F..."); :}
-
-;
-
-OPM_F ::=   INT                     {: System.out.println("F->num..."); :}
-      |     ID                      {: System.out.println("F->id..."); :}
-      |     OPAR OPM_E CPAR         {: System.out.println("F->(E)..."); :}
-
-;
