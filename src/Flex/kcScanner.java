@@ -951,8 +951,7 @@ class kcScanner implements java_cup.runtime.Scanner {
           if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
             zzAtEOF = true;
             zzDoEOF();
-              {     System.out.println("Fin del archivo");
-    return symbol(sym.EOF);
+              {     return symbol(sym.EOF);
  }
           } 
           else {

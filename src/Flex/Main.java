@@ -20,7 +20,6 @@ import java_cup.runtime.Symbol;
 public class Main {
 
     public static void main(String[] args) {
-        kcScanner lex;
         try {
             Symbol symbol;
             parser par = new parser(new InputStreamReader(new FileInputStream("./src/resources/test3.gg")));
@@ -32,7 +31,7 @@ public class Main {
 
                 System.out.println("");
             }
-            System.out.println("");
+            System.out.println("Fin del archivo");
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

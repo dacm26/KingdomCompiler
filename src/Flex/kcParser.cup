@@ -52,50 +52,48 @@ terminal Character CHARCONTENT;
 terminal String STRINGCONTENT;
 
 /* Non terminals */
-non terminal primary_expression, expression, assignment_expression, assignment_operator, conditional_expression;
-non terminal logical_or_expression, logical_and_expression, inclusive_or_expression, unary_expression;
+non terminal type_specifier, type_value, logical_operator,arithmetic_operator, equals_operator;
 
-/* Precedences */
-precedence left ADD, MIN;
-precedence left MUL, DIV;
+/*KC CFG*/
 
 
 
-/*Primary Expression*/
-primary_expression ::=  ID:identifierValue {: System.out.println(identifierValue); :}
-      |   INT:integerContent               {: System.out.println(integerContent); :}
-      |   STRINGCONTENT:stringContent      {: System.out.println(stringContent); :}
-      |   DOUBLEVALUE:doubleContent        {: System.out.println(doubleContent); :}
-      |   CHARCONTENT:charContent          {: System.out.println(charContent); :}
-      |   OPAR expression CPAR            
-      ;
+/*Equals Operator*/
+equals_operator ::= EQU     {: System.out.println("equals_operator: equal"); :}
+;
 
-/*Expression*/
-expression ::= assignment_expression
-	| expression COMMA assignment_expression
-	;
+/*Arithmetic Operators*/
+arithmetic_operator ::= GREATEREQ   {: System.out.println("arithmetic_operator: great or equal"); :}
+        | LESSEQ            {: System.out.println("arithmetic_operator: less or equal"); :}
+        | GREATER           {: System.out.println("arithmetic_operator: greater"); :}
+        | LESS              {: System.out.println("arithmetic_operator: less"); :}
+;
 
-/*Assignment Expression*/
-assignment_expression ::=   conditional_expression
-        | unary_expression assignment_operator assignment_expression
-	;
+/* Logical Operators */
+logical_operator ::= NOT    {: System.out.println("logical_operator: not"); :}
+        | OR                {: System.out.println("logical_operator: or"); :}
+        | AND               {: System.out.println("logical_operator: and"); :}
+        | NEQU              {: System.out.println("logical_operator: notEqual"); :}
+;
 
-/*Unary Expressions*/
-unary_expression ::=   postfix_expression
-        ;
+/*Type Values*/
+type_value ::= ID           {: System.out.println("type_value: id"); :}
+	| INT               {: System.out.println("type_specifier: int value"); :}
+	| DOUBLEVALUE       {: System.out.println("type_specifier: double value"); :}
+	| STRINGCONTENT     {: System.out.println("type_specifier: string content"); :}
+        | CHARCONTENT       {: System.out.println("type_specifier: char content"); :}
+        | TRUE              {: System.out.println("type_specifier: true"); :}
+        | FALSE             {: System.out.println("type_specifier: false"); :}
+; 
 
-/*Assignment Operator*/
-assignment_operator ::=  ASSIGN
-	; 
-
-/*Conditional Expression*/
-conditional_expression ::=   logical_or_expressions
-	;
-
-
-
-
-
+/*Type specifiers*/
+type_specifier ::= CHAR     {: System.out.println("type_specifier: char"); :}
+	| INTEGER           {: System.out.println("type_specifier: integer"); :}
+	| DOUBLE            {: System.out.println("type_specifier: double"); :}
+	| STRING            {: System.out.println("type_specifier: string"); :}
+        | BOOLEAN           {: System.out.println("type_specifier: bool"); :}
+        | VOID              {: System.out.println("type_specifier: void"); :}
+; 
 
 
 
