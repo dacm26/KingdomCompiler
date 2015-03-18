@@ -53,7 +53,7 @@ terminal String STRINGCONTENT;
 
 /* Non terminals */
 non terminal primary_expression, expression, assignment_expression, assignment_operator, conditional_expression;
-non terminal logical_or_expression, logical_and_expression, inclusive_or_expression;
+non terminal logical_or_expression, logical_and_expression, inclusive_or_expression, unary_expression;
 
 /* Precedences */
 precedence left ADD, MIN;
@@ -67,5 +67,37 @@ primary_expression ::=  ID:identifierValue {: System.out.println(identifierValue
       |   STRINGCONTENT:stringContent      {: System.out.println(stringContent); :}
       |   DOUBLEVALUE:doubleContent        {: System.out.println(doubleContent); :}
       |   CHARCONTENT:charContent          {: System.out.println(charContent); :}
+      |   OPAR expression CPAR            
       ;
+
+/*Expression*/
+expression ::= assignment_expression
+	| expression COMMA assignment_expression
+	;
+
+/*Assignment Expression*/
+assignment_expression ::=   conditional_expression
+        | unary_expression assignment_operator assignment_expression
+	;
+
+/*Unary Expressions*/
+unary_expression ::=   postfix_expression
+        ;
+
+/*Assignment Operator*/
+assignment_operator ::=  ASSIGN
+	; 
+
+/*Conditional Expression*/
+conditional_expression ::=   logical_or_expressions
+	;
+
+
+
+
+
+
+
+
+
 
