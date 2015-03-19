@@ -51,14 +51,22 @@ terminal Double DOUBLEVALUE;
 terminal Character CHARCONTENT;
 terminal String STRINGCONTENT;
 
+
 /* Non terminals */
 non terminal type_specifier, type_value, logical_operator,arithmetic_operator ,equals_operator;
 non terminal OPM_S, OPM_E, OPM_T, OPM_F;
+non terminal pre_assign_statement,assign_value ,assign_statement;
 
 /*KC CFG*/
 
+/*Assignation statements*/
+assign_statement ::= pre_assign_statement OPM_S END  {: System.out.println("Asignando like a boss"); :}
+;
 
-/* PEMDAS Value */
+pre_assign_statement ::= type_specifier ID ASSIGN    {: System.out.println("Pre-Asignando like a boss"); :}
+;
+
+/* All values with operations */
 
 OPM_S ::= OPM_E                     {: System.out.println("OPM_S = OPM_E"); :}
 ;
@@ -77,19 +85,6 @@ OPM_T ::=   OPM_T MUL OPM_F         {: System.out.println("OPM_T: Multiplicando"
 OPM_F ::=   type_value              {: System.out.println("OPM_F: type_value"); :}
       |     OPAR OPM_E CPAR         {: System.out.println("OPM_F: (E)"); :}
 ;
-
-/*Type Values*/
-type_value ::= ID           {: System.out.println("type_value: id"); :}
-	| INT               {: System.out.println("type_specifier: int value"); :}
-	| DOUBLEVALUE       {: System.out.println("type_specifier: double value"); :}
-	| STRINGCONTENT     {: System.out.println("type_specifier: string content"); :}
-        | CHARCONTENT       {: System.out.println("type_specifier: char content"); :}
-        | TRUE              {: System.out.println("type_specifier: true"); :}
-        | FALSE             {: System.out.println("type_specifier: false"); :}
-;
-
-
-
 
 /*Equals Operator*/
 equals_operator ::= EQU     {: System.out.println("equals_operator: equal"); :}
@@ -120,5 +115,12 @@ type_specifier ::= CHAR     {: System.out.println("type_specifier: char"); :}
         | VOID              {: System.out.println("type_specifier: void"); :}
 ; 
 
-
-
+/*Type Values*/
+type_value ::= ID           {: System.out.println("type_value: id"); :}
+	| INT               {: System.out.println("type_value: int value"); :}
+	| DOUBLEVALUE       {: System.out.println("type_value: double value"); :}
+	| STRINGCONTENT     {: System.out.println("type_value: string content"); :}
+        | CHARCONTENT       {: System.out.println("type_value: char content"); :}
+        | TRUE              {: System.out.println("type_value: true"); :}
+        | FALSE             {: System.out.println("type_value: false"); :}
+;
