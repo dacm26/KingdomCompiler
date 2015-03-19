@@ -55,15 +55,26 @@ terminal String STRINGCONTENT;
 /* Non terminals */
 non terminal type_specifier, type_value, logical_operator,arithmetic_operator ,equals_operator;
 non terminal OPM_S, OPM_E, OPM_T, OPM_F;
-non terminal pre_assign_statement,assign_value ,assign_statement;
+non terminal pre_assign_statement, assign_statement;
+non terminal declaration_statement, variable_statement;
 
 /*KC CFG*/
+
+variable_statement ::= assign_statement             {: System.out.println("assign_statement a variable_statement"); :}
+     | declaration_statement                        {: System.out.println("declaration_statement a variable_statement"); :}
+;
 
 /*Assignation statements*/
 assign_statement ::= pre_assign_statement OPM_S END  {: System.out.println("Asignando like a boss"); :}
 ;
 
-pre_assign_statement ::= type_specifier ID ASSIGN    {: System.out.println("Pre-Asignando like a boss"); :}
+pre_assign_statement ::= declaration_statement ASSIGN    {: System.out.println("Pre-Asignando like a boss"); :}
+;
+
+/*Declaration statement*/
+declaration_statement ::= declaration_statement END {: System.out.println("Declarando like a boss"); :}
+      |     declaration_statement COMMA ID          {: System.out.println("Declarando varios like a boss"); :}
+      |     type_specifier ID                       {: System.out.println("Pre-Declarando like a boss"); :}
 ;
 
 /* All values with operations */
