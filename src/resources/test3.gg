@@ -1,1 +1,1 @@
-bool a,b,c, d1, _a;
+bool a=a+1;
