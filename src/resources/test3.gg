@@ -1,2 +1,35 @@
+int i,x,f;
+bool x,f,t;
 
-123        *                         3 /2 +1-(   89 )
+int KingdomHearts(int x, int f, int y){
+    if ( true ) {
+        if ( true && false ) {
+            int i;
+            i = 3;
+        }
+    } else if ( i == true ) {
+        while (false){
+            ;
+            switch (i){
+                case 1: {
+                    ragnarok;
+                };
+                case 2: {
+                    secondChance;  
+                };
+                default: error();
+            }
+        }
+    } else if ( true ) {
+
+
+    } else {
+
+    }
+    giff 0;
+}
+
+void Daniel (){
+
+    giff 0;
+}
