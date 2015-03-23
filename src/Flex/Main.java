@@ -9,7 +9,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java_cup.runtime.Symbol;
+    import java_cup.runtime.Symbol;
 
 /**
  *
@@ -18,7 +18,7 @@ import java_cup.runtime.Symbol;
 public class Main {
 
     public static void main(String[] args) {
-        try {
+            try {
             Symbol symbol;
             parser par = new parser(new InputStreamReader(new FileInputStream("./src/resources/test3.gg")));
             symbol = par.parse();

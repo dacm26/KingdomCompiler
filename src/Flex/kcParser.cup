@@ -2,7 +2,7 @@ package Flex;
 import java_cup.runtime.*; 
 
 parser code {:
-     public static int errors = 0;
+    public static int errors = 0;
     public static kcScanner s;
 
     public parser(java.io.Reader input) {
@@ -10,6 +10,7 @@ parser code {:
     }
 
     public void report_error(String message, Object info) {
+
         if (info instanceof java_cup.runtime.Symbol){
             java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol)info);
             errors++;
@@ -20,9 +21,14 @@ parser code {:
             if (info instanceof java_cup.runtime.Symbol) {
                 m.append("(" + info.toString() + ")");
             }
-            m.append(" : " + message);
-            System.err.println(m);
+        m.append(" : " + message);
+        System.err.println(m);
         }
+
+    }
+    public void report_fatal_error(String message, Object info) {
+        report_error(message, info);
+        throw new RuntimeException("Fatal Syntax Error");
     }
 :};
 
@@ -93,6 +99,7 @@ external_declaration ::=   function_definition external_declaration       						
 
 /*Main Function*/
 main_function ::= declaration_specifiers main_declarator compound_statement          				{:System.out.println("Main_Function -> Declaration_Specifiers Main_Declarator Compound_Statement");:}  
+        |	error:e                                                                                                         {: parser.report_error("main function",e); :}            
         ;
 
 /*Function Declaration*/
@@ -100,7 +107,9 @@ function_definition ::=   declaration_specifiers declarator declaration_list com
 	| declaration_specifiers declarator compound_statement                                          {:System.out.println("Function_Definition -> Function_Definition declaration_specifiers declarator compound_statement");:}
 	| declarator declaration_list compound_statement                                                {:System.out.println("Function_Definition -> Function_Definition declarator declaration_list compound_statement");:}
 	| declarator compound_statement                                                                 {:System.out.println("Function_Definition -> Function_Definition declarator compound_statement");:}
-	;
+	| error:e                                                                                                         {: parser.report_error("function definition",e); :}    
+
+        ;
 
 /*Translation Unit*/
 translation_unit ::=   external_declaration                               							{:System.out.println("Translation_Unit -> External_Declaration");:}
@@ -116,9 +125,12 @@ jump_statement ::=   CONTINUE END                                     								{:
 
 /*Iteration Statements*/
 iteration_statement ::=   WHILE OPAR expression CPAR statement                            			{:System.out.println("Iteration_Statement -> while ( Expression ) Statement");:}
-	| FOR OPAR expression_statement expression_statement CPAR statement               				{:System.out.println("Iteration_Statement -> for ( Expression_Statement Expression_Statement ) Statement");:}
+	| WHILE error:e                                                                                                         {: parser.report_error("while iteration error",e); :}          
+        | FOR OPAR expression_statement expression_statement CPAR statement               				{:System.out.println("Iteration_Statement -> for ( Expression_Statement Expression_Statement ) Statement");:}
 	| FOR OPAR expression_statement expression_statement expression CPAR statement    				{:System.out.println("Iteration_Statement -> for ( Expression_Statement Expression_Statemenet Expression ) Statement ");:}
-	;
+        | FOR error:e                                                                                                         {: parser.report_error("for iteration error",e); :}          
+
+        ;
 
 /*Selection Statements*/
 selection_statement ::=   IF OPAR expression CPAR statement              							{:System.out.println("Selection_Statement -> if ( Expression ) Statement");:}
