@@ -30,17 +30,14 @@ parser code {:
 /* Variables */
 terminal INTEGER, BOOLEAN, DOUBLE, CHAR, STRING, VOID;
 
-/* Boolean types */
-terminal TRUE, FALSE;
-
 /* Iterations Structures */
 terminal FOR, WHILE;
 
 /* Decision Structures */
-terminal IF, ELSIF, ELSE, SWITCH, CASE, DEFAULT, BREAK, CONTINUE;
+terminal IF, ELSE, SWITCH, CASE, DEFAULT, BREAK, CONTINUE;
 
 /* Functions */
-terminal MAIN, FUNCTION, RETURN;
+terminal MAIN, RETURN;
 
 /* I/O */
 terminal PRINT, SCAN;
@@ -55,10 +52,10 @@ terminal ADD, MIN, MUL, DIV;
 terminal OPAR, CPAR, OCBRA, CCBRA;
 
 /* Arithmetic operators */
-terminal GREATEREQ, LESSEQ, GREATER, LESS;
+terminal GREATEREQ, LESSEQ, GREATER, LESS, QUES;
 
 /* Logic operators */
-terminal NOT, OR, AND, NEQU, EQU;
+terminal OR, AND, NEQU, EQU;
 
 /* Assignment operator */
 terminal ASSIGN;
@@ -69,89 +66,263 @@ terminal Integer INT;
 terminal Double DOUBLEVALUE;
 terminal Character CHARCONTENT;
 terminal String STRINGCONTENT;
+terminal Boolean TRUE;
+terminal Boolean FALSE;
 
 
 /* Non terminals */
-non terminal type_specifier, type_value, logical_operator,arithmetic_operator ,equals_operator;
-non terminal OPM_S, OPM_E, OPM_T, OPM_F;
-non terminal pre_assign_statement, assign_statement;
-non terminal declaration_statement, variable_statement;
+non terminal primary_expression, expression, assignment_expression, assignment_operator, conditional_expression, relational_expression, equality_expression, parameter_declaration, parameter_type_list, cast_expression;
+non terminal logical_or_expression, logical_and_expression, additive_expression, multiplicative_expression, unary_expression, postfix_expression, argument_expression_list, parameter_list;
+non terminal declaration, declaration_list, declaration_specifiers, init_declarator_list, init_declarator, initializer, initializer_list, declarator, direct_declarator, identifier_list, type_specifier, selection_statement;
+non terminal main_function_declaration, main_function, main_declarator, iteration_statement, statement, statement_list, labeled_statement, compound_statement, expression_statement, jump_statement, function_definition, external_declaration, translation_unit, two_functions, selection_statement_else;
 
-/*KC CFG*/
+/* Precedences */
+precedence left ADD, MIN;
+precedence left MUL, DIV;
+precedence nonassoc ELSE;
 
-variable_statement ::= assign_statement             {: System.out.println("assign_statement a variable_statement"); :}
-     | declaration_statement                        {: System.out.println("declaration_statement a variable_statement"); :}
-     |	error:e                                     {: parser.report_error("variable_declaration",e); :}
-;
+/*Main Function Declaration*/
+main_function_declaration ::= declaration main_function_declaration       							{:System.out.println("Main_Function_Declaration -> Declaration Main_Function_Declaration");:}
+        |  main_function external_declaration                             							{:System.out.println("Main_Function_Declaration -> Main_Function External_Declaration");:}
+        ;
 
-/*Assignation statements*/
-assign_statement ::= pre_assign_statement OPM_S END  {: System.out.println("Asignando like a boss"); :}
-;
+/*External Function/Statement Declarations*/
+external_declaration ::=   function_definition external_declaration       							{:System.out.println("External_Declaration -> Function_Declaration External_Declaration");:}
+        |                                                                 							{:System.out.println("External_Declaration -> Lambda");:} 
+	;
 
-pre_assign_statement ::= declaration_statement ASSIGN    {: System.out.println("Pre-Asignando like a boss"); :}
-;
+/*Main Function*/
+main_function ::= declaration_specifiers main_declarator compound_statement          				{:System.out.println("Main_Function -> Declaration_Specifiers Main_Declarator Compound_Statement");:}  
+        ;
 
-/*Declaration statement*/
-declaration_statement ::= declaration_statement END {: System.out.println("Declarando like a boss"); :}
-      |     declaration_statement COMMA ID          {: System.out.println("Declarando varios like a boss"); :}
-      |     type_specifier ID                       {: System.out.println("Pre-Declarando like a boss"); :}
-;
+/*Function Declaration*/
+function_definition ::=   declaration_specifiers declarator declaration_list compound_statement     {:System.out.println("Function_Definition -> Function_Definition declaration_specifiers declarator declaration_list compound_statement");:}
+	| declaration_specifiers declarator compound_statement                                          {:System.out.println("Function_Definition -> Function_Definition declaration_specifiers declarator compound_statement");:}
+	| declarator declaration_list compound_statement                                                {:System.out.println("Function_Definition -> Function_Definition declarator declaration_list compound_statement");:}
+	| declarator compound_statement                                                                 {:System.out.println("Function_Definition -> Function_Definition declarator compound_statement");:}
+	;
 
-/* All values with operations */
+/*Translation Unit*/
+translation_unit ::=   external_declaration                               							{:System.out.println("Translation_Unit -> External_Declaration");:}
+	| translation_unit external_declaration                           								{:System.out.println("Translation_Unit -> Translation_Unit External_Declaration");:}
+	;
 
-OPM_S ::= OPM_E                     {: System.out.println("OPM_S = OPM_E"); :}
-;
+/*Jump Statements*/
+jump_statement ::=   CONTINUE END                                     								{:System.out.println("Jump_Statement -> secondChance;");:}
+	| BREAK END                                                       								{:System.out.println("Jump_Statement -> ragnarok;");:}
+	| RETURN END                                                      								{:System.out.println("Jump_Statement -> return;");:}
+	| RETURN expression END                                           								{:System.out.println("Jump_Statement -> return Expression;");:}
+	;
 
-OPM_E ::=   OPM_E ADD OPM_T         {: System.out.println("OPM_E: Sumando"); :}
-      |     OPM_E MIN OPM_T         {: System.out.println("OPM_E: Restando"); :}
-      |     OPM_T                   {: System.out.println("OPM_E: OPM_T"); :}
-;
+/*Iteration Statements*/
+iteration_statement ::=   WHILE OPAR expression CPAR statement                            			{:System.out.println("Iteration_Statement -> while ( Expression ) Statement");:}
+	| FOR OPAR expression_statement expression_statement CPAR statement               				{:System.out.println("Iteration_Statement -> for ( Expression_Statement Expression_Statement ) Statement");:}
+	| FOR OPAR expression_statement expression_statement expression CPAR statement    				{:System.out.println("Iteration_Statement -> for ( Expression_Statement Expression_Statemenet Expression ) Statement ");:}
+	;
 
-OPM_T ::=   OPM_T MUL OPM_F         {: System.out.println("OPM_T: Multiplicando"); :}
-      |     OPM_T DIV OPM_F         {: System.out.println("OPM_T: Dividiendo"); :}
-      |     OPM_F                   {: System.out.println("OPM_T: OPM_F"); :}
+/*Selection Statements*/
+selection_statement ::=   IF OPAR expression CPAR statement              							{:System.out.println("Selection_Statement -> if ( Expression ) Statement");:}
+        | IF OPAR expression CPAR statement ELSE statement               							{:System.out.println("Selection_Statement -> if ( Expression ) Statement ELSE statement");:}
+	| SWITCH OPAR expression CPAR statement                          	 							{:System.out.println("Selection_Statement -> switch ( Expression ) Statement");:}
+	;
 
-;
+/*Expression Statements*/
+expression_statement ::=   END                                           							{:System.out.println("Expression_Statement -> ;");:}
+	| expression END                                                 								{:System.out.println("Expression_Statement -> Expression;");:}
+	;
 
-OPM_F ::=   type_value              {: System.out.println("OPM_F: type_value"); :}
-      |     OPAR OPM_E CPAR         {: System.out.println("OPM_F: (E)"); :}
-;
+/*Statement List*/
+statement_list ::=   statement                                           							{:System.out.println("Statement_List -> Statement");:}
+	| statement_list statement                                       								{:System.out.println("Statement_List -> Statement_List Statement");:}
+	;
 
-/*Equals Operator*/
-equals_operator ::= EQU     {: System.out.println("equals_operator: equal"); :}
-;
+/*Declaration Lists*/
+declaration_list ::=   declaration                                       							{:System.out.println("Declaration_List -> Declaration");:}
+	| declaration_list declaration                                   	 							{:System.out.println("Declaration_List -> Declaration_List Declaration");:}
+	;
 
-/*Arithmetic Operators*/
-arithmetic_operator ::= GREATEREQ   {: System.out.println("arithmetic_operator: great or equal"); :}
-        | LESSEQ            {: System.out.println("arithmetic_operator: less or equal"); :}
-        | GREATER           {: System.out.println("arithmetic_operator: greater"); :}
-        | LESS              {: System.out.println("arithmetic_operator: less"); :}
-;
+/*Compound Statements*/
+compound_statement ::=   OCBRA CCBRA                                 								{:System.out.println("Compound Statement -> {}");:}
+	| OCBRA statement_list CCBRA                                     								{:System.out.println("Compound Statement -> { Statement_List }");:}
+	| OCBRA declaration_list CCBRA                                   								{:System.out.println("Compound Statement -> { Declaration_List }");:}
+	| OCBRA declaration_list statement_list CCBRA                    								{:System.out.println("Compound Statement -> { Declaration_List Statement_List}");:}
+	;
 
-/* Logical Operators */
-logical_operator ::= NOT    {: System.out.println("logical_operator: not"); :}
-        | OR                {: System.out.println("logical_operator: or"); :}
-        | AND               {: System.out.println("logical_operator: and"); :}
-        | NEQU              {: System.out.println("logical_operator: notEqual"); :}
-;
+/*Label Statement*/
+labeled_statement ::=   ID:identifier COLON statement                								{:System.out.println("Labeled_Statement = > " + identifier + ": Statement");:}
+	| CASE conditional_expression COLON statement                    								{:System.out.println("Labeled_Statement = > case Conditional_Expression: Statement");:}
+	| DEFAULT COLON statement                                        								{:System.out.println("Labeled_Statement = > default: Statement");:}
+	;
 
+/*Statement Generalization*/
+statement ::=   labeled_statement                                   								{:System.out.println("Statement -> Labeled_Statement");:}
+	| compound_statement                                            								{:System.out.println("Statement -> Compound_Statement");:}
+	| expression_statement                                          								{:System.out.println("Statement -> Expression_Statement");:}
+	| selection_statement                                           								{:System.out.println("Statement -> Selection_Statement");:}
+	| iteration_statement                                           								{:System.out.println("Statement -> Iteration_Statement");:}
+	| jump_statement                                                								{:System.out.println("Statement -> Jump_Statement");:}
+	;
 
+/*Initializer List*/
+initializer_list ::=   initializer                                      							{:System.out.println("Initializer_List -> Initializer");:}      
+	| initializer_list COMMA initializer                            								{:System.out.println("Initializer_List -> Initializer_List , Initializer");:}
+	;
+
+/*Initializer*/
+initializer ::=     assignment_expression                           								{:System.out.println("Initializer ->  Assignment Expression");:}
+	| OCBRA initializer_list CCBRA                                  								{:System.out.println("Initializer ->  { Initializer_List }");:}
+	| OCBRA initializer_list COMMA CCBRA                            								{:System.out.println("Initializer -> { Initializer_List , }");:}
+	;
+
+/*Identifier List
+identifier_list ::=   ID:id                                         								{:System.out.println("Identifier_List -> " + id);:}
+	| identifier_list COMMA ID:id                                   								{:System.out.println("Identifier_List -> Identifier_List, " + id);:}
+	;
+
+/*Parameter Declaration*/
+parameter_declaration ::= declaration_specifiers declarator         								{:System.out.println("Parameter_Declaration -> Declaration_Specifiers Declarator");:}
+	| declaration_specifiers                                        								{:System.out.println("Parameter_Declaration -> Declaration_Specifiers");:}
+	;
+
+/*Parameter List*/
+parameter_list ::=   parameter_declaration                          								{:System.out.println("Parameter_List -> Parameter_Declaration");:}
+	| parameter_list COMMA parameter_declaration                    								{:System.out.println("Parameter_List -> Parameter_List , Parameter_Declaration");:}
+	;
+
+/*Parameter Type List*/
+parameter_type_list ::=   parameter_list                                							{:System.out.println("Parameter_Type_List -> Parameter_List");:}
+	;
+
+/*Direct Declarations*/
+direct_declarator ::=   ID:identifier                               								{:System.out.println("Direct_Declarator -> Identifier: " + identifier);:}
+	| OPAR declarator CPAR                                          								{:System.out.println("Direct_Declarator -> (Declarator)");:}
+        | direct_declarator OPAR parameter_type_list CPAR           								{:System.out.println("Direct_Declarator -> Direct_Declarator ( Parameter_Type_List )");:}
+	| direct_declarator OPAR identifier_list CPAR                   								{:System.out.println("Direct_Declarator -> Direct_Declarator ( Identifier_List ) ");:}
+	| direct_declarator OPAR CPAR                                   								{:System.out.println("Direct_Declarator -> Direct_Declarator ()");:}
+	;
+
+/*Declarator*/
+declarator ::=   direct_declarator                                      							{:System.out.println("Declarator -> Direct Declarator");:}
+	;
+
+/*Main Declarator*/
+main_declarator ::=   MAIN                                              							{:System.out.println("Main_Declarator -> KingdomHearts");:}
+        | main_declarator OPAR parameter_type_list CPAR                 							{:System.out.println("Main_Declarator -> Main_Declarator ( Parameter_Type_List )");:}
+        | main_declarator OPAR identifier_list CPAR                     							{:System.out.println("Main_Declarator -> Main_Declarator ( Identifier_List )");:}
+        | main_declarator OPAR CPAR                                     							{:System.out.println("Main_Declarator -> Main_Declarator ()");:}
+        ;
 
 /*Type specifiers*/
-type_specifier ::= CHAR     {: System.out.println("type_specifier: char"); :}
-	| INTEGER           {: System.out.println("type_specifier: integer"); :}
-	| DOUBLE            {: System.out.println("type_specifier: double"); :}
-	| STRING            {: System.out.println("type_specifier: string"); :}
-        | BOOLEAN           {: System.out.println("type_specifier: bool"); :}
-        | VOID              {: System.out.println("type_specifier: void"); :}
-; 
+type_specifier ::= CHAR                                                 							{:System.out.println("Type_Specifier CHARACTER");:}
+	| INTEGER                                                       								{:System.out.println("Type_Specifier INTEGER");:}
+	| DOUBLE                                                        								{:System.out.println("Type_Specifier DOUBLE");:}
+	| STRING                                                        								{:System.out.println("Type_Specifier STRING");:}
+        | BOOLEAN                                                       							{:System.out.println("Type_Specifier BOOLEAN");:}
+        | VOID                                                          							{:System.out.println("Type_Specifier VOID");:}
+	;
 
-/*Type Values*/
-type_value ::= ID           {: System.out.println("type_value: id"); :}
-	| INT               {: System.out.println("type_value: int value"); :}
-	| DOUBLEVALUE       {: System.out.println("type_value: double value"); :}
-	| STRINGCONTENT     {: System.out.println("type_value: string content"); :}
-        | CHARCONTENT       {: System.out.println("type_value: char content"); :}
-        | TRUE              {: System.out.println("type_value: true"); :}
-        | FALSE             {: System.out.println("type_value: false"); :}
-;
+/*Initialize Declarator*/
+init_declarator ::=   declarator                                        							{:System.out.println("Init_Declarator -> Declarator");:}
+	| declarator EQU initializer                                    								{:System.out.println("Init_Declarator -> Declarator = Initializer");:}
+	;
+
+/*Initialize Declaration Lists*/
+init_declarator_list ::=   init_declarator                              							{:System.out.println("Init_Declarator_List -> Init_Declarator");:}
+	| init_declarator_list COMMA init_declarator                    								{:System.out.println("Init_Declarator_List -> Init_Declarator_List , Init_Declarator");:}
+	;
+
+/*Declaration Specifiers*/
+declaration_specifiers ::=   type_specifier                             							{:System.out.println("Declaration_Specifiers -> Type_Specifiers");:}
+	| type_specifier declaration_specifiers                         								{:System.out.println("Declaration_Specifiers -> Type_Specifiers Declaration_Specifiers");:}
+	;
+
+/*Declarations*/
+declaration ::=  declaration_specifiers END                             							{:System.out.println("Declaration -> Declaration_Specifiers ;");:}
+	| declaration_specifiers init_declarator_list END               								{:System.out.println("Declaration -> Declaration_Specifiers Init_Declarator_List ;");:}
+	;
+
+/*Expression*/
+expression ::= assignment_expression                                    							{:System.out.println("Expression -> Assignment_Expression");:}
+	| expression COMMA assignment_expression                        								{:System.out.println("Expression -> Expression , Assignment_Expression");:}
+	;
+
+/*Assignment Operator*/
+assignment_operator ::=  ASSIGN                                         							{:System.out.println("Assignment_Operator -> =");:}
+	; 
+
+/*Assignment Expression*/
+assignment_expression ::=   conditional_expression                      							{:System.out.println("Assignment_Expression -> Conditional_Expression");:}
+        | unary_expression assignment_operator assignment_expression    							{:System.out.println("Assignment_Expression -> Unary_Expression Assignment_Operator Assignment_Expression");:}
+	;
+
+/*Conditional Expression*/
+conditional_expression ::=   logical_or_expression                      							{:System.out.println("Conditional_Expression -> Logical_OR_Expression");:}
+        | logical_or_expression QUES expression COLON conditional_expression    					{:System.out.println("Conditional_Expression -> Logical_OR_Expression ? Expression : Conditional_Expression");:}
+	;
+
+/*Logical OR expression*/
+logical_or_expression ::=   logical_and_expression                      							{:System.out.println("Logical_OR_Expression -> Logical_AND_Expression");:}               
+	| logical_or_expression OR logical_and_expression               								{:System.out.println("Logical_OR_Expression -> Logical_OR_Expression OR Logical_AND_Expression");:} 
+	;
+
+/*Logical AND expression*/      
+logical_and_expression ::=   equality_expression                        							{:System.out.println("Logical_AND_Expression -> Equality_Expression");:} 
+	|   logical_and_expression AND equality_expression              								{:System.out.println("Logical_AND_Expression -> Logical_AND_Expression AND Equality_Expression");:} 
+	;
+
+/*Equality Expression*/
+equality_expression ::=   relational_expression                     								{:System.out.println("Equality_Expression -> Relation_Expression");:} 
+	| equality_expression EQU relational_expression                 								{:System.out.println("Equality_Expression -> Equality_Expression == Relational_Expression");:} 
+	| equality_expression NEQU relational_expression                								{:System.out.println("Equality_Expression -> Equality_Expression != Relation_Expression");:} 
+	;
+
+/*Relational Expressions*/
+relational_expression ::=   additive_expression                         							{:System.out.println("Relational_Expression -> Additive_Expression");:} 
+	| relational_expression LESS additive_expression                								{:System.out.println("Relational_Expression -> Relational_Expression < Additive_Expression");:} 
+	| relational_expression GREATER additive_expression             								{:System.out.println("Relational_Expression -> Relational_Expression > Additive_Expression");:} 
+	| relational_expression LESSEQ additive_expression              								{:System.out.println("Relational_Expression -> Relational_Expression <= Additive_Expression");:} 
+	| relational_expression GREATEREQ additive_expression           								{:System.out.println("Relational_Expression -> Relational_Expression >= Additive_Expression");:} 
+	;
+
+/*Additive Expression*/
+additive_expression ::=   multiplicative_expression                     							{:System.out.println("Additive_Expression -> Multiplicative_Expression");:} 
+	| additive_expression ADD multiplicative_expression            									{:System.out.println("Additive_Expression -> Additive_Expression + Multiplicative_Expression");:} 
+	| additive_expression MIN multiplicative_expression             								{:System.out.println("Additive_Expression -> Additive_Expression - Multiplicative_Expression");:} 
+	;
+
+/*Multiplicative Expression*/
+multiplicative_expression ::=   unary_expression                    								{:System.out.println("Multiplicative_Expression -> Unary_Expression");:} 
+	| multiplicative_expression MUL unary_expression                								{:System.out.println("Multiplicative_Expression -> Multiplicative_Expression * Unary_Expression");:} 
+	| multiplicative_expression DIV unary_expression                								{:System.out.println("Multiplicative_Expression -> Multiplicative_Expression / Unary_Expression");:}               
+	;
+
+/*Cast Expression*/ 
+cast_expression ::=   unary_expression                                  							{:System.out.println("Cast_Expression -> Unary_Expression");:}
+	;
+
+/*Unary Expressions*/
+unary_expression ::=   postfix_expression                               							{:System.out.println("Unary_Expression -> Postfix_Expression");:}
+        ;
+
+/*Argument Expression List*/
+argument_expression_list ::=   assignment_expression                    							{:System.out.println("Argument_Expression_List -> Assignment_Expression");:}
+	| argument_expression_list COMMA assignment_expression          								{:System.out.println("Argument_Expression_List -> Argument_Expression_List , Assignment_Expression");:}
+	;
+
+/*Postfix Expressions*/
+postfix_expression ::=   primary_expression                             							{:System.out.println("Postfix_Expression -> Primary_Expression");:}
+        |   postfix_expression OPAR CPAR                                							{:System.out.println("Postfix_Expression -> Postfix_Expression ()");:}
+        |   postfix_expression OPAR argument_expression_list CPAR      								{:System.out.println("Postfix_Expression -> Postfix_Expression ( Argument_Expression_List )");:}
+        ;
+
+/*Primary Expression*/
+primary_expression ::=  ID:identifierValue                              							{:System.out.println("Primary_Expression -> Identifier: " + identifierValue); :}
+      |   INT:integerContent                                            							{:System.out.println("Primary_Expression -> Integer: " + integerContent); :}
+      |   STRINGCONTENT:stringContent                                   							{:System.out.println("Primary_Expression -> String: " + stringContent); :}
+      |   DOUBLEVALUE:doubleContent                                     							{:System.out.println("Primary_Expression -> Double: " + doubleContent); :}
+      |   CHARCONTENT:charContent                                       							{:System.out.println("Primary_Expression -> Char: " + charContent); :}
+      |   TRUE:boolConstant                                             							{:System.out.println("Primary_Expression -> Boolean: true");:}
+      |   FALSE:boolConstantFalse                                       							{:System.out.println("Primary Expression -> Boolean: false");:}
+      |   OPAR expression CPAR                                          							{:System.out.println("Primary_Expression -> ( Expression )");:}
+      ;
+>>>>>>> Parsing

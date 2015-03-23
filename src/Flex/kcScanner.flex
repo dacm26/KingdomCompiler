@@ -48,7 +48,7 @@ LINEBREAK = [ \n\t\r\s]
 	"munny"                 {return symbol(sym.DOUBLE);}
 	"char"                  {return symbol(sym.CHAR);}
 	"KChain"                {return symbol(sym.STRING);}
-	"void"                {return symbol(sym.VOID);}
+	"void"                	{return symbol(sym.VOID);}
 
 	"true"                  {return symbol(sym.TRUE);}
 	"false"                 {return symbol(sym.FALSE);}
@@ -57,7 +57,6 @@ LINEBREAK = [ \n\t\r\s]
 	"while"                 {return symbol(sym.WHILE);}
 
 	"if"                    {return symbol(sym.IF);}
-	"elsif"                 {return symbol(sym.ELSIF);}
 	"else"                  {return symbol(sym.ELSE);}
 	"switch"                {return symbol(sym.SWITCH);}
 	"case"                  {return symbol(sym.CASE);}
@@ -66,14 +65,13 @@ LINEBREAK = [ \n\t\r\s]
 	"secondChance"          {return symbol(sym.CONTINUE);}
 
 	"KingdomHearts"         {return symbol(sym.MAIN);}
-	"Ability"               {return symbol(sym.FUNCTION);}
 	"giff"                  {return symbol(sym.RETURN);}
 
 	"print"                 {return symbol(sym.PRINT);}
 	"scan"                  {return symbol(sym.SCAN);}
 
 	","                     {return symbol(sym.COMMA);}
-        ":"                      {return symbol(sym.COLON);}
+    ":"                 	{return symbol(sym.COLON);}
 	";"                     {return symbol(sym.END);}
 
 	"+"                     {return symbol(sym.ADD);}
@@ -92,8 +90,8 @@ LINEBREAK = [ \n\t\r\s]
 	"<"                     {return symbol(sym.LESS);}
 	"!="                    {return symbol(sym.NEQU);}
 	"=="                    {return symbol(sym.EQU);}
+    "?"                     {return symbol(sym.QUES);}
 
-	"!"                     {return symbol(sym.NOT);}
 	"||"                    {return symbol(sym.OR);} 
 	"&&"                    {return symbol(sym.AND);}
 
