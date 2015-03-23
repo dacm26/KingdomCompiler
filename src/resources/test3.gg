@@ -2,6 +2,10 @@ int i,x,f;
 bool x,f,t;
 
 int KingdomHearts(int x, int f, int y){
+    switch(x){
+        case 1:
+        break;
+    }
     if ( true ) {
         if ( true && false ) {
             int i;
@@ -20,11 +24,10 @@ int KingdomHearts(int x, int f, int y){
                 default: error();
             }
         }#
-        int j;
-        for(j=0; j<10; j++){
-        }
-        while){
-        }
+        #
+        if(s){
+        }else if()
+        }#
     } else if ( true ) {
 
 
@@ -33,7 +36,8 @@ int KingdomHearts(int x, int f, int y){
     }
     giff 0;
 
-
+}
 void Daniel (){
 
     giff 0;
+}

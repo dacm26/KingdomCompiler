@@ -27,8 +27,12 @@ parser code {:
 
     }
     public void report_fatal_error(String message, Object info) {
-        report_error(message, info);
-        throw new RuntimeException("Fatal Syntax Error");
+        try{
+            report_error(message, info);
+        }catch(Exception e){
+            System.err.println("Fatal Syntax Error");
+        }
+        
     }
 :};
 
@@ -134,9 +138,11 @@ iteration_statement ::=   WHILE OPAR expression CPAR statement                  
 
 /*Selection Statements*/
 selection_statement ::=   IF OPAR expression CPAR statement              							{:System.out.println("Selection_Statement -> if ( Expression ) Statement");:}
+        | IF error:e                                                                                                            {: parser.report_error("if selection statement error",e); :}      
         | IF OPAR expression CPAR statement ELSE statement               							{:System.out.println("Selection_Statement -> if ( Expression ) Statement ELSE statement");:}
 	| SWITCH OPAR expression CPAR statement                          	 							{:System.out.println("Selection_Statement -> switch ( Expression ) Statement");:}
-	;
+	| SWITCH error:e                                                                                                        {: parser.report_error("switch selection statement error",e); :} 
+        ;
 
 /*Expression Statements*/
 expression_statement ::=   END                                           							{:System.out.println("Expression_Statement -> ;");:}
