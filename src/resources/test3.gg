@@ -2,33 +2,17 @@ int i,x,f;
 bool x,f,t;
 
 int KingdomHearts(int x, int f, int y){
-    if ( true ) {
-        if ( true && false ) {
-            int i;
-            i = 3;
-        }
-    } else if ( i == true ) {
-        while (false){
-            ;
-            switch (i){
-                case 1: {
-                    ragnarok;
-                };
-                case 2: {
-                    secondChance;  
-                };
-                default: error();
-            }
-        }
-    } else if ( true ) {
-
-
-    } else {
-
+    int x;
+    x=*2;
+    for(x=0; ){
     }
+    while(){}
+    switch(){}
+    if{}
+    else if(){
     giff 0;
-}
 
+}
 void Daniel (){
 
     giff 0;

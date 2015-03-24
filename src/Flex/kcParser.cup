@@ -2,9 +2,38 @@ package Flex;
 import java_cup.runtime.*; 
 
 parser code {:
-  public parser (java.io.Reader input) {
-    super(new kcScanner(input));
-  }
+    public static int errors = 0;
+    public static kcScanner s;
+
+    public parser(java.io.Reader input) {
+        super(s=new kcScanner(input));
+    }
+
+    public void report_error(String message, Object info) {
+
+        if (info instanceof java_cup.runtime.Symbol){
+            java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol)info);
+            errors++;
+            System.err.println("  " + errors + "==> " +" " + message
+                    + "\n\t\tline: "+ (s.left+1) + ", column: "+(s.right+1) + "\n");
+        } else {
+            StringBuffer m = new StringBuffer("Error ");
+            if (info instanceof java_cup.runtime.Symbol) {
+                m.append("(" + info.toString() + ")");
+            }
+        m.append(" : " + message);
+        System.err.println(m);
+        }
+
+    }
+    public void report_fatal_error(String message, Object info) {
+        try{
+            report_error(message, info);
+        }catch(Exception e){
+            System.err.println("Fatal Syntax Error");
+        }
+        
+    }
 :};
 
 
@@ -50,6 +79,7 @@ terminal String STRINGCONTENT;
 terminal Boolean TRUE;
 terminal Boolean FALSE;
 
+
 /* Non terminals */
 non terminal primary_expression, expression, assignment_expression, assignment_operator, conditional_expression, relational_expression, equality_expression, parameter_declaration, parameter_type_list, cast_expression;
 non terminal logical_or_expression, logical_and_expression, additive_expression, multiplicative_expression, unary_expression, postfix_expression, argument_expression_list, parameter_list;
@@ -73,6 +103,7 @@ external_declaration ::=   function_definition external_declaration       						
 
 /*Main Function*/
 main_function ::= declaration_specifiers main_declarator compound_statement          				{:System.out.println("Main_Function -> Declaration_Specifiers Main_Declarator Compound_Statement");:}  
+        |	error:e                                                                                                         {: parser.report_error("main function",e); :}            
         ;
 
 /*Function Declaration*/
@@ -80,7 +111,9 @@ function_definition ::=   declaration_specifiers declarator declaration_list com
 	| declaration_specifiers declarator compound_statement                                          {:System.out.println("Function_Definition -> Function_Definition declaration_specifiers declarator compound_statement");:}
 	| declarator declaration_list compound_statement                                                {:System.out.println("Function_Definition -> Function_Definition declarator declaration_list compound_statement");:}
 	| declarator compound_statement                                                                 {:System.out.println("Function_Definition -> Function_Definition declarator compound_statement");:}
-	;
+	| error:e                                                                                                         {: parser.report_error("function definition",e); :}    
+
+        ;
 
 /*Translation Unit*/
 translation_unit ::=   external_declaration                               							{:System.out.println("Translation_Unit -> External_Declaration");:}
@@ -96,15 +129,20 @@ jump_statement ::=   CONTINUE END                                     								{:
 
 /*Iteration Statements*/
 iteration_statement ::=   WHILE OPAR expression CPAR statement                            			{:System.out.println("Iteration_Statement -> while ( Expression ) Statement");:}
-	| FOR OPAR expression_statement expression_statement CPAR statement               				{:System.out.println("Iteration_Statement -> for ( Expression_Statement Expression_Statement ) Statement");:}
+	| WHILE error:e                                                                                                         {: parser.report_error("while iteration error",e); :}          
+        | FOR OPAR expression_statement expression_statement CPAR statement               				{:System.out.println("Iteration_Statement -> for ( Expression_Statement Expression_Statement ) Statement");:}
 	| FOR OPAR expression_statement expression_statement expression CPAR statement    				{:System.out.println("Iteration_Statement -> for ( Expression_Statement Expression_Statemenet Expression ) Statement ");:}
-	;
+        | FOR error:e                                                                                                         {: parser.report_error("for iteration error",e); :}          
+
+        ;
 
 /*Selection Statements*/
 selection_statement ::=   IF OPAR expression CPAR statement              							{:System.out.println("Selection_Statement -> if ( Expression ) Statement");:}
+        | IF error:e                                                                                                            {: parser.report_error("if selection statement error",e); :}      
         | IF OPAR expression CPAR statement ELSE statement               							{:System.out.println("Selection_Statement -> if ( Expression ) Statement ELSE statement");:}
 	| SWITCH OPAR expression CPAR statement                          	 							{:System.out.println("Selection_Statement -> switch ( Expression ) Statement");:}
-	;
+	| SWITCH error:e                                                                                                        {: parser.report_error("switch selection statement error",e); :} 
+        ;
 
 /*Expression Statements*/
 expression_statement ::=   END                                           							{:System.out.println("Expression_Statement -> ;");:}
