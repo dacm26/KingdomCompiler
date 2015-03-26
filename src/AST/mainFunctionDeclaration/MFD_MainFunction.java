@@ -4,14 +4,14 @@
  * and open the template in the editor.
  */
 
-package AST.mainFunctionDefinition;
+package AST.mainFunctionDeclaration;
 import AST.mainFunction.*;
 import AST.externalDeclaration.*;
 /**
  *
  * @author Daniel
  */
-public class MFD_MainFunction extends mainFunctionDefinition{
+public class MFD_MainFunction extends mainFunctionDeclaration{
     private mainFunction mF;
     private externalDeclaration eD;
 

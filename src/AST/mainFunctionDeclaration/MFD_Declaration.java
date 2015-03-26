@@ -4,17 +4,17 @@
  * and open the template in the editor.
  */
 
-package AST.mainFunctionDefinition;
+package AST.mainFunctionDeclaration;
 import AST.declaration.*;
 /**
  *
  * @author Daniel
  */
-public class MFD_Declaration extends mainFunctionDefinition{
+public class MFD_Declaration extends mainFunctionDeclaration{
     private declaration d;
-    private mainFunctionDefinition mFD;
+    private mainFunctionDeclaration mFD;
 
-    public MFD_Declaration(declaration d, mainFunctionDefinition mFD) {
+    public MFD_Declaration(declaration d, mainFunctionDeclaration mFD) {
         this.d = d;
         this.mFD = mFD;
     }
@@ -27,11 +27,11 @@ public class MFD_Declaration extends mainFunctionDefinition{
         this.d = d;
     }
 
-    public mainFunctionDefinition getmFD() {
+    public mainFunctionDeclaration getmFD() {
         return mFD;
     }
 
-    public void setmFD(mainFunctionDefinition mFD) {
+    public void setmFD(mainFunctionDeclaration mFD) {
         this.mFD = mFD;
     }
 

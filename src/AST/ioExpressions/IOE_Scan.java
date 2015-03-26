@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package AST.ioExpressions;
 
-package AST.basicExpression;
 /**
  *
- * @author Daniel
+ * @author C5220701
  */
-public class BE_Scan extends basicExpression{
+public class IOE_Scan extends ioExpressions{
     private String id;
 
-    public BE_Scan(String id) {
+    public IOE_Scan(String id) {
         this.id = id;
     }
 
@@ -26,9 +26,8 @@ public class BE_Scan extends basicExpression{
 
     @Override
     public void printNode() {
-        System.out.println("BE_Scan");
+        System.out.println("IOE_Scan");
         System.out.println(this.id);
     }
-    
     
 }

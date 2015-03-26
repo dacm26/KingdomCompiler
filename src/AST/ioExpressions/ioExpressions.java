@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package AST.mainFunctionDefinition;
+package AST.ioExpressions;
 
 /**
  *
- * @author Daniel
+ * @author C5220701
  */
-abstract public class mainFunctionDefinition {
+abstract public class ioExpressions {
     abstract public void printNode();
 }

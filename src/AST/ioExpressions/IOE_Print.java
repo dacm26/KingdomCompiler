@@ -3,23 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package AST.basicExpression;
+package AST.ioExpressions;
 import AST.identifierList.*;
 /**
  *
- * @author Daniel
+ * @author C5220701
  */
-public class BE_Print extends basicExpression{
+public class IOE_Print extends ioExpressions{
     private String content;
     private identifierList iL;
 
-    public BE_Print(String content) {
+    public IOE_Print(String content) {
         this.content = content;
         this.iL=null;
     }
 
-    public BE_Print(String content, identifierList iL) {
+    public IOE_Print(String content, identifierList iL) {
         this.content = content;
         this.iL = iL;
     }
@@ -42,13 +41,15 @@ public class BE_Print extends basicExpression{
 
     @Override
     public void printNode() {
-        System.out.println("BE_Print");
-        System.out.print(this.content+"\t");
-        if (this.iL != null) {
+        System.out.println("IOE_Print");
+        System.out.println(this.content);
+        if (this.iL !=null) {
             this.iL.printNode();
+            
         }
-        
     }
+    
+    
     
     
 }
