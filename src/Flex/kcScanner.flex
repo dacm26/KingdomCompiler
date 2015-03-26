@@ -71,7 +71,7 @@ LINEBREAK = [ \n\t\r\s]
 	"scan"                  {return symbol(sym.SCAN);}
 
 	","                     {return symbol(sym.COMMA);}
-    ":"                 	{return symbol(sym.COLON);}
+        ":"                 	{return symbol(sym.COLON);}
 	";"                     {return symbol(sym.END);}
 
 	"+"                     {return symbol(sym.ADD);}
@@ -90,7 +90,6 @@ LINEBREAK = [ \n\t\r\s]
 	"<"                     {return symbol(sym.LESS);}
 	"!="                    {return symbol(sym.NEQU);}
 	"=="                    {return symbol(sym.EQU);}
-    "?"                     {return symbol(sym.QUES);}
 
 	"||"                    {return symbol(sym.OR);} 
 	"&&"                    {return symbol(sym.AND);}

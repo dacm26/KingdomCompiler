@@ -8,45 +8,44 @@ package Flex;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int QUES = 36;
-  public static final int CHARCONTENT = 45;
+  public static final int CHARCONTENT = 44;
   public static final int CCBRA = 31;
   public static final int OPAR = 28;
   public static final int CHAR = 5;
-  public static final int DOUBLEVALUE = 44;
+  public static final int DOUBLEVALUE = 43;
   public static final int CASE = 13;
   public static final int CPAR = 29;
   public static final int DOUBLE = 4;
   public static final int INTEGER = 2;
   public static final int GREATER = 34;
   public static final int CONTINUE = 16;
-  public static final int INT = 43;
+  public static final int INT = 42;
   public static final int LESS = 35;
   public static final int FOR = 8;
   public static final int SCAN = 20;
-  public static final int AND = 38;
-  public static final int OR = 37;
+  public static final int AND = 37;
+  public static final int OR = 36;
   public static final int COMMA = 21;
   public static final int DIV = 27;
-  public static final int ASSIGN = 41;
+  public static final int ASSIGN = 40;
   public static final int MIN = 25;
   public static final int LESSEQ = 33;
   public static final int MAIN = 17;
   public static final int IF = 10;
-  public static final int ID = 42;
+  public static final int ID = 41;
   public static final int EOF = 0;
   public static final int BOOLEAN = 3;
   public static final int RETURN = 18;
-  public static final int TRUE = 47;
+  public static final int TRUE = 46;
   public static final int error = 1;
   public static final int MUL = 26;
   public static final int ADD = 24;
   public static final int BREAK = 15;
   public static final int VOID = 7;
   public static final int SWITCH = 12;
-  public static final int EQU = 40;
+  public static final int EQU = 39;
   public static final int COLON = 23;
-  public static final int NEQU = 39;
+  public static final int NEQU = 38;
   public static final int ELSE = 11;
   public static final int WHILE = 9;
   public static final int DEFAULT = 14;
@@ -54,8 +53,8 @@ public class sym {
   public static final int END = 22;
   public static final int GREATEREQ = 32;
   public static final int STRING = 6;
-  public static final int FALSE = 48;
-  public static final int STRINGCONTENT = 46;
+  public static final int FALSE = 47;
+  public static final int STRINGCONTENT = 45;
   public static final int PRINT = 19;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -94,7 +93,6 @@ public class sym {
   "LESSEQ",
   "GREATER",
   "LESS",
-  "QUES",
   "OR",
   "AND",
   "NEQU",

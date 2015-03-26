@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class Main {
 
     public static void main(String[] args) {
-            try {
+        /*try {
             Symbol symbol;
             parser par = new parser(new InputStreamReader(new FileInputStream("./src/resources/test3.gg")));
             symbol = par.parse();
@@ -36,6 +36,6 @@ public class Main {
 
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
 }
