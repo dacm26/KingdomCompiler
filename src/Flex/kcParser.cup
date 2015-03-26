@@ -151,7 +151,7 @@ precedence left MUL, DIV;
 precedence nonassoc ELSE;
 
 /*AST Declaration*/
-ast_tree_declaration ::= main_function_declaration:mFD        										{: if(print) mFD.printNode();
+ast_tree_declaration ::= main_function_declaration:mFD        										{: if(print){ mFD.printNode(); compilerOutput.append("The AST was printed in NetBeans! Check it out!");}
 																									   else parser.report_error("There was an error and the AST couldn't be printed", "No AST for you"); :}                                                                      
 	;
 
