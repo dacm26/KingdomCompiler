@@ -509,8 +509,9 @@ public class parser extends java_cup.runtime.lr_parser {
 
 
 
-    public static int errors = 0;
+    public  int errors = 0;
     public static kcScanner s;
+    public boolean print=true;
     public static javax.swing.JTextArea compilerOutput;
 
     public parser(java.io.Reader input, javax.swing.JTextArea text) {
@@ -575,7 +576,8 @@ class CUP$parser$actions {
 		int mFDleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int mFDright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		mainFunctionDeclaration mFD = (mainFunctionDeclaration)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 mFD.printNode(); 
+		 if(print) mFD.printNode();
+																									   else parser.report_error("There was an error and the AST couldn't be printed", "No AST for you"); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ast_tree_declaration",0, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -673,7 +675,7 @@ class CUP$parser$actions {
 		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
-		parser.report_error("Missing return type in Main", e); 
+		 print=false; parser.report_error("Missing return type in Main", e); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("main_function",3, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -763,7 +765,7 @@ class CUP$parser$actions {
 		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		parser.report_error("Was expecting ';' character instead received: " + e,e); 
+		 print=false; parser.report_error("Was expecting ';' character instead received: " + e,e); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("jump_statement",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -775,7 +777,7 @@ class CUP$parser$actions {
 		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		parser.report_error("Was expecting ';' character instead received: " + e,e); 
+		 print=false; parser.report_error("Was expecting ';' character instead received: " + e,e); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("jump_statement",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1126,7 +1128,7 @@ class CUP$parser$actions {
 		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		parser.report_error("Was expecting id after type defintion in parameter_list instead received " + e,e);errors = 0;
+		 print=false; parser.report_error("Was expecting id after type defintion in parameter_list instead received " + e,e);errors = 0;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("parameter_list",14, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1159,7 +1161,7 @@ class CUP$parser$actions {
 		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-2)).value;
-		parser.report_error("Error in main function declaration was expecting keyword KingdomHearts",e);errors = 0;
+		 print=false; parser.report_error("Error in main function declaration was expecting keyword KingdomHearts",e);errors = 0;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("main_declarator",15, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1171,7 +1173,7 @@ class CUP$parser$actions {
 		int eleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		parser.report_error("Error in main function declaration missing char '(' ",e);errors = 0;
+		 print=false; parser.report_error("Error in main function declaration missing char '(' ",e);errors = 0;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("main_declarator",15, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

@@ -4,7 +4,7 @@ int kampai;
 
 int KingdomHearts () {
 	if ( i == 3 || i != 3 && i > 3 && i < 5  || i >= 3 && i <= 4 ){
-		prin ("Hola Daniel");
+		print ("Hola Daniel");
 		scan (id);
 		par();
 		par(i,j,k);

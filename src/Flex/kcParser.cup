@@ -33,8 +33,9 @@ import AST.ioExpressions.*;
 import AST.primaryExpression.*;
 
 parser code {:
-    public static int errors = 0;
+    public  int errors = 0;
     public static kcScanner s;
+    public boolean print=true;
     public static javax.swing.JTextArea compilerOutput;
 
     public parser(java.io.Reader input, javax.swing.JTextArea text) {
@@ -150,7 +151,8 @@ precedence left MUL, DIV;
 precedence nonassoc ELSE;
 
 /*AST Declaration*/
-ast_tree_declaration ::= main_function_declaration:mFD        										{: mFD.printNode(); :}                                                                      
+ast_tree_declaration ::= main_function_declaration:mFD        										{: if(print) mFD.printNode();
+																									   else parser.report_error("There was an error and the AST couldn't be printed", "No AST for you"); :}                                                                      
 	;
 
 /*Main Function Declaration*/
@@ -165,7 +167,7 @@ external_declaration ::= function_definition:fD external_declaration:eD       		
 
 /*Main Function*/
 main_function ::= type_specifier:tS main_declarator:mD compound_statement:cS          				{: RESULT = new MF_MainFunction(tS,mD,cS);compilerOutput.append("Main_Function -> Type_Specifier Main_Declarator Compound_Statement\n");:}  
-   | error:e main_declarator compound_statement 													{:parser.report_error("Missing return type in Main", e); :}
+   | error:e main_declarator compound_statement 													{: print=false; parser.report_error("Missing return type in Main", e); :}
    ;
 
 /*Function Declaration*/
@@ -178,8 +180,8 @@ jump_statement ::=   CONTINUE END                                     								{:
 	| BREAK END                                                       								{: RESULT = new JS_Break(); compilerOutput.append("Jump_Statement -> ragnarok;\n");:}
 	| RETURN END                                                      								{: RESULT = new JS_Return(); compilerOutput.append("Jump_Statement -> return;\n");:}
 	| RETURN conditional_expression:cE END                                           				{: RESULT = new JS_Return(cE); compilerOutput.append("Jump_Statement -> return Expression;\n");:}
-	| RETURN error:e                                                                                {:parser.report_error("Was expecting ';' character instead received: " + e,e); :}
-	| BREAK error:e                                                                                 {:parser.report_error("Was expecting ';' character instead received: " + e,e); :}
+	| RETURN error:e                                                                                {: print=false; parser.report_error("Was expecting ';' character instead received: " + e,e); :}
+	| BREAK error:e                                                                                 {: print=false; parser.report_error("Was expecting ';' character instead received: " + e,e); :}
 	;
  
 /*Iteration Statements*/
@@ -232,14 +234,14 @@ identifier_list ::=   ID:id                                         								{: R
 /*Parameter List*/
 parameter_list ::=   variable_type_specifier:vTS ID:id                          					{: RESULT = new PL_Id(vTS,id);compilerOutput.append("Parameter_List -> Variable_Type_Specifier "+id+"\n");:}
 	| parameter_list:pL COMMA variable_type_specifier:vTS ID:id                    					{: RESULT = new PL_ParameterList(pL,vTS,id);compilerOutput.append("Parameter_List -> Parameter_List , Parameter_Declaration\n");:}
-	| variable_type_specifier error:e 																{:parser.report_error("Was expecting id after type defintion in parameter_list instead received " + e,e);errors = 0;:}
+	| variable_type_specifier error:e 																{: print=false; parser.report_error("Was expecting id after type defintion in parameter_list instead received " + e,e);errors = 0;:}
 	;
 
 /*Main Declarator*/
 main_declarator ::=   MAIN OPAR parameter_list:pL CPAR                 								{: RESULT = new MD_Declaration(pL);compilerOutput.append("Main_Declarator -> Main ( Parameter_List )\n");:}
     | MAIN OPAR CPAR                                     											{: RESULT = new MD_Declaration();compilerOutput.append("Main_Declarator -> Main ()\n");:}
-    | error:e OPAR CPAR										 										{:parser.report_error("Error in main function declaration was expecting keyword KingdomHearts",e);errors = 0;:} 
-    | MAIN error:e 																					{:parser.report_error("Error in main function declaration missing char '(' ",e);errors = 0;:} 
+    | error:e OPAR CPAR										 										{: print=false; parser.report_error("Error in main function declaration was expecting keyword KingdomHearts",e);errors = 0;:} 
+    | MAIN error:e 																					{: print=false; parser.report_error("Error in main function declaration missing char '(' ",e);errors = 0;:} 
     ;
 
 /*Type specifiers*/
