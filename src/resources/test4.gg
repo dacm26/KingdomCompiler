@@ -63,7 +63,7 @@ void Test () {
 }
 
 void many (int i, int j){
-	 int x = 3 + 5;
+	 int x = 3 + 3;
     if ( true ){
 	switch ( i ) {
 	    case 1: {
