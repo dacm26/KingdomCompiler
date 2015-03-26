@@ -108,6 +108,8 @@ non terminal relational_expression;
 non terminal additive_expression;
 non terminal multiplicative_expression;
 non terminal basic_expression;
+non terminal function_calls_expression;
+non terminal io_expressions;
 non terminal primary_expression;
 
 
@@ -132,7 +134,7 @@ external_declaration ::= function_definition external_declaration       							{
 
 /*Main Function*/
 main_function ::= type_specifier main_declarator compound_statement          						{:compilerOutput.append("Main_Function -> Type_Specifier Main_Declarator Compound_Statement\n");:}  
-   | error:e OPAR CPAR										 										{:parser.report_error("Error in main function declaration was expecting keyword MAIN",e); :} 
+   | error:e main_declarator compound_statement 													{:parser.report_error("Missing return type in Main", e); :}
    ;
 
 /*Function Declaration*/
@@ -145,6 +147,8 @@ jump_statement ::=   CONTINUE END                                     								{:
 	| BREAK END                                                       								{:compilerOutput.append("Jump_Statement -> ragnarok;\n");:}
 	| RETURN END                                                      								{:compilerOutput.append("Jump_Statement -> return;\n");:}
 	| RETURN conditional_expression END                                           					{:compilerOutput.append("Jump_Statement -> return Expression;\n");:}
+	| RETURN error:e                                                                                {:parser.report_error("Was expecting ';' character instead received: " + e,e); :}
+	| BREAK error:e                                                                                 {:parser.report_error("Was expecting ';' character instead received: " + e,e); :}
 	;
  
 /*Iteration Statements*/
@@ -227,6 +231,8 @@ variable_type_specifier ::= CHAR                                                
 /*Variable Declarations*/
 declaration ::= type_specifier identifier_list END                                          		{:compilerOutput.append("Declaration -> Type_Specifier Identifier_List\n");:}
 	| assignment_expression																			{:compilerOutput.append("Declaration -> Assignment_Expression");:}
+	| io_expressions																				{:compilerOutput.append("Declaration -> Io_expressions");:}
+	| function_calls_expression                                                                     {:compilerOutput.append("Declaration -> Function_Calls_Expressions");:}
 	;
 
 /*Assignment Expression*/
@@ -265,13 +271,20 @@ multiplicative_expression ::=   basic_expression                    								{:co
 	| multiplicative_expression DIV basic_expression                								{:compilerOutput.append("Multiplicative_Expression -> Multiplicative_Expression / Primary Expression\n");:}               
 	;
 
+/*IO Expressions*/
+io_expressions ::= PRINT OPAR STRINGCONTENT:stringContent CPAR END                                  {:compilerOutput.append("Basic_Expression -> print (\"" +stringContent+ "\")\n");:}
+    |   PRINT OPAR STRINGCONTENT:stringContent COMMA identifier_list CPAR END             			{:compilerOutput.append("Basic_Expression -> print (\"" +stringContent+ "\", identifier_list)\n");:}
+    |   SCAN  OPAR ID:identifierValue CPAR END                                                      {:compilerOutput.append("Basic_Expression -> scan (\"" +identifierValue+ "\")\n");:}
+    ;
+
+/*Function calls*/
+function_calls_expression ::= ID:id OPAR CPAR END
+	| ID:id OPAR identifier_list CPAR END
+	;
+
 /*Basic Expressions*/
 basic_expression ::=   primary_expression                             								{:compilerOutput.append("Basic_Expression -> Primary_Expression\n");:}
-    |   basic_expression OPAR CPAR                                									{:compilerOutput.append("Basic_Expression -> Basic_Expression ()\n");:}
-	|   PRINT OPAR STRINGCONTENT:stringContent CPAR                                             	{:compilerOutput.append("Basic_Expression -> print (\"" +stringContent+ "\")\n");:}
-    |   PRINT OPAR STRINGCONTENT:stringContent COMMA identifier_list CPAR              				{:compilerOutput.append("Basic_Expression -> print (\"" +stringContent+ "\", identifier_list)\n");:}
-    |   SCAN  OPAR ID:identifierValue CPAR END                                                      {:compilerOutput.append("Basic_Expression -> scan (\"" +identifierValue+ "\")\n");:}
-    |   error OPAR ID:identifierValue CPAR END
+    | function_calls_expression																		{:compilerOutput.append("Basic_Expression -> Function_Calls_Expression\n");:}
     ;
 
 /*Primary Expression*/

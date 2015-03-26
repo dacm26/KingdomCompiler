@@ -1,3 +1,43 @@
-int KingdomHearts {
+int i = 3;
+int i,x,y,z;
+int kampai;
+
+int KingdomHearts () {
+	if ( i == 3 || i != 3 && i > 3 && i < 5  || i >= 3 && i <= 4 ){
+		print ("Hola Daniel");
+		scan (id);
+		par();
+		par(i,j,k);
+		switch (i){
+			case 1: {
+				if ( true ){
+
+				}
+				ragnarok;
+			}
+			case 2: {
+				secondChance;
+			}
+			default: {
+				int i = 3;
+				x = 3;
+			}
+		}
+	} else {
+		if (true){
+
+		} else if ( i == "Kampai" ){
+
+		} else {
+
+		}
+	}
+}
+
+void function (){
+
+}
+
+void function (int i, int k, int j){
 
 }
