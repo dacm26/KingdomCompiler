@@ -5,6 +5,7 @@
  */
 
 package AST.additiveExpression;
+import AST.multiplicativeExpression.*;
 /**
  *
  * @author Daniel
@@ -12,9 +13,9 @@ package AST.additiveExpression;
 public class AE_Operation extends additiveExpression{
     private additiveExpression aE;
     private String operator;
-    private additiveExpression mE;
+    private multiplicativeExpression mE;
 
-    public AE_Operation(additiveExpression aE, String operator, additiveExpression mE) {
+    public AE_Operation(additiveExpression aE, String operator, multiplicativeExpression mE) {
         this.aE = aE;
         this.operator = operator;
         this.mE = mE;
@@ -36,11 +37,11 @@ public class AE_Operation extends additiveExpression{
         this.operator = operator;
     }
 
-    public additiveExpression getmE() {
+    public multiplicativeExpression getmE() {
         return mE;
     }
 
-    public void setmE(additiveExpression mE) {
+    public void setmE(multiplicativeExpression mE) {
         this.mE = mE;
     }
     

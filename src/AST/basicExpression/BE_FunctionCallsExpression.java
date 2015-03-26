@@ -12,6 +12,11 @@ import AST.functionCallsExpression.*;
 public class BE_FunctionCallsExpression extends basicExpression{
     private functionCallsExpression fCE;
 
+    public BE_FunctionCallsExpression(functionCallsExpression fCE) {
+        this.fCE = fCE;
+    }
+    
+    
     public functionCallsExpression getfCE() {
         return fCE;
     }
