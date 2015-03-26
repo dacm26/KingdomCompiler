@@ -15,11 +15,26 @@ public class makeAnalysis {
 
     public static void main(String[] args) {
         try {
-            String values[] = new String[1];
-            values[0] = "./src/Flex/kcParser.cup";
+            File parser = new File("./src/Flex/parser.java");
+            File sym = new File("./src/Flex/sym.java");
+            if (parser.exists()){
+                parser.delete();
+            }
+            if (sym.exists()){
+                sym.delete();
+            }
+            String values[] = new String[6];
             File file = new File("./src/Flex/kcScanner.flex");
+            String opciones[] = new String[7];
+            opciones[0] = "-destdir";
+            opciones[1] = "src/Flex";
+            opciones[2] = "-parser";
+            opciones[3] = "parser";
+            opciones[4] = "-symbols";
+            opciones[5] = "sym";
+            opciones[6] = "src/Flex/kcParser.cup";
             jflex.Main.generate(file);
-            java_cup.Main.main(values);
+            java_cup.Main.main(opciones);
         } catch (Exception e) {
             System.err.println(e);
         }

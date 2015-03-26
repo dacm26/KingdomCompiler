@@ -4,9 +4,9 @@ import java_cup.runtime.*;
 parser code {:
     public static int errors = 0;
     public static kcScanner s;
-    public static JTextArea compilerOutput;
+    public static javax.swing.JTextArea compilerOutput;
 
-    public parser(java.io.Reader input, JTextArea text) {
+    public parser(java.io.Reader input, javax.swing.JTextArea text) {
         super(s=new kcScanner(input));
         compilerOutput = text;
     }
@@ -16,8 +16,8 @@ parser code {:
         if (info instanceof java_cup.runtime.Symbol){
             java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol)info);
             errors++;
-            compilerOutput.append("  " + errors + "==> " +" " + message
-                    + "\n\t\tline: "+ (s.left+1) + ", column: "+(s.right+1) + "\n");
+            compilerOutput.append("" + errors + "==> " + " " + message
+                    + " line: "+ (s.left+1) + ", column: "+(s.right+1) + "\n");
         } else {
             StringBuffer m = new StringBuffer("Error ");
             if (info instanceof java_cup.runtime.Symbol) {
@@ -26,7 +26,6 @@ parser code {:
             m.append(" : " + message + "\n");
             compilerOutput.append(m.toString());
         }
-
     }
     public void report_fatal_error(String message, Object info) {
         try{
@@ -83,6 +82,7 @@ terminal Boolean FALSE;
 
 
 /* Non terminals */
+non terminal ast_tree_declaration;
 non terminal main_function_declaration;
 non terminal external_declaration;
 non terminal main_function;
@@ -90,7 +90,6 @@ non terminal function_definition;
 non terminal jump_statement;
 non terminal iteration_statement;
 non terminal selection_statement;
-non terminal expression_statement;
 non terminal statement_list;
 non terminal declaration_list;
 non terminal compound_statement;
@@ -117,6 +116,10 @@ precedence left ADD, MIN;
 precedence left MUL, DIV;
 precedence nonassoc ELSE;
 
+/*AST Declaration*/
+ast_tree_declaration ::= main_function_declaration
+	;
+
 /*Main Function Declaration*/
 main_function_declaration ::= declaration main_function_declaration       							{:compilerOutput.append("Main_Function_Declaration -> Declaration Main_Function_Declaration\n");:}
     |  main_function external_declaration                             								{:compilerOutput.append("Main_Function_Declaration -> Main_Function External_Declaration\n");:}
@@ -129,37 +132,32 @@ external_declaration ::= function_definition external_declaration       							{
 
 /*Main Function*/
 main_function ::= type_specifier main_declarator compound_statement          						{:compilerOutput.append("Main_Function -> Type_Specifier Main_Declarator Compound_Statement\n");:}  
-    | error:e                                                                                 		{: parser.report_error("main function",e); :}            
-    ;
+   | error:e OPAR CPAR										 										{:parser.report_error("Error in main function declaration was expecting keyword MAIN",e); :} 
+   ;
 
 /*Function Declaration*/
 function_definition ::= type_specifier ID:id OPAR CPAR compound_statement               			{:compilerOutput.append("Function_Definition -> type_specifier " +id+ "() compound_statement\n");:}
 	| type_specifier ID:id OPAR parameter_list CPAR compound_statement 								{:compilerOutput.append("Function_Definition -> type_specifier " +id+ "( parameter_list ) compound_statement\n");:}
-	| error:e                                                                                       {:parser.report_error("function definition",e); :}    
-    ;
+;
 
 /*Jump Statements*/
 jump_statement ::=   CONTINUE END                                     								{:compilerOutput.append("Jump_Statement -> secondChance;\n");:}
 	| BREAK END                                                       								{:compilerOutput.append("Jump_Statement -> ragnarok;\n");:}
 	| RETURN END                                                      								{:compilerOutput.append("Jump_Statement -> return;\n");:}
 	| RETURN conditional_expression END                                           					{:compilerOutput.append("Jump_Statement -> return Expression;\n");:}
-	; 
-
+	;
+ 
 /*Iteration Statements*/
 iteration_statement ::=   WHILE OPAR conditional_expression CPAR statement                          {:compilerOutput.append("Iteration_Statement -> while ( Expression ) Statement\n");:}
-	| WHILE error:e                                                                                 {:parser.report_error("while iteration error",e); :}          
-    | FOR OPAR type_specifier ID:id ASSIGN conditional_expression END
+	| FOR OPAR type_specifier ID:id ASSIGN conditional_expression END
       conditional_expression END assignment_expression CPAR statement    							{:compilerOutput.append("Iteration_Statement -> for ( Type_Specifier " +id+ " = conditional_expression; conditional_expression; assignment_expression) Statement \n");:}
-    | FOR error:e                                                                                   {:parser.report_error("for iteration error",e); :}          
-	;
+    ;
 
 /*Selection Statements*/
 selection_statement ::=   IF OPAR conditional_expression CPAR statement              				{:compilerOutput.append("Selection_Statement -> if ( Expression ) Statement\n");:}      
     | IF OPAR conditional_expression CPAR statement ELSE statement               					{:compilerOutput.append("Selection_Statement -> if ( Expression ) Statement ELSE statement\n");:}
-    | IF error:e                                                                                	{:parser.report_error("if selection statement error",e); :}
-	| SWITCH OPAR conditional_expression CPAR OCBRA labeled_statement CCBRA                         {:compilerOutput.append("Selection_Statement -> switch ( Expression ) Statement\n");:}
-	| SWITCH error:e                                                                                {:parser.report_error("switch selection statement error",e); :} 
-    ;
+    | SWITCH OPAR conditional_expression CPAR OCBRA labeled_statement CCBRA                         {:compilerOutput.append("Selection_Statement -> switch ( Expression ) Statement\n");:}
+	;
 
 /*Statement List*/
 statement_list ::=   statement                                           							{:compilerOutput.append("Statement_List -> Statement\n");:}
@@ -186,7 +184,6 @@ labeled_statement ::=   CASE conditional_expression COLON statement labeled_stat
 
 /*Statement Generalization*/
 statement ::=   compound_statement                                            						{:compilerOutput.append("Statement -> Compound_Statement\n");:}
-	| expression_statement                                          								{:compilerOutput.append("Statement -> Expression_Statement\n");:}
 	| selection_statement 																			{:compilerOutput.append("Statement -> Selection_Statement\n");:}                                      										
 	| iteration_statement                                           								{:compilerOutput.append("Statement -> Iteration_Statement\n");:}
 	| jump_statement                                                								{:compilerOutput.append("Statement -> Jump_Statement\n");:}
@@ -200,11 +197,14 @@ identifier_list ::=   ID:id                                         								{:co
 /*Parameter List*/
 parameter_list ::=   variable_type_specifier ID:id                          						{:compilerOutput.append("Parameter_List -> Variable_Type_Specifier "+id+"\n");:}
 	| parameter_list COMMA variable_type_specifier ID:id                    						{:compilerOutput.append("Parameter_List -> Parameter_List , Parameter_Declaration\n");:}
+	| variable_type_specifier error:e 																{:parser.report_error("Was expecting id after type defintion in parameter_list instead received " + e,e);errors = 0;:}
 	;
 
 /*Main Declarator*/
 main_declarator ::=   MAIN OPAR parameter_list CPAR                 								{:compilerOutput.append("Main_Declarator -> Main ( Parameter_List )\n");:}
     | MAIN OPAR CPAR                                     											{:compilerOutput.append("Main_Declarator -> Main ()\n");:}
+    | error:e OPAR CPAR										 										{:parser.report_error("Error in main function declaration was expecting keyword KingdomHearts",e);errors = 0;:} 
+    | MAIN error:e 																					{:parser.report_error("Error in main function declaration missing char '(' ",e);errors = 0;:} 
     ;
 
 /*Type specifiers*/
@@ -271,6 +271,7 @@ basic_expression ::=   primary_expression                             								{:
 	|   PRINT OPAR STRINGCONTENT:stringContent CPAR                                             	{:compilerOutput.append("Basic_Expression -> print (\"" +stringContent+ "\")\n");:}
     |   PRINT OPAR STRINGCONTENT:stringContent COMMA identifier_list CPAR              				{:compilerOutput.append("Basic_Expression -> print (\"" +stringContent+ "\", identifier_list)\n");:}
     |   SCAN  OPAR ID:identifierValue CPAR END                                                      {:compilerOutput.append("Basic_Expression -> scan (\"" +identifierValue+ "\")\n");:}
+    |   error OPAR ID:identifierValue CPAR END
     ;
 
 /*Primary Expression*/
