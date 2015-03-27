@@ -1,49 +1,33 @@
-ifnt $daniel = 29;
-KChain var = $"Testing String";
-bool test = true;
-bool dasdasd = false;
-#Holaasdsadsadasda
+int x = 3;
+bool y = true;
+munny z = 3.5;
+KChain t = "Kampai";
 
-char c = 'tla';
-munny d = 27.98;
-munny d2 = 2L.98;
-
-for ( false ) {
-	
+int KingdomHearts(int i, int j, int k){
+    print ("Hola Mundo");
+    scan (i);
+    print  ("Hola Mundo", i,j,k);
+    giff 0;
 }
 
-while (true){
-	if (true){
+void functionOne () {
+   if ( i == 3){
+      switch (i){
+         case 1:{
+                 ragnarok;
+         }
+         case 2:{
+                secondChance;
+         }
+         default: {
+                
+         }
+      }
+   } else if ( i > 3){
+          int x;
+          x  =  3;
+          x = i;
+   } else {
 
-	} elsif (false){
-
-	} else {
-
-	}
-}
-
-switch (asd){
-	case 1: 
-	ragnarok;
-	default:
-	secondChance;
-}
-
-KChain KingdomHearts(){
-	giff 0;
-}
-
-Kchain Ability daniel(int x, int y, int z){
-	print("Success!");
-	scan(x, y + z);	
-	if (var == true){
-		x = y*z;
-		x = y/z;
-		x = y-z;
-		x = (y >= z)true:false;
-		x = (y <= z)true:false;
-		x = (y != z)true:false;
-	if (var == true || var == false && var != true)
-		print('hsdfsd');
-	}
+   }
 }

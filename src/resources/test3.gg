@@ -1,0 +1,17 @@
+int i;
+
+void KingdomHearts (int i, int j){
+   int x = 3 + 5 * 3;
+   switch (i > 3) {
+      case 1:{
+
+      } 
+      case 2:{
+
+      }
+      default:{
+          error();
+      }
+   }
+   giff 0;
+}	

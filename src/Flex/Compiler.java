@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Flex;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java_cup.runtime.Symbol;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,13 +40,15 @@ public class Compiler extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFileChooser1 = new javax.swing.JFileChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         compilerInput = new javax.swing.JTextPane();
-        jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         compilerOutput = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -55,18 +59,22 @@ public class Compiler extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(compilerInput);
 
-        jButton1.setText("Compile");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         compilerOutput.setColumns(20);
         compilerOutput.setRows(5);
         jScrollPane3.setViewportView(compilerOutput);
 
+        jLabel1.setText("Console Output");
+
         jMenu1.setText("File");
+
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem5.setText("New File");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Open File");
@@ -79,6 +87,11 @@ public class Compiler extends javax.swing.JFrame {
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("Save File");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
@@ -91,6 +104,11 @@ public class Compiler extends javax.swing.JFrame {
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem4.setText("Compile");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuBar1.add(jMenu2);
@@ -101,18 +119,18 @@ public class Compiler extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 830, Short.MAX_VALUE)
-                .addComponent(jButton1))
             .addComponent(jScrollPane1)
-            .addComponent(jScrollPane3)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 901, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
         );
@@ -122,37 +140,184 @@ public class Compiler extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
+        compilerInput.setText("");
+        JFileChooser fc = new JFileChooser();
+        fc.setCurrentDirectory(new File("."));
+        if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File loadFile = fc.getSelectedFile();
+            try {
+                FileReader fr = new FileReader(loadFile.getAbsolutePath());
+                compilerInput.read(fr, null);
+                currentFile = loadFile;
+                this.setTitle(currentFile.getName());
+            } catch (IOException ex) {
+                Logger.getLogger(Compiler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        compilerOutput.setText("");
-        
-        //Save file to compile
-        File file = new File(".\\src\\resources\\test4.gg");
-        if (file.exists()){
-            file.delete();
+        if (!compilerInput.getText().isEmpty()) {
+            int i = JOptionPane.showConfirmDialog(null, "Do you want to save your changes?");
+            if (i == JOptionPane.OK_OPTION) {
+                if (currentFile == null) {
+                    String fileName = JOptionPane.showInputDialog(null, "Please enter the name of your file.");
+                    JFileChooser fc = new JFileChooser();
+                    fc.setCurrentDirectory(new File("."));
+                    fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                    fc.setAcceptAllFileFilterUsed(false);
+                    if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                        File currentDirectory = fc.getSelectedFile();
+                        File newFile = new File(currentDirectory.getAbsoluteFile() + "\\" + fileName);
+                        while (newFile.exists()) {
+                            fileName = JOptionPane.showInputDialog(null, "Please enter the name of your file.");
+                        }
+                        newFile = new File(currentDirectory.getAbsoluteFile() + "\\" + fileName);
+                        currentFile = null;
+                        FileWriter fw = null;
+                        BufferedWriter bw = null;
+                        try {
+                            newFile.createNewFile();
+                            fw = new FileWriter(newFile);
+                            bw = new BufferedWriter(fw);
+                            bw.write(compilerInput.getText());
+                            bw.flush();
+                            bw.close();
+                            fw.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        compilerInput.setText("");
+                        compilerOutput.setText("");
+                    }
+                } else {
+                    FileWriter fw = null;
+                    BufferedWriter bw = null;
+                    try {
+                        fw = new FileWriter(currentFile);
+                        bw = new BufferedWriter(fw);
+                        bw.write(compilerInput.getText());
+                        bw.flush();
+                        bw.close();
+                        fw.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    currentFile = null;
+                    this.setTitle("New Text");
+                    compilerInput.setText("");
+                    compilerOutput.setText("");
+                }
+            } else if (i == JOptionPane.NO_OPTION) {
+                compilerInput.setText("");
+                compilerOutput.setText("");
+            } else {
+
+            }
         }
-        FileWriter fw = null;
-        BufferedWriter bw = null;
-        try {
-            file.createNewFile();
-            fw = new FileWriter(file.getAbsolutePath());
-            bw = new BufferedWriter(fw);
-            bw.write(compilerInput.getText());
-            bw.flush();
-            bw.close();
-            fw.close();
-        } catch ( Exception e ){
-            e.printStackTrace();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        if (currentFile == null) {
+            String fileName = JOptionPane.showInputDialog(null, "Please enter the name of your file.");
+            JFileChooser fc = new JFileChooser();
+            fc.setCurrentDirectory(new File("."));
+            fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            fc.setAcceptAllFileFilterUsed(false);
+            if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                File currentDirectory = fc.getSelectedFile();
+                File newFile = new File(currentDirectory.getAbsoluteFile() + "\\" + fileName);
+                while (newFile.exists()) {
+                    fileName = JOptionPane.showInputDialog(null, "Please enter the name of your file.");
+                }
+                newFile = new File(currentDirectory.getAbsoluteFile() + "\\" + fileName);
+                currentFile = null;
+                FileWriter fw = null;
+                BufferedWriter bw = null;
+                try {
+                    newFile.createNewFile();
+                    fw = new FileWriter(newFile);
+                    bw = new BufferedWriter(fw);
+                    bw.write(compilerInput.getText());
+                    bw.flush();
+                    bw.close();
+                    fw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                this.setTitle(fileName);
+            }
+        } else {
+            FileWriter fw = null;
+            BufferedWriter bw = null;
+            try {
+                fw = new FileWriter(currentFile);
+                bw = new BufferedWriter(fw);
+                bw.write(compilerInput.getText());
+                bw.flush();
+                bw.close();
+                fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        if (currentFile == null) {
+            String fileName = JOptionPane.showInputDialog(null, "Please enter the name of your file.");
+            JFileChooser fc = new JFileChooser();
+            fc.setCurrentDirectory(new File("."));
+            fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            fc.setAcceptAllFileFilterUsed(false);
+            if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                File currentDirectory = fc.getSelectedFile();
+                File newFile = new File(currentDirectory.getAbsoluteFile() + "\\" + fileName);
+                while (newFile.exists()) {
+                    fileName = JOptionPane.showInputDialog(null, "Please enter the name of your file.");
+                }
+                newFile = new File(currentDirectory.getAbsoluteFile() + "\\" + fileName);
+                currentFile = newFile;
+                FileWriter fw = null;
+                BufferedWriter bw = null;
+                try {
+                    newFile.createNewFile();
+                    fw = new FileWriter(newFile);
+                    bw = new BufferedWriter(fw);
+                    bw.write(compilerInput.getText());
+                    bw.flush();
+                    bw.close();
+                    fw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                this.setTitle(fileName);
+            }
+        } else {
+            FileWriter fw = null;
+            BufferedWriter bw = null;
+            try {
+                fw = new FileWriter(currentFile);
+                bw = new BufferedWriter(fw);
+                bw.write(compilerInput.getText());
+                bw.flush();
+                bw.close();
+                fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         
-        //Compiling
+        // Compiling
         try {
             Symbol symbol;
-            parser par = new parser(new InputStreamReader(new FileInputStream("./src/resources/test4.gg")), compilerOutput);
+            parser par = new parser(new InputStreamReader(new FileInputStream(currentFile)), compilerOutput);
             symbol = par.parse();
-            while ( ((symbol).sym != sym.EOF) ) {
+            while (((symbol).sym != sym.EOF)) {
                 System.out.print("Token Name: " + sym.terminalNames[symbol.sym]);
                 if (symbol.value != null) {
                     System.out.print(" | Value:" + symbol.value);
@@ -162,8 +327,8 @@ public class Compiler extends javax.swing.JFrame {
             System.out.println("Fin del archivo");
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }      
-    }//GEN-LAST:event_jButton1ActionPerformed
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,7 +368,8 @@ public class Compiler extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextPane compilerInput;
     private javax.swing.JTextArea compilerOutput;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JFileChooser jFileChooser1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -211,7 +377,9 @@ public class Compiler extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
+    File currentFile;
 }
