@@ -268,6 +268,7 @@ public class Compiler extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
+        this.compilerOutput.setText("");
         if (currentFile == null) {
             String fileName = JOptionPane.showInputDialog(null, "Please enter the name of your file.");
             JFileChooser fc = new JFileChooser();
