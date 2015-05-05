@@ -1,7 +1,5 @@
-int i;
-
-void KingdomHearts (int i, int j){
-   int x = 3 + 5 * 3;
+KingdomHearts (int i, int j){
+   int  = 3 + 5 * 3;
    switch (i > 3) {
       case 1:{
 
@@ -14,4 +12,4 @@ void KingdomHearts (int i, int j){
       }
    }
    giff 0;
-}	
+}

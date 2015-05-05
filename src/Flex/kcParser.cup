@@ -51,19 +51,19 @@ parser code {:
             compilerOutput.append("" + errors + "==> " + " " + message
                     + " line: "+ (s.left+1) + ", column: "+(s.right+1) + "\n");
         } else {
-            StringBuffer m = new StringBuffer("Error ");
+            /*StringBuffer m = new StringBuffer("Error ");
             if (info instanceof java_cup.runtime.Symbol) {
                 m.append("(" + info.toString() + ")");
             }
             m.append(" : " + message + "\n");
-            compilerOutput.append(m.toString());
+            compilerOutput.append(m.toString());*/
         }
     }
     public void report_fatal_error(String message, Object info) {
         try{
             report_error(message, info);
         }catch(Exception e){
-           compilerOutput.append("Fatal Syntax Error GG WP");
+           
         }
         
     }
@@ -151,181 +151,181 @@ precedence left MUL, DIV;
 precedence nonassoc ELSE;
 
 /*AST Declaration*/
-ast_tree_declaration ::= main_function_declaration:mFD        										{: if(print){ mFD.printNode(); compilerOutput.append("The AST was printed in NetBeans! Check it out!");}
+ast_tree_declaration ::= main_function_declaration:mFD        										{: if(print){ mFD.printNode(); }
 																									   else parser.report_error("There was an error and the AST couldn't be printed", "No AST for you"); :}                                                                      
 	;
 
 /*Main Function Declaration*/
-main_function_declaration ::= declaration:d main_function_declaration:mFD       					{: RESULT = new MFD_Declaration(d,mFD); compilerOutput.append("Main_Function_Declaration -> Declaration Main_Function_Declaration\n");:}
-    |  main_function:mF external_declaration:eD                             						{: RESULT = new MFD_MainFunction(mF,eD); compilerOutput.append("Main_Function_Declaration -> Main_Function External_Declaration\n");:}
+main_function_declaration ::= declaration:d main_function_declaration:mFD       					{: RESULT = new MFD_Declaration(d,mFD); :}
+    |  main_function:mF external_declaration:eD                             						{: RESULT = new MFD_MainFunction(mF,eD); :}
     ;
 
 /*External Function Declarations*/
-external_declaration ::= function_definition:fD external_declaration:eD       						{: RESULT = new ED_ExternalDeclaration(fD,eD); compilerOutput.append("External_Declaration -> Function_Definition External_Declaration\n");:}
-    |                                                                 								{: RESULT = new ED_Lamda(); compilerOutput.append("External_Declaration -> Lambda\n");:} 
+external_declaration ::= function_definition:fD external_declaration:eD       						{: RESULT = new ED_ExternalDeclaration(fD,eD); :}
+    |                                                                 								{: RESULT = new ED_Lamda(); :} 
 	;
 
 /*Main Function*/
-main_function ::= type_specifier:tS main_declarator:mD compound_statement:cS          				{: RESULT = new MF_MainFunction(tS,mD,cS);compilerOutput.append("Main_Function -> Type_Specifier Main_Declarator Compound_Statement\n");:}  
+main_function ::= type_specifier:tS main_declarator:mD compound_statement:cS          				{: RESULT = new MF_MainFunction(tS,mD,cS);:}  
    | error:e main_declarator compound_statement 													{: print=false; parser.report_error("Missing return type in Main", e); :}
    ;
 
 /*Function Declaration*/
-function_definition ::= type_specifier:tS ID:id OPAR CPAR compound_statement:cS               		{: RESULT = new FD_FunctionDefinition(tS,id,cS);compilerOutput.append("Function_Definition -> type_specifier " +id+ "() compound_statement\n");:}
-	| type_specifier:tS ID:id OPAR parameter_list:pL CPAR compound_statement:cS 					{: RESULT = new FD_FunctionDefinition(tS,id,pL,cS);compilerOutput.append("Function_Definition -> type_specifier " +id+ "( parameter_list ) compound_statement\n");:}
+function_definition ::= type_specifier:tS ID:id OPAR CPAR compound_statement:cS               		{: RESULT = new FD_FunctionDefinition(tS,id,cS);:}
+	| type_specifier:tS ID:id OPAR parameter_list:pL CPAR compound_statement:cS 					{: RESULT = new FD_FunctionDefinition(tS,id,pL,cS);:}
 ;
 
 /*Jump Statements*/
-jump_statement ::=   CONTINUE END                                     								{: RESULT = new JS_Continue(); compilerOutput.append("Jump_Statement -> secondChance;\n");:}
-	| BREAK END                                                       								{: RESULT = new JS_Break(); compilerOutput.append("Jump_Statement -> ragnarok;\n");:}
-	| RETURN END                                                      								{: RESULT = new JS_Return(); compilerOutput.append("Jump_Statement -> return;\n");:}
-	| RETURN conditional_expression:cE END                                           				{: RESULT = new JS_Return(cE); compilerOutput.append("Jump_Statement -> return Expression;\n");:}
+jump_statement ::=   CONTINUE END                                     								{: RESULT = new JS_Continue(); :}
+	| BREAK END                                                       								{: RESULT = new JS_Break(); :}
+	| RETURN END                                                      								{: RESULT = new JS_Return(); :}
+	| RETURN conditional_expression:cE END                                           				{: RESULT = new JS_Return(cE); :}
 	| RETURN error:e                                                                                {: print=false; parser.report_error("Was expecting ';' character instead received: " + e,e); :}
 	| BREAK error:e                                                                                 {: print=false; parser.report_error("Was expecting ';' character instead received: " + e,e); :}
 	;
  
 /*Iteration Statements*/
-iteration_statement ::=   WHILE OPAR conditional_expression:cE CPAR statement:stm                   {: RESULT = new IT_While(cE,stm); compilerOutput.append("Iteration_Statement -> while ( Expression ) Statement\n");:}
+iteration_statement ::=   WHILE OPAR conditional_expression:cE CPAR statement:stm                   {: RESULT = new IT_While(cE,stm); :}
 	| FOR OPAR type_specifier:tS ID:id ASSIGN conditional_expression:cE END
-      conditional_expression:cE1 END assignment_expression:aE CPAR statement:stm    				{: RESULT = new IT_For(tS,id,cE,cE1,aE,stm); compilerOutput.append("Iteration_Statement -> for ( Type_Specifier " +id+ " = conditional_expression; conditional_expression; assignment_expression) Statement \n");:}
+      conditional_expression:cE1 END assignment_expression:aE CPAR statement:stm    				{: RESULT = new IT_For(tS,id,cE,cE1,aE,stm); :}
     ;
 
 /*Selection Statements*/
-selection_statement ::=   IF OPAR conditional_expression:cE CPAR statement:stm              		{: RESULT = new SS_If(cE,stm); compilerOutput.append("Selection_Statement -> if ( Expression ) Statement\n");:}      
-    | IF OPAR conditional_expression:cE CPAR statement:stm ELSE statement:stm1               		{: RESULT = new SS_IfElse(cE,stm,stm1); compilerOutput.append("Selection_Statement -> if ( Expression ) Statement ELSE statement\n");:}
-    | SWITCH OPAR conditional_expression:cE CPAR OCBRA labeled_statement:lS CCBRA                   {: RESULT = new SS_Switch(cE,lS); compilerOutput.append("Selection_Statement -> switch ( Expression ) Statement\n");:}
+selection_statement ::=   IF OPAR conditional_expression:cE CPAR statement:stm              		{: RESULT = new SS_If(cE,stm); :}      
+    | IF OPAR conditional_expression:cE CPAR statement:stm ELSE statement:stm1               		{: RESULT = new SS_IfElse(cE,stm,stm1); :}
+    | SWITCH OPAR conditional_expression:cE CPAR OCBRA labeled_statement:lS CCBRA                   {: RESULT = new SS_Switch(cE,lS); :}
 	;
 
 /*Statement List*/
-statement_list ::=   statement:stm                                           						{: RESULT = new SL_Statement(stm);compilerOutput.append("Statement_List -> Statement\n");:}
-	| statement_list:sL statement:stm                                       						{: RESULT = new SL_StatementList(sL,stm);compilerOutput.append("Statement_List -> Statement_List Statement\n");:}
+statement_list ::=   statement:stm                                           						{: RESULT = new SL_Statement(stm);:}
+	| statement_list:sL statement:stm                                       						{: RESULT = new SL_StatementList(sL,stm);:}
 	;
 
 /*Declaration Lists*/
-declaration_list ::=   declaration:d                                       							{: RESULT = new DL_Declaration(d);compilerOutput.append("Declaration_List -> Declaration\n");:}
-	| declaration_list:dL declaration:d                                   	 						{: RESULT = new DL_DeclarationList(dL,d);compilerOutput.append("Declaration_List -> Declaration_List Declaration\n");:}
+declaration_list ::=   declaration:d                                       							{: RESULT = new DL_Declaration(d);:}
+	| declaration_list:dL declaration:d                                   	 						{: RESULT = new DL_DeclarationList(dL,d);:}
 	;
 
 /*Compound Statements*/
-compound_statement ::=   OCBRA CCBRA                                 								{: RESULT = new CS_Empty();compilerOutput.append("Compound Statement -> {}\n");:}
-	| OCBRA statement_list:sL CCBRA                                     							{: RESULT = new CS_StatementList(sL);compilerOutput.append("Compound Statement -> { Statement_List }\n");:}
-	| OCBRA declaration_list:dL CCBRA                                   							{: RESULT = new CS_DeclarationList(dL);compilerOutput.append("Compound Statement -> { Declaration_List }\n");:}
-	| OCBRA declaration_list:dL statement_list:sL CCBRA												{: RESULT = new CS_Compound(dL,sL);compilerOutput.append("Compound Statement -> { Declaration_List Statement_List }\n");:}
+compound_statement ::=   OCBRA CCBRA                                 								{: RESULT = new CS_Empty();:}
+	| OCBRA statement_list:sL CCBRA                                     							{: RESULT = new CS_StatementList(sL);:}
+	| OCBRA declaration_list:dL CCBRA                                   							{: RESULT = new CS_DeclarationList(dL);:}
+	| OCBRA declaration_list:dL statement_list:sL CCBRA												{: RESULT = new CS_Compound(dL,sL);:}
 	;
 
 /*Label Statement*/
-labeled_statement ::=   CASE conditional_expression:cE COLON statement:stm labeled_statement:lS		{: RESULT = new LS_Case(cE,stm,lS);compilerOutput.append("Labeled_Statement -> case Conditional_Expression: Statement\n");:}
-	| DEFAULT COLON statement:stm                                      								{: RESULT = new LS_Default(stm);compilerOutput.append("Labeled_Statement -> default: Statement\n");:}
-	| 																								{: RESULT = new LS_Lamda();compilerOutput.append("Labeled_Statement -> Lambda\n");:}
+labeled_statement ::=   CASE conditional_expression:cE COLON statement:stm labeled_statement:lS		{: RESULT = new LS_Case(cE,stm,lS);:}
+	| DEFAULT COLON statement:stm                                      								{: RESULT = new LS_Default(stm);:}
+	| 																								{: RESULT = new LS_Lamda();:}
 	;
 
 /*Statement Generalization*/
-statement ::=   compound_statement:cS                                            					{: RESULT = new S_CompoundStatement(cS);compilerOutput.append("Statement -> Compound_Statement\n");:}
-	| selection_statement:sS 																		{: RESULT = new S_SelectionStatement(sS);compilerOutput.append("Statement -> Selection_Statement\n");:}                                      										
-	| iteration_statement:iS                                           								{: RESULT = new S_IterationStatement(iS);compilerOutput.append("Statement -> Iteration_Statement\n");:}
-	| jump_statement:jS                                                								{: RESULT = new S_JumpStatement(jS);compilerOutput.append("Statement -> Jump_Statement\n");:}
+statement ::=   compound_statement:cS                                            					{: RESULT = new S_CompoundStatement(cS);:}
+	| selection_statement:sS 																		{: RESULT = new S_SelectionStatement(sS);:}                                      										
+	| iteration_statement:iS                                           								{: RESULT = new S_IterationStatement(iS);:}
+	| jump_statement:jS                                                								{: RESULT = new S_JumpStatement(jS);:}
 	;
 
 /*Identifier List*/
-identifier_list ::=   ID:id                                         								{: RESULT = new IL_Id(id);compilerOutput.append("Identifier_List -> " + id + "\n");:}
-	| identifier_list:iL COMMA ID:id                                   								{: RESULT = new IL_identifierList(iL,id);compilerOutput.append("Identifier_List -> Identifier_List, " + id + "\n");:}
+identifier_list ::=   ID:id                                         								{: RESULT = new IL_Id(id);:}
+	| identifier_list:iL COMMA ID:id                                   								{: RESULT = new IL_identifierList(iL,id);:}
 	;
 
 /*Parameter List*/
-parameter_list ::=   variable_type_specifier:vTS ID:id                          					{: RESULT = new PL_Id(vTS,id);compilerOutput.append("Parameter_List -> Variable_Type_Specifier "+id+"\n");:}
-	| parameter_list:pL COMMA variable_type_specifier:vTS ID:id                    					{: RESULT = new PL_ParameterList(pL,vTS,id);compilerOutput.append("Parameter_List -> Parameter_List , Parameter_Declaration\n");:}
+parameter_list ::=   variable_type_specifier:vTS ID:id                          					{: RESULT = new PL_Id(vTS,id);:}
+	| parameter_list:pL COMMA variable_type_specifier:vTS ID:id                    					{: RESULT = new PL_ParameterList(pL,vTS,id);:}
 	| variable_type_specifier error:e 																{: print=false; parser.report_error("Was expecting id after type defintion in parameter_list instead received " + e,e);errors = 0;:}
 	;
 
 /*Main Declarator*/
-main_declarator ::=   MAIN OPAR parameter_list:pL CPAR                 								{: RESULT = new MD_Declaration(pL);compilerOutput.append("Main_Declarator -> Main ( Parameter_List )\n");:}
-    | MAIN OPAR CPAR                                     											{: RESULT = new MD_Declaration();compilerOutput.append("Main_Declarator -> Main ()\n");:}
+main_declarator ::=   MAIN OPAR parameter_list:pL CPAR                 								{: RESULT = new MD_Declaration(pL);:}
+    | MAIN OPAR CPAR                                     											{: RESULT = new MD_Declaration();:}
     | error:e OPAR CPAR										 										{: print=false; parser.report_error("Error in main function declaration was expecting keyword KingdomHearts",e);errors = 0;:} 
     | MAIN error:e 																					{: print=false; parser.report_error("Error in main function declaration missing char '(' ",e);errors = 0;:} 
     ;
 
 /*Type specifiers*/
-type_specifier ::= CHAR                                                 							{: RESULT = new TS_Type("Character");compilerOutput.append("Type_Specifier CHARACTER\n");:}
-	| INTEGER                                                       								{: RESULT = new TS_Type("Integer");compilerOutput.append("Type_Specifier INTEGER\n");:}
-	| DOUBLE                                                        								{: RESULT = new TS_Type("Double");compilerOutput.append("Type_Specifier DOUBLE\n");:}
-	| STRING                                                        								{: RESULT = new TS_Type("String");compilerOutput.append("Type_Specifier STRING\n");:}
-    | BOOLEAN                                                       							    {: RESULT = new TS_Type("Boolean");compilerOutput.append("Type_Specifier BOOLEAN\n");:}
-    | VOID                                                          							    {: RESULT = new TS_Type("Void");compilerOutput.append("Type_Specifier VOID\n");:}
+type_specifier ::= CHAR                                                 							{: RESULT = new TS_Type("Character");:}
+	| INTEGER                                                       								{: RESULT = new TS_Type("Integer");:}
+	| DOUBLE                                                        								{: RESULT = new TS_Type("Double");:}
+	| STRING                                                        								{: RESULT = new TS_Type("String");:}
+    | BOOLEAN                                                       							    {: RESULT = new TS_Type("Boolean");:}
+    | VOID                                                          							    {: RESULT = new TS_Type("Void");:}
 	;
 
 /*Variable Type specifiers*/
-variable_type_specifier ::= CHAR                                                 					{: RESULT = new VTS_Type("Character");compilerOutput.append("Variable_Type_Specifier CHARACTER\n");:}
-	| INTEGER                                                       								{: RESULT = new VTS_Type("Integer");compilerOutput.append("Variable_Type_Specifier INTEGER\n");:}
-	| DOUBLE                                                        								{: RESULT = new VTS_Type("Double");compilerOutput.append("Variable_Type_Specifier DOUBLE\n");:}
-	| STRING                                                        								{: RESULT = new VTS_Type("String");compilerOutput.append("Variable_Type_Specifier STRING\n");:}
-    | BOOLEAN                                                       							    {: RESULT = new VTS_Type("Boolean") ;compilerOutput.append("Variable_Type_Specifier BOOLEAN\n");:}
+variable_type_specifier ::= CHAR                                                 					{: RESULT = new VTS_Type("Character");:}
+	| INTEGER                                                       								{: RESULT = new VTS_Type("Integer");:}
+	| DOUBLE                                                        								{: RESULT = new VTS_Type("Double");:}
+	| STRING                                                        								{: RESULT = new VTS_Type("String");:}
+    | BOOLEAN                                                       							    {: RESULT = new VTS_Type("Boolean") ;:}
     ;
 
 /*Variable Declarations*/
-declaration ::= type_specifier:tS identifier_list:iL END                                          	{: RESULT = new D_identifierList(tS,iL);compilerOutput.append("Declaration -> Type_Specifier Identifier_List\n");:}
-	| assignment_expression:aE																		{: RESULT = new D_assignmentExpression(aE);compilerOutput.append("Declaration -> Assignment_Expression");:}
-	| io_expressions:ioE																			{: RESULT = new D_IOExpressions(ioE);compilerOutput.append("Declaration -> Io_expressions");:}
-	| function_calls_expression:fCE                                                                 {: RESULT = new D_FunctionCallsExpression(fCE);compilerOutput.append("Declaration -> Function_Calls_Expressions");:}
+declaration ::= type_specifier:tS identifier_list:iL END                                          	{: RESULT = new D_identifierList(tS,iL);:}
+	| assignment_expression:aE																		{: RESULT = new D_assignmentExpression(aE);:}
+	| io_expressions:ioE																			{: RESULT = new D_IOExpressions(ioE);:}
+	| function_calls_expression:fCE                                                                 {: RESULT = new D_FunctionCallsExpression(fCE);:}
 	;
 
 /*Assignment Expression*/
-assignment_expression ::= type_specifier:tS ID:stringValue ASSIGN conditional_expression:cE END		{: RESULT = new AE_Assignation(tS,stringValue,cE);compilerOutput.append("Assigment_Expression -> Type_Specifier " +stringValue+ " = Primary_Expression\n");:}
-	| ID:stringValue ASSIGN conditional_expression:cE END                                           {: RESULT = new AE_Assignation(stringValue,cE);compilerOutput.append("Assigment_Expression -> " +stringValue+ " = Primary_Expression\n");:}
+assignment_expression ::= type_specifier:tS ID:stringValue ASSIGN conditional_expression:cE END		{: RESULT = new AE_Assignation(tS,stringValue,cE);:}
+	| ID:stringValue ASSIGN conditional_expression:cE END                                           {: RESULT = new AE_Assignation(stringValue,cE);:}
 	;
 
 /*Conditional Expression*/
-conditional_expression ::= 	equality_expression:eE													{: RESULT = new CE_equalityExpression(eE);compilerOutput.append("Conditional_Expression -> Equality_Expression\n");:}
-	| conditional_expression:cE AND equality_expression:eE											{: RESULT = new CE_Operation(cE,"&&",eE);compilerOutput.append("Conditional_Expression -> Conditional_Expression && Equality_Expression\n");:}
-	| conditional_expression:cE OR equality_expression:eE											{: RESULT = new CE_Operation(cE,"||",eE);compilerOutput.append("Conditional_Expression -> Conditional_Expression || Equality_Expression\n");:}
+conditional_expression ::= 	equality_expression:eE													{: RESULT = new CE_equalityExpression(eE);:}
+	| conditional_expression:cE AND equality_expression:eE											{: RESULT = new CE_Operation(cE,"&&",eE);:}
+	| conditional_expression:cE OR equality_expression:eE											{: RESULT = new CE_Operation(cE,"||",eE);:}
 	;
 
-equality_expression ::= relational_expression:rE 													{: RESULT = new EE_relationalExpression(rE);compilerOutput.append("Equality_Expression -> Relational_Expression\n");:}
-	| equality_expression:eE EQU relational_expression:rE          									{: RESULT = new EE_Operation(eE,"==",rE);compilerOutput.append("Equality_Expression -> Equality_Expression == Relational_Expression\n");:}
-	| equality_expression:eE NEQU relational_expression:rE 											{: RESULT = new EE_Operation(eE,"!=",rE);compilerOutput.append("Equality_Expression -> Equality_Expression != Relational_Expression\n");:}
+equality_expression ::= relational_expression:rE 													{: RESULT = new EE_relationalExpression(rE);:}
+	| equality_expression:eE EQU relational_expression:rE          									{: RESULT = new EE_Operation(eE,"==",rE);:}
+	| equality_expression:eE NEQU relational_expression:rE 											{: RESULT = new EE_Operation(eE,"!=",rE);:}
 	;
 
 /*Relational Expressions*/
-relational_expression ::=   additive_expression:aE                         							{: RESULT = new RE_additiveExpression(aE);compilerOutput.append("Relational_Expression -> Additive_Expression\n");:} 
-	| relational_expression:rE LESS additive_expression:aE                							{: RESULT = new RE_Operation(rE,"<",aE);compilerOutput.append("Relational_Expression -> Relational_Expression < Additive_Expression\n");:} 
-	| relational_expression:rE GREATER additive_expression:aE             							{: RESULT = new RE_Operation(rE,">",aE);compilerOutput.append("Relational_Expression -> Relational_Expression > Additive_Expression\n");:} 
-	| relational_expression:rE LESSEQ additive_expression:aE              							{: RESULT = new RE_Operation(rE,"<=",aE);compilerOutput.append("Relational_Expression -> Relational_Expression <= Additive_Expression\n");:} 
-	| relational_expression:rE GREATEREQ additive_expression:aE           							{: RESULT = new RE_Operation(rE,">=",aE);compilerOutput.append("Relational_Expression -> Relational_Expression >= Additive_Expression\n");:} 
+relational_expression ::=   additive_expression:aE                         							{: RESULT = new RE_additiveExpression(aE);:} 
+	| relational_expression:rE LESS additive_expression:aE                							{: RESULT = new RE_Operation(rE,"<",aE);:} 
+	| relational_expression:rE GREATER additive_expression:aE             							{: RESULT = new RE_Operation(rE,">",aE);:} 
+	| relational_expression:rE LESSEQ additive_expression:aE              							{: RESULT = new RE_Operation(rE,"<=",aE);:} 
+	| relational_expression:rE GREATEREQ additive_expression:aE           							{: RESULT = new RE_Operation(rE,">=",aE);:} 
 	;
 
 /*Additive Expression*/
-additive_expression ::=   multiplicative_expression:mE                     							{: RESULT = new AE_multiplicativeExpression(mE);compilerOutput.append("Additive_Expression -> Multiplicative_Expression\n");:} 
-	| additive_expression:aE ADD multiplicative_expression:mE            							{: RESULT = new AE_Operation(aE,"+",mE);compilerOutput.append("Additive_Expression -> Additive_Expression + Multiplicative_Expression\n");:} 
-	| additive_expression:aE MIN multiplicative_expression:mE             							{: RESULT = new AE_Operation(aE,"-",mE);compilerOutput.append("Additive_Expression -> Additive_Expression - Multiplicative_Expression\n");:} 
+additive_expression ::=   multiplicative_expression:mE                     							{: RESULT = new AE_multiplicativeExpression(mE);:} 
+	| additive_expression:aE ADD multiplicative_expression:mE            							{: RESULT = new AE_Operation(aE,"+",mE);:} 
+	| additive_expression:aE MIN multiplicative_expression:mE             							{: RESULT = new AE_Operation(aE,"-",mE);:} 
 	;
 
 /*Multiplicative Expression*/
-multiplicative_expression ::=   basic_expression:bE                    								{: RESULT = new ME_basicExpression(bE);compilerOutput.append("Multiplicative_Expression -> Primary Expression\n");:} 
-	| multiplicative_expression:mE MUL basic_expression:bE                							{: RESULT = new ME_Operation(mE,"*",bE);compilerOutput.append("Multiplicative_Expression -> Multiplicative_Expression * Primary Expression\n");:} 
-	| multiplicative_expression:mE DIV basic_expression:bE                							{: RESULT = new ME_Operation(mE,"/",bE);compilerOutput.append("Multiplicative_Expression -> Multiplicative_Expression / Primary Expression\n");:}               
+multiplicative_expression ::=   basic_expression:bE                    								{: RESULT = new ME_basicExpression(bE);:} 
+	| multiplicative_expression:mE MUL basic_expression:bE                							{: RESULT = new ME_Operation(mE,"*",bE);:} 
+	| multiplicative_expression:mE DIV basic_expression:bE                							{: RESULT = new ME_Operation(mE,"/",bE);:}               
 	;
 
 /*IO Expressions*/
-io_expressions ::= PRINT OPAR STRINGCONTENT:stringContent CPAR END                                  {: RESULT = new IOE_Print(stringContent);compilerOutput.append("Basic_Expression -> print (\"" +stringContent+ "\")\n");:}
-    |   PRINT OPAR STRINGCONTENT:stringContent COMMA identifier_list:iL CPAR END             		{: RESULT = new IOE_Print(stringContent,iL);compilerOutput.append("Basic_Expression -> print (\"" +stringContent+ "\", identifier_list)\n");:}
-    |   SCAN  OPAR ID:identifierValue CPAR END                                                      {: RESULT = new IOE_Scan(identifierValue);compilerOutput.append("Basic_Expression -> scan (\"" +identifierValue+ "\")\n");:}
+io_expressions ::= PRINT OPAR STRINGCONTENT:stringContent CPAR END                                  {: RESULT = new IOE_Print(stringContent);:}
+    |   PRINT OPAR STRINGCONTENT:stringContent COMMA identifier_list:iL CPAR END             		{: RESULT = new IOE_Print(stringContent,iL);:}
+    |   SCAN  OPAR ID:identifierValue CPAR END                                                      {: RESULT = new IOE_Scan(identifierValue);:}
     ;
 
 /*Function calls*/
-function_calls_expression ::= ID:id OPAR CPAR END 													{: RESULT = new FCE_FunctionCallsExpression(id);compilerOutput.append("Function_Calls_Expression -> " +id+ "()\n");:}
-	| ID:id OPAR identifier_list:iL CPAR END 														{: RESULT = new FCE_FunctionCallsExpression(id,iL);compilerOutput.append("Function_Calls_Expression -> " +id+ "("+"identifier_list"+")\n");:}
+function_calls_expression ::= ID:id OPAR CPAR END 													{: RESULT = new FCE_FunctionCallsExpression(id);:}
+	| ID:id OPAR identifier_list:iL CPAR END 														{: RESULT = new FCE_FunctionCallsExpression(id,iL);:}
 	;
 
 /*Basic Expressions*/
-basic_expression ::=   primary_expression:pE                           								{: RESULT = new BE_primaryExpression(pE);compilerOutput.append("Basic_Expression -> Primary_Expression\n");:}
-    | function_calls_expression:fCE																	{: RESULT = new BE_FunctionCallsExpression(fCE);compilerOutput.append("Basic_Expression -> Function_Calls_Expression\n");:}
+basic_expression ::=   primary_expression:pE                           								{: RESULT = new BE_primaryExpression(pE);:}
+    | function_calls_expression:fCE																	{: RESULT = new BE_FunctionCallsExpression(fCE);:}
     ;
 
 /*Primary Expression*/
-primary_expression ::=  ID:identifierValue                              							{: RESULT = new PE_Id(identifierValue);compilerOutput.append("Primary_Expression -> Identifier: " + identifierValue +"\n"); :}
-	|   INT:integerContent                                            								{: RESULT = new PE_Content(new Integer(integerContent));compilerOutput.append("Primary_Expression -> Integer: " + integerContent + "\n"); :}
-	|   STRINGCONTENT:stringContent                                   								{: RESULT = new PE_Content(new String(stringContent));compilerOutput.append("Primary_Expression -> String: " + stringContent + "\n"); :}
-	|   DOUBLEVALUE:doubleContent                                     								{: RESULT = new PE_Content(new Double(doubleContent));compilerOutput.append("Primary_Expression -> Double: " + doubleContent + "\n"); :}
-	|   CHARCONTENT:charContent                                       								{: RESULT = new PE_Content(new Character(charContent));compilerOutput.append("Primary_Expression -> Char: " + charContent + "\n"); :}
-	|   TRUE                                            											{: RESULT = new PE_Content(new Boolean(true));compilerOutput.append("Primary_Expression -> Boolean: True\n");:}
-	|   FALSE                                       												{: RESULT = new PE_Content(new Boolean(false));compilerOutput.append("Primary_Expression -> Boolean: False\n");:}
+primary_expression ::=  ID:identifierValue                              							{: RESULT = new PE_Id(identifierValue); :}
+	|   INT:integerContent                                            								{: RESULT = new PE_Content(new Integer(integerContent)); :}
+	|   STRINGCONTENT:stringContent                                   								{: RESULT = new PE_Content(new String(stringContent)); :}
+	|   DOUBLEVALUE:doubleContent                                     								{: RESULT = new PE_Content(new Double(doubleContent)); :}
+	|   CHARCONTENT:charContent                                       								{: RESULT = new PE_Content(new Character(charContent)); :}
+	|   TRUE                                            											{: RESULT = new PE_Content(new Boolean(true));:}
+	|   FALSE                                       												{: RESULT = new PE_Content(new Boolean(false));:}
 	;
