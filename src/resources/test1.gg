@@ -1,4 +1,14 @@
 void KingdomHearts (){
-   x('a',"asd",12.12,a,b,c,true,123);
-   giff 0;
+   x();
+   scan(a)
+   y();
+   switch(a){
+        case 1:{
+            secondChance;
+        }case 2:{
+            int x;
+        }default:
+            ragnarok;
+   }
+   scan(y);
 }	

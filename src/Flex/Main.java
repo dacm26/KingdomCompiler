@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             Symbol symbol;
-            parser par = new parser(new InputStreamReader(new FileInputStream("./src/resources/test1.gg")));
+            parser par = new parser(new InputStreamReader(new FileInputStream("./src/resources/test5.gg")));
             symbol = par.parse();
             while ( ((symbol).sym != sym.EOF) ) {
                 symbol = par.parse();

@@ -50,7 +50,7 @@ parser code {:
     		if (info instanceof java_cup.runtime.Symbol) 
     			m.append( "("+info.toString()+")" );     
     		Symbol temp = (Symbol) info;
-    		m.append(" : "+message+ " in "+"line: "+ (temp.left+1) + ", column: "+(temp.right+1));   
+    		m.append(" : "+message+ " in "+"line: "+ (temp.left) + ", column: "+(temp.right));   
     		System.err.println(m);
     	}
     }
@@ -174,6 +174,8 @@ jump_statement ::=   CONTINUE END                                     								{:
 	| BREAK END                                                       								{: RESULT = new JS_Break(); :}
 	| RETURN END                                                      								{: RESULT = new JS_Return(); :}
 	| RETURN conditional_expression:cE END                                           				{: RESULT = new JS_Return(cE); :}
+	| RETURN conditional_expression error 															{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+	  END	      
 	;
  
 /*Iteration Statements*/
@@ -297,6 +299,12 @@ multiplicative_expression ::=   basic_expression:bE                    								{
 io_expressions ::= PRINT OPAR STRINGCONTENT:stringContent CPAR END                                  {: RESULT = new IOE_Print(stringContent);:}
     |   PRINT OPAR STRINGCONTENT:stringContent COMMA identifier_list:iL CPAR END             		{: RESULT = new IOE_Print(stringContent,iL);:}
     |   SCAN  OPAR ID:identifierValue CPAR END                                                      {: RESULT = new IOE_Scan(identifierValue);:}
+    | 	SCAN OPAR ID CPAR error 																	{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+    	END
+    |	PRINT OPAR STRINGCONTENT CPAR error 														{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+    	END
+    |	PRINT OPAR STRINGCONTENT COMMA identifier_list CPAR error 									{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+    	END
     ;
 
 /*Function calls*/
