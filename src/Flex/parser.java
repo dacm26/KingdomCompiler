@@ -6,6 +6,7 @@
 package Flex;
 
 import java_cup.runtime.*;
+import java.util.ArrayList;
 import AST.astTreeDeclaration.*;
 import AST.mainFunctionDeclaration.*;
 import AST.externalDeclaration.*;
@@ -512,11 +513,8 @@ public class parser extends java_cup.runtime.lr_parser {
     public  int errors = 0;
     public static kcScanner s;
     public boolean print=true;
-    public static javax.swing.JTextArea compilerOutput;
-
-    public parser(java.io.Reader input, javax.swing.JTextArea text) {
+    public parser(java.io.Reader input) {
         super(s=new kcScanner(input));
-        compilerOutput = text;
     }
 
     public void report_error(String message, Object info) {
@@ -524,7 +522,7 @@ public class parser extends java_cup.runtime.lr_parser {
         if (info instanceof java_cup.runtime.Symbol){
             java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol)info);
             errors++;
-            compilerOutput.append("" + errors + "==> " + " " + message
+            System.err.println("" + errors + "==> " + " " + message
                     + " line: "+ (s.left+1) + ", column: "+(s.right+1) + "\n");
         } else {
             /*StringBuffer m = new StringBuffer("Error ");

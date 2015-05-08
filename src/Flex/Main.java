@@ -5,7 +5,11 @@
  */
 package Flex;
 
-import AST.primaryExpression.*;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java_cup.runtime.Symbol;
 
 
 /**
@@ -15,17 +19,11 @@ import AST.primaryExpression.*;
 public class Main {
 
     public static void main(String[] args) {
-        /*try {
+        try {
             Symbol symbol;
-            parser par = new parser(new InputStreamReader(new FileInputStream("./src/resources/test3.gg")));
+            parser par = new parser(new InputStreamReader(new FileInputStream("./src/resources/asd.gg")));
             symbol = par.parse();
             while ( ((symbol).sym != sym.EOF) ) {
-                System.out.print("Token Name: " + sym.terminalNames[symbol.sym]);
-                if (symbol.value != null) {
-                    System.out.print(" | Value:" + symbol.value);
-                }
-
-                System.out.println("");
                 symbol = par.parse();
 
             }
@@ -33,6 +31,6 @@ public class Main {
 
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
     }
 }

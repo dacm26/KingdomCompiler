@@ -2,6 +2,8 @@ package Flex;
 
 
 import java_cup.runtime.*;
+import java.util.ArrayList;
+
 
 %%
 
@@ -15,9 +17,11 @@ import java_cup.runtime.*;
   private Symbol symbol(int type) {
     return new Symbol(type, yyline, yycolumn);
   }
+
   private Symbol symbol(int type, Object value) {
     return new Symbol(type, yyline, yycolumn, value);
   }
+
 %}
 
 %eofval{
@@ -71,7 +75,7 @@ LINEBREAK = [ \n\t\r\s]
 	"scan"                  {return symbol(sym.SCAN);}
 
 	","                     {return symbol(sym.COMMA);}
-        ":"                 	{return symbol(sym.COLON);}
+    ":"		                {return symbol(sym.COLON);}
 	";"                     {return symbol(sym.END);}
 
 	"+"                     {return symbol(sym.ADD);}
@@ -97,33 +101,39 @@ LINEBREAK = [ \n\t\r\s]
 	"="                     {return symbol(sym.ASSIGN);}
 
 
-        {LINEBREAK}             {}
-	{INT} 			{return symbol(sym.INT, new Integer(Integer.parseInt(yytext())));}
+    {LINEBREAK}             {}
+	{INT} 					{return symbol(sym.INT, new Integer(Integer.parseInt(yytext())));}
 	{DOUBLE}                {return symbol(sym.DOUBLEVALUE, new Double(Double.parseDouble(yytext())));}
-	{ID} 			{return symbol(sym.ID, yytext());}
+	{ID} 					{return symbol(sym.ID, yytext());}
 	{SDELIMITER}            {yybegin(KCHAIN);}
 	{CDELIMITER}            {yybegin(KCHAR);}
 
 	
 	{COMMENT}               {}
-	.                       { System.err.println("Illegal character <" + yytext() + "> at line: " + (yyline + 1) + " column: " + (yycolumn + 1)); }
+	.                       { 
+								System.err.println("Illegal character <" + yytext() + "> at line: " + (yyline + 1) + " column: " + (yycolumn + 1)); 
+							}
 
 }
 
 <KCHAIN> {
     {SDELIMITER}            { yybegin(YYINITIAL);                         }
     {STRINGCONTENT}         { return symbol(sym.STRINGCONTENT, yytext()); }
-    .                       { System.err.println("Illegal character <" + yytext() + "> at line: " + (yyline + 1) + " column: " + (yycolumn + 1)); }
-
+    .                       { 
+    							System.err.println("Illegal character <" + yytext() + "> at line: " + (yyline + 1) + " column: " + (yycolumn + 1)); 
+							}
 }
 
 <KCHAR> {
     {CDELIMITER}            { yybegin(YYINITIAL);                         }
     {CHARCONTENT}           {   if(yytext().length()>1){
-                                    System.err.println("A char can't handle that kind of darkness <" + yytext() + "> at line: " + (yyline + 1) + " column: " + (yycolumn + 1));
+    								System.err.println("A char can't handle that kind of darkness <" + yytext() + "> at line: " + (yyline + 1) + " column: " + (yycolumn + 1));
                                 }else{
-                                   return symbol(sym.CHARCONTENT, new Character(yytext().charAt(0))); }
+                                   return symbol(sym.CHARCONTENT, new Character(yytext().charAt(0))); 
                                 }
+                            }
                                 
-    .                       { System.err.println("Illegal character <" + yytext() + "> at line: " + (yyline + 1) + " column: " + (yycolumn + 1)); }
+    .                       { 
+    							System.err.println("Illegal character <" + yytext() + "> at line: " + (yyline + 1) + " column: " + (yycolumn + 1)); 
+							}
 }

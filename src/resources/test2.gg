@@ -1,5 +1,5 @@
 int $x = 3;
-bool y = true;
+bool $y = true;
 munny z = 3.5;
 KChain t = "Kampai";
 
