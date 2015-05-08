@@ -22,6 +22,12 @@ import java.util.ArrayList;
     return new Symbol(type, yyline, yycolumn, value);
   }
 
+  public String current_lexeme(){
+    int l = yyline+1;
+    int c = yycolumn+1;
+    return " (line: "+l+" , column: "+c+")";
+  }
+
 %}
 
 %eofval{

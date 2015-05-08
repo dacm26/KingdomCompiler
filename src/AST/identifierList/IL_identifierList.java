@@ -6,15 +6,16 @@
 
 package AST.identifierList;
 
+import AST.primaryExpression.*;
 /**
  *
  * @author Daniel
  */
 public class IL_identifierList extends identifierList{
     private identifierList iL;
-    private String id;
+    private primaryExpression id;
 
-    public IL_identifierList(identifierList iL, String id) {
+    public IL_identifierList(identifierList iL, primaryExpression id) {
         this.iL = iL;
         this.id = id;
     }
@@ -27,11 +28,11 @@ public class IL_identifierList extends identifierList{
         this.iL = iL;
     }
 
-    public String getId() {
+    public primaryExpression getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(primaryExpression id) {
         this.id = id;
     }
 

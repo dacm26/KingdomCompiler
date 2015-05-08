@@ -7,8 +7,6 @@ package Flex;
 
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java_cup.runtime.Symbol;
 
 
@@ -21,7 +19,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             Symbol symbol;
-            parser par = new parser(new InputStreamReader(new FileInputStream("./src/resources/asd.gg")));
+            parser par = new parser(new InputStreamReader(new FileInputStream("./src/resources/test1.gg")));
             symbol = par.parse();
             while ( ((symbol).sym != sym.EOF) ) {
                 symbol = par.parse();
@@ -30,7 +28,6 @@ public class Main {
             System.out.println("Fin del archivo");
 
         } catch (Exception ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

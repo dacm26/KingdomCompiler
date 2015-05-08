@@ -1,4 +1,4 @@
-int KingdomHearts () {
-    int $$$$= 8;
-    giff 0;
-}
+void KingdomHearts (){
+   x('a',"asd",12.12,a,b,c,true,123);
+   giff 0;
+}	

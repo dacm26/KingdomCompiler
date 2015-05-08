@@ -347,6 +347,12 @@ class kcScanner implements java_cup.runtime.Scanner {
     return new Symbol(type, yyline, yycolumn, value);
   }
 
+  public String current_lexeme(){
+    int l = yyline+1;
+    int c = yycolumn+1;
+    return " (line: "+l+" , column: "+c+")";
+  }
+
 
 
   /**
@@ -732,15 +738,13 @@ class kcScanner implements java_cup.runtime.Scanner {
         case 2: 
           { if(yytext().length()>1){
     								System.err.println("A char can't handle that kind of darkness <" + yytext() + "> at line: " + (yyline + 1) + " column: " + (yycolumn + 1));
-    								//return symbol(sym.LEXICERROR, new String(("A char can't handle that kind of darkness <" + yytext() + "> at line: " + (yyline + 1) + " column: " + (yycolumn + 1))));
                                 }else{
                                    return symbol(sym.CHARCONTENT, new Character(yytext().charAt(0))); 
                                 }
           }
         case 53: break;
         case 3: 
-          { System.err.println("Illegal character <" + yytext() + "> at line: " + (yyline + 1) + " column: " + (yycolumn + 1)); 
-								//return symbol(sym.LEXICERROR, new String(("Illegal character <" + yytext() + "> at line: " + (yyline + 1) + " column: " + (yycolumn + 1))));
+          { System.err.println("Illegal character <" + yytext() + "> at line: " + (yyline + 1) + " column: " + (yycolumn + 1));
           }
         case 54: break;
         case 4: 

@@ -5,23 +5,24 @@
  */
 
 package AST.identifierList;
+import AST.primaryExpression.*;
 
 /**
  *
  * @author Daniel
  */
 public class IL_Id extends identifierList{
-    private String id;
+    private primaryExpression id;
 
-    public IL_Id(String id) {
+    public IL_Id(primaryExpression id) {
         this.id = id;
     }
 
-    public String getId() {
+    public primaryExpression getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(primaryExpression id) {
         this.id = id;
     }
 

@@ -1,6 +1,5 @@
 package Flex;
 import java_cup.runtime.*; 
-import java.util.ArrayList;
 /*AST Imports*/
 
 import AST.astTreeDeclaration.*;
@@ -34,37 +33,37 @@ import AST.ioExpressions.*;
 import AST.primaryExpression.*;
 
 parser code {:
-    public  int errors = 0;
     public static kcScanner s;
-    public boolean print=true;
-    public parser(java.io.Reader input) {
+    public static int errors=0;
+    public static boolean print=true;
+   	public parser(java.io.Reader input) {
         super(s=new kcScanner(input));
     }
-
     public void report_error(String message, Object info) {
+    	if (info instanceof String){
+    		errors++; 
+    		System.err.println("  "+ errors + "==> " + info + " "+ message + 
+    			"\n       Parsing resumed from 2nd token before" + s.current_lexeme()+"\n");
+    	}
+    	else {
+    		StringBuffer m = new StringBuffer("Error ");
+    		if (info instanceof java_cup.runtime.Symbol) 
+    			m.append( "("+info.toString()+")" );     
+    		Symbol temp = (Symbol) info;
+    		m.append(" : "+message+ " in "+"line: "+ (temp.left+1) + ", column: "+(temp.right+1));   
+    		System.err.println(m);
+    	}
+    }
 
-        if (info instanceof java_cup.runtime.Symbol){
-            java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol)info);
-            errors++;
-            System.err.println("" + errors + "==> " + " " + message
-                    + " line: "+ (s.left+1) + ", column: "+(s.right+1) + "\n");
-        } else {
-            /*StringBuffer m = new StringBuffer("Error ");
-            if (info instanceof java_cup.runtime.Symbol) {
-                m.append("(" + info.toString() + ")");
-            }
-            m.append(" : " + message + "\n");
-            compilerOutput.append(m.toString());*/
-        }
-    }
     public void report_fatal_error(String message, Object info) {
-        try{
-            report_error(message, info);
-        }catch(Exception e){
-           
-        }
-        
+    	try{
+    		report_error(message, info);
+    	}catch(Exception e){
+    		print=false;
+    		System.err.println("Couldn't repair from the error.");
+    	}
     }
+
 :};
 
 
@@ -148,8 +147,7 @@ precedence left MUL, DIV;
 precedence nonassoc ELSE;
 
 /*AST Declaration*/
-ast_tree_declaration ::= main_function_declaration:mFD        										{: if(print){ mFD.printNode(); }
-																									   else parser.report_error("There was an error and the AST couldn't be printed", "No AST for you"); :}                                                                      
+ast_tree_declaration ::= main_function_declaration:mFD        										{: /*Imprimir tree*/ :}                                                                      
 	;
 
 /*Main Function Declaration*/
@@ -164,7 +162,6 @@ external_declaration ::= function_definition:fD external_declaration:eD       		
 
 /*Main Function*/
 main_function ::= type_specifier:tS main_declarator:mD compound_statement:cS          				{: RESULT = new MF_MainFunction(tS,mD,cS);:}  
-   | error:e main_declarator compound_statement 													{: print=false; parser.report_error("Missing return type in Main", e); :}
    ;
 
 /*Function Declaration*/
@@ -177,8 +174,6 @@ jump_statement ::=   CONTINUE END                                     								{:
 	| BREAK END                                                       								{: RESULT = new JS_Break(); :}
 	| RETURN END                                                      								{: RESULT = new JS_Return(); :}
 	| RETURN conditional_expression:cE END                                           				{: RESULT = new JS_Return(cE); :}
-	| RETURN error:e                                                                                {: print=false; parser.report_error("Was expecting ';' character instead received: " + e,e); :}
-	| BREAK error:e                                                                                 {: print=false; parser.report_error("Was expecting ';' character instead received: " + e,e); :}
 	;
  
 /*Iteration Statements*/
@@ -224,21 +219,18 @@ statement ::=   compound_statement:cS                                           
 	;
 
 /*Identifier List*/
-identifier_list ::=   ID:id                                         								{: RESULT = new IL_Id(id);:}
-	| identifier_list:iL COMMA ID:id                                   								{: RESULT = new IL_identifierList(iL,id);:}
+identifier_list ::=   primary_expression:id                                         				{: RESULT = new IL_Id(id);:}
+	| identifier_list:iL COMMA primary_expression:id                                   				{: RESULT = new IL_identifierList(iL,id);:}
 	;
 
 /*Parameter List*/
 parameter_list ::=   variable_type_specifier:vTS ID:id                          					{: RESULT = new PL_Id(vTS,id);:}
 	| parameter_list:pL COMMA variable_type_specifier:vTS ID:id                    					{: RESULT = new PL_ParameterList(pL,vTS,id);:}
-	| variable_type_specifier error:e 																{: print=false; parser.report_error("Was expecting id after type defintion in parameter_list instead received " + e,e);errors = 0;:}
 	;
 
 /*Main Declarator*/
 main_declarator ::=   MAIN OPAR parameter_list:pL CPAR                 								{: RESULT = new MD_Declaration(pL);:}
     | MAIN OPAR CPAR                                     											{: RESULT = new MD_Declaration();:}
-    | error:e OPAR CPAR										 										{: print=false; parser.report_error("Error in main function declaration was expecting keyword KingdomHearts",e);errors = 0;:} 
-    | MAIN error:e 																					{: print=false; parser.report_error("Error in main function declaration missing char '(' ",e);errors = 0;:} 
     ;
 
 /*Type specifiers*/
@@ -310,6 +302,10 @@ io_expressions ::= PRINT OPAR STRINGCONTENT:stringContent CPAR END              
 /*Function calls*/
 function_calls_expression ::= ID:id OPAR CPAR END 													{: RESULT = new FCE_FunctionCallsExpression(id);:}
 	| ID:id OPAR identifier_list:iL CPAR END 														{: RESULT = new FCE_FunctionCallsExpression(id,iL);:}
+	| ID OPAR CPAR error 																			{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+	  END
+	| ID OPAR identifier_list CPAR error 															{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+	  END	  
 	;
 
 /*Basic Expressions*/
