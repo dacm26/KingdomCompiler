@@ -1,14 +1,7 @@
-void KingdomHearts (){
-   x();
-   scan(a)
-   y();
-   switch(a){
-        case 1:{
-            secondChance;
-        }case 2:{
-            int x;
-        }default:
-            ragnarok;
-   }
-   scan(y);
-}	
+void KingdomHearts(int i, int j, int k){
+
+    char x = 'a';
+    x=2;
+    scan(x)
+    giff 0;
+}

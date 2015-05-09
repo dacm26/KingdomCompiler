@@ -299,21 +299,21 @@ multiplicative_expression ::=   basic_expression:bE                    								{
 io_expressions ::= PRINT OPAR STRINGCONTENT:stringContent CPAR END                                  {: RESULT = new IOE_Print(stringContent);:}
     |   PRINT OPAR STRINGCONTENT:stringContent COMMA identifier_list:iL CPAR END             		{: RESULT = new IOE_Print(stringContent,iL);:}
     |   SCAN  OPAR ID:identifierValue CPAR END                                                      {: RESULT = new IOE_Scan(identifierValue);:}
-    | 	SCAN OPAR ID CPAR error 																	{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
-    	END
-    |	PRINT OPAR STRINGCONTENT CPAR error 														{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
-    	END
-    |	PRINT OPAR STRINGCONTENT COMMA identifier_list CPAR error 									{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
-    	END
+    | 	SCAN  OPAR ID:identifierValue CPAR error 													{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+    	END 																						{: RESULT = new IOE_Scan(identifierValue);:}
+    |	PRINT OPAR STRINGCONTENT:stringContent CPAR error 											{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+    	END 																						{: RESULT = new IOE_Print(stringContent);:}
+    |	PRINT OPAR STRINGCONTENT:stringContent COMMA identifier_list:iL CPAR error 					{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+    	END 																						{: RESULT = new IOE_Print(stringContent,iL);:}
     ;
 
 /*Function calls*/
 function_calls_expression ::= ID:id OPAR CPAR END 													{: RESULT = new FCE_FunctionCallsExpression(id);:}
 	| ID:id OPAR identifier_list:iL CPAR END 														{: RESULT = new FCE_FunctionCallsExpression(id,iL);:}
-	| ID OPAR CPAR error 																			{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
-	  END
-	| ID OPAR identifier_list CPAR error 															{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
-	  END	  
+	| ID:id OPAR CPAR error 																		{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+	  END 																							{: RESULT = new FCE_FunctionCallsExpression(id);:}
+	| ID:id OPAR identifier_list:iL CPAR error 														{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+	  END	  																						{: RESULT = new FCE_FunctionCallsExpression(id,iL);:}
 	;
 
 /*Basic Expressions*/

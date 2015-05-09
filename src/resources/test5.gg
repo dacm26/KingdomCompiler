@@ -1,8 +1,16 @@
 void KingdomHearts(int i, int j, int k){
-    print ("Hola Mundo");
+    print ("a");
     scan (x)
     print ("Hola Mundo", i,j,k);
     asd()
+    x=12;
+    asd(1,true,2)
+    x=12;
+    asd(1,true,2)
+    x=12;
+    asd(1,true,2)
+    x=12;
+    asd(1,true,2)
     x=12;
     asd(1,true,2)
     x=12;
@@ -18,7 +26,7 @@ void asd () {
          case 2:{
                 secondChance;
          }
-         default: {
+         default:{
                 
          }
       }
