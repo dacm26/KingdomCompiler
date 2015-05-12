@@ -1,5 +1,6 @@
-package Flex;
+package app.lexicAnalysis;
 
+import app.syntaxAnalysis.*;
 
 import java_cup.runtime.*;
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 
 %%
 
+%public
 %unicode
 %class kcScanner
 %cup

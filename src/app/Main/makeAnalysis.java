@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Flex;
+package app.Main;
 
 import java.io.File;
 
@@ -24,15 +24,15 @@ public class makeAnalysis {
                 sym.delete();
             }
             String values[] = new String[6];
-            File file = new File("./src/Flex/kcScanner.flex");
+            File file = new File("./src/app/lexicAnalysis/kcScanner.flex");
             String opciones[] = new String[7];
             opciones[0] = "-destdir";
-            opciones[1] = "src/Flex";
+            opciones[1] = "src/app/syntaxAnalysis";
             opciones[2] = "-parser";
             opciones[3] = "parser";
             opciones[4] = "-symbols";
             opciones[5] = "sym";
-            opciones[6] = "src/Flex/kcParser.cup";
+            opciones[6] = "src/app/syntaxAnalysis/kcParser.cup";
             jflex.Main.generate(file);
             java_cup.Main.main(opciones);
         } catch (Exception e) {

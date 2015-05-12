@@ -1,5 +1,8 @@
-package Flex;
+package app.syntaxAnalysis;
+
 import java_cup.runtime.*; 
+import app.lexicAnalysis.*;
+
 /*AST Imports*/
 
 import AST.astTreeDeclaration.*;

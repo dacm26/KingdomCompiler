@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Flex;
+package app.Main;
 
+import app.syntaxAnalysis.sym;
+import app.syntaxAnalysis.parser;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java_cup.runtime.Symbol;
