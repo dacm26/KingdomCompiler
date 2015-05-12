@@ -24,7 +24,7 @@ public class Table {
         if (this.table.containsKey(id)) {
             return false;
         }
-        
+
         this.table.put(id, t);
         return true;
 
@@ -32,6 +32,24 @@ public class Table {
 
     public HashMap<String, Type> getTable() {
         return table;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sB = new StringBuilder();
+        sB.append("Id\t\tType");
+        String key, value;
+        for (String name : this.table.keySet()) {
+
+            key = name;
+            value =this.table.get(key).toString();
+            sB.append(key);
+            sB.append("\t\t");
+            sB.append(value);
+            sB.append("\n");
+
+        }
+        return sB.toString();
     }
 
 }
