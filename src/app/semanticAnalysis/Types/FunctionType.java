@@ -11,7 +11,8 @@ import java.util.ArrayList;
  *
  * @author C5220701
  */
-public class FunctionType extends Type{
+public class FunctionType extends Type {
+
     private final ArrayList<Type> parameters;
     private final Type Return;
 
@@ -27,7 +28,6 @@ public class FunctionType extends Type{
     public Type getReturn() {
         return Return;
     }
-    
 
     @Override
     public Type getType() {
@@ -36,16 +36,27 @@ public class FunctionType extends Type{
 
     @Override
     public String toString() {
-        StringBuilder sB= new StringBuilder();
-        for (int i = 0; i < this.parameters.size(); i++) {
-            if(i < this.parameters.size()-1){
-                sB.append(this.parameters.get(i).toString()).append(" X ");
-            }else{
-                 sB.append(this.parameters.get(i));
+        StringBuilder sB = new StringBuilder();
+        if (this.parameters.isEmpty()) {
+            sB.append("lambda");
+        } else {
+            for (int i = 0; i < this.parameters.size(); i++) {
+
+                if (i < this.parameters.size() - 1) {
+                    sB.append(this.parameters.get(i).toString()).append(" X ");
+                } else {
+                    sB.append(this.parameters.get(i));
+                }
             }
         }
-        sB.append(" --> ").append(this.Return.toString());
+
+        sB.append(" -> ").append(this.Return.toString());
         return sB.toString();
     }
-    
+
+    @Override
+    public int getSize() {
+        return -1;
+    }
+
 }

@@ -12,5 +12,6 @@ package app.semanticAnalysis.Types;
 abstract public class Type {
     abstract public Type getType();
     abstract public String toString();
+    abstract public int getSize();
     
 }
