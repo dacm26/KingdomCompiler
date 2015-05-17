@@ -4,36 +4,37 @@ import java_cup.runtime.*;
 import app.lexicAnalysis.*;
 
 /*AST Imports*/
-
-import AST.astTreeDeclaration.*;
-import AST.mainFunctionDeclaration.*;
-import AST.externalDeclaration.*;
-import AST.mainFunction.*;
-import AST.functionDefinition.*;
-import AST.jumpStatement.*;
-import AST.iterationStatement.*;
-import AST.selectionStatement.*;
-import AST.statementList.*;
-import AST.declarationList.*;
-import AST.compoundStatement.*;
-import AST.labeledStatement.*;
-import AST.statement.*;
-import AST.identifierList.*;
-import AST.parameterList.*;
-import AST.mainDeclarator.*;
-import AST.typeSpecifier.*;
-import AST.variableTypeSpecifier.*;
-import AST.declaration.*;
-import AST.assignmentExpression.*;
+import AST.primaryExpression.*;
 import AST.conditionalExpression.*;
 import AST.equalityExpression.*;
 import AST.relationalExpression.*;
 import AST.additiveExpression.*;
 import AST.multiplicativeExpression.*;
+import AST.functionCallsExpression.*;
+import AST.expression.*;
 import AST.basicExpression.*;
 import AST.functionCallsExpression.*;
 import AST.ioExpressions.*;
-import AST.primaryExpression.*;
+import AST.assignmentExpression.*;
+import AST.declaration.*;
+import AST.globalDeclaration.*;
+import AST.variableTypeSpecifier.*;
+import AST.functionTypeSpecifier.*;
+import AST.typeParameterList.*;
+import AST.PL.*;
+import AST.statement.*;
+import AST.identifierList.*;
+import AST.labeledStatement.*;
+import AST.compoundStatement.*;
+import AST.statementList.*;
+import AST.selectionStatement.*;
+import AST.iterationStatement.*;
+import AST.jumpFunctionStatement.*;
+import AST.jumpIterationStatement.*;
+import AST.functionDefinition.*;
+import AST.mainFunction.*;
+import AST.externalDeclaration.*;
+import AST.mainFunctionDeclaration.*;
 
 parser code {:
     public static kcScanner s;
@@ -114,36 +115,36 @@ terminal Boolean FALSE;
 
 /* Non terminals */
 non terminal ast_tree_declaration;
-non terminal main_function_declaration;
-non terminal global_declaration;
-non terminal main_function;
-non terminal external_declaration;
-non terminal function_definition;
-non terminal function_type_specifier;
-non terminal compound_statement;
-non terminal iteration_statement;
-non terminal type_parameter_list;
-non terminal selection_statement;
-non terminal variable_type_specifier;
-non terminal expression;
-non terminal assignment_expression;
-non terminal conditional_expression;
-non terminal relational_expression;
-non terminal additive_expression;
-non terminal multiplicative_expression;
-non terminal basic_expression;
-non terminal equality_expression;
-non terminal labeled_statement;
-non terminal statement_list;
-non terminal statement;
-non terminal declaration;
-non terminal io_expressions;
-non terminal function_calls_expression;
-non terminal identifier_list;
-non terminal parameter_list;
-non terminal primary_expression;
-non terminal jump_iteration_statement;
-non terminal jump_function_statement;
+non terminal mainFunctionDeclaration main_function_declaration;
+non terminal globalDeclaration global_declaration;
+non terminal mainFunction main_function;
+non terminal externalDeclaration external_declaration;
+non terminal functionDefinition function_definition;
+non terminal functionTypeSpecifier function_type_specifier;
+non terminal compoundStatement compound_statement;
+non terminal iterationStatement iteration_statement;
+non terminal typeParameterList type_parameter_list;
+non terminal selectionStatement selection_statement;
+non terminal variableTypeSpecifier variable_type_specifier;
+non terminal Expression expression;
+non terminal assignmentExpression assignment_expression;
+non terminal conditionalExpression conditional_expression;
+non terminal relationalExpression relational_expression;
+non terminal additiveExpression additive_expression;
+non terminal multiplicativeExpression multiplicative_expression;
+non terminal basicExpression basic_expression;
+non terminal equalityExpression equality_expression;
+non terminal labeledStatement labeled_statement;
+non terminal statementList statement_list;
+non terminal Statement statement;
+non terminal Declaration declaration;
+non terminal ioExpressions io_expressions;
+non terminal functionCallsExpression function_calls_expression;
+non terminal identifierList identifier_list;
+non terminal parameterList parameter_list;
+non terminal primaryExpression primary_expression;
+non terminal jumpIterationStatement jump_iteration_statement;
+non terminal jumpFunctionStatement jump_function_statement ;
 
 
 /* Precedences */
@@ -156,196 +157,199 @@ ast_tree_declaration ::= main_function_declaration:mFD        										{: /*Imp
 	;
 
 /*Main Function Declaration*/
-main_function_declaration ::= global_declaration:d main_function_declaration:mFD       				{: /*RESULT = new ();*/ :}
-    |  main_function:mF external_declaration:eD                             						{: /*RESULT = new ();*/ :}
+main_function_declaration ::= global_declaration:d main_function_declaration:mFD       				{: RESULT = new MFD_GlobalDeclaration(d,mFD); :}
+    |  main_function:mF external_declaration:eD                             						{: RESULT = new MFD_MainFunction(mF,eD); :}
     ;
 
 /*External Function Declarations*/
-external_declaration ::= function_definition:fD external_declaration:eD       						{: /*RESULT = new ();*/ :}
-    |                                                                 								{: /*RESULT = new ();*/ :}
+external_declaration ::= function_definition:fD external_declaration:eD       						{: RESULT = new ED_ExternalDeclaration(fD,eD); :}
+    |                                                                 								{: RESULT = new ED_Lambda(); :}
 	;
 
 /*Main Function*/
-main_function ::= function_type_specifier:tS MAIN OPAR CPAR compound_statement:cS					{: /*RESULT = new ();*/ :}				
+main_function ::= function_type_specifier:tS MAIN OPAR CPAR compound_statement:cS					{: RESULT = new MF_MainFunction(tS,cS); :}				
 	;
 
 /*Function Declaration*/
 function_definition ::= function_type_specifier:tS ID:id OPAR CPAR 
-	compound_statement:cS 															    			{: /*RESULT = new ();*/ :}  
+	compound_statement:cS 															    			{: RESULT = new FD_FunctionDefinition(tS,id,cS); :}  
 	| function_type_specifier:tS ID:id OPAR type_parameter_list:pL CPAR
-	compound_statement:cS 						 													{: /*RESULT = new ();*/ :}  
+	compound_statement:cS 						 													{: RESULT = new FD_FunctionDefinition(tS,id,pL,cS); :}  
 	;
 
 /*Jump Statements*/
-jump_iteration_statement ::= CONTINUE END                                     					    {: /*RESULT = new ();*/ :}
-	| BREAK END                                                       								{: /*RESULT = new ();*/ :}
+jump_iteration_statement ::= CONTINUE END                                     					    {: RESULT = new JIS_Continue(); :}
+	| BREAK END                                                       								{: RESULT = new JIS_Break(); :}
 	;
 
-jump_function_statement ::= RETURN END                                                      		{: /*RESULT = new ();*/ :}
-	| RETURN conditional_expression:cE END                                           				{: /*RESULT = new ();*/ :}
+jump_function_statement ::= RETURN END                                                      		{: RESULT = new JFS_EmptyReturn(); :}
+	| RETURN conditional_expression:cE END                                           				{: RESULT = new JFS_Return(cE); :}
 	;
 
 /*Iteration Statements*/
-iteration_statement ::=   WHILE OPAR conditional_expression:cE CPAR compound_statement 				{: /*RESULT = new ();*/ :}
+iteration_statement ::=   WHILE OPAR conditional_expression:cE CPAR compound_statement:cS			{: RESULT = new IT_While(cE,cS);  :}
 	| FOR OPAR variable_type_specifier:tS ID:id ASSIGN expression:exp END                        
       conditional_expression:cE1 END assignment_expression:aE CPAR 
-      compound_statement:cS 																		{: /*RESULT = new ();*/ :}
+      compound_statement:cS 																		{: RESULT = new IT_For(tS,id,exp,cE1,aE,cS);  :}
     | FOR OPAR ID:id ASSIGN expression:exp END conditional_expression:cE1 END 
-    assignment_expression:aE CPAR compound_statement:cS 											{: /*RESULT = new ();*/ :} 				
+    assignment_expression:aE CPAR compound_statement:cS 											{: RESULT = new IT_For(id,exp,cE1,aE,cS);  :} 				
     ;
 
 /*Selection Statements*/
-selection_statement ::=   IF OPAR conditional_expression:cE CPAR compound_statement			        {: /*RESULT = new ();*/ :}     
-    | IF OPAR conditional_expression:cE CPAR compound_statement 
-    ELSE compound_statement 			               												{: /*RESULT = new ();*/ :}
-    | SWITCH OPAR ID:id CPAR OCBRA labeled_statement:lS CCBRA                   					{: /*RESULT = new ();*/ :}
+selection_statement ::=   IF OPAR conditional_expression:cE CPAR compound_statement:cS		        {: RESULT = new SS_If(cE,cS); :}     
+    | IF OPAR conditional_expression:cE CPAR compound_statement:cS 
+    ELSE compound_statement:cSE			               												{: RESULT = new SS_IfElse(cE,cS,cSE); :}
+    | IF OPAR conditional_expression:cE CPAR compound_statement:cS ELSE selection_statement:sS 		{: RESULT = new SS_IfSS(cE,cS,sS); :}
+    | SWITCH OPAR ID:id CPAR OCBRA labeled_statement:lS CCBRA                   					{: RESULT = new SS_Switch(id,lS); :}
 	;
 
 /*Statement List*/
-statement_list ::=   statement:stm                                           						{: /*RESULT = new ();*/ :}
-	| statement_list:sL statement:stm                                       						{: /*RESULT = new ();*/ :}
+statement_list ::=   statement:stm                                           						{: RESULT = new SL_Statement(stm); :}
+	| statement_list:sL statement:stm                                       						{: RESULT = new SL_StatementList(sL,stm); :}
 	;
 
 /*Compound Statements*/
-compound_statement ::=   OCBRA CCBRA                                 								{: /*RESULT = new ();*/ :}
-	| OCBRA statement_list:sL CCBRA                                     							{: /*RESULT = new ();*/ :}
+compound_statement ::=   OCBRA CCBRA                                 								{: RESULT = new CS_Empty(); :}
+	| OCBRA statement_list:sL CCBRA                                     							{: RESULT = new CS_StatementList(sL); :}
 	;
 
 /*Label Statement*/
-labeled_statement ::=   CASE INT:integerContent COLON compound_statement:cS labeled_statement:lS	{: /*RESULT = new ();*/ :}
-	| CASE CHARCONTENT:charContent COLON compound_statement labeled_statement:lS	   				{: /*RESULT = new ();*/ :}
-	| CASE STRINGCONTENT:stringContent COLON  compound_statement:cS labeled_statement:lS 			{: /*RESULT = new ();*/ :}
-	| DEFAULT COLON compound_statement:cS                 											{: /*RESULT = new ();*/ :}
-	|
+labeled_statement ::=   CASE INT:integerContent COLON compound_statement:cS labeled_statement:lS	{: RESULT = new LS_Case(integerContent,cS,lS); :}
+	| CASE CHARCONTENT:charContent COLON compound_statement:cS labeled_statement:lS	   				{: RESULT = new LS_Case(charContent,cS,lS); :}
+	| CASE STRINGCONTENT:stringContent COLON  compound_statement:cS labeled_statement:lS 			{: RESULT = new LS_Case(stringContent,cS,lS); :}
+	| DEFAULT COLON compound_statement:cS                 											{: RESULT = new LS_Default(cS); :}
+	|																								{: RESULT = new LS_Lambda(); :}
 	;
 
 /*Statement Generalization*/
-statement ::=   compound_statement:cS                                            					{: /*RESULT = new ();*/ :}
-	| selection_statement:sS 																		{: /*RESULT = new ();*/ :}                                     										
-	| iteration_statement:iS                                           								{: /*RESULT = new ();*/ :}
-	| declaration:d                                                                                 {: /*RESULT = new ();*/ :}
-	| io_expressions:iE                                                                             {: /*RESULT = new ();*/ :}
-	| function_calls_expression                                                                     {: /*RESULT = new ();*/ :}
-	| jump_iteration_statement																		{: /*RESULT = new ();*/ :}
-	| jump_function_statement																		{: /*RESULT = new ();*/ :}
+statement ::=   compound_statement:cS                                            					{: RESULT = new S_CompoundStatement(cS); :}
+	| selection_statement:sS 																		{: RESULT = new S_SelectionStatement(sS); :}                                     										
+	| iteration_statement:iS                                           								{: RESULT = new S_IterationStatement(iS); :}
+	| declaration:d                                                                                 {: RESULT = new S_Declaration(d); :}
+	| io_expressions:iE                                                                             {: RESULT = new S_IOExpression(iE); :}
+	| function_calls_expression:fce                                                                 {: RESULT = new S_FCE(fce); :}
+	| jump_iteration_statement:jis																	{: RESULT = new S_JIS(jis); :}
+	| jump_function_statement:jfs																	{: RESULT = new S_JFS(jfs); :}
 	;
 
 /*Identifier List*/
-identifier_list ::=   ID:id                                                                         {: /*RESULT = new ();*/ :}
-	| identifier_list:iL COMMA ID:id 																{: /*RESULT = new ();*/ :}
+identifier_list ::=   ID:id                                                                         {: RESULT = new IL_Id(id); :}
+	| identifier_list:iL COMMA ID:id 																{: RESULT = new IL_IdentifierList(iL,id); :}
 	;
-
 /*Parameter List*/
-parameter_list ::=   expression:exp 																{: /*RESULT = new ();*/ :}
-	| parameter_list:pL COMMA expression:exp 														{: /*RESULT = new ();*/ :}
+parameter_list ::=   expression:exp 																{: RESULT = new PL_Expression(exp); :}
+	| parameter_list:pL COMMA expression:exp 														{: RESULT = new PL_List(pL,exp); :}
 	;
 
 /*Parameter List with Variable Types*/
-type_parameter_list ::=   variable_type_specifier:vTS ID:id                          				{: /*RESULT = new ();*/ :}
-	| type_parameter_list:pL COMMA variable_type_specifier:vTS ID:id                    			{: /*RESULT = new ();*/ :}
+type_parameter_list ::=   variable_type_specifier:vTS ID:id                          				{: RESULT = new TPL_Id(vTS,id); :}
+	| type_parameter_list:pL COMMA variable_type_specifier:vTS ID:id                    			{: RESULT = new TPL_List(pL,vTS,id); :}
 	;
 
 /*Function Type specifiers*/
-function_type_specifier ::= CHAR                                                                    {: /*RESULT = new ();*/ :}
-	| INTEGER 																						{: /*RESULT = new ();*/ :}
-	| DOUBLE 																						{: /*RESULT = new ();*/ :}
-	| STRING  																						{: /*RESULT = new ();*/ :}
-	| BOOLEAN 																						{: /*RESULT = new ();*/ :}
-	| VOID 																							{: /*RESULT = new ();*/ :}
+function_type_specifier ::= CHAR                                                                    {: RESULT = new FTS_Type(Character.TYPE); :}
+	| INTEGER 																						{: RESULT = new FTS_Type(Integer.TYPE); :}
+	| DOUBLE 																						{: RESULT = new FTS_Type(Double.TYPE); :}
+	| STRING  																						{: RESULT = new FTS_Type(String.class.getSimpleName()); :}
+	| BOOLEAN 																						{: RESULT = new FTS_Type(Boolean.TYPE); :}
+	| VOID 																							{: RESULT = new FTS_Type(Void.TYPE); :}
 	;
 
 /*Variable Type specifiers*/
-variable_type_specifier ::= CHAR                                                                    {: /*RESULT = new ();*/ :}                                               					
-	| INTEGER                                                                                       {: /*RESULT = new ();*/ :}                                								
-	| DOUBLE                                                        								{: /*RESULT = new ();*/ :}
-	| STRING                                                        								{: /*RESULT = new ();*/ :}
-    | BOOLEAN                                                       							    {: /*RESULT = new ();*/ :}
+variable_type_specifier ::= CHAR                                                                    {: RESULT = new VTS_Type(Character.TYPE); :}                                               					
+	| INTEGER                                                                                       {: RESULT = new VTS_Type(Integer.TYPE); :}                                								
+	| DOUBLE                                                        								{: RESULT = new VTS_Type(Double.TYPE); :}
+	| STRING                                                        								{: RESULT = new VTS_Type(String.class.getSimpleName()); :}
+    | BOOLEAN                                                       							    {: RESULT = new VTS_Type(Boolean.TYPE); :}
 	;
 
 /*Global Variable Declarations*/
-global_declaration ::= variable_type_specifier:vTS identifier_list:iL END      						{: /*RESULT = new ();*/ :}                             
-	| variable_type_specifier:vTS  ID:stringValue ASSIGN expression:exp END 						{: /*RESULT = new ();*/ :}
+global_declaration ::= variable_type_specifier:vTS identifier_list:iL END      						{: RESULT = new GD_identifierList(vTS,iL);:}                             
+	| variable_type_specifier:vTS  ID:stringValue ASSIGN expression:exp END 						{: RESULT = new GD_Assign(vTS,stringValue,exp); :}
 	;
 
 /*Variable Declarations*/
-declaration ::= variable_type_specifier:vTS identifier_list:iL END                                  {: /*RESULT = new ();*/ :} 
-	| variable_type_specifier:vTS  ID:stringValue ASSIGN expression:exp END                         {: /*RESULT = new ();*/ :}
-	| ID:stringValue ASSIGN expression:exp END                                                      {: /*RESULT = new ();*/ :}
+declaration ::= variable_type_specifier:vTS identifier_list:iL END                                  {: RESULT = new D_identifierList(vTS,iL); :} 
+	| variable_type_specifier:vTS  ID:stringValue ASSIGN expression:exp END                         {: RESULT = new D_Assign(vTS,stringValue,exp); :}
+	| ID:stringValue ASSIGN expression:exp END                                                      {: RESULT = new D_Assign(stringValue,exp); :}
 	;
 
 /*Assignment Expression*/
-assignment_expression ::= variable_type_specifier:tS ID:stringValue ASSIGN expression:exp 	    	{: /*RESULT = new ();*/ :}
-	| ID:stringValue ASSIGN expression:exp 	                                           				{: /*RESULT = new ();*/ :}
+assignment_expression ::= variable_type_specifier:tS ID:stringValue ASSIGN expression:exp 	    	{: RESULT = new AE_Assignation(tS,stringValue,exp); :}
+	| ID:stringValue ASSIGN expression:exp 	                                           				{: RESULT = new AE_Assignation(stringValue,exp); :}
 	;
 
 /*Conditional Expression*/
-conditional_expression ::= 	equality_expression:eE													{: /*RESULT = new ();*/ :}
-	| conditional_expression:cE AND equality_expression:eE											{: /*RESULT = new ();*/ :}
-	| conditional_expression:cE OR equality_expression:eE											{: /*RESULT = new ();*/ :}
+conditional_expression ::= 	equality_expression:eE													{: RESULT = new CE_equalityExpression(eE); :}
+	| conditional_expression:cE AND equality_expression:eE											{: RESULT = new CE_Operation(cE,"&&",eE); :}
+	| conditional_expression:cE OR equality_expression:eE											{: RESULT = new CE_Operation(cE,"||",eE); :}
 	;
 
-equality_expression ::= relational_expression:rE 													{: /*RESULT = new ();*/ :}
-	| equality_expression:eE EQU relational_expression:rE          									{: /*RESULT = new ();*/ :}
-	| equality_expression:eE NEQU relational_expression:rE 											{: /*RESULT = new ();*/ :}
+equality_expression ::= relational_expression:rE 													{: RESULT = new EE_relationalExpression(rE); :}
+	| equality_expression:eE EQU relational_expression:rE          									{: RESULT = new EE_Operation(eE,"==",rE); :}
+	| equality_expression:eE NEQU relational_expression:rE 											{: RESULT = new EE_Operation(eE,"!=",rE); :}
 	;
 
 /*Relational Expressions*/
-relational_expression ::=   additive_expression:aE                         							{: /*RESULT = new ();*/ :}
-	| relational_expression:rE LESS additive_expression:aE                							{: /*RESULT = new ();*/ :} 
-	| relational_expression:rE GREATER additive_expression:aE             							{: /*RESULT = new ();*/ :} 
-	| relational_expression:rE LESSEQ additive_expression:aE              							{: /*RESULT = new ();*/ :}
-	| relational_expression:rE GREATEREQ additive_expression:aE           							{: /*RESULT = new ();*/ :} 
+relational_expression ::=   additive_expression:aE                         							{: RESULT = new RE_additiveExpression(aE); :}
+	| relational_expression:rE LESS additive_expression:aE                							{: RESULT = new RE_Operation(rE,"<",aE); :} 
+	| relational_expression:rE GREATER additive_expression:aE             							{: RESULT = new RE_Operation(rE,">",aE); :} 
+	| relational_expression:rE LESSEQ additive_expression:aE              							{: RESULT = new RE_Operation(rE,"<=",aE); :}
+	| relational_expression:rE GREATEREQ additive_expression:aE           							{: RESULT = new RE_Operation(rE,">=",aE); :} 
 	;
 
 /*Additive Expression*/
-additive_expression ::=   multiplicative_expression:mE                     							{: /*RESULT = new ();*/ :} 
-	| additive_expression:aE ADD multiplicative_expression:mE            							{: /*RESULT = new ();*/ :} 
-	| additive_expression:aE MIN multiplicative_expression:mE             							{: /*RESULT = new ();*/ :} 
+additive_expression ::=   multiplicative_expression:mE                     							{: RESULT = new AE_multiplicativeExpression(mE); :} 
+	| additive_expression:aE ADD multiplicative_expression:mE            							{: RESULT = new AE_Operation(aE,"+",mE); :} 
+	| additive_expression:aE MIN multiplicative_expression:mE             							{: RESULT = new AE_Operation(aE,"-",mE); :} 
 	;
 
 /*Multiplicative Expression*/
-multiplicative_expression ::=   basic_expression:bE                    								{: /*RESULT = new ();*/ :}
-	| multiplicative_expression:mE MUL basic_expression:bE                							{: /*RESULT = new ();*/ :} 
-	| multiplicative_expression:mE DIV basic_expression:bE                							{: /*RESULT = new ();*/ :}               
+multiplicative_expression ::=   basic_expression:bE                    								{: RESULT = new ME_basicExpression(bE); :}
+	| multiplicative_expression:mE MUL basic_expression:bE                							{: RESULT = new ME_Operation(mE,"*",bE); :} 
+	| multiplicative_expression:mE DIV basic_expression:bE                							{: RESULT = new ME_Operation(mE,"/",bE); :}               
 	;
 
 /*IO Expressions*/
-io_expressions ::= PRINT OPAR STRINGCONTENT:stringContent CPAR END                                  {: /*RESULT = new ();*/ :}
-    |   PRINT OPAR STRINGCONTENT:stringContent COMMA parameter_list:pL CPAR END                     {: /*RESULT = new ();*/ :}       		
-    |   PRINT OPAR ID:identifierValue CPAR END                                                      {: /*RESULT = new ();*/ :}
-    |   SCAN  OPAR ID:identifierValue CPAR END                                                      {: /*RESULT = new ();*/ :}
+io_expressions ::= PRINT OPAR STRINGCONTENT:stringContent CPAR END                                  {: RESULT = new IOE_Print(stringContent,false); :}
+    |   PRINT OPAR STRINGCONTENT:stringContent COMMA parameter_list:pL CPAR END                     {: RESULT = new IOE_Print(stringContent,pL); :}       		
+    |   PRINT OPAR ID:identifierValue CPAR END                                                      {: RESULT = new IOE_Print(identifierValue,true); :}
+    |   SCAN  OPAR ID:identifierValue CPAR END                                                      {: RESULT = new IOE_Scan(identifierValue); :}
     | 	SCAN  OPAR ID:identifierValue CPAR error 													{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
-    	END 																						{: /*RESULT = new ();*/ :}
+    	END 																						{: RESULT = new IOE_Scan(identifierValue); :}
     |	PRINT OPAR STRINGCONTENT:stringContent CPAR error 											{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
-    	END 																						{: /*RESULT = new ();*/ :}
+    	END 																						{: RESULT = new IOE_Print(stringContent,false); :}
     |	PRINT OPAR STRINGCONTENT:stringContent COMMA parameter_list:pL CPAR error 					{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
-    	END 																						
+    	END 																						{: RESULT = new IOE_Print(stringContent,pL); :}	
+    | 	PRINT OPAR ID:identifierValue CPAR error 													{: RESULT = new IOE_Print(identifierValue,true); :}
+    	END															
     ;
 
 /*Function calls*/
-function_calls_expression ::= ID:id OPAR CPAR END 													{: /*RESULT = new ();*/ :}
-	| ID:id OPAR parameter_list:pL CPAR END 														{: /*RESULT = new ();*/ :}
+function_calls_expression ::= ID:id OPAR CPAR END 													{: RESULT = new FCE_FunctionCallsExpression(id); :}
+	| ID:id OPAR parameter_list:pL CPAR END 														{: RESULT = new FCE_FunctionCallsExpression(id,pL); :}
 	| ID:id OPAR CPAR error 																		{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
-	  END 																							{: /*RESULT = new ();*/ :}
+	  END 																							{: RESULT = new FCE_FunctionCallsExpression(id); :}
 	| ID:id OPAR parameter_list:pL CPAR error 														{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
-	  END	  																						{: /*RESULT = new ();*/ :}
+	  END	  																						{: RESULT = new FCE_FunctionCallsExpression(id,pL); :}
 	;
 
 /*Expression*/
-expression ::= conditional_expression
+expression ::= conditional_expression:cE															{: RESULT = new Expression(cE); :}
 	;
 
 /*Basic Expressions*/
-basic_expression ::=   primary_expression:pE                           								{: /*RESULT = new ();*/ :}
+basic_expression ::= primary_expression:pE                           								{: RESULT = new BE_primaryExpression(pE); :}
     ;
 
+
 /*Primary Expression*/
-primary_expression ::=  ID:identifierValue                              							{: /*RESULT = new ();*/ :}
-	|   INT:integerContent                                            								{: /*RESULT = new ();*/ :}
-	|   STRINGCONTENT:stringContent                                   								{: /*RESULT = new ();*/ :}
-	|   DOUBLEVALUE:doubleContent                                     								{: /*RESULT = new ();*/ :}
-	|   CHARCONTENT:charContent                                       								{: /*RESULT = new ();*/ :}
-	|   TRUE                                            											{: /*RESULT = new ();*/ :}
-	|   FALSE                                       												{: /*RESULT = new ();*/ :}
-	|   OPAR expression CPAR																		{: /*RESULT = new ();*/ :}
+primary_expression ::=  ID:identifierValue                              							{: RESULT = new PE_Id(identifierValue); :}
+	|   INT:integerContent                                            								{: RESULT = new PE_Content(integerContent); :}
+	|   STRINGCONTENT:stringContent                                   								{: RESULT = new PE_Content(stringContent); :}
+	|   DOUBLEVALUE:doubleContent                                     								{: RESULT = new PE_Content(doubleContent); :}
+	|   CHARCONTENT:charContent                                       								{: RESULT = new PE_Content(charContent); :}
+	|   TRUE                                            											{: RESULT = new PE_Content(true); :}
+	|   FALSE                                       												{: RESULT = new PE_Content(false); :}
+	|   OPAR expression:exp CPAR																	{: RESULT = new PE_Expression(exp); :}
 	;

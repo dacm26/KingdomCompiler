@@ -3,18 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package AST.typeParameterList;
 
-package AST.identifierList;
-
+import AST.variableTypeSpecifier.*;
 /**
  *
  * @author Daniel
  */
-public class IL_Id extends identifierList{
+public class TPL_Id extends typeParameterList{
+    
+    private variableTypeSpecifier vTS;
     private String id;
 
-    public IL_Id(String id) {
+    public TPL_Id(variableTypeSpecifier vTS, String id) {
+        this.vTS = vTS;
         this.id = id;
+    }
+
+    public variableTypeSpecifier getvTS() {
+        return vTS;
+    }
+
+    public void setvTS(variableTypeSpecifier vTS) {
+        this.vTS = vTS;
     }
 
     public String getId() {
@@ -24,11 +35,11 @@ public class IL_Id extends identifierList{
     public void setId(String id) {
         this.id = id;
     }
-
+    
+    
+    
     @Override
     public void printNode() {
-        System.out.println("IL_Id");
-        System.out.println(this.id);
     }
     
 }

@@ -5,36 +5,38 @@
  */
 
 package AST.labeledStatement;
-import AST.conditionalExpression.*;
-import AST.statement.*;
+
+import AST.compoundStatement.*;
+
 /**
  *
  * @author Daniel
  */
 public class LS_Case extends labeledStatement{
-    private conditionalExpression cE;
-    private statement stm;
+    private Object content;
+    private compoundStatement cS;
     private labeledStatement lS;
 
-    public LS_Case(conditionalExpression cE, statement stm, labeledStatement lS) {
-        this.cE = cE;
-        this.stm = stm;
+    public LS_Case(Object content, compoundStatement cS, labeledStatement lS) {
+        this.content = content;
+        this.cS = cS;
         this.lS = lS;
     }
-    public conditionalExpression getcE() {
-        return cE;
+
+    public Object getContent() {
+        return content;
     }
 
-    public void setcE(conditionalExpression cE) {
-        this.cE = cE;
+    public void setContent(Object content) {
+        this.content = content;
     }
 
-    public statement getStm() {
-        return stm;
+    public compoundStatement getcS() {
+        return cS;
     }
 
-    public void setStm(statement stm) {
-        this.stm = stm;
+    public void setcS(compoundStatement cS) {
+        this.cS = cS;
     }
 
     public labeledStatement getlS() {
@@ -44,13 +46,11 @@ public class LS_Case extends labeledStatement{
     public void setlS(labeledStatement lS) {
         this.lS = lS;
     }
+    
+    
 
     @Override
     public void printNode() {
-        System.out.println("LS_Case");
-        this.cE.printNode();
-        this.stm.printNode();
-        this.lS.printNode();
     }
     
 }

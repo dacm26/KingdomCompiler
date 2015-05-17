@@ -3,21 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package AST.externalDeclaration;
+package AST.typeParameterList;
 
 /**
  *
  * @author Daniel
  */
-public class ED_Lamda extends externalDeclaration{
-
-    public ED_Lamda() {
-    }
-
-    @Override
-    public void printNode() {
-        System.out.println("ED_Lamda");
-    }
-    
+public abstract class typeParameterList {
+    abstract public void printNode();
 }

@@ -5,7 +5,7 @@
  */
 
 package AST.mainDeclarator;
-import AST.parameterList.*;
+import AST.PL.parameterList;
 /**
  *
  * @author Daniel

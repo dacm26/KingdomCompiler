@@ -6,16 +6,16 @@
 
 package AST.selectionStatement;
 import AST.conditionalExpression.*;
-import AST.statement.*;
+import AST.compoundStatement.*;
 /**
  *
  * @author Daniel
  */
 public class SS_If extends selectionStatement{
     private conditionalExpression cE;
-    private statement stm;
+    private compoundStatement stm;
 
-    public SS_If(conditionalExpression cE, statement stm) {
+    public SS_If(conditionalExpression cE, compoundStatement stm) {
         this.cE = cE;
         this.stm = stm;
     }
@@ -28,11 +28,11 @@ public class SS_If extends selectionStatement{
         this.cE = cE;
     }
 
-    public statement getStm() {
+    public compoundStatement getStm() {
         return stm;
     }
 
-    public void setStm(statement stm) {
+    public void setStm(compoundStatement stm) {
         this.stm = stm;
     }
 

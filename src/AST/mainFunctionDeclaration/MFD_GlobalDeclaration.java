@@ -5,25 +5,25 @@
  */
 
 package AST.mainFunctionDeclaration;
-import AST.declaration.*;
+import AST.globalDeclaration.globalDeclaration;
 /**
  *
  * @author Daniel
  */
-public class MFD_Declaration extends mainFunctionDeclaration{
-    private declaration d;
+public class MFD_GlobalDeclaration extends mainFunctionDeclaration{
+    private globalDeclaration d;
     private mainFunctionDeclaration mFD;
 
-    public MFD_Declaration(declaration d, mainFunctionDeclaration mFD) {
+    public MFD_GlobalDeclaration(globalDeclaration d, mainFunctionDeclaration mFD) {
         this.d = d;
         this.mFD = mFD;
     }
 
-    public declaration getD() {
+    public globalDeclaration getD() {
         return d;
     }
 
-    public void setD(declaration d) {
+    public void setD(globalDeclaration d) {
         this.d = d;
     }
 
@@ -37,9 +37,7 @@ public class MFD_Declaration extends mainFunctionDeclaration{
 
     @Override
     public void printNode() {
-        System.out.println("MFD_Declaration");
-        this.d.printNode();
-        this.mFD.printNode();
+
     }
     
     

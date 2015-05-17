@@ -11,7 +11,7 @@ import AST.iterationStatement.*;
  *
  * @author Daniel
  */
-public class S_IterationStatement extends statement{
+public class S_IterationStatement extends Statement{
     private iterationStatement iS;
 
     public S_IterationStatement(iterationStatement iS) {

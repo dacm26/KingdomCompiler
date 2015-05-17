@@ -4,18 +4,18 @@
  * and open the template in the editor.
  */
 
-package AST.declaration;
+package AST.globalDeclaration;
 import AST.variableTypeSpecifier.*;
 import AST.identifierList.*;
 /**
  *
  * @author Daniel
  */
-public class D_identifierList extends Declaration{
+public class GD_identifierList extends globalDeclaration{
     private variableTypeSpecifier tS;
     private identifierList iL;
 
-    public D_identifierList(variableTypeSpecifier tS, identifierList iL) {
+    public GD_identifierList(variableTypeSpecifier tS, identifierList iL) {
         this.tS = tS;
         this.iL = iL;
     }

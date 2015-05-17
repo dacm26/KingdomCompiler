@@ -10,7 +10,7 @@ import AST.selectionStatement.*;
  *
  * @author Daniel
  */
-public class S_SelectionStatement extends statement{
+public class S_SelectionStatement extends Statement{
     private selectionStatement sS;
 
     public S_SelectionStatement(selectionStatement sS) {

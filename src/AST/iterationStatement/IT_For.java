@@ -5,10 +5,11 @@
  */
 package AST.iterationStatement;
 
-import AST.typeSpecifier.*;
+import AST.variableTypeSpecifier.*;
 import AST.conditionalExpression.*;
 import AST.assignmentExpression.*;
-import AST.statement.*;
+import AST.compoundStatement.compoundStatement;
+import AST.expression.*;
 
 /**
  *
@@ -16,14 +17,14 @@ import AST.statement.*;
  */
 public class IT_For extends iterationStatement {
 
-    private typeSpecifier type;
+    private variableTypeSpecifier type;
     private String id;
-    private conditionalExpression idValue;
+    private Expression idValue;
     private conditionalExpression cE;
     private assignmentExpression aE;
-    private statement stm;
+    private compoundStatement stm;
 
-    public IT_For(typeSpecifier type, String id, conditionalExpression idValue, conditionalExpression cE, assignmentExpression aE, statement stm) {
+    public IT_For(variableTypeSpecifier type, String id, Expression idValue, conditionalExpression cE, assignmentExpression aE, compoundStatement stm) {
         this.type = type;
         this.id = id;
         this.idValue = idValue;
@@ -31,12 +32,21 @@ public class IT_For extends iterationStatement {
         this.aE = aE;
         this.stm = stm;
     }
+    
+    public IT_For(String id, Expression idValue, conditionalExpression cE, assignmentExpression aE, compoundStatement stm) {
+        this.type = null;
+        this.id = id;
+        this.idValue = idValue;
+        this.cE = cE;
+        this.aE = aE;
+        this.stm = stm;
+    }
 
-    public typeSpecifier getType() {
+    public variableTypeSpecifier getType() {
         return type;
     }
 
-    public void setType(typeSpecifier type) {
+    public void setType(variableTypeSpecifier type) {
         this.type = type;
     }
 
@@ -48,11 +58,11 @@ public class IT_For extends iterationStatement {
         this.id = id;
     }
 
-    public conditionalExpression getIdValue() {
+    public Expression getIdValue() {
         return idValue;
     }
 
-    public void setIdValue(conditionalExpression idValue) {
+    public void setIdValue(Expression idValue) {
         this.idValue = idValue;
     }
 
@@ -72,23 +82,16 @@ public class IT_For extends iterationStatement {
         this.aE = aE;
     }
 
-    public statement getStm() {
+    public compoundStatement getStm() {
         return stm;
     }
 
-    public void setStm(statement stm) {
+    public void setStm(compoundStatement stm) {
         this.stm = stm;
     }
 
     @Override
     public void printNode() {
-        System.out.println("IT_For");
-        this.type.printNode();
-        System.out.println(this.id);
-        this.idValue.printNode();
-        this.cE.printNode();
-        this.aE.printNode();
-        this.stm.printNode();
     }
 
 }

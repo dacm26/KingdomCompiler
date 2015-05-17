@@ -11,17 +11,17 @@ import AST.declaration.*;
  * @author Daniel
  */
 public class DL_Declaration extends declarationList{
-    private declaration d;
+    private Declaration d;
 
-    public DL_Declaration(declaration d) {
+    public DL_Declaration(Declaration d) {
         this.d = d;
     }
 
-    public declaration getD() {
+    public Declaration getD() {
         return d;
     }
 
-    public void setD(declaration d) {
+    public void setD(Declaration d) {
         this.d = d;
     }
 

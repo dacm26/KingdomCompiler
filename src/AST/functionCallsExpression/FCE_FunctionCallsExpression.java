@@ -5,7 +5,7 @@
  */
 package AST.functionCallsExpression;
 
-import AST.identifierList.*;
+import AST.PL.parameterList;
 
 /**
  *
@@ -14,16 +14,16 @@ import AST.identifierList.*;
 public class FCE_FunctionCallsExpression extends functionCallsExpression {
 
     private String id;
-    private identifierList iL;
+    private parameterList pL;
 
-    public FCE_FunctionCallsExpression(String id, identifierList iL) {
+    public FCE_FunctionCallsExpression(String id, parameterList pL) {
         this.id = id;
-        this.iL = iL;
+        this.pL = pL;
     }
 
     public FCE_FunctionCallsExpression(String id) {
         this.id = id;
-        this.iL=null;
+        this.pL=null;
     }
 
     public String getId() {
@@ -34,20 +34,20 @@ public class FCE_FunctionCallsExpression extends functionCallsExpression {
         this.id = id;
     }
 
-    public identifierList getiL() {
-        return iL;
+    public parameterList getpL() {
+        return pL;
     }
 
-    public void setiL(identifierList iL) {
-        this.iL = iL;
+    public void setpL(parameterList pL) {
+        this.pL = pL;
     }
 
     @Override
     public void printNode() {
         System.out.println("FCE_FunctionCallsExpression");
         System.out.println(this.id);
-        if (this.iL != null) {
-            this.iL.printNode();
+        if (this.pL != null) {
+            this.pL.printNode();
 
         }
     }

@@ -4,27 +4,27 @@
  * and open the template in the editor.
  */
 
-package AST.parameterList;
-import AST.variableTypeSpecifier.*;
+package AST.identifierList;
+
 /**
  *
  * @author Daniel
  */
-public class PL_Id extends parameterList{
-    private VTS_Type type;
+public class IL_IdentifierList extends identifierList{
+    private identifierList iL;
     private String id;
 
-    public PL_Id(VTS_Type type, String id) {
-        this.type = type;
+    public IL_IdentifierList(identifierList iL, String id) {
+        this.iL = iL;
         this.id = id;
     }
 
-    public VTS_Type getType() {
-        return type;
+    public identifierList getiL() {
+        return iL;
     }
 
-    public void setType(VTS_Type type) {
-        this.type = type;
+    public void setiL(identifierList iL) {
+        this.iL = iL;
     }
 
     public String getId() {
@@ -37,9 +37,10 @@ public class PL_Id extends parameterList{
 
     @Override
     public void printNode() {
-        System.out.println("PL_Id");
-        this.type.printNode();
+        System.out.println("IL_identifierList");
+        this.iL.printNode();
         System.out.println(this.id);
     }
+    
     
 }

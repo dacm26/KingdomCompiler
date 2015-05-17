@@ -4,16 +4,17 @@
  * and open the template in the editor.
  */
 
-package AST.variableTypeSpecifier;
+package AST.functionTypeSpecifier;
+
 
 /**
  *
  * @author Daniel
  */
-public class VTS_Type extends variableTypeSpecifier{
+public class FTS_Type extends functionTypeSpecifier{
     private Object type;
 
-    public VTS_Type(Object type) {
+    public FTS_Type(Object type) {
         this.type = type;
     }
 

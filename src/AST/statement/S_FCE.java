@@ -3,20 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AST.basicExpression;
+package AST.statement;
+
 import AST.functionCallsExpression.*;
+
 /**
  *
- * @author C5220701
+ * @author Daniel
  */
-public class BE_FunctionCallsExpression extends basicExpression{
+public class S_FCE extends Statement{
     private functionCallsExpression fCE;
 
-    public BE_FunctionCallsExpression(functionCallsExpression fCE) {
+    public S_FCE(functionCallsExpression fCE) {
         this.fCE = fCE;
     }
-    
-    
+
     public functionCallsExpression getfCE() {
         return fCE;
     }
@@ -27,9 +28,6 @@ public class BE_FunctionCallsExpression extends basicExpression{
 
     @Override
     public void printNode() {
-        System.out.println("BE_FunctionCallsExpression");
-        this.fCE.printNode();
     }
-    
     
 }

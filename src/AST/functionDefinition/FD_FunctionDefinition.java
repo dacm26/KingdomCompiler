@@ -5,38 +5,38 @@
  */
 
 package AST.functionDefinition;
-import AST.typeSpecifier.*;
+import AST.functionTypeSpecifier.*;
 import AST.compoundStatement.*;
-import AST.parameterList.*;
+import AST.typeParameterList.*;
 /**
  *
  * @author Daniel
  */
 public class FD_FunctionDefinition extends functionDefinition{
-    private typeSpecifier type;
+    private functionTypeSpecifier type;
     private String id;
-    private parameterList pL;
+    private typeParameterList pL;
     private compoundStatement cS;
 
-    public FD_FunctionDefinition(typeSpecifier type, String id, compoundStatement cS) {
+    public FD_FunctionDefinition(functionTypeSpecifier type, String id, compoundStatement cS) {
         this.type = type;
         this.id = id;
         this.pL = null;
         this.cS = cS;
     }
 
-    public FD_FunctionDefinition(typeSpecifier type, String id, parameterList pL, compoundStatement cS) {
+    public FD_FunctionDefinition(functionTypeSpecifier type, String id, typeParameterList pL, compoundStatement cS) {
         this.type = type;
         this.id = id;
         this.pL = pL;
         this.cS = cS;
     }
 
-    public typeSpecifier getType() {
+    public functionTypeSpecifier getType() {
         return type;
     }
 
-    public void setType(typeSpecifier type) {
+    public void setType(functionTypeSpecifier type) {
         this.type = type;
     }
 
@@ -48,11 +48,11 @@ public class FD_FunctionDefinition extends functionDefinition{
         this.id = id;
     }
 
-    public parameterList getpL() {
+    public typeParameterList getpL() {
         return pL;
     }
 
-    public void setpL(parameterList pL) {
+    public void setpL(typeParameterList pL) {
         this.pL = pL;
     }
 

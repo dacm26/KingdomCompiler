@@ -5,31 +5,30 @@
  */
 
 package AST.labeledStatement;
-import AST.statement.*;
+import AST.compoundStatement.*;
 /**
  *
  * @author Daniel
  */
 public class LS_Default extends labeledStatement{
-    private statement stm;
+    private compoundStatement stm;
 
-    public LS_Default(statement stm) {
+    public LS_Default(compoundStatement stm) {
         this.stm = stm;
     }
 
 
-    public statement getStm() {
+    public compoundStatement getStm() {
         return stm;
     }
 
-    public void setStm(statement stm) {
+    public void setStm(compoundStatement stm) {
         this.stm = stm;
     }
 
     @Override
     public void printNode() {
-        System.out.println("LS_Default");
-        this.stm.printNode();
+
     }
     
     

@@ -3,21 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package AST.labeledStatement;
+package AST.functionTypeSpecifier;
 
 /**
  *
  * @author Daniel
  */
-public class LS_Lamda extends labeledStatement{
-
-    public LS_Lamda() {
-    }
-
-    @Override
-    public void printNode() {
-        System.out.println("LS_Lamda");
-    }
-    
+public abstract class functionTypeSpecifier {
+    abstract public void printNode();
 }

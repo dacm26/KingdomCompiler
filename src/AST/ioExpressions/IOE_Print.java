@@ -4,38 +4,56 @@
  * and open the template in the editor.
  */
 package AST.ioExpressions;
-import AST.identifierList.*;
+import AST.PL.parameterList;
 /**
  *
  * @author C5220701
  */
 public class IOE_Print extends ioExpressions{
     private String content;
-    private identifierList iL;
+    private String id;
+    private parameterList iL;
 
-    public IOE_Print(String content) {
-        this.content = content;
+    public IOE_Print(String content, boolean isId) {
+        
+        if (isId) {
+            this.id=content;
+        }else{
+            this.content = content;
+        }
         this.iL=null;
+        this.id=null;
     }
 
-    public IOE_Print(String content, identifierList iL) {
+    public IOE_Print(String content, parameterList iL) {
         this.content = content;
         this.iL = iL;
+        this.id=null;
     }
 
     public String getContent() {
         return content;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
+    
+
     public void setContent(String content) {
         this.content = content;
     }
 
-    public identifierList getiL() {
+    public parameterList getiL() {
         return iL;
     }
 
-    public void setiL(identifierList iL) {
+    public void setiL(parameterList iL) {
         this.iL = iL;
     }
 

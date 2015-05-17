@@ -5,27 +5,27 @@
  */
 
 package AST.selectionStatement;
-import AST.conditionalExpression.*;
+
 import AST.labeledStatement.*;
 /**
  *
  * @author Daniel
  */
 public class SS_Switch extends selectionStatement{
-    private conditionalExpression cE;
+    private String id;
     private labeledStatement lS;
 
-    public SS_Switch(conditionalExpression cE, labeledStatement lS) {
-        this.cE = cE;
+    public SS_Switch(String id, labeledStatement lS) {
+        this.id = id;
         this.lS = lS;
     }
 
-    public conditionalExpression getcE() {
-        return cE;
+    public String getid() {
+        return id;
     }
 
-    public void setcE(conditionalExpression cE) {
-        this.cE = cE;
+    public void setid(String id) {
+        this.id = id;
     }
 
     public labeledStatement getlS() {
@@ -38,9 +38,6 @@ public class SS_Switch extends selectionStatement{
 
     @Override
     public void printNode() {
-        System.out.println("SS_Switch");
-        this.cE.printNode();
-        this.lS.printNode();
     }
     
 }

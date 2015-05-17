@@ -6,16 +6,16 @@
 
 package AST.iterationStatement;
 import AST.conditionalExpression.*;
-import AST.statement.*;
+import AST.compoundStatement.*;
 /**
  *
  * @author Daniel
  */
 public class IT_While extends iterationStatement{
     private conditionalExpression cE;
-    private statement stm;
+    private compoundStatement stm;
 
-    public IT_While(conditionalExpression cE, statement stm) {
+    public IT_While(conditionalExpression cE, compoundStatement stm) {
         this.cE = cE;
         this.stm = stm;
     }
@@ -28,11 +28,11 @@ public class IT_While extends iterationStatement{
         this.cE = cE;
     }
 
-    public statement getStm() {
+    public compoundStatement getStm() {
         return stm;
     }
 
-    public void setStm(statement stm) {
+    public void setStm(compoundStatement stm) {
         this.stm = stm;
     }
 

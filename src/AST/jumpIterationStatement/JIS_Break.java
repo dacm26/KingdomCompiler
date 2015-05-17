@@ -3,13 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package AST.parameterList;
+package AST.jumpIterationStatement;
 
 /**
  *
  * @author Daniel
  */
-abstract public class parameterList {
-    abstract public void printNode();
+public class JIS_Break extends jumpIterationStatement{
+
+    public JIS_Break() {
+    }
+    
+    @Override
+    public void printNode() {
+    }
+    
 }

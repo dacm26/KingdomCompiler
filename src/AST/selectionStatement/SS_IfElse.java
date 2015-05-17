@@ -6,7 +6,7 @@
 package AST.selectionStatement;
 
 import AST.conditionalExpression.*;
-import AST.statement.*;
+import AST.compoundStatement.*;
 
 /**
  *
@@ -15,10 +15,10 @@ import AST.statement.*;
 public class SS_IfElse extends selectionStatement {
 
     private conditionalExpression cE;
-    private statement stmIf;
-    private statement stmElse;
+    private compoundStatement stmIf;
+    private compoundStatement stmElse;
 
-    public SS_IfElse(conditionalExpression cE, statement stmIf, statement stmElse) {
+    public SS_IfElse(conditionalExpression cE, compoundStatement stmIf, compoundStatement stmElse) {
         this.cE = cE;
         this.stmIf = stmIf;
         this.stmElse = stmElse;
@@ -32,19 +32,19 @@ public class SS_IfElse extends selectionStatement {
         this.cE = cE;
     }
 
-    public statement getStmIf() {
+    public compoundStatement getStmIf() {
         return stmIf;
     }
 
-    public void setStmIf(statement stmIf) {
+    public void setStmIf(compoundStatement stmIf) {
         this.stmIf = stmIf;
     }
 
-    public statement getStmElse() {
+    public compoundStatement getStmElse() {
         return stmElse;
     }
 
-    public void setStmElse(statement stmElse) {
+    public void setStmElse(compoundStatement stmElse) {
         this.stmElse = stmElse;
     }
 

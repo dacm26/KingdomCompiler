@@ -4,12 +4,20 @@
  * and open the template in the editor.
  */
 
-package AST.statement;
+package AST.labeledStatement;
 
 /**
  *
  * @author Daniel
  */
-abstract public class statement {
-    abstract public void printNode();
+public class LS_Lambda extends labeledStatement{
+
+    public LS_Lambda() {
+    }
+
+    @Override
+    public void printNode() {
+        System.out.println("LS_Lamda");
+    }
+    
 }

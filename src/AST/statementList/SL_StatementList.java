@@ -12,9 +12,9 @@ import AST.statement.*;
  */
 public class SL_StatementList extends statementList{
     private statementList sL;
-    private statement stm;
+    private Statement stm;
 
-    public SL_StatementList(statementList sL, statement stm) {
+    public SL_StatementList(statementList sL, Statement stm) {
         this.sL = sL;
         this.stm = stm;
     }
@@ -27,11 +27,11 @@ public class SL_StatementList extends statementList{
         this.sL = sL;
     }
 
-    public statement getStm() {
+    public Statement getStm() {
         return stm;
     }
 
-    public void setStm(statement stm) {
+    public void setStm(Statement stm) {
         this.stm = stm;
     }
 

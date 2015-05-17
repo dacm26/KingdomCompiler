@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package AST.declaration;
+package AST.jumpFunctionStatement;
 
 /**
  *
  * @author Daniel
  */
-abstract public class declaration {
-    abstract public void printNode();
+public abstract class jumpFunctionStatement {
+    public abstract void printNode();
 }

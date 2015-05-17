@@ -10,7 +10,7 @@ import AST.compoundStatement.*;
  *
  * @author Daniel
  */
-public class S_CompoundStatement extends statement{
+public class S_CompoundStatement extends Statement{
     private compoundStatement cS;
 
     public S_CompoundStatement(compoundStatement cS) {

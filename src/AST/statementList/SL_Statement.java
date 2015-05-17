@@ -11,17 +11,17 @@ import AST.statement.*;
  * @author Daniel
  */
 public class SL_Statement extends statementList{
-    private statement stm;
+    private Statement stm;
 
-    public SL_Statement(statement stm) {
+    public SL_Statement(Statement stm) {
         this.stm = stm;
     }
 
-    public statement getStm() {
+    public Statement getStm() {
         return stm;
     }
 
-    public void setStm(statement stm) {
+    public void setStm(Statement stm) {
         this.stm = stm;
     }
 

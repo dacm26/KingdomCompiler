@@ -12,9 +12,9 @@ import AST.declaration.*;
  */
 public class DL_DeclarationList extends declarationList{
     private declarationList dL;
-    private declaration d;
+    private Declaration d;
 
-    public DL_DeclarationList(declarationList dL, declaration d) {
+    public DL_DeclarationList(declarationList dL, Declaration d) {
         this.dL = dL;
         this.d = d;
     }
@@ -27,11 +27,11 @@ public class DL_DeclarationList extends declarationList{
         this.dL = dL;
     }
 
-    public declaration getD() {
+    public Declaration getD() {
         return d;
     }
 
-    public void setD(declaration d) {
+    public void setD(Declaration d) {
         this.d = d;
     }
 
