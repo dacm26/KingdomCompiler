@@ -30,6 +30,7 @@ public class Main {
             System.out.println("Fin del archivo");
 
         } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 }

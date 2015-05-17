@@ -43,7 +43,7 @@ SDELIMITER = [\"]
 CDELIMITER = [\']
 
 ID = (_|{LETTER})(_|{LETTER}|{DIGIT})*
-INT = {DIGIT}+
+INT = -?{DIGIT}+
 DOUBLE = ({DIGIT}+\.{DIGIT}+)
 COMMENT = #(.|[\r\n])*?#
 STRINGCONTENT = (\\.|[^\"])*
@@ -83,7 +83,7 @@ LINEBREAK = [ \n\t\r\s]
 	"scan"                  {return symbol(sym.SCAN);}
 
 	","                     {return symbol(sym.COMMA);}
-    ":"		                {return symbol(sym.COLON);}
+        ":"		        {return symbol(sym.COLON);}
 	";"                     {return symbol(sym.END);}
 
 	"+"                     {return symbol(sym.ADD);}
