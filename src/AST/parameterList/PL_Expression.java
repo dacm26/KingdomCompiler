@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package AST.PL;
+package AST.parameterList;
 
 import AST.expression.*;
+
 /**
  *
  * @author Daniel
@@ -25,7 +25,6 @@ public class PL_Expression extends parameterList{
     public void setExp(Expression exp) {
         this.exp = exp;
     }
-
 
     @Override
     public void printNode() {

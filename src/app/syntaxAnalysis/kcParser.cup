@@ -21,7 +21,7 @@ import AST.globalDeclaration.*;
 import AST.variableTypeSpecifier.*;
 import AST.functionTypeSpecifier.*;
 import AST.typeParameterList.*;
-import AST.PL.*;
+import AST.parameterList.*;
 import AST.statement.*;
 import AST.identifierList.*;
 import AST.labeledStatement.*;
@@ -238,7 +238,7 @@ identifier_list ::=   ID:id                                                     
 	;
 /*Parameter List*/
 parameter_list ::=   expression:exp 																{: RESULT = new PL_Expression(exp); :}
-	| parameter_list:pL COMMA expression:exp 														{: RESULT = new PL_List(pL,exp); :}
+	| parameter_list:pL COMMA expression:exp 														{: RESULT = new PL_ExpressionList(pL,exp); :}
 	;
 
 /*Parameter List with Variable Types*/
@@ -275,8 +275,8 @@ declaration ::= variable_type_specifier:vTS identifier_list:iL END              
 	;
 
 /*Assignment Expression*/
-assignment_expression ::= variable_type_specifier:tS ID:stringValue ASSIGN expression:exp 	    	{: RESULT = new AE_Assignation(tS,stringValue,exp); :}
-	| ID:stringValue ASSIGN expression:exp 	                                           				{: RESULT = new AE_Assignation(stringValue,exp); :}
+assignment_expression ::= variable_type_specifier:tS ID:stringValue ASSIGN expression:exp 	    	{: RESULT = new AEX_Assignation(tS,stringValue,exp); :}
+	| ID:stringValue ASSIGN expression:exp 	                                           				{: RESULT = new AEX_Assignation(stringValue,exp); :}
 	;
 
 /*Conditional Expression*/

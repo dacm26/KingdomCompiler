@@ -3,19 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package AST.parameterList;
 
-package AST.PL;
-import AST.Expression.*;
+import AST.expression.*;
+
 /**
  *
  * @author Daniel
  */
-public class PL_List extends parameterList{
-    private parameterList pL;
+public class PL_ExpressionList extends parameterList{
     private Expression exp;
+    private parameterList pL;
 
-    public PL_List(parameterList pL, Expression exp) {
+    public PL_ExpressionList(parameterList pL,Expression exp) {
+        this.exp = exp;
         this.pL = pL;
+    }
+    
+    
+    public Expression getExp() {
+        return exp;
+    }
+
+    public void setExp(Expression exp) {
         this.exp = exp;
     }
 
@@ -26,15 +36,8 @@ public class PL_List extends parameterList{
     public void setpL(parameterList pL) {
         this.pL = pL;
     }
-
-    public Expression getType() {
-        return exp;
-    }
-
-    public void setType(Expression exp) {
-        this.exp = exp;
-    }
-
+    
+    
 
     @Override
     public void printNode() {

@@ -5,7 +5,7 @@
  */
 package AST.functionCallsExpression;
 
-import AST.PL.parameterList;
+import AST.parameterList.*;
 
 /**
  *

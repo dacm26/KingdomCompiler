@@ -24,7 +24,7 @@ import AST.globalDeclaration.*;
 import AST.variableTypeSpecifier.*;
 import AST.functionTypeSpecifier.*;
 import AST.typeParameterList.*;
-import AST.PL.*;
+import AST.parameterList.*;
 import AST.statement.*;
 import AST.identifierList.*;
 import AST.labeledStatement.*;
@@ -1196,7 +1196,7 @@ class CUP$parser$actions {
 		int expleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int expright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Expression exp = (Expression)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new PL_List(pL,exp); 
+		 RESULT = new PL_ExpressionList(pL,exp); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("parameter_list",27, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1427,7 +1427,7 @@ class CUP$parser$actions {
 		int expleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int expright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Expression exp = (Expression)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new AE_Assignation(tS,stringValue,exp); 
+		 RESULT = new AEX_Assignation(tS,stringValue,exp); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("assignment_expression",13, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1442,7 +1442,7 @@ class CUP$parser$actions {
 		int expleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int expright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Expression exp = (Expression)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new AE_Assignation(stringValue,exp); 
+		 RESULT = new AEX_Assignation(stringValue,exp); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("assignment_expression",13, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

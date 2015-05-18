@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package AST.PL;
+package AST.parameterList;
 
 /**
  *
  * @author Daniel
  */
-abstract public class parameterList {
-    abstract public void printNode();
+public abstract class parameterList {
+    public abstract void printNode();
 }

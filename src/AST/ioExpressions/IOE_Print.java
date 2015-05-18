@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package AST.ioExpressions;
-import AST.PL.parameterList;
+import AST.parameterList.*;
 /**
  *
  * @author C5220701

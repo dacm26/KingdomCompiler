@@ -3,32 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AST.assignmentExpression;
 
-import AST.Expression.*;
+import AST.expression.*;
 import AST.variableTypeSpecifier.*;
+
 /**
  *
  * @author Daniel
  */
-public class AE_Assignation extends assignmentExpression{
+public class AEX_Assignation extends assignmentExpression {
+
     private variableTypeSpecifier vTS;
     private String id;
-    private String operator;
     private Expression exp;
 
-    public AE_Assignation(variableTypeSpecifier vTS, String id, Expression exp) {
+    public AEX_Assignation(variableTypeSpecifier vTS, String id, Expression exp) {
         this.vTS = vTS;
         this.id = id;
-        this.operator="=";
         this.exp = exp;
     }
 
-    public AE_Assignation(String id, Expression exp) {
+    public AEX_Assignation(String id, Expression exp) {
         this.vTS = null;
         this.id = id;
-        this.operator = "=";
         this.exp = exp;
     }
 
@@ -48,14 +46,6 @@ public class AE_Assignation extends assignmentExpression{
         this.id = id;
     }
 
-    public String getOperator() {
-        return operator;
-    }
-
-    public void setOperator(String operator) {
-        this.operator = operator;
-    }
-
     public Expression getExp() {
         return exp;
     }
@@ -65,11 +55,10 @@ public class AE_Assignation extends assignmentExpression{
     }
     
     
+    
 
     @Override
     public void printNode() {
     }
-    
-    
-    
+
 }
