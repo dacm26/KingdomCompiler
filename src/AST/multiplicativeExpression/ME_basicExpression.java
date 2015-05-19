@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AST.multiplicativeExpression;
+
+import AST.additiveExpression.additiveExpression;
 import AST.basicExpression.*;
 import app.semanticAnalysis.Table.Node;
+
 /**
  *
  * @author Daniel
  */
-public class ME_basicExpression extends multiplicativeExpression{
+public class ME_basicExpression extends multiplicativeExpression {
+
     private basicExpression bE;
 
     public ME_basicExpression(basicExpression bE) {
@@ -34,7 +37,12 @@ public class ME_basicExpression extends multiplicativeExpression{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        
+
     }
-    
+
+    @Override
+    public int getMultiplicativeType(Node symbolNode, additiveExpression temp3) {
+       return -1;
+    }
+
 }

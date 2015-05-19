@@ -347,11 +347,11 @@ basic_expression ::= primary_expression:pE                           								{: 
 
 /*Primary Expression*/
 primary_expression ::=  ID:identifierValue                              							{: RESULT = new PE_Id(identifierValue); :}
-	|   INT:integerContent                                            								{: RESULT = new PE_Content(integerContent); :}
-	|   STRINGCONTENT:stringContent                                   								{: RESULT = new PE_Content(stringContent); :}
-	|   DOUBLEVALUE:doubleContent                                     								{: RESULT = new PE_Content(doubleContent); :}
-	|   CHARCONTENT:charContent                                       								{: RESULT = new PE_Content(charContent); :}
-	|   TRUE                                            											{: RESULT = new PE_Content(true); :}
-	|   FALSE                                       												{: RESULT = new PE_Content(false); :}
+	|   INT:integerContent                                            								{: RESULT = new PE_Content(integerContent,2); :}
+	|   STRINGCONTENT:stringContent                                   								{: RESULT = new PE_Content(stringContent,4); :}
+	|   DOUBLEVALUE:doubleContent                                     								{: RESULT = new PE_Content(doubleContent,3); :}
+	|   CHARCONTENT:charContent                                       								{: RESULT = new PE_Content(charContent,1); :}
+	|   TRUE                                            											{: RESULT = new PE_Content(true,5); :}
+	|   FALSE                                       												{: RESULT = new PE_Content(false,5); :}
 	|   OPAR expression:exp CPAR																	{: RESULT = new PE_Expression(exp); :}
 	;

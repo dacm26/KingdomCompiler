@@ -5,7 +5,10 @@
  */
 
 package AST.multiplicativeExpression;
+import AST.additiveExpression.AE_multiplicativeExpression;
+import AST.additiveExpression.additiveExpression;
 import AST.basicExpression.*;
+import AST.primaryExpression.PE_Id;
 import app.semanticAnalysis.Table.Node;
 /**
  *
@@ -57,6 +60,11 @@ public class ME_Operation extends multiplicativeExpression{
     @Override
     public void generateSymbolNode(Node symbolNode) {
         
+    }
+
+    @Override
+    public int getMultiplicativeType(Node symbolNode,additiveExpression temp3) {
+        return -1;
     }
     
 }

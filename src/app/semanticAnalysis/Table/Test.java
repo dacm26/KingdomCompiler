@@ -5,6 +5,7 @@
  */
 package app.semanticAnalysis.Table;
 
+import AST.primaryExpression.PE_Content;
 import app.semanticAnalysis.Types.*;
 import java.util.ArrayList;
 
@@ -25,11 +26,25 @@ public class Test {
         table.add(new Row("f",new PrimitiveDataType(String.class.getSimpleName(),Character.SIZE*f.length()/8)));
         table.add(new Row("h",new FunctionType(a,new PrimitiveDataType(Integer.TYPE,Integer.SIZE/8))));
         System.out.println(table.toString());
-        Object type = new Integer("");
-        if (type instanceof Integer) {
-            System.out.println(((Integer)type).toString());
-        } else {
-            System.out.println("No sale: "+type);
+        System.out.println(table.getIdType("a").toString());
+        PE_Content test=new PE_Content("123",2);
+        PE_Content test1=new PE_Content("asd",4);
+        PE_Content test2=new PE_Content("12.12",3);
+        PE_Content test3=new PE_Content("a",1);
+        PE_Content test4=new PE_Content(true,5);
+        PE_Content test5=new PE_Content(false,5);
+        
+        System.out.println(test.getType());
+        System.out.println(test1.getContent().toString());
+        System.out.println(test2.getContent().toString());
+        System.out.println(test3.getContent().toString());
+        System.out.println(test4.getContent().toString());
+        System.out.println(test5.getContent().toString());
+        
+        if ("int".equals(table.getIdType("a").toString())) {
+            System.out.println("Es entero");
+        }else{
+            System.out.println("Neles");
         }
         
     }
