@@ -1,9 +1,14 @@
 bool KingdomHearts(){
     function();
     function(id, x, c);
-    int x, y, z;
+    int b,c,d,e,f,g,h;
     bool k = "hola";
     bool k = (3 > 5);
+    int x = 1;
+    char a = '2';
+    munny q = 12.12;
+    KChain asd = "v";
+    int b,c,d,e,f,g,h;
     switch(k){
         case 1:{
             if ( true || popeye && (5 + 3 == 6)){

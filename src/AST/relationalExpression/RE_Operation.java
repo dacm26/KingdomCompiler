@@ -56,7 +56,7 @@ public class RE_Operation extends relationalExpression{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
    
 }

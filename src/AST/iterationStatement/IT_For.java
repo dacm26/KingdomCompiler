@@ -97,7 +97,7 @@ public class IT_For extends iterationStatement {
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
 }

@@ -1293,7 +1293,7 @@ class CUP$parser$actions {
           case 49: // variable_type_specifier ::= CHAR 
             {
               variableTypeSpecifier RESULT =null;
-		 RESULT = new VTS_Type(Character.TYPE); 
+		 RESULT = new VTS_Type(Character.TYPE,Character.SIZE/8); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("variable_type_specifier",11, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1302,7 +1302,7 @@ class CUP$parser$actions {
           case 50: // variable_type_specifier ::= INTEGER 
             {
               variableTypeSpecifier RESULT =null;
-		 RESULT = new VTS_Type(Integer.TYPE); 
+		 RESULT = new VTS_Type(Integer.TYPE,Integer.SIZE/8); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("variable_type_specifier",11, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1311,7 +1311,7 @@ class CUP$parser$actions {
           case 51: // variable_type_specifier ::= DOUBLE 
             {
               variableTypeSpecifier RESULT =null;
-		 RESULT = new VTS_Type(Double.TYPE); 
+		 RESULT = new VTS_Type(Double.TYPE,Double.SIZE/8); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("variable_type_specifier",11, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1320,7 +1320,7 @@ class CUP$parser$actions {
           case 52: // variable_type_specifier ::= STRING 
             {
               variableTypeSpecifier RESULT =null;
-		 RESULT = new VTS_Type(String.class.getSimpleName()); 
+		 RESULT = new VTS_Type(String.class.getSimpleName(),255); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("variable_type_specifier",11, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1329,7 +1329,7 @@ class CUP$parser$actions {
           case 53: // variable_type_specifier ::= BOOLEAN 
             {
               variableTypeSpecifier RESULT =null;
-		 RESULT = new VTS_Type(Boolean.TYPE); 
+		 RESULT = new VTS_Type(Boolean.TYPE,1); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("variable_type_specifier",11, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

@@ -34,7 +34,7 @@ public class S_CompoundStatement extends Statement{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.cS.generateSymbolNode(symbolNode);
     }
     
 }

@@ -14,10 +14,21 @@ import app.semanticAnalysis.Table.Node;
  */
 public class VTS_Type extends variableTypeSpecifier{
     private Object type;
+    private int size;
 
-    public VTS_Type(Object type) {
+    public VTS_Type(Object type, int size) {
         this.type = type;
+        this.size=size;
     }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+    
 
     public Object getType() {
         return type;
@@ -35,7 +46,7 @@ public class VTS_Type extends variableTypeSpecifier{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
 }

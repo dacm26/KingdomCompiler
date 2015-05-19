@@ -258,11 +258,11 @@ function_type_specifier ::= CHAR                                                
 	;
 
 /*Variable Type specifiers*/
-variable_type_specifier ::= CHAR                                                                    {: RESULT = new VTS_Type(Character.TYPE); :}                                               					
-	| INTEGER                                                                                       {: RESULT = new VTS_Type(Integer.TYPE); :}                                								
-	| DOUBLE                                                        								{: RESULT = new VTS_Type(Double.TYPE); :}
-	| STRING                                                        								{: RESULT = new VTS_Type(String.class.getSimpleName()); :}
-    | BOOLEAN                                                       							    {: RESULT = new VTS_Type(Boolean.TYPE); :}
+variable_type_specifier ::= CHAR                                                                    {: RESULT = new VTS_Type(Character.TYPE,Character.SIZE/8); :}                                               					
+	| INTEGER                                                                                       {: RESULT = new VTS_Type(Integer.TYPE,Integer.SIZE/8); :}                                								
+	| DOUBLE                                                        								{: RESULT = new VTS_Type(Double.TYPE,Double.SIZE/8); :}
+	| STRING                                                        								{: RESULT = new VTS_Type(String.class.getSimpleName(),255); :}
+    | BOOLEAN                                                       							    {: RESULT = new VTS_Type(Boolean.TYPE,1); :}
 	;
 
 /*Global Variable Declarations*/

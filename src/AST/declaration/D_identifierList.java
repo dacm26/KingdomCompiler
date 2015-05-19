@@ -8,6 +8,9 @@ package AST.declaration;
 import AST.variableTypeSpecifier.*;
 import AST.identifierList.*;
 import app.semanticAnalysis.Table.Node;
+import app.semanticAnalysis.Table.Row;
+import app.semanticAnalysis.Types.PrimitiveDataType;
+import java.util.ArrayList;
 /**
  *
  * @author Daniel
@@ -46,7 +49,11 @@ public class D_identifierList extends Declaration{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<String> ids= this.iL.getIds();
+        for (int i = 0; i < ids.size(); i++) {
+            symbolNode.getSymbolTable().add(new Row(ids.get(i),new PrimitiveDataType(((VTS_Type)this.tS).getType(),((VTS_Type)this.tS).getSize())));
+        }
+        
     }
     
 }

@@ -34,7 +34,7 @@ public class CS_StatementList extends compoundStatement{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.sL.generateSymbolNode(symbolNode);
     }
     
     

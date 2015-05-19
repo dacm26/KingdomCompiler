@@ -7,6 +7,7 @@
 package AST.identifierList;
 
 import app.semanticAnalysis.Table.Node;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,4 +16,5 @@ import app.semanticAnalysis.Table.Node;
 abstract public class identifierList {
     abstract public void printNode();
     abstract public void generateSymbolNode(Node symbolNode);
+    abstract public ArrayList<String> getIds();
 }

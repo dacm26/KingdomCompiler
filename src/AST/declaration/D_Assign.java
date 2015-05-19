@@ -8,6 +8,8 @@ package AST.declaration;
 import AST.expression.Expression;
 import AST.variableTypeSpecifier.*;
 import app.semanticAnalysis.Table.Node;
+import app.semanticAnalysis.Table.Row;
+import app.semanticAnalysis.Types.PrimitiveDataType;
 /**
  *
  * @author Daniel
@@ -62,7 +64,8 @@ public class D_Assign extends Declaration{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        /*Falta comprobacion de tipos*/
+        symbolNode.getSymbolTable().add(new Row(id,new PrimitiveDataType(((VTS_Type)this.type).getType(),((VTS_Type)this.type).getSize())));
     }
     
 }

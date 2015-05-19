@@ -46,12 +46,14 @@ public class MF_MainFunction extends mainFunction {
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
+        /*Function Type Specifier*/
         if (this.tS instanceof FTS_Type) {
             ArrayList<Type> params = new ArrayList<>();
             symbolNode.getSymbolTable().add(new Row("KingdomHearts", new FunctionType(params, new PrimitiveDataType(((FTS_Type) this.tS).getType(), 0))));
         }
+        
         /*Compound Statement*/
-        //this.cS.generateSymbolNode(symbolNode);
+        this.cS.generateSymbolNode(symbolNode);
     }
 
     

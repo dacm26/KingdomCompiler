@@ -7,6 +7,7 @@
 package AST.identifierList;
 
 import app.semanticAnalysis.Table.Node;
+import java.util.ArrayList;
 
 /**
  *
@@ -35,7 +36,14 @@ public class IL_Id extends identifierList{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+    }
+
+    @Override
+    public ArrayList<String> getIds() {
+        ArrayList<String> retVal = new ArrayList<>();
+        retVal.add(id);
+        return retVal;
     }
     
 }

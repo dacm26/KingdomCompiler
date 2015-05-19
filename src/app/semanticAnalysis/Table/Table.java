@@ -25,18 +25,22 @@ public class Table {
     }
 
     public boolean add(Row t) {
-        int dir;
-
+        int dir=0;
         if (this.index.containsKey(t.getId())) {
+            System.err.println("Error, the id: "+t.getId()+ " already exists.");
             return false;
         }
-        if (this.table.isEmpty() && t.getType() instanceof PrimitiveDataType) {
+        else if (this.table.isEmpty() && t.getType() instanceof PrimitiveDataType) {
             dir = 0;
-        }else if (t.getType() instanceof FunctionType) {
-            dir=t.getType().getSize();
-        }
-        else{
-            dir = this.table.get(this.table.size() - 1).getDir()+this.table.get(this.table.size() - 1).getType().getSize();
+        } else if (t.getType() instanceof FunctionType) {
+            dir = -1;
+        } else {
+            if (this.table.get(this.table.size() - 1).getDir() < 0) {
+                dir = 0;
+            } else {
+                dir = this.table.get(this.table.size() - 1).getDir() + this.table.get(this.table.size() - 1).getType().getSize();
+
+            }
         }
         t.setDir(dir);
         this.table.add(t);
@@ -71,7 +75,7 @@ public class Table {
         for (String name : this.index.keySet()) {
 
             key = name;
-            value =this.index.get(key);
+            value = this.index.get(key);
             sB.append(key);
             sB.append("\t\t");
             sB.append(value);

@@ -45,7 +45,8 @@ public class SL_StatementList extends statementList{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.sL.generateSymbolNode(symbolNode);
+        this.stm.generateSymbolNode(symbolNode);
     }
     
     
