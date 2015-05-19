@@ -6,6 +6,7 @@
 package AST.typeParameterList;
 
 import AST.variableTypeSpecifier.*;
+import app.semanticAnalysis.Table.Table;
 
 /**
  *
@@ -51,6 +52,11 @@ public class TPL_List extends typeParameterList{
     
     @Override
     public void printNode() {
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

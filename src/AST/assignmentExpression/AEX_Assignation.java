@@ -7,6 +7,7 @@ package AST.assignmentExpression;
 
 import AST.expression.*;
 import AST.variableTypeSpecifier.*;
+import app.semanticAnalysis.Table.Table;
 
 /**
  *
@@ -59,6 +60,11 @@ public class AEX_Assignation extends assignmentExpression {
 
     @Override
     public void printNode() {
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -6,6 +6,7 @@
 
 package AST.statement;
 import AST.selectionStatement.*;
+import app.semanticAnalysis.Table.Table;
 /**
  *
  * @author Daniel
@@ -29,6 +30,11 @@ public class S_SelectionStatement extends Statement{
     public void printNode() {
         System.out.println("S_SelectionStatement");
         this.sS.printNode();
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

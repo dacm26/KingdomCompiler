@@ -6,10 +6,13 @@
 
 package AST.variableTypeSpecifier;
 
+import app.semanticAnalysis.Table.Table;
+
 /**
  *
  * @author Daniel
  */
 abstract public class variableTypeSpecifier {
     abstract public void printNode();
+    abstract public void generateSymbolTable(Table symbolTable);
 }

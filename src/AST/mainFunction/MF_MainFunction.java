@@ -3,15 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AST.mainFunction;
+
 import AST.functionTypeSpecifier.*;
 import AST.compoundStatement.*;
+import app.semanticAnalysis.Table.Row;
+import app.semanticAnalysis.Table.Table;
+import app.semanticAnalysis.Types.FunctionType;
+import app.semanticAnalysis.Types.PrimitiveDataType;
+import app.semanticAnalysis.Types.Type;
+import java.util.ArrayList;
+
 /**
  *
  * @author Daniel
  */
-public class MF_MainFunction extends mainFunction{
+public class MF_MainFunction extends mainFunction {
+
     private functionTypeSpecifier tS;
     private compoundStatement cS;
 
@@ -28,7 +36,6 @@ public class MF_MainFunction extends mainFunction{
         this.tS = tS;
     }
 
-
     public compoundStatement getcS() {
         return cS;
     }
@@ -38,7 +45,19 @@ public class MF_MainFunction extends mainFunction{
     }
 
     @Override
+    public void generateSymbolTable(Table symbolTable) {
+        if (this.tS instanceof FTS_Type) {
+            ArrayList<Type> params = new ArrayList<>();
+            symbolTable.add(new Row("KingdomHearts", new FunctionType(params, new PrimitiveDataType(((FTS_Type) this.tS).getType(), 0))));
+        }
+        /*Compound Statement*/
+        //this.cS.generateSymbolTable(symbolTable);
+    }
+
+    
+    @Override
     public void printNode() {
     }
-    
+
+
 }

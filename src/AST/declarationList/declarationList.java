@@ -6,10 +6,13 @@
 
 package AST.declarationList;
 
+import app.semanticAnalysis.Table.Table;
+
 /**
  *
  * @author Daniel
  */
 abstract public class declarationList {
     abstract public void printNode();
+    abstract public void generateSymbolTable(Table symbolTable);
 }

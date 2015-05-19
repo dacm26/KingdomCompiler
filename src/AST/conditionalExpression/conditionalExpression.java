@@ -5,11 +5,13 @@
  */
 
 package AST.conditionalExpression;
+import app.semanticAnalysis.Table.Table;
 
 /**
  *
  * @author Daniel
  */
 abstract public class conditionalExpression {
-  abstract public void printNode();  
+  abstract public void printNode();
+  abstract public void generateSymbolTable(Table symbolTable);  
 }

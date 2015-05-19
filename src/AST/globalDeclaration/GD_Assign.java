@@ -8,6 +8,7 @@ package AST.globalDeclaration;
 import AST.expression.Expression;
 import AST.variableTypeSpecifier.VTS_Type;
 import AST.variableTypeSpecifier.variableTypeSpecifier;
+import app.semanticAnalysis.Table.Table;
 /**
  *
  * @author Daniel
@@ -58,6 +59,11 @@ public class GD_Assign extends globalDeclaration{
     
     @Override
     public void printNode() {
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

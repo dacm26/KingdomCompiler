@@ -6,6 +6,7 @@
 
 package AST.jumpStatement;
 import AST.conditionalExpression.*;
+import app.semanticAnalysis.Table.Table;
 /**
  *
  * @author Daniel
@@ -35,6 +36,11 @@ public class JS_Return extends jumpStatement{
         if (this.cE != null) {
             this.cE.printNode();
         }
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

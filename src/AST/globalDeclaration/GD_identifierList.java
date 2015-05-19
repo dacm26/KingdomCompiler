@@ -7,6 +7,7 @@
 package AST.globalDeclaration;
 import AST.variableTypeSpecifier.*;
 import AST.identifierList.*;
+import app.semanticAnalysis.Table.Table;
 /**
  *
  * @author Daniel
@@ -41,6 +42,11 @@ public class GD_identifierList extends globalDeclaration{
         System.out.println("D_identifierList");
         this.tS.printNode();
         this.iL.printNode();
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -1,8 +1,4 @@
-int x;
-int x,y,z;
-munny y = 3;
-
-void KingdomHearts(){
+bool KingdomHearts(){
     function();
     function(id, x, c);
     int x, y, z;

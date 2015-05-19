@@ -6,6 +6,8 @@
 
 package AST.compoundStatement;
 
+import app.semanticAnalysis.Table.Table;
+
 /**
  *
  * @author Daniel
@@ -18,6 +20,11 @@ public class CS_Empty extends compoundStatement{
     @Override
     public void printNode() {
         System.out.println("CS_Empty");
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -5,10 +5,13 @@
  */
 package AST.functionCallsExpression;
 
+import app.semanticAnalysis.Table.Table;
+
 /**
  *
  * @author C5220701
  */
 abstract public class functionCallsExpression {
     abstract public void printNode();
+    abstract public void generateSymbolTable(Table symbolTable);
 }

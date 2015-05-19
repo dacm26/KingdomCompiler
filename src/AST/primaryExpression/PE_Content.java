@@ -6,6 +6,8 @@
 
 package AST.primaryExpression;
 
+import app.semanticAnalysis.Table.Table;
+
 /**
  *
  * @author Daniel
@@ -29,6 +31,11 @@ public class PE_Content extends primaryExpression{
     public void printNode() {
         System.out.println("PE_Content");
         System.out.println(this.content.toString());
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -6,6 +6,7 @@
 
 package AST.conditionalExpression;
 import AST.equalityExpression.*;
+import app.semanticAnalysis.Table.Table;
 /**
  *
  * @author Daniel
@@ -51,6 +52,11 @@ public class CE_Operation extends conditionalExpression{
         this.cE.printNode();
         System.out.println(this.operator);
         this.eE.printNode();
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

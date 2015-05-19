@@ -6,10 +6,13 @@
 
 package AST.identifierList;
 
+import app.semanticAnalysis.Table.Table;
+
 /**
  *
  * @author Daniel
  */
 abstract public class identifierList {
     abstract public void printNode();
+    abstract public void generateSymbolTable(Table symbolTable);
 }

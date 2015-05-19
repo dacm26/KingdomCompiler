@@ -5,6 +5,7 @@
  */
 
 package AST.equalityExpression;
+import app.semanticAnalysis.Table.Table;
 
 /**
  *
@@ -12,4 +13,5 @@ package AST.equalityExpression;
  */
 abstract public class equalityExpression {
     abstract public void printNode();
+    abstract public void generateSymbolTable(Table symbolTable);
 }

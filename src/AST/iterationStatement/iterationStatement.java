@@ -1,5 +1,7 @@
 package AST.iterationStatement;
 
+import app.semanticAnalysis.Table.Table;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,4 +14,5 @@ package AST.iterationStatement;
  */
 abstract public class iterationStatement {
     abstract public void printNode();
+    abstract public void generateSymbolTable(Table symbolTable);
 }

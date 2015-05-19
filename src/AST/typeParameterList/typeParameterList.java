@@ -5,10 +5,13 @@
  */
 package AST.typeParameterList;
 
+import app.semanticAnalysis.Table.Table;
+
 /**
  *
  * @author Daniel
  */
 public abstract class typeParameterList {
     abstract public void printNode();
+    abstract public void generateSymbolTable(Table symbolTable);
 }

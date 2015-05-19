@@ -6,6 +6,7 @@
 package AST.expression;
 
 import AST.conditionalExpression.conditionalExpression;
+import app.semanticAnalysis.Table.Table;
 /**
  *
  * @author Daniel
@@ -23,5 +24,8 @@ public class Expression {
 
     public void setConditionalExpression(conditionalExpression ConditionalExpression) {
         this.ConditionalExpression = ConditionalExpression;
-    }    
+    }
+    public void generateSymbolTable(Table table){
+        
+    }
 }

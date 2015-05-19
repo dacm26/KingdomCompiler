@@ -6,10 +6,13 @@
 
 package AST.selectionStatement;
 
+import app.semanticAnalysis.Table.Table;
+
 /**
  *
  * @author Daniel
  */
 abstract public class selectionStatement {
     abstract public void printNode();
+    abstract public void generateSymbolTable(Table symbolTable);
 }

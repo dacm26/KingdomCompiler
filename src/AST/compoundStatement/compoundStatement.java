@@ -5,6 +5,7 @@
  */
 
 package AST.compoundStatement;
+import app.semanticAnalysis.Table.Table;
 
 /**
  *
@@ -12,4 +13,5 @@ package AST.compoundStatement;
  */
 abstract public class compoundStatement {
     abstract public void printNode();
+    abstract public void generateSymbolTable(Table symbolTable);
 }

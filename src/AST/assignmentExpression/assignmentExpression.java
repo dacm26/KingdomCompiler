@@ -5,6 +5,7 @@
  */
 
 package AST.assignmentExpression;
+import app.semanticAnalysis.Table.Table;
 
 /**
  *
@@ -12,4 +13,6 @@ package AST.assignmentExpression;
  */
 abstract public class assignmentExpression {
     abstract public void printNode();
+    abstract public void generateSymbolTable(Table symbolTable);
+    
 }

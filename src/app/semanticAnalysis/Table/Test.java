@@ -25,5 +25,12 @@ public class Test {
         table.add(new Row("f",new PrimitiveDataType(String.class.getSimpleName(),Character.SIZE*f.length()/8)));
         table.add(new Row("h",new FunctionType(a,new PrimitiveDataType(Integer.TYPE,Integer.SIZE/8))));
         System.out.println(table.toString());
+        Object type = new Integer("");
+        if (type instanceof Integer) {
+            System.out.println(((Integer)type).toString());
+        } else {
+            System.out.println("No sale: "+type);
+        }
+        
     }
 }

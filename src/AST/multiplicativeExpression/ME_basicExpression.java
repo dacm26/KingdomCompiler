@@ -6,6 +6,7 @@
 
 package AST.multiplicativeExpression;
 import AST.basicExpression.*;
+import app.semanticAnalysis.Table.Table;
 /**
  *
  * @author Daniel
@@ -29,6 +30,11 @@ public class ME_basicExpression extends multiplicativeExpression{
     public void printNode() {
         System.out.println("ME_basicExpression");
         this.bE.printNode();
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

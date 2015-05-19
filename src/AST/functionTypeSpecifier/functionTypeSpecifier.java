@@ -5,10 +5,13 @@
  */
 package AST.functionTypeSpecifier;
 
+import app.semanticAnalysis.Table.Table;
+
 /**
  *
  * @author Daniel
  */
 public abstract class functionTypeSpecifier {
     abstract public void printNode();
+    abstract public void generateSymbolTable(Table symbolTable);
 }

@@ -6,6 +6,8 @@
 
 package AST.functionTypeSpecifier;
 
+import app.semanticAnalysis.Table.Table;
+
 
 /**
  *
@@ -30,6 +32,11 @@ public class FTS_Type extends functionTypeSpecifier{
     public void printNode() {
         System.out.println("VTS_Type");
         System.out.println(this.type);
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

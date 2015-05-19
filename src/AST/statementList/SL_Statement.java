@@ -6,6 +6,7 @@
 
 package AST.statementList;
 import AST.statement.*;
+import app.semanticAnalysis.Table.Table;
 /**
  *
  * @author Daniel
@@ -29,6 +30,11 @@ public class SL_Statement extends statementList{
     public void printNode() {
         System.out.println("SL_Statement");
         this.stm.printNode();
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -6,10 +6,13 @@
 
 package AST.labeledStatement;
 
+import app.semanticAnalysis.Table.Table;
+
 /**
  *
  * @author Daniel
  */
 abstract public class labeledStatement {
     abstract public void printNode();
+    abstract public void generateSymbolTable(Table symbolTable);
 }

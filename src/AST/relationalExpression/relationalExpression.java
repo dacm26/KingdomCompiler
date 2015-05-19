@@ -6,10 +6,13 @@
 
 package AST.relationalExpression;
 
+import app.semanticAnalysis.Table.Table;
+
 /**
  *
  * @author Daniel
  */
 abstract public class relationalExpression {
    abstract public void printNode(); 
+   abstract public void generateSymbolTable(Table symbolTable);
 }

@@ -6,6 +6,7 @@
 package AST.statement;
 
 import AST.functionCallsExpression.*;
+import app.semanticAnalysis.Table.Table;
 
 /**
  *
@@ -28,6 +29,11 @@ public class S_FCE extends Statement{
 
     @Override
     public void printNode() {
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

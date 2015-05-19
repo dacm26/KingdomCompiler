@@ -38,6 +38,7 @@ import AST.functionDefinition.*;
 import AST.mainFunction.*;
 import AST.externalDeclaration.*;
 import AST.mainFunctionDeclaration.*;
+import AST.astTreeDeclaration.*;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20141202 (SVN rev 60) generated parser.
@@ -626,11 +627,12 @@ class CUP$parser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 0: // ast_tree_declaration ::= main_function_declaration 
             {
-              Object RESULT =null;
+              ATD_ASTTreeDeclaration RESULT =null;
 		int mFDleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int mFDright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		mainFunctionDeclaration mFD = (mainFunctionDeclaration)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 /*Imprimir tree*/ 
+		 RESULT = new ATD_ASTTreeDeclaration(mFD);
+																									   RESULT.generateSymbolTable(); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ast_tree_declaration",0, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -641,7 +643,7 @@ class CUP$parser$actions {
               Object RESULT =null;
 		int start_valleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int start_valright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
-		Object start_val = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		ATD_ASTTreeDeclaration start_val = (ATD_ASTTreeDeclaration)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		RESULT = start_val;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("$START",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }

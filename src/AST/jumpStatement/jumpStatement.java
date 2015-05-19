@@ -6,10 +6,13 @@
 
 package AST.jumpStatement;
 
+import app.semanticAnalysis.Table.Table;
+
 /**
  *
  * @author Daniel
  */
 abstract public class jumpStatement {
     abstract public void printNode();
+    abstract public void generateSymbolTable(Table symbolTable);
 }

@@ -6,6 +6,7 @@
 
 package AST.basicExpression;
 import AST.primaryExpression.*;
+import app.semanticAnalysis.Table.Table;
 /**
  *
  * @author Daniel
@@ -30,5 +31,11 @@ public class BE_primaryExpression extends basicExpression{
         System.out.println("BE_primaryExpression");
         this.pE.printNode();
     }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 }

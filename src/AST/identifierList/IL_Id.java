@@ -6,6 +6,8 @@
 
 package AST.identifierList;
 
+import app.semanticAnalysis.Table.Table;
+
 /**
  *
  * @author Daniel
@@ -29,6 +31,11 @@ public class IL_Id extends identifierList{
     public void printNode() {
         System.out.println("IL_Id");
         System.out.println(this.id);
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

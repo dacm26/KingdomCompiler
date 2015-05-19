@@ -7,6 +7,7 @@
 package AST.mainFunctionDeclaration;
 import AST.mainFunction.*;
 import AST.externalDeclaration.*;
+import app.semanticAnalysis.Table.Table;
 /**
  *
  * @author Daniel
@@ -41,6 +42,13 @@ public class MFD_MainFunction extends mainFunctionDeclaration{
         System.out.println("MFD_MainFunction");
         this.mF.printNode();
         this.eD.printNode();
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        this.mF.generateSymbolTable(symbolTable);
+        //Falta implementarlo
+        //this.eD.generateSymbolTable(symbolTable);
     }
     
 }

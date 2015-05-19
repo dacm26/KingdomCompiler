@@ -6,6 +6,7 @@
 package app.semanticAnalysis.Table;
 
 import app.semanticAnalysis.Types.FunctionType;
+import app.semanticAnalysis.Types.PrimitiveDataType;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -29,7 +30,7 @@ public class Table {
         if (this.index.containsKey(t.getId())) {
             return false;
         }
-        if (this.table.isEmpty()) {
+        if (this.table.isEmpty() && t.getType() instanceof PrimitiveDataType) {
             dir = 0;
         }else if (t.getType() instanceof FunctionType) {
             dir=t.getType().getSize();

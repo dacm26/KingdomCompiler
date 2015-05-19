@@ -6,10 +6,13 @@
 
 package AST.mainFunction;
 
+import app.semanticAnalysis.Table.Table;
+
 /**
  *
  * @author Daniel
  */
 abstract public class mainFunction {
     abstract public void printNode();
+    abstract public void generateSymbolTable(Table symbolTable);
 }

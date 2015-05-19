@@ -7,6 +7,7 @@ package AST.selectionStatement;
 
 import AST.conditionalExpression.*;
 import AST.compoundStatement.*;
+import app.semanticAnalysis.Table.Table;
 
 /**
  *
@@ -54,6 +55,11 @@ public class SS_IfElse extends selectionStatement {
         this.cE.printNode();
         this.stmIf.printNode();
         this.stmElse.printNode();
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -5,6 +5,7 @@
  */
 
 package AST.basicExpression;
+import app.semanticAnalysis.Table.Table;
 
 /**
  *
@@ -12,4 +13,5 @@ package AST.basicExpression;
  */
 abstract public class basicExpression {
     abstract public void printNode();
+    abstract public void generateSymbolTable(Table symbolTable);
 }

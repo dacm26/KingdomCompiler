@@ -7,6 +7,7 @@ package AST.declaration;
 
 import AST.expression.Expression;
 import AST.variableTypeSpecifier.*;
+import app.semanticAnalysis.Table.Table;
 /**
  *
  * @author Daniel
@@ -57,6 +58,11 @@ public class D_Assign extends Declaration{
     
     @Override
     public void printNode() {
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

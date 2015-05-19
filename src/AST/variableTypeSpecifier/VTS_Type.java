@@ -6,6 +6,8 @@
 
 package AST.variableTypeSpecifier;
 
+import app.semanticAnalysis.Table.Table;
+
 /**
  *
  * @author Daniel
@@ -29,6 +31,11 @@ public class VTS_Type extends variableTypeSpecifier{
     public void printNode() {
         System.out.println("VTS_Type");
         System.out.println(this.type);
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -5,6 +5,8 @@
  */
 package AST.ioExpressions;
 
+import app.semanticAnalysis.Table.Table;
+
 /**
  *
  * @author C5220701
@@ -28,6 +30,11 @@ public class IOE_Scan extends ioExpressions{
     public void printNode() {
         System.out.println("IOE_Scan");
         System.out.println(this.id);
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

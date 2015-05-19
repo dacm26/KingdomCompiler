@@ -6,6 +6,7 @@
 
 package AST.additiveExpression;
 import AST.multiplicativeExpression.*;
+import app.semanticAnalysis.Table.Table;
 /**
  *
  * @author Daniel
@@ -51,6 +52,11 @@ public class AE_Operation extends additiveExpression{
         this.aE.printNode();
         System.out.println(this.operator);
         this.mE.printNode();
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

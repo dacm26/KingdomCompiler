@@ -8,6 +8,7 @@ package AST.functionDefinition;
 import AST.functionTypeSpecifier.*;
 import AST.compoundStatement.*;
 import AST.typeParameterList.*;
+import app.semanticAnalysis.Table.Table;
 /**
  *
  * @author Daniel
@@ -73,6 +74,11 @@ public class FD_FunctionDefinition extends functionDefinition{
             this.pL.printNode();
         }
         this.cS.printNode();
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

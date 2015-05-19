@@ -10,6 +10,7 @@ import AST.conditionalExpression.*;
 import AST.assignmentExpression.*;
 import AST.compoundStatement.compoundStatement;
 import AST.expression.*;
+import app.semanticAnalysis.Table.Table;
 
 /**
  *
@@ -92,6 +93,11 @@ public class IT_For extends iterationStatement {
 
     @Override
     public void printNode() {
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

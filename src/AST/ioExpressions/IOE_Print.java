@@ -5,6 +5,7 @@
  */
 package AST.ioExpressions;
 import AST.parameterList.*;
+import app.semanticAnalysis.Table.Table;
 /**
  *
  * @author C5220701
@@ -65,6 +66,11 @@ public class IOE_Print extends ioExpressions{
             this.iL.printNode();
             
         }
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

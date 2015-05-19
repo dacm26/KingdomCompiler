@@ -35,6 +35,7 @@ import AST.functionDefinition.*;
 import AST.mainFunction.*;
 import AST.externalDeclaration.*;
 import AST.mainFunctionDeclaration.*;
+import AST.astTreeDeclaration.*;
 
 parser code {:
     public static kcScanner s;
@@ -114,7 +115,7 @@ terminal Boolean TRUE;
 terminal Boolean FALSE;
 
 /* Non terminals */
-non terminal ast_tree_declaration;
+non terminal ATD_ASTTreeDeclaration ast_tree_declaration;
 non terminal mainFunctionDeclaration main_function_declaration;
 non terminal globalDeclaration global_declaration;
 non terminal mainFunction main_function;
@@ -153,10 +154,12 @@ precedence left MUL, DIV;
 precedence nonassoc ELSE;
 
 /*AST Declaration*/
-ast_tree_declaration ::= main_function_declaration:mFD        										{: /*Imprimir tree*/ :}                                                                      
+ast_tree_declaration ::= main_function_declaration:mFD        										{: RESULT = new ATD_ASTTreeDeclaration(mFD);
+																									   RESULT.generateSymbolTable(); :}                                                                      
 	;
 
 /*Main Function Declaration*/
+/*Por los momentos, se ignora las variables globales*/
 main_function_declaration ::= global_declaration:d main_function_declaration:mFD       				{: RESULT = new MFD_GlobalDeclaration(d,mFD); :}
     |  main_function:mF external_declaration:eD                             						{: RESULT = new MFD_MainFunction(mF,eD); :}
     ;

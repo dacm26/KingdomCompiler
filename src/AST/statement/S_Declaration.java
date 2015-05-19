@@ -6,6 +6,7 @@
 package AST.statement;
 
 import AST.declaration.*;
+import app.semanticAnalysis.Table.Table;
 /**
  *
  * @author Daniel
@@ -27,6 +28,11 @@ public class S_Declaration extends Statement{
     
     @Override
     public void printNode() {
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

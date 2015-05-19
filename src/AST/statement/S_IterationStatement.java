@@ -7,6 +7,7 @@
 package AST.statement;
 import AST.iterationStatement.iterationStatement;
 import AST.iterationStatement.*;
+import app.semanticAnalysis.Table.Table;
 /**
  *
  * @author Daniel
@@ -30,6 +31,11 @@ public class S_IterationStatement extends Statement{
     public void printNode() {
         System.out.println("S_IterationStatement");
         this.iS.printNode();
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

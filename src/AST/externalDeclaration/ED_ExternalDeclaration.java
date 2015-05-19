@@ -6,6 +6,7 @@
 
 package AST.externalDeclaration;
 import AST.functionDefinition.*;
+import app.semanticAnalysis.Table.Table;
 /**
  *
  * @author Daniel
@@ -40,6 +41,11 @@ public class ED_ExternalDeclaration extends externalDeclaration{
         System.out.println("ED_ExternalDeclaration");
         this.fD.printNode();
         this.eD.printNode();
+    }
+
+    @Override
+    public void generateSymbolTable(Table symbolTable) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

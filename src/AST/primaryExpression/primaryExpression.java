@@ -6,10 +6,13 @@
 
 package AST.primaryExpression;
 
+import app.semanticAnalysis.Table.Table;
+
 /**
  *
  * @author Daniel
  */
 abstract public class primaryExpression {
     abstract public void printNode();
+    abstract public void generateSymbolTable(Table symbolTable);
 }
