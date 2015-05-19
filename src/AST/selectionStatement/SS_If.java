@@ -7,7 +7,7 @@
 package AST.selectionStatement;
 import AST.conditionalExpression.*;
 import AST.compoundStatement.*;
-import app.semanticAnalysis.Table.Table;
+import app.semanticAnalysis.Table.Node;
 /**
  *
  * @author Daniel
@@ -45,7 +45,7 @@ public class SS_If extends selectionStatement{
     }
 
     @Override
-    public void generateSymbolTable(Table symbolTable) {
+    public void generateSymbolNode(Node symbolNode) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

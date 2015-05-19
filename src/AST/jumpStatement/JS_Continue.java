@@ -6,7 +6,7 @@
 
 package AST.jumpStatement;
 
-import app.semanticAnalysis.Table.Table;
+import app.semanticAnalysis.Table.Node;
 
 /**
  *
@@ -23,7 +23,7 @@ public class JS_Continue extends jumpStatement{
     }
 
     @Override
-    public void generateSymbolTable(Table symbolTable) {
+    public void generateSymbolNode(Node symbolNode) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

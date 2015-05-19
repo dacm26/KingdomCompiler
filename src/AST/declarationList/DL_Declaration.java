@@ -6,7 +6,7 @@
 
 package AST.declarationList;
 import AST.declaration.*;
-import app.semanticAnalysis.Table.Table;
+import app.semanticAnalysis.Table.Node;
 /**
  *
  * @author Daniel
@@ -33,7 +33,7 @@ public class DL_Declaration extends declarationList{
     }
 
     @Override
-    public void generateSymbolTable(Table symbolTable) {
+    public void generateSymbolNode(Node symbolNode) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -7,7 +7,7 @@
 package AST.statement;
 import AST.iterationStatement.iterationStatement;
 import AST.iterationStatement.*;
-import app.semanticAnalysis.Table.Table;
+import app.semanticAnalysis.Table.Node;
 /**
  *
  * @author Daniel
@@ -34,7 +34,7 @@ public class S_IterationStatement extends Statement{
     }
 
     @Override
-    public void generateSymbolTable(Table symbolTable) {
+    public void generateSymbolNode(Node symbolNode) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

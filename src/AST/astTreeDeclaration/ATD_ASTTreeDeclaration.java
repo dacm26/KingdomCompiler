@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package AST.astTreeDeclaration;
-import AST.mainFunction.MF_MainFunction;
 import AST.mainFunctionDeclaration.*;
 import app.semanticAnalysis.Table.*;
 /**
@@ -13,19 +12,20 @@ import app.semanticAnalysis.Table.*;
  */
 public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
     private mainFunctionDeclaration mFD;
-    private Table symbolTable;
+    private Node symbolNode;
 
     public ATD_ASTTreeDeclaration(mainFunctionDeclaration mFD) {
         this.mFD = mFD;
-        this.symbolTable= new Table();
+        this.symbolNode= new Node();
+        this.generateSymbolNode();
     }
 
-    public Table getSymbolTable() {
-        return symbolTable;
+    public Node getSymbolNode() {
+        return symbolNode;
     }
 
-    public void setSymbolTable(Table symbolTable) {
-        this.symbolTable = symbolTable;
+    public void setSymbolNode(Node symbolNode) {
+        this.symbolNode = symbolNode;
     }
     
 
@@ -37,14 +37,14 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
         this.mFD = mFD;
     }
     @Override
-    public void generateSymbolTable(){
-        this.mFD.generateSymbolTable(symbolTable);
-        System.out.println(this.symbolTable.toString());
+    public void generateSymbolNode(){
+        this.mFD.generateSymbolNode(symbolNode);
+        System.out.println(this.symbolNode.getSymbolTable().toString());
     }
 
     @Override
     public void printNode() {
-        this.symbolTable.toString();
+        this.symbolNode.toString();
     }
     
 }

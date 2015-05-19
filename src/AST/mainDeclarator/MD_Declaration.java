@@ -6,7 +6,7 @@
 
 package AST.mainDeclarator;
 import AST.parameterList.*;
-import app.semanticAnalysis.Table.Table;
+import app.semanticAnalysis.Table.Node;
 /**
  *
  * @author Daniel
@@ -51,7 +51,7 @@ public class MD_Declaration extends mainDeclarator{
     }
 
     @Override
-    public void generateSymbolTable(Table symbolTable) {
+    public void generateSymbolNode(Node symbolNode) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

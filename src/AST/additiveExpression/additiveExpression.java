@@ -7,7 +7,7 @@
 package AST.additiveExpression;
 
 import AST.multiplicativeExpression.*;
-import app.semanticAnalysis.Table.Table;
+import app.semanticAnalysis.Table.Node;
 
 /**
  *
@@ -15,6 +15,6 @@ import app.semanticAnalysis.Table.Table;
  */
 abstract public class additiveExpression {
     abstract public void printNode();
-    abstract public void generateSymbolTable(Table symbolTable);
+    abstract public void generateSymbolNode(Node symbolNode);
 
 }

@@ -11,5 +11,5 @@ package AST.astTreeDeclaration;
  */
 abstract public class astTreeDeclaration {
     abstract public void printNode();
-    abstract public void generateSymbolTable();
+    abstract public void generateSymbolNode();
 }

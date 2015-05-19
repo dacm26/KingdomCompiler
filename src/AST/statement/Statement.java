@@ -6,7 +6,7 @@
 
 package AST.statement;
 
-import app.semanticAnalysis.Table.Table;
+import app.semanticAnalysis.Table.Node;
 
 /**
  *
@@ -14,5 +14,5 @@ import app.semanticAnalysis.Table.Table;
  */
 abstract public class Statement {
     abstract public void printNode();
-    abstract public void generateSymbolTable(Table symbolTable);
+    abstract public void generateSymbolNode(Node symbolNode);
 }

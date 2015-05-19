@@ -631,8 +631,7 @@ class CUP$parser$actions {
 		int mFDleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int mFDright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		mainFunctionDeclaration mFD = (mainFunctionDeclaration)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new ATD_ASTTreeDeclaration(mFD);
-																									   RESULT.generateSymbolTable(); 
+		 RESULT = new ATD_ASTTreeDeclaration(mFD); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ast_tree_declaration",0, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

@@ -5,7 +5,7 @@
  */
 package AST.jumpFunctionStatement;
 
-import app.semanticAnalysis.Table.Table;
+import app.semanticAnalysis.Table.Node;
 
 /**
  *
@@ -13,5 +13,5 @@ import app.semanticAnalysis.Table.Table;
  */
 public abstract class jumpFunctionStatement {
     public abstract void printNode();
-    abstract public void generateSymbolTable(Table symbolTable);
+    abstract public void generateSymbolNode(Node symbolNode);
 }

@@ -154,8 +154,7 @@ precedence left MUL, DIV;
 precedence nonassoc ELSE;
 
 /*AST Declaration*/
-ast_tree_declaration ::= main_function_declaration:mFD        										{: RESULT = new ATD_ASTTreeDeclaration(mFD);
-																									   RESULT.generateSymbolTable(); :}                                                                      
+ast_tree_declaration ::= main_function_declaration:mFD        										{: RESULT = new ATD_ASTTreeDeclaration(mFD); :}                                                                      
 	;
 
 /*Main Function Declaration*/

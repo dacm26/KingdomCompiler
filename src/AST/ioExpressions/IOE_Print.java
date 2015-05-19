@@ -5,7 +5,7 @@
  */
 package AST.ioExpressions;
 import AST.parameterList.*;
-import app.semanticAnalysis.Table.Table;
+import app.semanticAnalysis.Table.Node;
 /**
  *
  * @author C5220701
@@ -69,7 +69,7 @@ public class IOE_Print extends ioExpressions{
     }
 
     @Override
-    public void generateSymbolTable(Table symbolTable) {
+    public void generateSymbolNode(Node symbolNode) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -6,7 +6,7 @@
 package AST.primaryExpression;
 
 import AST.expression.Expression;
-import app.semanticAnalysis.Table.Table;
+import app.semanticAnalysis.Table.Node;
 
 /**
  *
@@ -32,7 +32,7 @@ public class PE_Expression extends primaryExpression{
     }
 
     @Override
-    public void generateSymbolTable(Table symbolTable) {
+    public void generateSymbolNode(Node symbolNode) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

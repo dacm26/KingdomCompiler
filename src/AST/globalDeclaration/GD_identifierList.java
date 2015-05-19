@@ -7,7 +7,7 @@
 package AST.globalDeclaration;
 import AST.variableTypeSpecifier.*;
 import AST.identifierList.*;
-import app.semanticAnalysis.Table.Table;
+import app.semanticAnalysis.Table.Node;
 /**
  *
  * @author Daniel
@@ -45,7 +45,7 @@ public class GD_identifierList extends globalDeclaration{
     }
 
     @Override
-    public void generateSymbolTable(Table symbolTable) {
+    public void generateSymbolNode(Node symbolNode) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

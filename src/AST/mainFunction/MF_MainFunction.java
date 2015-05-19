@@ -8,7 +8,7 @@ package AST.mainFunction;
 import AST.functionTypeSpecifier.*;
 import AST.compoundStatement.*;
 import app.semanticAnalysis.Table.Row;
-import app.semanticAnalysis.Table.Table;
+import app.semanticAnalysis.Table.Node;
 import app.semanticAnalysis.Types.FunctionType;
 import app.semanticAnalysis.Types.PrimitiveDataType;
 import app.semanticAnalysis.Types.Type;
@@ -45,13 +45,13 @@ public class MF_MainFunction extends mainFunction {
     }
 
     @Override
-    public void generateSymbolTable(Table symbolTable) {
+    public void generateSymbolNode(Node symbolNode) {
         if (this.tS instanceof FTS_Type) {
             ArrayList<Type> params = new ArrayList<>();
-            symbolTable.add(new Row("KingdomHearts", new FunctionType(params, new PrimitiveDataType(((FTS_Type) this.tS).getType(), 0))));
+            symbolNode.getSymbolTable().add(new Row("KingdomHearts", new FunctionType(params, new PrimitiveDataType(((FTS_Type) this.tS).getType(), 0))));
         }
         /*Compound Statement*/
-        //this.cS.generateSymbolTable(symbolTable);
+        //this.cS.generateSymbolNode(symbolNode);
     }
 
     
