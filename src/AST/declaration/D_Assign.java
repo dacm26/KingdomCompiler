@@ -90,13 +90,13 @@ public class D_Assign extends Declaration {
                     type1 = -1;
             }
             if (type1 == -1) {
-                System.err.println("Error, Type mismatch (D_Assign)");
+                System.err.println("Error, Type mismatch (D_Assign1)");
             } else {
                 type2 = this.exp.getExpressionType(symbolNode);
                 if (type2 == 0 || (type1 == type2)) {
                     return;
                 } else {
-                    System.err.println("Error, Type mismatch (D_Assign)");
+                    System.err.println("Error, Type mismatch (D_Assign2)");
                 }
             }
         } else {
@@ -104,12 +104,12 @@ public class D_Assign extends Declaration {
             type1 = this.type.getTypeAsNumber();
             type2 = this.exp.getExpressionType(symbolNode);
             if (type2 == -1) {
-                System.err.println("Error, Type mismatch (D_Assign)");
+                System.err.println("Error, Type mismatch (D_Assign3)");
             } else {
                 if (type2 == 0 || (type1 == type2)) {
                     symbolNode.getSymbolTable().add(new Row(id, new PrimitiveDataType(((VTS_Type) this.type).getType(), ((VTS_Type) this.type).getSize())));
                 } else {
-                    System.err.println("Error, Type mismatch (D_Assign)");
+                    System.err.println("Error, Type mismatch (D_Assign4)");
                 }
             }
             

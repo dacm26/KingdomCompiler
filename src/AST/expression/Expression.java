@@ -45,6 +45,8 @@ public class Expression {
                 if (type == -1) {
                     System.err.println("Error, Type mismatch (ConditionalExpression)");
                     return -1;
+                }else if(type == 5){
+                    return 5;
                 }
             }
             return types.get(0);

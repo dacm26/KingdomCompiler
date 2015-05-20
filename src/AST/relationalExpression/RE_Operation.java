@@ -68,13 +68,13 @@ public class RE_Operation extends relationalExpression{
         int type1 = this.rE.getType(symbolTable);
         int type2 = this.aE.getType(symbolTable);
         if (type1 == -1 || type2 == -1) {
-            System.err.println("Error, Type mismatch (RE_Operation)");
+            System.err.println("Error, Type mismatch (RE_Operation1)");
             return -1;
         }else{
-            if (type1 == type2 && (type1 ==1 || type1==3)) {
+            if (type1 == type2 && (type1 ==2 || type1==3)) {
                 return 5;
             }else{
-                System.err.println("Error, Type mismatch (RE_Operation)");
+                System.err.println("Error, Type mismatch (RE_Operation2)");
                 return -1;
             }
         }
