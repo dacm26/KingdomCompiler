@@ -94,9 +94,8 @@ public class D_Assign extends Declaration {
             } else {
                 type2 = this.exp.getExpressionType(symbolNode);
                 if (type2 == 0 || (type1 == type2)) {
-                    return;
                 } else {
-                    System.err.println("Error, Type mismatch (D_Assign2)");
+                    reportSemanticError(type1, type2);
                 }
             }
         } else {
@@ -104,17 +103,63 @@ public class D_Assign extends Declaration {
             type1 = this.type.getTypeAsNumber();
             type2 = this.exp.getExpressionType(symbolNode);
             if (type2 == -1) {
-                System.err.println("Error, Type mismatch (D_Assign3)");
+
             } else {
                 if (type2 == 0 || (type1 == type2)) {
                     symbolNode.getSymbolTable().add(new Row(id, new PrimitiveDataType(((VTS_Type) this.type).getType(), ((VTS_Type) this.type).getSize())));
                 } else {
-                    System.err.println("Error, Type mismatch (D_Assign4)");
+                    reportSemanticError(type1, type2);
                 }
             }
-            
 
         }
+    }
+
+    private void reportSemanticError(int type1, int type2) {
+        String typeReceived;
+        switch (type2) {
+            case 1:
+                typeReceived = "char";
+                break;
+            case 2:
+                typeReceived = "int";
+                break;
+            case 3:
+                typeReceived = "double";
+                break;
+            case 4:
+                typeReceived = "String";
+                break;
+            case 5:
+                typeReceived = "boolean";
+                break;
+            default:
+                typeReceived = "";
+                break;
+        }
+        String typeExpected;
+        switch (type1) {
+            case 1:
+                typeExpected = "char";
+                break;
+            case 2:
+                typeExpected = "int";
+                break;
+            case 3:
+                typeExpected = "double";
+                break;
+            case 4:
+                typeExpected = "String";
+                break;
+            case 5:
+                typeExpected = "boolean";
+                break;
+            default:
+                typeExpected = "";
+                break;
+        }
+        String errorMsg = "Semantic Error: Type mismatch\n" + "\tExpected: " + typeExpected + " for the id: " + this.id + ".\n\tReceived: " + typeReceived;
+        System.err.println(errorMsg);
     }
 
 }

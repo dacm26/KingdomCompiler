@@ -12,16 +12,34 @@ import java.util.ArrayList;
  * @author Daniel
  */
 public class Node {
+    private Node imAmYourFather;
     private Table symbolTable;
-    private Node leftestSon;
-    private ArrayList<Node> rightSons;
+    private ArrayList<Node> weAreYourSons;
 
     public Node() {
+        this.imAmYourFather = null;
         this.symbolTable = new Table();
-        this.leftestSon = null;
-        this.rightSons = new ArrayList<>();
+        this.weAreYourSons = new ArrayList<>();
         
     }
+
+    public Node getFather() {
+        return imAmYourFather;
+    }
+
+    public void setFather(Node imAmYourFather) {
+        this.imAmYourFather = imAmYourFather;
+    }
+
+    public ArrayList<Node> getSons() {
+        return weAreYourSons;
+    }
+
+    public void setSons(ArrayList<Node> weAreYourSons) {
+        this.weAreYourSons = weAreYourSons;
+    }
+    
+    
     
     public Table getSymbolTable() {
         return symbolTable;
@@ -31,21 +49,6 @@ public class Node {
         this.symbolTable = symbolTable;
     }
 
-    public Node getLeftestSon() {
-        return leftestSon;
-    }
-
-    public void setLeftestSon(Node leftestSon) {
-        this.leftestSon = leftestSon;
-    }
-
-    public ArrayList<Node> getRightSons() {
-        return rightSons;
-    }
-
-    public void setRightSons(ArrayList<Node> rightSons) {
-        this.rightSons = rightSons;
-    }
 
     
     

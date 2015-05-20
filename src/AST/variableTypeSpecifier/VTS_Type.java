@@ -50,7 +50,6 @@ public class VTS_Type extends variableTypeSpecifier{
             case "String":
                 return 4;
             default:
-            System.err.println("Error, Type mismatch (VTS_Type)");
                 return -1;
         }
     }

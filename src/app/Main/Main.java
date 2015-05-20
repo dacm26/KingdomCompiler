@@ -27,8 +27,6 @@ public class Main {
                 symbol = par.parse();
 
             }
-            System.out.println("Fin del archivo");
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }

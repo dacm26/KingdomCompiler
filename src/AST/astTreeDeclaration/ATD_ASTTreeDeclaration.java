@@ -39,7 +39,7 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
     @Override
     public void generateSymbolNode(){
         this.mFD.generateSymbolNode(symbolNode);
-        System.out.println(this.symbolNode.getSymbolTable().toString());
+        //System.out.println(this.symbolNode.getSymbolTable().toString());
     }
 
     @Override

@@ -57,7 +57,6 @@ public class PE_Id extends primaryExpression{
             case "String":
                 return 4;
             default:
-            System.err.println("Error, Type mismatch (PE_Id)");
                 return -1;
         }
         
