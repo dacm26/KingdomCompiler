@@ -53,10 +53,25 @@ public class EE_Operation extends equalityExpression{
         System.out.println(this.operator);
         this.rE.printNode();
     }
-
+        /*
+         char = 1
+         int = 2
+         double = 3
+         string = 4
+         boolean = 5
+         error = -1
+        */
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
+    public int getType(Node symbolTable) {
+        int type1 = this.eE.getType(symbolTable);
+        int type2 = this.rE.getType(symbolTable);
+        if (type1==type2 && (type1 ==2 || type1 ==3 || type1 ==5)) {
+            return 5;
+        }else{
+            System.err.println("Error, Type mismatch (EE_Operation)");
+            return -1;
+        }
     }
+
     
 }

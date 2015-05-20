@@ -6,6 +6,7 @@
 
 package AST.conditionalExpression;
 import app.semanticAnalysis.Table.Node;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,5 +14,5 @@ import app.semanticAnalysis.Table.Node;
  */
 abstract public class conditionalExpression {
   abstract public void printNode();
-  abstract public void generateSymbolNode(Node symbolNode);  
+  abstract public ArrayList<Integer> getType(Node symbolTable);
 }

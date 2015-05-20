@@ -32,8 +32,10 @@ public class PE_Expression extends primaryExpression{
     }
 
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
+    public int getType(Node symbolTable) {
+        return this.getExpression().getExpressionType(symbolTable);
     }
+
+
     
 }

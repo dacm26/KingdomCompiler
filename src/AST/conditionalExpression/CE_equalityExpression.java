@@ -7,6 +7,7 @@
 package AST.conditionalExpression;
 import AST.equalityExpression.*;
 import app.semanticAnalysis.Table.Node;
+import java.util.ArrayList;
 /**
  *
  * @author Daniel
@@ -32,9 +33,12 @@ public class CE_equalityExpression extends conditionalExpression{
         this.eE.printNode();
     }
 
+
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
+    public ArrayList<Integer> getType(Node symbolTable) {
+        ArrayList<Integer> temp = new ArrayList<>();
+        temp.add(this.eE.getType(symbolTable));
+        return temp;
     }
     
 }

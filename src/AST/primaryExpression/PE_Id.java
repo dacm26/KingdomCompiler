@@ -32,9 +32,34 @@ public class PE_Id extends primaryExpression{
         System.out.println("PE_Id");
         System.out.println(id);
     }
-
+    
+        /*
+         char = 1
+         int = 2
+         double = 3
+         string = 4
+         boolean = 5
+         error = -1
+        */
+    
     @Override
-    public void generateSymbolNode(Node symbolNode) {
+    public int getType(Node symbolTable) {
+        String type = symbolTable.getSymbolTable().getIdType(this.getId()).toString();
+        switch(type){
+            case "int":
+                return 2;
+            case "char":
+                return 1;
+            case "double":
+                return 3;
+            case "boolean":
+                return 5;
+            case "String":
+                return 4;
+            default:
+            System.err.println("Error, Type mismatch (PE_Id)");
+                return -1;
+        }
         
     }
     

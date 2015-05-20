@@ -32,9 +32,10 @@ public class AE_multiplicativeExpression extends additiveExpression{
         this.mE.printNode();
     }
 
+
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
+    public int getType(Node symbolTable) {
+        return this.mE.getType(symbolTable);
     }
     
 }

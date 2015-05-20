@@ -34,10 +34,6 @@ public class IL_Id extends identifierList{
         System.out.println(this.id);
     }
 
-    @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
-    }
 
     @Override
     public ArrayList<String> getIds() {

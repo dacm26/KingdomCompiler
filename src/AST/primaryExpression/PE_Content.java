@@ -54,8 +54,9 @@ public class PE_Content extends primaryExpression{
     }
 
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
+    public int getType(Node symbolTable) {
+        return this.getType();
     }
+
     
 }

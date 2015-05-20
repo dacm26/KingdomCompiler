@@ -5,7 +5,6 @@
  */
 package AST.multiplicativeExpression;
 
-import AST.additiveExpression.additiveExpression;
 import AST.basicExpression.*;
 import app.semanticAnalysis.Table.Node;
 
@@ -36,13 +35,8 @@ public class ME_basicExpression extends multiplicativeExpression {
     }
 
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-
-    }
-
-    @Override
-    public int getMultiplicativeType(Node symbolNode, additiveExpression temp3) {
-       return -1;
+    public int getType(Node symbolTable) {
+        return this.bE.getType(symbolTable);
     }
 
 }

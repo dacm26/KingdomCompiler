@@ -27,6 +27,9 @@ public class Test {
         table.add(new Row("h",new FunctionType(a,new PrimitiveDataType(Integer.TYPE,Integer.SIZE/8))));
         System.out.println(table.toString());
         System.out.println(table.getIdType("a").toString());
+        
+        
+        
         PE_Content test=new PE_Content("123",2);
         PE_Content test1=new PE_Content("asd",4);
         PE_Content test2=new PE_Content("12.12",3);

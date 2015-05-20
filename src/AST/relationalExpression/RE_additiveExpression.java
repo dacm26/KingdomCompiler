@@ -32,9 +32,10 @@ public class RE_additiveExpression extends relationalExpression{
         this.aE.printNode();
     }
 
+
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
+    public int getType(Node symbolTable) {
+        return this.aE.getType(symbolTable);
     }
     
     

@@ -5,10 +5,7 @@
  */
 
 package AST.multiplicativeExpression;
-import AST.additiveExpression.AE_multiplicativeExpression;
-import AST.additiveExpression.additiveExpression;
 import AST.basicExpression.*;
-import AST.primaryExpression.PE_Id;
 import app.semanticAnalysis.Table.Node;
 /**
  *
@@ -57,14 +54,24 @@ public class ME_Operation extends multiplicativeExpression{
         this.bE.printNode();
     }
 
+       /*
+         char = 1
+         int = 2
+         double = 3
+         string = 4
+         boolean = 5
+         error = -1
+        */
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
-    }
-
-    @Override
-    public int getMultiplicativeType(Node symbolNode,additiveExpression temp3) {
-        return -1;
+    public int getType(Node symbolTable) {
+        int type1 = this.mE.getType(symbolTable);
+        int type2 = this.bE.getType(symbolTable);
+        if (type1 == type2 && (type1 == 2 || type1 == 3)) {
+            return type1;
+        }else{
+            System.err.println("Error, Type mismatch (ME_Operation)");
+            return -1;
+        }
     }
     
 }

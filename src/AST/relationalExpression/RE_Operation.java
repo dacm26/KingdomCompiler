@@ -54,9 +54,30 @@ public class RE_Operation extends relationalExpression{
         this.aE.printNode();
     }
 
+        /*
+         char = 1
+         int = 2
+         double = 3
+         string = 4
+         boolean = 5
+         error = -1
+        */
+
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
+    public int getType(Node symbolTable) {
+        int type1 = this.rE.getType(symbolTable);
+        int type2 = this.aE.getType(symbolTable);
+        if (type1 == -1 || type2 == -1) {
+            System.err.println("Error, Type mismatch (RE_Operation)");
+            return -1;
+        }else{
+            if (type1 == type2 && (type1 ==1 || type1==3)) {
+                return 5;
+            }else{
+                System.err.println("Error, Type mismatch (RE_Operation)");
+                return -1;
+            }
+        }
     }
    
 }

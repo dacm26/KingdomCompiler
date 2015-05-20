@@ -10,17 +10,19 @@ import AST.variableTypeSpecifier.*;
 import app.semanticAnalysis.Table.Node;
 import app.semanticAnalysis.Table.Row;
 import app.semanticAnalysis.Types.PrimitiveDataType;
+
 /**
  *
  * @author Daniel
  */
-public class D_Assign extends Declaration{
+public class D_Assign extends Declaration {
+
     private variableTypeSpecifier type;
     private String id;
     private Expression exp;
 
     public D_Assign(String id, Expression exp) {
-        this.type=null;
+        this.type = null;
         this.id = id;
         this.exp = exp;
     }
@@ -38,7 +40,6 @@ public class D_Assign extends Declaration{
     public void setType(variableTypeSpecifier type) {
         this.type = type;
     }
-    
 
     public String getId() {
         return id;
@@ -55,17 +56,65 @@ public class D_Assign extends Declaration{
     public void setExp(Expression exp) {
         this.exp = exp;
     }
-    
-    
-    
+
     @Override
     public void printNode() {
     }
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
+        int type1;
+        int type2;
+
         /*Falta comprobacion de tipos*/
-        symbolNode.getSymbolTable().add(new Row(id,new PrimitiveDataType(((VTS_Type)this.type).getType(),((VTS_Type)this.type).getSize())));
+        if (this.type == null) {
+            /*Es una asignacion de una variable ya creada*/
+            String typeTemp = symbolNode.getSymbolTable().getIdType(id).toString();
+            switch (typeTemp) {
+                case "int":
+                    type1 = 2;
+                    break;
+                case "char":
+                    type1 = 1;
+                    break;
+                case "double":
+                    type1 = 3;
+                    break;
+                case "boolean":
+                    type1 = 5;
+                    break;
+                case "String":
+                    type1 = 4;
+                    break;
+                default:
+                    type1 = -1;
+            }
+            if (type1 == -1) {
+                System.err.println("Error, Type mismatch (D_Assign)");
+            } else {
+                type2 = this.exp.getExpressionType(symbolNode);
+                if (type2 == 0 || (type1 == type2)) {
+                    return;
+                } else {
+                    System.err.println("Error, Type mismatch (D_Assign)");
+                }
+            }
+        } else {
+            /*Es una declaracion de variable con su respectiva asignacion*/
+            type1 = this.type.getTypeAsNumber();
+            type2 = this.exp.getExpressionType(symbolNode);
+            if (type2 == -1) {
+                System.err.println("Error, Type mismatch (D_Assign)");
+            } else {
+                if (type2 == 0 || (type1 == type2)) {
+                    symbolNode.getSymbolTable().add(new Row(id, new PrimitiveDataType(((VTS_Type) this.type).getType(), ((VTS_Type) this.type).getSize())));
+                } else {
+                    System.err.println("Error, Type mismatch (D_Assign)");
+                }
+            }
+            
+
+        }
     }
-    
+
 }

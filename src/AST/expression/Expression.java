@@ -5,21 +5,9 @@
  */
 package AST.expression;
 
-import AST.additiveExpression.AE_Operation;
-import AST.additiveExpression.AE_multiplicativeExpression;
-import AST.additiveExpression.additiveExpression;
-import AST.basicExpression.BE_primaryExpression;
-import AST.conditionalExpression.CE_Operation;
-import AST.conditionalExpression.CE_equalityExpression;
 import AST.conditionalExpression.conditionalExpression;
-import AST.equalityExpression.EE_relationalExpression;
-import AST.multiplicativeExpression.ME_Operation;
-import AST.multiplicativeExpression.ME_basicExpression;
-import AST.primaryExpression.PE_Content;
-import AST.primaryExpression.PE_Expression;
-import AST.primaryExpression.PE_Id;
-import AST.relationalExpression.RE_additiveExpression;
 import app.semanticAnalysis.Table.Node;
+import java.util.ArrayList;
 
 /**
  *
@@ -49,31 +37,20 @@ public class Expression {
          string = 4
          boolean = 5
          error = -1
+         no hubo problemas en las operaciones = 0
          */
-        if (this.ConditionalExpression instanceof CE_equalityExpression) {
-            /*No es un boolean*/
-            if (((CE_equalityExpression) this.ConditionalExpression).geteE() instanceof EE_relationalExpression) {
-                /*No es un boolean*/
-                EE_relationalExpression temp = ((EE_relationalExpression) ((CE_equalityExpression) this.ConditionalExpression).geteE());
-                if (((EE_relationalExpression) temp).getrE() instanceof RE_additiveExpression) {    
-                    /*No es un boolean*/
-
-                } else {
-                    /*Es una operacion booleana*/
-                    return 5;
+        ArrayList<Integer> types = this.ConditionalExpression.getType(symbolNode);
+        if (types.size() != 1) {
+            for (Integer type : types) {
+                if (type == -1) {
+                    System.err.println("Error, Type mismatch (ConditionalExpression)");
+                    return -1;
                 }
-            } else {
-                /*Es una operacion booleana*/
-                return 5;
             }
-        } else if (this.ConditionalExpression instanceof CE_Operation) {
-            /*Es una operacion booleana*/
-            return 5;
+            return types.get(0);
+        }else{
+            return types.get(0);
         }
-        /*No es nada*/
-        System.err.println("Error, Type mismatch");
-        return -1;
-
     }
 
 }

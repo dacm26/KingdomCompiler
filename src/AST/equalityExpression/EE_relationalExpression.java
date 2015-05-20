@@ -33,8 +33,10 @@ public class EE_relationalExpression extends equalityExpression{
     }
 
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
+    public int getType(Node symbolTable) {
+        return this.rE.getType(symbolTable);
     }
+
+
     
 }

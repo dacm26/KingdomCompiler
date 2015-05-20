@@ -13,5 +13,5 @@ import app.semanticAnalysis.Table.Node;
  */
 abstract public class basicExpression {
     abstract public void printNode();
-    abstract public void generateSymbolNode(Node symbolNode);
+    abstract public int getType(Node symbolTable);
 }

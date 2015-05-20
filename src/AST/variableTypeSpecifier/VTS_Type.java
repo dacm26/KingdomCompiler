@@ -28,10 +28,31 @@ public class VTS_Type extends variableTypeSpecifier{
     public void setSize(int size) {
         this.size = size;
     }
-    
 
     public Object getType() {
         return type;
+    }
+    
+    
+    
+    @Override
+    public int getTypeAsNumber() {
+        String typeT = this.type.toString();
+        switch(typeT){
+            case "int":
+                return 2;
+            case "char":
+                return 1;
+            case "double":
+                return 3;
+            case "boolean":
+                return 5;
+            case "String":
+                return 4;
+            default:
+            System.err.println("Error, Type mismatch (VTS_Type)");
+                return -1;
+        }
     }
 
     public void setType(Object type) {
@@ -42,11 +63,6 @@ public class VTS_Type extends variableTypeSpecifier{
     public void printNode() {
         System.out.println("VTS_Type");
         System.out.println(this.type);
-    }
-
-    @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
     }
     
 }

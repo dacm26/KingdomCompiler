@@ -53,6 +53,13 @@ public class Table {
         return this.index.containsKey(id);
     }
     
+    public Row searchRow(String id){
+        if (search(id)) {
+            return this.table.get(this.index.get(id));
+        }
+        return null;
+    }
+    
     public Object getIdType(String id){
         return this.table.get(this.index.get(id)).getType();
     }

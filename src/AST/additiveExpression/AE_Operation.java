@@ -54,9 +54,16 @@ public class AE_Operation extends additiveExpression{
         this.mE.printNode();
     }
 
+
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
-    }
+    public int getType(Node symbolTable) {
+        int type1 = this.aE.getType(symbolTable);
+        int type2 = this.mE.getType(symbolTable);
+        if (type1 == type2 && (type1 == 2 || type1 == 3)) {
+            return type1;
+        }else{
+            System.err.println("Error, Type mismatch (AE_Operation)");
+            return -1;
+        }    }
     
 }

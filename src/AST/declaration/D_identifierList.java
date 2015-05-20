@@ -50,8 +50,8 @@ public class D_identifierList extends Declaration{
     @Override
     public void generateSymbolNode(Node symbolNode) {
         ArrayList<String> ids= this.iL.getIds();
-        for (int i = 0; i < ids.size(); i++) {
-            symbolNode.getSymbolTable().add(new Row(ids.get(i),new PrimitiveDataType(((VTS_Type)this.tS).getType(),((VTS_Type)this.tS).getSize())));
+        for (String id : ids) {
+            symbolNode.getSymbolTable().add(new Row(id, new PrimitiveDataType(((VTS_Type)this.tS).getType(),((VTS_Type)this.tS).getSize())));
         }
         
     }

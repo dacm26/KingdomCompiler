@@ -33,8 +33,8 @@ public class BE_primaryExpression extends basicExpression{
     }
 
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
+    public int getType(Node symbolTable) {
+        return this.pE.getType(symbolTable);
     }
 
     
