@@ -67,7 +67,7 @@ public class ME_Operation extends multiplicativeExpression{
         int type1 = this.mE.getType(symbolTable);
         int type2 = this.bE.getType(symbolTable);
         if (type1 == type2 ) {
-            if ((type1 == 2 && type2 == 2) || (type1 == 3 && type2 == 3)) {
+            if (type1 == 2 || type1 == 3 ) {
                 return type1;
             }
             return -1;

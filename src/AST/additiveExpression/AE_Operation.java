@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AST.additiveExpression;
+
 import AST.multiplicativeExpression.*;
 import app.semanticAnalysis.Table.Node;
+
 /**
  *
  * @author Daniel
  */
-public class AE_Operation extends additiveExpression{
+public class AE_Operation extends additiveExpression {
+
     private additiveExpression aE;
     private String operator;
     private multiplicativeExpression mE;
@@ -45,7 +47,7 @@ public class AE_Operation extends additiveExpression{
     public void setmE(multiplicativeExpression mE) {
         this.mE = mE;
     }
-    
+
     @Override
     public void printNode() {
         System.out.println("AE_Operation");
@@ -54,18 +56,18 @@ public class AE_Operation extends additiveExpression{
         this.mE.printNode();
     }
 
-
     @Override
     public int getType(Node symbolTable) {
         int type1 = this.aE.getType(symbolTable);
         int type2 = this.mE.getType(symbolTable);
-        if (type1 == type2 ) {
-            if ((type1 == 2 && type2 == 2) || (type1 == 3 && type2 == 3)) {
+        if (type1 == type2) {
+            if (type1 == 2 || type1 == 3) {
                 return type1;
             }
             return -1;
-        }else{
+        } else {
             return -1;
-        }    }
-    
+        }
+    }
+
 }

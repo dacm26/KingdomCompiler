@@ -66,13 +66,13 @@ public class EE_Operation extends equalityExpression{
         int type1 = this.eE.getType(symbolTable);
         int type2 = this.rE.getType(symbolTable);
         if (type1==type2 ) {
-            if (type1 == 2 && type2 == 2) {
+            if (type1 == 2) {
                 return 5;
             }
-            if (type1 == 3 && type2 == 3) {
+            else if (type1 == 3) {
                 return 5;
             }
-            if (type1 == 5 && type2 == 5) {
+            else if (type1 == 5) {
                 return 5;
             }
             return -1;

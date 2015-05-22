@@ -55,7 +55,7 @@ public class PE_Content extends primaryExpression{
 
     @Override
     public int getType(Node symbolTable) {
-        return this.getType();
+        return this.type;
     }
 
     

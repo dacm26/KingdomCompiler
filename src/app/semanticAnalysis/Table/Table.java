@@ -27,7 +27,7 @@ public class Table {
     public boolean add(Row t) {
         int dir=0;
         if (this.index.containsKey(t.getId())) {
-            System.err.println("Error, the id: \" "+t.getId()+ " \" already exists.");
+            System.err.println("Semantic Error: the id: \""+t.getId()+ "\" already exists.");
             return false;
         }
         else if (this.table.isEmpty() && t.getType() instanceof PrimitiveDataType) {

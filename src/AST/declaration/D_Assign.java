@@ -66,7 +66,6 @@ public class D_Assign extends Declaration {
         int type1;
         int type2;
 
-        /*Falta comprobacion de tipos*/
         if (this.type == null) {
             /*Es una asignacion de una variable ya creada*/
             String typeTemp = symbolNode.getSymbolTable().getIdType(id).toString();
@@ -93,7 +92,7 @@ public class D_Assign extends Declaration {
                 System.err.println("Error, Type mismatch (D_Assign1)");
             } else {
                 type2 = this.exp.getExpressionType(symbolNode);
-                if (type2 == 0 || (type1 == type2)) {
+                if ((type1 == type2)) {
                 } else {
                     reportSemanticError(type1, type2);
                 }
@@ -103,9 +102,9 @@ public class D_Assign extends Declaration {
             type1 = this.type.getTypeAsNumber();
             type2 = this.exp.getExpressionType(symbolNode);
             if (type2 == -1) {
-
+                reportSemanticError(type1, type2);
             } else {
-                if (type2 == 0 || (type1 == type2)) {
+                if ((type1 == type2)) {
                     symbolNode.getSymbolTable().add(new Row(id, new PrimitiveDataType(((VTS_Type) this.type).getType(), ((VTS_Type) this.type).getSize())));
                 } else {
                     reportSemanticError(type1, type2);
@@ -134,7 +133,7 @@ public class D_Assign extends Declaration {
                 typeReceived = "boolean";
                 break;
             default:
-                typeReceived = "";
+                typeReceived = "Wrong Operation";
                 break;
         }
         String typeExpected;
@@ -155,10 +154,10 @@ public class D_Assign extends Declaration {
                 typeExpected = "boolean";
                 break;
             default:
-                typeExpected = "";
+                typeExpected = "Wrong Operation";
                 break;
         }
-        String errorMsg = "Semantic Error: Type mismatch\n" + "\tExpected: " + typeExpected + " for the id: " + this.id + ".\n\tReceived: " + typeReceived;
+        String errorMsg = "Semantic Error: Type mismatch\n" + "\tExpected: " + typeExpected + " for the id: \'" + this.id + "\'.\n\tReceived: " + typeReceived;
         System.err.println(errorMsg);
     }
 

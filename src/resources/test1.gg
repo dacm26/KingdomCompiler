@@ -11,4 +11,5 @@ bool KingdomHearts(){
     char j = true;
     KChain k = 'a';
     int c =12;
+    int x = 2+true/'a'*2.2;
 }
