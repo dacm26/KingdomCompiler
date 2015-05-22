@@ -4,32 +4,35 @@
  * and open the template in the editor.
  */
 package AST.ioExpressions;
+
 import AST.parameterList.*;
 import app.semanticAnalysis.Table.Node;
+
 /**
  *
  * @author C5220701
  */
-public class IOE_Print extends ioExpressions{
+public class IOE_Print extends ioExpressions {
+
     private String content;
     private String id;
     private parameterList iL;
 
     public IOE_Print(String content, boolean isId) {
-        
+
         if (isId) {
-            this.id=content;
-        }else{
+            this.id = content;
+        } else {
             this.content = content;
         }
-        this.iL=null;
-        this.id=null;
+        this.iL = null;
+        this.id = null;
     }
 
     public IOE_Print(String content, parameterList iL) {
         this.content = content;
         this.iL = iL;
-        this.id=null;
+        this.id = null;
     }
 
     public String getContent() {
@@ -43,8 +46,6 @@ public class IOE_Print extends ioExpressions{
     public void setId(String id) {
         this.id = id;
     }
-    
-    
 
     public void setContent(String content) {
         this.content = content;
@@ -62,9 +63,9 @@ public class IOE_Print extends ioExpressions{
     public void printNode() {
         System.out.println("IOE_Print");
         System.out.println(this.content);
-        if (this.iL !=null) {
+        if (this.iL != null) {
             this.iL.printNode();
-            
+
         }
     }
 
@@ -72,8 +73,5 @@ public class IOE_Print extends ioExpressions{
     public void generateSymbolNode(Node symbolNode) {
         
     }
-    
-    
-    
-    
+
 }

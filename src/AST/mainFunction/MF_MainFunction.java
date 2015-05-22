@@ -49,7 +49,7 @@ public class MF_MainFunction extends mainFunction {
         /*Function Type Specifier*/
         if (this.tS instanceof FTS_Type) {
             ArrayList<Type> params = new ArrayList<>();
-            symbolNode.getSymbolTable().add(new Row("KingdomHearts", new FunctionType(params, new PrimitiveDataType(((FTS_Type) this.tS).getType(), 0))));
+            symbolNode.add(new Row("KingdomHearts", new FunctionType(params, new PrimitiveDataType(((FTS_Type) this.tS).getType(), 0))));
         }
         
         /*Compound Statement*/

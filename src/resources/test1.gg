@@ -12,4 +12,5 @@ bool KingdomHearts(){
     KChain k = 'a';
     int c =12;
     int x = 2+true/'a'*2.2;
+    scan(snusnu);
 }

@@ -68,7 +68,7 @@ public class D_Assign extends Declaration {
 
         if (this.type == null) {
             /*Es una asignacion de una variable ya creada*/
-            String typeTemp = symbolNode.getSymbolTable().getIdType(id).toString();
+            String typeTemp = symbolNode.getIdType(id).toString();
             switch (typeTemp) {
                 case "int":
                     type1 = 2;
@@ -105,7 +105,7 @@ public class D_Assign extends Declaration {
                 reportSemanticError(type1, type2);
             } else {
                 if ((type1 == type2)) {
-                    symbolNode.getSymbolTable().add(new Row(id, new PrimitiveDataType(((VTS_Type) this.type).getType(), ((VTS_Type) this.type).getSize())));
+                    symbolNode.add(new Row(id, new PrimitiveDataType(((VTS_Type) this.type).getType(), ((VTS_Type) this.type).getSize())));
                 } else {
                     reportSemanticError(type1, type2);
                 }

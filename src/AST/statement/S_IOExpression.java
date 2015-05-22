@@ -32,6 +32,7 @@ public class S_IOExpression extends Statement{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
+        this.ioExp.generateSymbolNode(symbolNode);
         
     }
     

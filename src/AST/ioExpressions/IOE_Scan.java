@@ -34,7 +34,10 @@ public class IOE_Scan extends ioExpressions{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        
+        if (!symbolNode.search(id)) {
+            String errorMsg = "Semantic Error: The id: \'"+id+"\' doesn\'t exists";
+            System.err.println(errorMsg);
+        }
     }
     
 }

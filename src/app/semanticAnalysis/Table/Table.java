@@ -61,7 +61,12 @@ public class Table {
     }
     
     public Object getIdType(String id){
-        return this.table.get(this.index.get(id)).getType();
+        if (this.search(id)) {
+            return this.table.get(this.index.get(id)).getType();
+        }else{
+            return null;
+        }
+        
     }
 
     public ArrayList<Row> getTable() {

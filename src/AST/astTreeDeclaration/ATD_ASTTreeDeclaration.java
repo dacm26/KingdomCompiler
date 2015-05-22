@@ -6,6 +6,8 @@
 package AST.astTreeDeclaration;
 import AST.mainFunctionDeclaration.*;
 import app.semanticAnalysis.Table.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author C5220701
@@ -39,7 +41,12 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
     @Override
     public void generateSymbolNode(){
         this.mFD.generateSymbolNode(symbolNode);
-        //System.out.println(this.symbolNode.getSymbolTable().toString());
+        try {
+            Thread.sleep(2500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ATD_ASTTreeDeclaration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.symbolNode.printTables();
     }
 
     @Override

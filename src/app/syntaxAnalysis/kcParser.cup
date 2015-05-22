@@ -227,7 +227,7 @@ labeled_statement ::=   CASE INT:integerContent COLON compound_statement:cS labe
 statement ::=   compound_statement:cS                                            					{: RESULT = new S_CompoundStatement(cS); :}
 	| selection_statement:sS 																		{: RESULT = new S_SelectionStatement(sS); :}                                     										
 	| iteration_statement:iS                                           								{: RESULT = new S_IterationStatement(iS); :}
-	| declaration:d                                                                                 {: RESULT = new S_Declaration(d); :}
+	| declaration:d                                                                                 {: RESULT = new S_Declaration(d); :}			//Done
 	| io_expressions:iE                                                                             {: RESULT = new S_IOExpression(iE); :}
 	| function_calls_expression:fce                                                                 {: RESULT = new S_FCE(fce); :}
 	| jump_iteration_statement:jis																	{: RESULT = new S_JIS(jis); :}
