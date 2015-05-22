@@ -35,5 +35,10 @@ public class PL_Expression extends parameterList{
     public void generateSymbolNode(Node symbolNode) {
         
     }
+
+    @Override
+    public boolean validExpression(Node symbolNode) {
+        return this.exp.getExpressionType(symbolNode) != -1;
+    }
     
 }

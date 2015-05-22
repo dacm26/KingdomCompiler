@@ -14,4 +14,5 @@ import app.semanticAnalysis.Table.Node;
 public abstract class parameterList {
     public abstract void printNode();
     abstract public void generateSymbolNode(Node symbolNode);
+    abstract public boolean validExpression(Node symbolNode);
 }

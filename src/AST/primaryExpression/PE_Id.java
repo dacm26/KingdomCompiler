@@ -44,6 +44,10 @@ public class PE_Id extends primaryExpression{
     
     @Override
     public int getType(Node symbolTable) {
+        Object t = symbolTable.getIdType(this.getId());
+        if (t == null) {
+            return -1;
+        }
         String type = symbolTable.getIdType(this.getId()).toString();
         switch(type){
             case "int":

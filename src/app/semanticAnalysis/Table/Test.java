@@ -15,6 +15,7 @@ import java.util.ArrayList;
  */
 public class Test {
     public static void main(String[] args) {
+        /*
         Table table = new Table();
         ArrayList<Type> a=new ArrayList<>();
         String f = "asdasd";
@@ -49,6 +50,10 @@ public class Test {
         }else{
             System.out.println("Neles");
         }
-        
+        */
+        Object t = null;
+        if (t == null) {
+            System.out.println("oi");
+        }
     }
 }

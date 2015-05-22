@@ -13,4 +13,13 @@ bool KingdomHearts(){
     int c =12;
     int x = 2+true/'a'*2.2;
     scan(snusnu);
+    scan(h);
+    scan(a);
+    print("Hi");
+    print  ("Hola Mundo", a,b,c);
+    print(a);
+    print(snusnu);
+    print("asd",snu,snu,snu);
+    print("asd",true>1.1);
+    print("q", 1==1);
 }

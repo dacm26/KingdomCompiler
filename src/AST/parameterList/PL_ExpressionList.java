@@ -48,6 +48,11 @@ public class PL_ExpressionList extends parameterList{
     public void generateSymbolNode(Node symbolNode) {
         
     }
+
+    @Override
+    public boolean validExpression(Node symbolNode) {
+        return this.exp.getExpressionType(symbolNode) != -1 && this.pL.validExpression(symbolNode);
+    }
     
     
 }
