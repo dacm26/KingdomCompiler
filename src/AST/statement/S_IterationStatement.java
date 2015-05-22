@@ -35,7 +35,7 @@ public class S_IterationStatement extends Statement{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        
+        this.iS.generateSymbolNode(symbolNode);
     }
     
 }

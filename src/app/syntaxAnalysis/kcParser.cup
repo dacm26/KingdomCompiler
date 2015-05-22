@@ -224,9 +224,9 @@ labeled_statement ::=   CASE INT:integerContent COLON compound_statement:cS labe
 	;
 
 /*Statement Generalization*/
-statement ::=   compound_statement:cS                                            					{: RESULT = new S_CompoundStatement(cS); :}
+statement ::=   compound_statement:cS                                            					{: RESULT = new S_CompoundStatement(cS); :}		//Done
 	| selection_statement:sS 																		{: RESULT = new S_SelectionStatement(sS); :}                                     										
-	| iteration_statement:iS                                           								{: RESULT = new S_IterationStatement(iS); :}
+	| iteration_statement:iS                                           								{: RESULT = new S_IterationStatement(iS); :}	//Done
 	| declaration:d                                                                                 {: RESULT = new S_Declaration(d); :}			//Done
 	| io_expressions:iE                                                                             {: RESULT = new S_IOExpression(iE); :}			//Done
 	| function_calls_expression:fce                                                                 {: RESULT = new S_FCE(fce); :}

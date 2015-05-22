@@ -3,16 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AST.iterationStatement;
+
 import AST.conditionalExpression.*;
 import AST.compoundStatement.*;
 import app.semanticAnalysis.Table.Node;
+import java.util.ArrayList;
+
 /**
  *
  * @author Daniel
  */
-public class IT_While extends iterationStatement{
+public class IT_While extends iterationStatement {
+
     private conditionalExpression cE;
     private compoundStatement stm;
 
@@ -46,7 +49,29 @@ public class IT_While extends iterationStatement{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
+        int type1;
+        String errorMsg = "Semantic Error: Something is wrong with the expression.";
+        ArrayList<Integer> types = this.cE.getType(symbolNode);
+        if (types.size() != 1) {
+            for (Integer type : types) {
+                if (type == -1) {
+                    System.err.println(errorMsg);
+                    return;
+                } else if (type == 5) {
+                    type1 = 5;
+                }
+            }
+
+        } else if (types.size() == 1) {
+            type1 = types.get(0);
+        } else {
+            System.err.println(errorMsg);
+        }
+        Node novo = new Node();
+        novo.setFather(symbolNode);
+        symbolNode.giffBaby(novo);
+        this.stm.generateSymbolNode(symbolNode.getSons().get(symbolNode.getSons().size()-1));
         
     }
-    
+
 }

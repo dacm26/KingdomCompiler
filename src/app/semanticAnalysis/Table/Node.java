@@ -24,6 +24,10 @@ public class Node {
 
     }
 
+    public void giffBaby(Node node) {
+        this.weAreYourSons.add(node);
+    }
+
     public boolean search(String id) {
         if (!this.symbolTable.search(id)) {
             if (this.imAmYourFather == null) {
@@ -62,11 +66,39 @@ public class Node {
         if (this.symbolTable.getIdType(id) == null) {
             if (this.imAmYourFather == null) {
                 return null;
-            }else{
+            } else {
                 return this.imAmYourFather.getIdType(id);
             }
-        }else{
+        } else {
             return this.symbolTable.getIdType(id);
+        }
+    }
+
+    public boolean deleteLastNode() {
+        if (!this.weAreYourSons.isEmpty()) {
+            this.weAreYourSons.remove(this.weAreYourSons.size() - 1);
+        }
+        return true;
+    }
+
+    public int getNumericalIdType(String id) {
+        Object type = this.getIdType(id);
+        if (type == null) {
+            return -1;
+        }
+        switch (type.toString()) {
+            case "int":
+                return 2;
+            case "char":
+                return 1;
+            case "double":
+                return 3;
+            case "boolean":
+                return 5;
+            case "String":
+                return 4;
+            default:
+                return -1;
         }
     }
 
@@ -95,16 +127,13 @@ public class Node {
     }
 
     public void printTables() {
-        if (this.imAmYourFather != null) {
-            this.imAmYourFather.printTables();
-        } else {
-            System.out.println(this.symbolTable.toString());
-            if (!this.weAreYourSons.isEmpty()) {
-                for (Node iAmASon : this.weAreYourSons) {
-                    iAmASon.printTables();
-                }
+        System.out.println(this.symbolTable.toString());
+        if (!this.weAreYourSons.isEmpty()) {
+            for (Node iAmASon : this.weAreYourSons) {
+                iAmASon.printTables();
             }
         }
+
     }
 
 }

@@ -22,4 +22,27 @@ bool KingdomHearts(){
     print("asd",snu,snu,snu);
     print("asd",true>1.1);
     print("q", 1==1);
+
+    while(a){
+        int x,y,z,a;
+        print(a);           
+        print(snusnusnu);
+        scan(z);
+        while(b == 2){
+            int snu,a1,a2,a3;
+            scan(x);
+            snu = z + b;
+        }
+    }
+    print(x);
+    int i;
+    for (i = 0; i<10; i=i+1)
+    {
+        bool soyUnBooleano = true;
+        char soyUnChar = 'a';
+        int soyunInt = 2+i;
+        munny soyunDouble =1.1;
+        KChain soyUnString = "ROXAS";
+    }
+    print(soyunDouble);
 }
