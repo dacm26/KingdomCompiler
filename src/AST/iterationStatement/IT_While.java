@@ -66,6 +66,7 @@ public class IT_While extends iterationStatement {
             type1 = types.get(0);
         } else {
             System.err.println(errorMsg);
+            return;
         }
         Node novo = new Node();
         novo.setFather(symbolNode);

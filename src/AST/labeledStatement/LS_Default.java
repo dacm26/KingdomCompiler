@@ -3,21 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AST.labeledStatement;
+
 import AST.compoundStatement.*;
 import app.semanticAnalysis.Table.Node;
+
 /**
  *
  * @author Daniel
  */
-public class LS_Default extends labeledStatement{
+public class LS_Default extends labeledStatement {
+
     private compoundStatement stm;
 
     public LS_Default(compoundStatement stm) {
         this.stm = stm;
     }
-
 
     public compoundStatement getStm() {
         return stm;
@@ -33,9 +34,12 @@ public class LS_Default extends labeledStatement{
     }
 
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
+    public boolean generateSymbolNode(Node symbolNode, String id) {
+        Node novo = new Node();
+        novo.setFather(symbolNode);
+        symbolNode.giffBaby(novo);
+        this.stm.generateSymbolNode(symbolNode.getSons().get(symbolNode.getSons().size() - 1));
+        return true;
     }
-    
-    
+
 }

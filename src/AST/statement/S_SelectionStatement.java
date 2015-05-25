@@ -34,7 +34,7 @@ public class S_SelectionStatement extends Statement{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        
+        this.sS.generateSymbolNode(symbolNode);
     }
     
 }

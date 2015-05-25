@@ -98,15 +98,7 @@ public class IT_For extends iterationStatement {
     @Override
     public void printNode() {
     }
-
-    /*
-     private variableTypeSpecifier type;
-     private String id;
-     private Expression idValue;
-     private conditionalExpression cE;
-     private assignmentExpression aE;
-     private compoundStatement stm;
-     */
+    
     @Override
     public void generateSymbolNode(Node symbolNode) {
         Node novo = new Node();

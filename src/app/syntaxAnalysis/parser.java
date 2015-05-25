@@ -990,7 +990,7 @@ class CUP$parser$actions {
 		int lSleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int lSright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		labeledStatement lS = (labeledStatement)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new LS_Case(integerContent,cS,lS); 
+		 RESULT = new LS_Case(integerContent,cS,lS,2); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("labeled_statement",20, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1008,7 +1008,7 @@ class CUP$parser$actions {
 		int lSleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int lSright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		labeledStatement lS = (labeledStatement)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new LS_Case(charContent,cS,lS); 
+		 RESULT = new LS_Case(charContent,cS,lS,1); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("labeled_statement",20, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1026,7 +1026,7 @@ class CUP$parser$actions {
 		int lSleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int lSright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		labeledStatement lS = (labeledStatement)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new LS_Case(stringContent,cS,lS); 
+		 RESULT = new LS_Case(stringContent,cS,lS,4); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("labeled_statement",20, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

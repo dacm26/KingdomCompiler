@@ -216,16 +216,16 @@ compound_statement ::=   OCBRA CCBRA                                 								{: 
 	;
 
 /*Label Statement*/
-labeled_statement ::=   CASE INT:integerContent COLON compound_statement:cS labeled_statement:lS	{: RESULT = new LS_Case(integerContent,cS,lS); :}
-	| CASE CHARCONTENT:charContent COLON compound_statement:cS labeled_statement:lS	   				{: RESULT = new LS_Case(charContent,cS,lS); :}
-	| CASE STRINGCONTENT:stringContent COLON  compound_statement:cS labeled_statement:lS 			{: RESULT = new LS_Case(stringContent,cS,lS); :}
+labeled_statement ::=   CASE INT:integerContent COLON compound_statement:cS labeled_statement:lS	{: RESULT = new LS_Case(integerContent,cS,lS,2); :}
+	| CASE CHARCONTENT:charContent COLON compound_statement:cS labeled_statement:lS	   				{: RESULT = new LS_Case(charContent,cS,lS,1); :}
+	| CASE STRINGCONTENT:stringContent COLON  compound_statement:cS labeled_statement:lS 			{: RESULT = new LS_Case(stringContent,cS,lS,4); :}
 	| DEFAULT COLON compound_statement:cS                 											{: RESULT = new LS_Default(cS); :}
 	|																								{: RESULT = new LS_Lambda(); :}
 	;
 
 /*Statement Generalization*/
 statement ::=   compound_statement:cS                                            					{: RESULT = new S_CompoundStatement(cS); :}		//Done
-	| selection_statement:sS 																		{: RESULT = new S_SelectionStatement(sS); :}                                     										
+	| selection_statement:sS 																		{: RESULT = new S_SelectionStatement(sS); :}    //Done                                 										
 	| iteration_statement:iS                                           								{: RESULT = new S_IterationStatement(iS); :}	//Done
 	| declaration:d                                                                                 {: RESULT = new S_Declaration(d); :}			//Done
 	| io_expressions:iE                                                                             {: RESULT = new S_IOExpression(iE); :}			//Done

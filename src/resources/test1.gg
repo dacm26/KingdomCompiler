@@ -5,7 +5,7 @@ bool KingdomHearts(){
     char d = 'a';
     KChain e = "asd";
     bool f = true && b == 43 || a && c >=12.0;
-    bool g = 12+1;
+    #bool g = 12+1;
     int h = (b || 2>3);
     munny i = 12*3;
     char j = true;
@@ -34,15 +34,53 @@ bool KingdomHearts(){
             snu = z + b;
         }
     }
-    print(x);
+    int a;
+    print(i);
     int i;
     for (i = 0; i<10; i=i+1)
     {
+    print("q",i);
         bool soyUnBooleano = true;
         char soyUnChar = 'a';
         int soyunInt = 2+i;
         munny soyunDouble =1.1;
         KChain soyUnString = "ROXAS";
+        for (int l=0; l<10; l=l+1)
+        {
+            int x123=l+i;
+    print("q",i);
+        }
+    print("q",i);
     }
-    print(soyunDouble);
+    print(soyunDouble);#
+    #if (x>2)
+    {
+        int x=3;
+        print(x);
+    }else if(x<2){
+        int x=2;
+        print(x);
+    }else if (x == 2)
+    {
+        int y;
+        print(a);
+    }else{
+        print(y);
+    }#
+
+    switch (e){
+         case "1a":{
+            int test=2;
+         }
+         case '2':{
+            int test1;
+            print(test);
+         }
+         default:{
+            int test2;
+            print(test1);
+            print(test);
+         }
+     }
+     print(test);
 }

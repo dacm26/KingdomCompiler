@@ -48,25 +48,6 @@ public class Expression {
                 }
             }
             return types.get(0);
-            /*
-            
-            if (types.get(0) == 2) {
-                for (Integer type : types) {
-                    if (type != 2) {
-                        return -1;
-                    }
-                }
-                return 2;
-            }else if(types.get(0) == 3){
-                for (Integer type : types) {
-                    if (type != 3) {
-                        return -1;
-                    }
-                }
-                return 3;
-            }else{
-                return -1;
-            }*/
             
         }else if(types.size() == 1){
             return types.get(0);

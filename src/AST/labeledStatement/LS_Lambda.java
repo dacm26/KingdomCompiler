@@ -23,8 +23,8 @@ public class LS_Lambda extends labeledStatement{
     }
 
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
+    public boolean generateSymbolNode(Node symbolNode,String id) {
+        return symbolNode.search(id);
     }
     
 }
