@@ -46,9 +46,11 @@ public class MFD_MainFunction extends mainFunctionDeclaration{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
+        if (this.eD != null) {
+            /*Implementacion de funciones*/
+        }
         this.mF.generateSymbolNode(symbolNode);
         //Falta implementarlo
-        //this.eD.generateSymbolNode(symbolNode);
     }
     
 }

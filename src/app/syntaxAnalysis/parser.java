@@ -651,7 +651,7 @@ class CUP$parser$actions {
 		int mFleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int mFright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		mainFunction mF = (mainFunction)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-
+		 RESULT = new MFD_MainFunction(mF,null); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("main_function_declaration",1, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
