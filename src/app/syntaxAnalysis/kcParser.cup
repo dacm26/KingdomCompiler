@@ -117,7 +117,7 @@ terminal Boolean FALSE;
 /* Non terminals */
 non terminal ATD_ASTTreeDeclaration ast_tree_declaration;
 non terminal mainFunctionDeclaration main_function_declaration;
-non terminal globalDeclaration global_declaration;
+//non terminal globalDeclaration global_declaration;
 non terminal mainFunction main_function;
 non terminal externalDeclaration external_declaration;
 non terminal functionDefinition function_definition;
@@ -159,8 +159,8 @@ ast_tree_declaration ::= main_function_declaration:mFD        										{: RESUL
 
 /*Main Function Declaration*/
 /*Por los momentos, se ignora las variables globales*/
-main_function_declaration ::= global_declaration:d main_function_declaration:mFD       				{: RESULT = new MFD_GlobalDeclaration(d,mFD); :}
-    |  main_function:mF external_declaration:eD                             						{: RESULT = new MFD_MainFunction(mF,eD); :}
+main_function_declaration ::= /*global_declaration:d main_function_declaration:mFD       				{: RESULT = new MFD_GlobalDeclaration(d,mFD); :}
+    |*/  main_function:mF external_declaration:eD                             						{: RESULT = new MFD_MainFunction(mF,eD); :}
     ;
 
 /*External Function Declarations*/
@@ -169,7 +169,7 @@ external_declaration ::= function_definition:fD external_declaration:eD       		
 	;
 
 /*Main Function*/
-main_function ::= function_type_specifier:tS MAIN OPAR CPAR compound_statement:cS					{: RESULT = new MF_MainFunction(tS,cS); :}				
+main_function ::= VOID MAIN OPAR CPAR compound_statement:cS											{: RESULT = new MF_MainFunction(new FTS_Type(Void.TYPE),cS); :}				
 	;
 
 /*Function Declaration*/
@@ -266,10 +266,10 @@ variable_type_specifier ::= CHAR                                                
 	;
 
 /*Global Variable Declarations*/
-global_declaration ::= variable_type_specifier:vTS identifier_list:iL END      						{: RESULT = new GD_identifierList(vTS,iL);:}                             
+/*global_declaration ::= variable_type_specifier:vTS identifier_list:iL END      						{: RESULT = new GD_identifierList(vTS,iL);:}                             
 	| variable_type_specifier:vTS  ID:stringValue ASSIGN expression:exp END 						{: RESULT = new GD_Assign(vTS,stringValue,exp); :}
 	;
-
+*/
 /*Variable Declarations*/
 declaration ::= variable_type_specifier:vTS identifier_list:iL END                                  {: RESULT = new D_identifierList(vTS,iL); :} 
 	| variable_type_specifier:vTS  ID:stringValue ASSIGN expression:exp END                         {: RESULT = new D_Assign(vTS,stringValue,exp); :}
