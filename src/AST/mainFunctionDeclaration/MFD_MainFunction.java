@@ -6,7 +6,6 @@
 
 package AST.mainFunctionDeclaration;
 import AST.mainFunction.*;
-import AST.externalDeclaration.*;
 import app.semanticAnalysis.Table.Node;
 /**
  *
@@ -14,11 +13,9 @@ import app.semanticAnalysis.Table.Node;
  */
 public class MFD_MainFunction extends mainFunctionDeclaration{
     private mainFunction mF;
-    private externalDeclaration eD;
 
-    public MFD_MainFunction(mainFunction mF, externalDeclaration eD) {
+    public MFD_MainFunction(mainFunction mF) {
         this.mF = mF;
-        this.eD = eD;
     }
 
     public mainFunction getmF() {
@@ -29,28 +26,16 @@ public class MFD_MainFunction extends mainFunctionDeclaration{
         this.mF = mF;
     }
 
-    public externalDeclaration geteD() {
-        return eD;
-    }
 
-    public void seteD(externalDeclaration eD) {
-        this.eD = eD;
-    }
 
     @Override
     public void printNode() {
-        System.out.println("MFD_MainFunction");
-        this.mF.printNode();
-        this.eD.printNode();
     }
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        if (this.eD != null) {
-            /*Implementacion de funciones*/
-        }
+
         this.mF.generateSymbolNode(symbolNode);
-        //Falta implementarlo
     }
     
 }

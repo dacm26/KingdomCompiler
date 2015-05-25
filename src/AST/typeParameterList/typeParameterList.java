@@ -6,6 +6,8 @@
 package AST.typeParameterList;
 
 import app.semanticAnalysis.Table.Node;
+import app.semanticAnalysis.Types.Type;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,5 +15,5 @@ import app.semanticAnalysis.Table.Node;
  */
 public abstract class typeParameterList {
     abstract public void printNode();
-    abstract public void generateSymbolNode(Node symbolNode);
+    abstract public ArrayList<Type> generateSymbolNode(Node symbolNode);
 }

@@ -7,12 +7,17 @@ package AST.typeParameterList;
 
 import AST.variableTypeSpecifier.*;
 import app.semanticAnalysis.Table.Node;
+import app.semanticAnalysis.Table.Row;
+import app.semanticAnalysis.Types.PrimitiveDataType;
+import app.semanticAnalysis.Types.Type;
+import java.util.ArrayList;
+
 /**
  *
  * @author Daniel
  */
-public class TPL_Id extends typeParameterList{
-    
+public class TPL_Id extends typeParameterList {
+
     private variableTypeSpecifier vTS;
     private String id;
 
@@ -36,16 +41,45 @@ public class TPL_Id extends typeParameterList{
     public void setId(String id) {
         this.id = id;
     }
-    
-    
-    
+
     @Override
     public void printNode() {
     }
 
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
+    public ArrayList<Type> generateSymbolNode(Node symbolNode) {
+        int type1 = this.vTS.getTypeAsNumber();
+        ArrayList<Type> a=new ArrayList<>();
+        PrimitiveDataType pDT;
+        switch (type1) {
+            case 1:
+                pDT = new PrimitiveDataType(Character.TYPE, Character.SIZE / 8);
+                symbolNode.add(new Row(this.id, pDT));
+                break;
+            case 2:
+                pDT = new PrimitiveDataType(Integer.TYPE, Integer.SIZE / 8);
+                symbolNode.add(new Row(this.id, pDT));
+                break;
+            case 3:
+                pDT = new PrimitiveDataType(Double.TYPE, Double.SIZE / 8);
+                symbolNode.add(new Row(this.id,pDT ));
+                break;
+            case 4:
+                pDT = new PrimitiveDataType(String.class.getSimpleName(), 255);
+                symbolNode.add(new Row(this.id, pDT));
+                break;
+            case 5:
+                pDT = new PrimitiveDataType(Boolean.TYPE, 1);
+                symbolNode.add(new Row(this.id, pDT));
+                break;
+
+            default:
+                System.err.println("huh?");
+                return null;
+        }
+        a.add(pDT);
+        return a;
+
     }
-    
+
 }

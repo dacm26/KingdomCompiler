@@ -33,7 +33,6 @@ import AST.jumpFunctionStatement.*;
 import AST.jumpIterationStatement.*;
 import AST.functionDefinition.*;
 import AST.mainFunction.*;
-import AST.externalDeclaration.*;
 import AST.mainFunctionDeclaration.*;
 import AST.astTreeDeclaration.*;
 
@@ -119,7 +118,7 @@ non terminal ATD_ASTTreeDeclaration ast_tree_declaration;
 non terminal mainFunctionDeclaration main_function_declaration;
 //non terminal globalDeclaration global_declaration;
 non terminal mainFunction main_function;
-non terminal externalDeclaration external_declaration;
+//non terminal externalDeclaration external_declaration;
 non terminal functionDefinition function_definition;
 non terminal functionTypeSpecifier function_type_specifier;
 non terminal compoundStatement compound_statement;
@@ -160,8 +159,8 @@ ast_tree_declaration ::= main_function_declaration:mFD        										{: RESUL
 /*Main Function Declaration*/
 /*Por los momentos, se ignora las variables globales*/
 main_function_declaration ::= /*global_declaration:d main_function_declaration:mFD       			{: RESULT = new MFD_GlobalDeclaration(d,mFD); :}
-    |*/ function_definition:fD main_function_declaration:mF                              						
-    |  	function_definition:fD main_function:mF														
+    |*/ function_definition:fD main_function_declaration:mF  										{: RESULT = new MFD_MainFunctionAndOthers(fD,mF); :}                            						
+    |  	main_function:mF																			{: RESULT = new MFD_MainFunction(mF); :}												
     ;
 
 /*Main Function*/

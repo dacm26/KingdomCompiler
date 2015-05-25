@@ -53,7 +53,10 @@ public class MF_MainFunction extends mainFunction {
         }
         
         /*Compound Statement*/
-        this.cS.generateSymbolNode(symbolNode);
+        Node novo = new Node();
+        novo.setFather(symbolNode);
+        symbolNode.giffBaby(novo);
+        this.cS.generateSymbolNode(symbolNode.getSons().get(symbolNode.getSons().size()-1));
     }
 
     

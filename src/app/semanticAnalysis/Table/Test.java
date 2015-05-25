@@ -15,7 +15,6 @@ import java.util.ArrayList;
  */
 public class Test {
     public static void main(String[] args) {
-        /*
         Table table = new Table();
         ArrayList<Type> a=new ArrayList<>();
         String f = "asdasd";
@@ -30,7 +29,7 @@ public class Test {
         System.out.println(table.getIdType("a").toString());
         
         
-        
+        /*
         PE_Content test=new PE_Content("123",2);
         PE_Content test1=new PE_Content("asd",4);
         PE_Content test2=new PE_Content("12.12",3);

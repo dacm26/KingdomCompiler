@@ -49,6 +49,8 @@ public class VTS_Type extends variableTypeSpecifier{
                 return 5;
             case "String":
                 return 4;
+            case "void":
+                return 6;
             default:
                 return -1;
         }

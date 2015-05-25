@@ -3,29 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package AST.mainFunctionDeclaration;
-import AST.globalDeclaration.globalDeclaration;
+
+import AST.functionDefinition.functionDefinition;
 import app.semanticAnalysis.Table.Node;
+
 /**
  *
- * @author Daniel
+ * @author C5220701
  */
-public class MFD_GlobalDeclaration extends mainFunctionDeclaration{
-    private globalDeclaration d;
+public class MFD_MainFunctionAndOthers extends mainFunctionDeclaration{
+    private functionDefinition fD;
     private mainFunctionDeclaration mFD;
 
-    public MFD_GlobalDeclaration(globalDeclaration d, mainFunctionDeclaration mFD) {
-        this.d = d;
+    public MFD_MainFunctionAndOthers(functionDefinition fD, mainFunctionDeclaration mFD) {
+        this.fD = fD;
         this.mFD = mFD;
     }
 
-    public globalDeclaration getD() {
-        return d;
+    public functionDefinition getfD() {
+        return fD;
     }
 
-    public void setD(globalDeclaration d) {
-        this.d = d;
+    public void setfD(functionDefinition fD) {
+        this.fD = fD;
     }
 
     public mainFunctionDeclaration getmFD() {
@@ -35,17 +36,18 @@ public class MFD_GlobalDeclaration extends mainFunctionDeclaration{
     public void setmFD(mainFunctionDeclaration mFD) {
         this.mFD = mFD;
     }
+    
+    
 
     @Override
     public void printNode() {
-
     }
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        
+        /**/
+        this.fD.generateSymbolNode(symbolNode);
+        this.mFD.generateSymbolNode(symbolNode);
     }
-    
-    
     
 }
