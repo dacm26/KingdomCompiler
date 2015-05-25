@@ -159,13 +159,13 @@ ast_tree_declaration ::= main_function_declaration:mFD        										{: RESUL
 
 /*Main Function Declaration*/
 /*Por los momentos, se ignora las variables globales*/
-main_function_declaration ::= /*global_declaration:d main_function_declaration:mFD       				{: RESULT = new MFD_GlobalDeclaration(d,mFD); :}
-    |*/  main_function:mF external_declaration:eD                             						{: RESULT = new MFD_MainFunction(mF,eD); :}
+main_function_declaration ::= /*global_declaration:d main_function_declaration:mFD       			{: RESULT = new MFD_GlobalDeclaration(d,mFD); :}
+    |*/ external_declaration:eD main_function:mF                              						{: RESULT = new MFD_MainFunction(mF,eD); :}
+    | main_function:mF
     ;
 
 /*External Function Declarations*/
 external_declaration ::= function_definition:fD external_declaration:eD       						{: RESULT = new ED_ExternalDeclaration(fD,eD); :}
-    |                                                                 								{: RESULT = new ED_Lambda(); :}
 	;
 
 /*Main Function*/
