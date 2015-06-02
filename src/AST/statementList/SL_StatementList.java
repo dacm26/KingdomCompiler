@@ -12,7 +12,7 @@ import app.semanticAnalysis.Table.Node;
  * @author Daniel
  */
 public class SL_StatementList extends statementList{
-    private statementList sL;
+    private statementList sL=null;
     private Statement stm;
 
     public SL_StatementList(statementList sL, Statement stm) {

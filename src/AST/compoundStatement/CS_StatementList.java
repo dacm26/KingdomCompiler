@@ -12,7 +12,7 @@ import app.semanticAnalysis.Table.Node;
  * @author Daniel
  */
 public class CS_StatementList extends compoundStatement{
-    private statementList sL;
+    private statementList sL = null;
 
     public CS_StatementList(statementList sL) {
         this.sL = sL;
