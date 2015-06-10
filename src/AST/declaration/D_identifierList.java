@@ -51,7 +51,7 @@ public class D_identifierList extends Declaration{
     public void generateSymbolNode(Node symbolNode) {
         ArrayList<String> ids= this.iL.getIds();
         for (String id : ids) {
-            symbolNode.add(new Row(id, new PrimitiveDataType(((VTS_Type)this.tS).getType(),((VTS_Type)this.tS).getSize())));
+            symbolNode.add(new Row(id, new PrimitiveDataType(((VTS_Type)this.tS).getType(),((VTS_Type)this.tS).getSize()),false));
         }
         
     }

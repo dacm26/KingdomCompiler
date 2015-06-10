@@ -14,11 +14,13 @@ import app.semanticAnalysis.Types.*;
 public class Row {
     private String id;
     private Type type;
+    private boolean isParam;
     private int dir;
 
-    public Row(String id,Type type) {
+    public Row(String id,Type type,boolean isParam) {
         this.id= id;
         this.type = type;
+        this.isParam = isParam;
         this.dir = 0;
     }
 
@@ -28,6 +30,14 @@ public class Row {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public boolean isParam() {
+        return isParam;
+    }
+
+    public void setIsParam(boolean isParam) {
+        this.isParam = isParam;
     }
     
     
@@ -50,7 +60,7 @@ public class Row {
 
     @Override
     public String toString() {
-        return this.id+"\t\t"+this.type.toString()+"\t\t"+this.dir+"\n";
+        return this.id+"\t\t"+this.type.toString()+"\t\t"+this.isParam+"\t\t"+this.dir+"\n";
     }
     
     

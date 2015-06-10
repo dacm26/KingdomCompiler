@@ -9,6 +9,16 @@ void Popeye(int x, bool y, KChain z){
     print(i);
 }
 
+bool Popeye2(int x, bool y, KChain z, char z1, munny z2){
+    int a,b,c,d;
+    for (int i = 0; i < 10; i=i+1)
+    {
+        print(a);
+    }
+    print(i);
+    giff 1>2;
+}
+
 void KingdomHearts(){
     bool test,a,b,c,d,i;
     print(a);

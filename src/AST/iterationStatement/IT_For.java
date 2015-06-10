@@ -180,7 +180,7 @@ public class IT_For extends iterationStatement {
                     return;
                 } else if (type2 == initType) {
                     //Son del mismo tipo
-                    symbolNode.getSons().get(symbolNode.getSons().size() - 1).add(new Row(this.id, new PrimitiveDataType(this.objectType(initType), this.objectSize(initType))));
+                    symbolNode.getSons().get(symbolNode.getSons().size() - 1).add(new Row(this.id, new PrimitiveDataType(this.objectType(initType), this.objectSize(initType)),false));
                     //Revisando la condicion
                     ArrayList<Integer> types = this.cE.getType(symbolNode.getSons().get(symbolNode.getSons().size() - 1));
                     if (types.size() != 1) {

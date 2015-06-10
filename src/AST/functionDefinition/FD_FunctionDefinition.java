@@ -90,27 +90,27 @@ public class FD_FunctionDefinition extends functionDefinition {
                 ArrayList<Type> params = new ArrayList<>();
                 switch (t1) {
                     case "int":
-                        symbolNode.add(new Row(this.id, new FunctionType(params, new PrimitiveDataType(Integer.TYPE, Integer.SIZE / 8))));
+                        symbolNode.add(new Row(this.id, new FunctionType(params, new PrimitiveDataType(Integer.TYPE, Integer.SIZE / 8)),false));
                         functionType = 2;
                         break;
                     case "char":
-                        symbolNode.add(new Row(this.id, new FunctionType(params, new PrimitiveDataType(Character.TYPE, Character.SIZE / 8))));
+                        symbolNode.add(new Row(this.id, new FunctionType(params, new PrimitiveDataType(Character.TYPE, Character.SIZE / 8)),false));
                         functionType = 1;
                         break;
                     case "double":
-                        symbolNode.add(new Row(this.id, new FunctionType(params, new PrimitiveDataType(Double.TYPE, Double.SIZE / 8))));
+                        symbolNode.add(new Row(this.id, new FunctionType(params, new PrimitiveDataType(Double.TYPE, Double.SIZE / 8)),false));
                         functionType = 3;
                         break;
                     case "boolean":
-                        symbolNode.add(new Row(this.id, new FunctionType(params, new PrimitiveDataType(Boolean.TYPE, 1))));
+                        symbolNode.add(new Row(this.id, new FunctionType(params, new PrimitiveDataType(Boolean.TYPE, 1)),false));
                         functionType = 5;
                         break;
                     case "String":
-                        symbolNode.add(new Row(this.id, new FunctionType(params, new PrimitiveDataType(String.class.getSimpleName(), 255))));
+                        symbolNode.add(new Row(this.id, new FunctionType(params, new PrimitiveDataType(String.class.getSimpleName(), 255)),false));
                         functionType = 4;
                         break;
                     case "void":
-                        symbolNode.add(new Row(this.id, new FunctionType(params, new PrimitiveDataType(Void.TYPE, 2))));
+                        symbolNode.add(new Row(this.id, new FunctionType(params, new PrimitiveDataType(Void.TYPE, 2)),false));
                         functionType = 6;
                         break;
                     default:

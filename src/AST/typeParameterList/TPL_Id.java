@@ -54,23 +54,23 @@ public class TPL_Id extends typeParameterList {
         switch (type1) {
             case 1:
                 pDT = new PrimitiveDataType(Character.TYPE, Character.SIZE / 8);
-                symbolNode.add(new Row(this.id, pDT));
+                symbolNode.add(new Row(this.id, pDT,true));
                 break;
             case 2:
                 pDT = new PrimitiveDataType(Integer.TYPE, Integer.SIZE / 8);
-                symbolNode.add(new Row(this.id, pDT));
+                symbolNode.add(new Row(this.id, pDT,true));
                 break;
             case 3:
                 pDT = new PrimitiveDataType(Double.TYPE, Double.SIZE / 8);
-                symbolNode.add(new Row(this.id,pDT ));
+                symbolNode.add(new Row(this.id,pDT,true));
                 break;
             case 4:
                 pDT = new PrimitiveDataType(String.class.getSimpleName(), 255);
-                symbolNode.add(new Row(this.id, pDT));
+                symbolNode.add(new Row(this.id, pDT,true));
                 break;
             case 5:
                 pDT = new PrimitiveDataType(Boolean.TYPE, 1);
-                symbolNode.add(new Row(this.id, pDT));
+                symbolNode.add(new Row(this.id, pDT,true));
                 break;
 
             default:

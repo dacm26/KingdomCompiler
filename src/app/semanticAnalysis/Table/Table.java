@@ -38,7 +38,17 @@ public class Table {
             if (this.table.get(this.table.size() - 1).getDir() < 0) {
                 dir = 0;
             } else {
-                dir = this.table.get(this.table.size() - 1).getDir() + this.table.get(this.table.size() - 1).getType().getSize();
+                if (t.isParam()) {
+                    dir = 0;
+                }else{
+                    if (this.table.get(this.table.size() - 1).isParam()) {
+                        dir = 0;
+                    }else{
+                        dir = this.table.get(this.table.size() - 1).getDir() + this.table.get(this.table.size() - 1).getType().getSize();
+                    }
+                    
+                }
+                
 
             }
         }
@@ -81,7 +91,7 @@ public class Table {
     public String toString() {
         StringBuilder sB = new StringBuilder();
         sB.append("Table\n");
-        sB.append("Id\t\tType\t\tDir\n");
+        sB.append("Id\t\tType\t\tisParam\t\tDir\n");
         for (Row name : this.table) {
             sB.append(name.toString());
         }

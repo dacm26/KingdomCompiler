@@ -18,7 +18,7 @@ public class Test {
         Table table = new Table();
         ArrayList<Type> a=new ArrayList<>();
         String f = "asdasd";
-        table.add(new Row("a",new PrimitiveDataType(Integer.TYPE,Integer.SIZE/8)));
+        /*table.add(new Row("a",new PrimitiveDataType(Integer.TYPE,Integer.SIZE/8)));
         table.add(new Row("b",new PrimitiveDataType(Character.TYPE,Character.SIZE/8)));
         table.add(new Row("c",new PrimitiveDataType(Double.TYPE,Double.SIZE/8)));
         table.add(new Row("d",new PrimitiveDataType(Boolean.TYPE,1)));
@@ -28,7 +28,7 @@ public class Test {
         System.out.println(table.toString());
         System.out.println(table.getIdType("a").toString());
         
-        
+        */
         /*
         PE_Content test=new PE_Content("123",2);
         PE_Content test1=new PE_Content("asd",4);
