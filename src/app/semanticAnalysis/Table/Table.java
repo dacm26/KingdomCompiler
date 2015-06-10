@@ -25,30 +25,36 @@ public class Table {
     }
 
     public boolean add(Row t) {
-        int dir=0;
+        int dir = 0;
         if (this.index.containsKey(t.getId())) {
-            System.err.println("Semantic Error: the id: \""+t.getId()+ "\" already exists.");
+            System.err.println("Semantic Error: the id: \"" + t.getId() + "\" already exists.");
             return false;
-        }
-        else if (this.table.isEmpty() && t.getType() instanceof PrimitiveDataType) {
-            dir = 0;
+        } else if (this.table.isEmpty() && t.getType() instanceof PrimitiveDataType) {
+            if (t.isParam()) {
+                dir = -1;
+            } else {
+                dir = 0;
+            }
         } else if (t.getType() instanceof FunctionType) {
             dir = -1;
         } else {
             if (this.table.get(this.table.size() - 1).getDir() < 0) {
-                dir = 0;
+                if (t.isParam()) {
+                    dir = -1;
+                } else {
+                    dir = 0;
+                }
             } else {
                 if (t.isParam()) {
-                    dir = 0;
-                }else{
+                    dir = -1;
+                } else {
                     if (this.table.get(this.table.size() - 1).isParam()) {
-                        dir = 0;
-                    }else{
+                        dir = -1;
+                    } else {
                         dir = this.table.get(this.table.size() - 1).getDir() + this.table.get(this.table.size() - 1).getType().getSize();
                     }
-                    
+
                 }
-                
 
             }
         }
@@ -62,21 +68,21 @@ public class Table {
     public boolean search(String id) {
         return this.index.containsKey(id);
     }
-    
-    public Row searchRow(String id){
+
+    public Row searchRow(String id) {
         if (search(id)) {
             return this.table.get(this.index.get(id));
         }
         return null;
     }
-    
-    public Object getIdType(String id){
+
+    public Object getIdType(String id) {
         if (this.search(id)) {
             return this.table.get(this.index.get(id)).getType();
-        }else{
+        } else {
             return null;
         }
-        
+
     }
 
     public ArrayList<Row> getTable() {
