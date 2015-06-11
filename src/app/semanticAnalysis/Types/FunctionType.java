@@ -29,6 +29,24 @@ public class FunctionType extends Type {
         return Return;
     }
 
+    public String getParamsType() {
+        StringBuilder sB = new StringBuilder();
+        if (this.parameters.isEmpty()) {
+            sB.append("lambda");
+        } else {
+            for (int i = 0; i < this.parameters.size(); i++) {
+
+                if (i < this.parameters.size() - 1) {
+                    sB.append(this.parameters.get(i).toString()).append(" X ");
+                } else {
+                    sB.append(this.parameters.get(i));
+                }
+            }
+        }
+        return sB.toString();
+    }
+    
+
     @Override
     public Type getType() {
         return this;

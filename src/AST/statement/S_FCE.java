@@ -33,7 +33,7 @@ public class S_FCE extends Statement{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        
+        this.fCE.generateSymbolNode(symbolNode);
     }
     
 }

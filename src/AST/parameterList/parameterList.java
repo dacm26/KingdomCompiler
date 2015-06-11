@@ -6,6 +6,7 @@
 package AST.parameterList;
 
 import app.semanticAnalysis.Table.Node;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,4 +16,5 @@ public abstract class parameterList {
     public abstract void printNode();
     abstract public void generateSymbolNode(Node symbolNode);
     abstract public boolean validExpression(Node symbolNode);
+    abstract public ArrayList<Integer> getTypes(Node symbolNode);
 }

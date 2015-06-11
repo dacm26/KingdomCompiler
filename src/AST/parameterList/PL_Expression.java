@@ -7,6 +7,7 @@ package AST.parameterList;
 
 import AST.expression.*;
 import app.semanticAnalysis.Table.Node;
+import java.util.ArrayList;
 
 /**
  *
@@ -39,6 +40,13 @@ public class PL_Expression extends parameterList{
     @Override
     public boolean validExpression(Node symbolNode) {
         return this.exp.getExpressionType(symbolNode) != -1;
+    }
+
+    @Override
+    public ArrayList<Integer> getTypes(Node symbolNode) {
+        ArrayList<Integer> tmp = new ArrayList();
+        tmp.add(this.exp.getExpressionType(symbolNode));
+        return tmp;
     }
     
 }
