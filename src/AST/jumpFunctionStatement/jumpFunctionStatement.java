@@ -13,5 +13,5 @@ import app.semanticAnalysis.Table.Node;
  */
 public abstract class jumpFunctionStatement {
     public abstract void printNode();
-    abstract public void generateSymbolNode(Node symbolNode);
+    abstract public int generateSymbolNode(Node symbolNode);
 }

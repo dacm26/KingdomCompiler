@@ -21,8 +21,8 @@ public class JFS_EmptyReturn extends jumpFunctionStatement{
     }
 
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
+    public int generateSymbolNode(Node symbolNode) {
+        return 6;
     }
     
 }

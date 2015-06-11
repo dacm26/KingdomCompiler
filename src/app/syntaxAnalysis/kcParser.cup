@@ -225,8 +225,8 @@ statement ::=   compound_statement:cS                                           
 	| declaration:d                                                                                 {: RESULT = new S_Declaration(d); :}			//Done
 	| io_expressions:iE                                                                             {: RESULT = new S_IOExpression(iE); :}			//Done
 	| function_calls_expression:fce                                                                 {: RESULT = new S_FCE(fce); :}					//Done				
-	| jump_iteration_statement:jis																	{: RESULT = new S_JIS(jis); :}
-	| jump_function_statement:jfs																	{: RESULT = new S_JFS(jfs); :}
+	| jump_iteration_statement:jis																	{: RESULT = new S_JIS(jis); :}					//Not Today
+	| jump_function_statement:jfs																	{: RESULT = new S_JFS(jfs); :}					//Not Today
 	;
 
 /*Identifier List*/

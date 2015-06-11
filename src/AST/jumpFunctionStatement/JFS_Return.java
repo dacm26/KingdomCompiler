@@ -32,8 +32,9 @@ public class JFS_Return extends jumpFunctionStatement{
     }
 
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-        
+    public int generateSymbolNode(Node symbolNode) {
+        //No verifica expressions
+        return this.cS.getType(symbolNode).get(0);
     }
     
 }

@@ -35,7 +35,11 @@ public class S_JFS extends Statement{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        
+        this.jFS.generateSymbolNode(symbolNode);
+    }
+    
+    public int getReturnType(Node symbolNode){
+        return this.jFS.generateSymbolNode(symbolNode);
     }
     
 }
