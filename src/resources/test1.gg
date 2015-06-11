@@ -6,7 +6,7 @@ void Popeye(int x, bool y, KChain z){
     {
         print(a);
     }
-    print(i);
+    print(a);
 }
 
 bool Popeye2(int x, bool y, KChain z, char z1, munny z2){
@@ -15,22 +15,18 @@ bool Popeye2(int x, bool y, KChain z, char z1, munny z2){
     {
         print(a);
     }
-    print(i);
+    print(a);
     giff 1>2;
 }
 
-void Popeye3(){
+int Popeye3(){
 }
 
 void KingdomHearts(){
-    bool test,a,b,c,d,i;
-    int x = 2;
-    KChain asd = "hl";
-    print(a);
-    print(a);
-    Popeye(1+2, true, "Hello");
-    Popeye(x, test, asd,(a && "asd"));
-    Popeye3(true,2*2,true);
-    Popeye4();
-    test = "oi";
+    int i;
+    Popeye();
+    i = Popeye();
+    if ( (Popeye() + 3) + 17 * 14 ){
+
+    }
 }
