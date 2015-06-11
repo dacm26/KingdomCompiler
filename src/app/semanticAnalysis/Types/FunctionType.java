@@ -29,6 +29,23 @@ public class FunctionType extends Type {
         return Return;
     }
 
+    public int getReturnAsInt() {
+        switch (this.Return.toString()) {
+            case "int":
+                return 2;
+            case "char":
+                return 1;
+            case "double":
+                return 3;
+            case "boolean":
+                return 5;
+            case "String":
+                return 4;
+            default:
+                return -1;
+        }
+    }
+
     public String getParamsType() {
         StringBuilder sB = new StringBuilder();
         if (this.parameters.isEmpty()) {
@@ -45,7 +62,6 @@ public class FunctionType extends Type {
         }
         return sB.toString();
     }
-    
 
     @Override
     public Type getType() {

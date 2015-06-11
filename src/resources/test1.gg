@@ -4,6 +4,7 @@ void Popeye(int x, bool y, KChain z){
     int a,b,c,d;
     for (int i = 0; i < 10; i=i+1)
     {
+        int cu;
         print(a);
     }
     print(a);
@@ -13,20 +14,21 @@ bool Popeye2(int x, bool y, KChain z, char z1, munny z2){
     int a,b,c,d;
     for (int i = 0; i < 10; i=i+1)
     {
+        int cucu;
         print(a);
     }
     print(a);
-    giff 1>2;
+    giff true;
 }
 
 int Popeye3(){
+    KChain snu = "asd";
 }
 
 void KingdomHearts(){
-    int i;
-    Popeye();
-    i = Popeye();
-    if ( (Popeye() + 3) + 17 * 14 ){
-
+    bool i;
+    i = Popeye2(1,true,"Hello",'a',2.2);
+    if(i){
+        int x = Popeye3()*2+1;
     }
 }

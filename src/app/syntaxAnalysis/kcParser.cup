@@ -10,10 +10,10 @@ import AST.equalityExpression.*;
 import AST.relationalExpression.*;
 import AST.additiveExpression.*;
 import AST.multiplicativeExpression.*;
-import AST.functionCallsExpression.*;
 import AST.expression.*;
 import AST.basicExpression.*;
 import AST.functionCallsExpression.*;
+import AST.functionCallsDeclaration.*;
 import AST.ioExpressions.*;
 import AST.assignmentExpression.*;
 import AST.declaration.*;
@@ -139,10 +139,8 @@ non terminal statementList statement_list;
 non terminal Statement statement;
 non terminal Declaration declaration;
 non terminal ioExpressions io_expressions;
-//non terminal functionCallsExpression function_calls_expression;
-//non terminal functionCallsDeclaration function_calls_Declaration
-non terminal function_calls_expression;
-non terminal function_calls_declaration;
+non terminal functionCallsExpression function_calls_expression;
+non terminal functionCallsDeclaration function_calls_declaration;
 non terminal identifierList identifier_list;
 non terminal parameterList parameter_list;
 non terminal primaryExpression primary_expression;
@@ -156,7 +154,7 @@ precedence left MUL, DIV;
 precedence nonassoc ELSE;
 
 /*AST Declaration*/
-ast_tree_declaration ::= main_function_declaration:mFD        										//{: RESULT = new ATD_ASTTreeDeclaration(mFD); :}                                                                      
+ast_tree_declaration ::= main_function_declaration:mFD        										{: RESULT = new ATD_ASTTreeDeclaration(mFD); :}                                                                      
 	;
 
 /*Main Function Declaration*/
@@ -227,7 +225,7 @@ statement ::=   compound_statement:cS                                           
 	| iteration_statement:iS                                           								{: RESULT = new S_IterationStatement(iS); :}	//Done
 	| declaration:d                                                                                 {: RESULT = new S_Declaration(d); :}			//Done
 	| io_expressions:iE                                                                             {: RESULT = new S_IOExpression(iE); :}			//Done
-	| function_calls_declaration:fcd                                                                //{: RESULT = new S_FCd(fce); :}					//Done				
+	| function_calls_declaration:fcd                                                                {: RESULT = new S_FCD(fcd); :}					//Done				
 	| jump_iteration_statement:jis																	{: RESULT = new S_JIS(jis); :}					//Not Today
 	| jump_function_statement:jfs																	{: RESULT = new S_JFS(jfs); :}					//Not Today
 	;
@@ -326,13 +324,13 @@ io_expressions ::= PRINT OPAR STRINGCONTENT:stringContent CPAR END              
     ;
 
 /*Function calls*/
-function_calls_declaration ::= ID:id OPAR CPAR END 													//{: RESULT = new FCE_FunctionCallsDeclaration(id); :}
-	| ID:id OPAR parameter_list:pL CPAR END 														//{: RESULT = new FCE_FunctionCallsDeclaration(id,pL); :} 																						
+function_calls_declaration ::= ID:id OPAR CPAR END 													{: RESULT = new FCE_FunctionCallsDeclaration(id); :}
+	| ID:id OPAR parameter_list:pL CPAR END 														{: RESULT = new FCE_FunctionCallsDeclaration(id,pL); :} 																						
 	;
 
 /*Function calls*/
-function_calls_expression ::= ID:id OPAR CPAR	 													//{: RESULT = new FCE_FunctionCallsExpression(id); :}
-	| ID:id OPAR parameter_list:pL CPAR 															//{: RESULT = new FCE_FunctionCallsExpression(id,pL); :}
+function_calls_expression ::= ID:id OPAR CPAR	 													{: RESULT = new FCE_FunctionCallsExpression(id); :}
+	| ID:id OPAR parameter_list:pL CPAR 															{: RESULT = new FCE_FunctionCallsExpression(id,pL); :}
 	;
 
 /*Expression*/
@@ -341,7 +339,7 @@ expression ::= conditional_expression:cE															{: RESULT = new Expressio
 
 /*Basic Expressions*/
 basic_expression ::= primary_expression:pE                           								{: RESULT = new BE_primaryExpression(pE); :}
-	| function_calls_expression:fCE
+	| function_calls_expression:fCE 																{: RESULT = new BE_FCE(fCE); :}
     ;
 
 

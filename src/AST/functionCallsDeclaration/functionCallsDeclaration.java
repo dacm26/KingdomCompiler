@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AST.functionCallsExpression;
+package AST.functionCallsDeclaration;
 
 import app.semanticAnalysis.Table.Node;
 
@@ -11,6 +11,7 @@ import app.semanticAnalysis.Table.Node;
  *
  * @author C5220701
  */
-abstract public class functionCallsExpression {
-    abstract public int generateSymbolNode(Node symbolNode);
+abstract public class functionCallsDeclaration {
+    abstract public void printNode();
+    abstract public void generateSymbolNode(Node symbolNode);
 }

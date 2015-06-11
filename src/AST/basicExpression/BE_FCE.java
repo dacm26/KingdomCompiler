@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AST.statement;
+package AST.basicExpression;
 
-import AST.functionCallsExpression.*;
+import AST.functionCallsExpression.functionCallsExpression;
 import app.semanticAnalysis.Table.Node;
 
 /**
  *
- * @author Daniel
+ * @author C5220701
  */
-public class S_FCE extends Statement{
+public class BE_FCE extends basicExpression{
+    
     private functionCallsExpression fCE;
 
-    public S_FCE(functionCallsExpression fCE) {
+    public BE_FCE(functionCallsExpression fCE) {
         this.fCE = fCE;
     }
 
@@ -26,14 +27,17 @@ public class S_FCE extends Statement{
     public void setfCE(functionCallsExpression fCE) {
         this.fCE = fCE;
     }
-
+    
+    
+    
     @Override
     public void printNode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void generateSymbolNode(Node symbolNode) {
-        this.fCE.generateSymbolNode(symbolNode);
+    public int getType(Node symbolTable) {
+        return fCE.generateSymbolNode(symbolTable);
     }
     
 }
