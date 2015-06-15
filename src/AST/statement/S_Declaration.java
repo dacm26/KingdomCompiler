@@ -6,6 +6,7 @@
 package AST.statement;
 
 import AST.declaration.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 /**
  *
@@ -24,6 +25,11 @@ public class S_Declaration extends Statement{
 
     public void setDeclaration(Declaration declaration) {
         this.declaration = declaration;
+    }
+    
+    @Override
+    public void generateIC(Generate gc){
+        
     }
     
     @Override

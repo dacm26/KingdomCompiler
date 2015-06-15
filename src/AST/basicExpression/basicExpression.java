@@ -5,6 +5,7 @@
  */
 
 package AST.basicExpression;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -14,4 +15,5 @@ import app.semanticAnalysis.Table.Node;
 abstract public class basicExpression {
     abstract public void printNode();
     abstract public int getType(Node symbolTable);
+    abstract public void generateIC(Generate gc);
 }

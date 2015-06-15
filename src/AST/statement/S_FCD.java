@@ -6,6 +6,7 @@
 package AST.statement;
 
 import AST.functionCallsDeclaration.functionCallsDeclaration;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -13,18 +14,26 @@ import app.semanticAnalysis.Table.Node;
  * @author Daniel
  */
 public class S_FCD extends Statement{
-    private functionCallsDeclaration fCE;
+    private functionCallsDeclaration fCD;
+    private Generate generateCode;
+    private Node symbolN;
 
-    public S_FCD(functionCallsDeclaration fCE) {
-        this.fCE = fCE;
+    public S_FCD(functionCallsDeclaration fCD) {
+        this.fCD = fCD;
     }
 
-    public functionCallsDeclaration getfCE() {
-        return fCE;
+    public functionCallsDeclaration getfCD() {
+        return fCD;
     }
 
-    public void setfCE(functionCallsDeclaration fCE) {
-        this.fCE = fCE;
+    public void setfCD(functionCallsDeclaration fCD) {
+        this.fCD = fCD;
+    }
+    
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
+        this.fCD.generateIC(this.generateCode, this.symbolN);
     }
 
     @Override
@@ -33,7 +42,8 @@ public class S_FCD extends Statement{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-        this.fCE.generateSymbolNode(symbolNode);
+        this.symbolN = symbolNode;
+        this.fCD.generateSymbolNode(symbolNode);
     }
     
 }

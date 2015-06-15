@@ -6,6 +6,7 @@
 package AST.statement;
 
 import AST.ioExpressions.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 /**
  *
@@ -26,6 +27,11 @@ public class S_IOExpression extends Statement{
         this.ioExp = ioExp;
     }
 
+    @Override
+    public void generateIC(Generate gc){
+        
+    }
+    
     @Override
     public void printNode() {
     }

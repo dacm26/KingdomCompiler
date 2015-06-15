@@ -6,6 +6,7 @@
 package AST.statement;
 
 import AST.jumpIterationStatement.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 /**
  *
@@ -27,6 +28,11 @@ public class S_JIS extends Statement{
         this.jIS = jIS;
     }
 
+    @Override
+    public void generateIC(Generate gc){
+        
+    }
+    
     @Override
     public void printNode() {
     }

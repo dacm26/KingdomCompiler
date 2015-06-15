@@ -12,4 +12,5 @@ package AST.astTreeDeclaration;
 abstract public class astTreeDeclaration {
     abstract public void printNode();
     abstract public void generateSymbolNode();
+    abstract public void generateIC();
 }

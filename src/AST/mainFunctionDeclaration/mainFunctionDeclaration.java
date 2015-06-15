@@ -7,6 +7,7 @@
 package AST.mainFunctionDeclaration;
 
 import app.semanticAnalysis.Table.Node;
+import app.intermediateCode.Generate;
 
 /**
  *
@@ -15,4 +16,5 @@ import app.semanticAnalysis.Table.Node;
 abstract public class mainFunctionDeclaration {
     abstract public void printNode();
     abstract public void generateSymbolNode(Node symbolNode);
+    abstract public void generateIC(Generate gc);
 }

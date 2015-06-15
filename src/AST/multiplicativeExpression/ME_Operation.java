@@ -6,6 +6,7 @@
 
 package AST.multiplicativeExpression;
 import AST.basicExpression.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 /**
  *
@@ -15,6 +16,7 @@ public class ME_Operation extends multiplicativeExpression{
     private multiplicativeExpression mE;
     private String operator;
     private basicExpression bE;
+    private Generate generateCode;
 
     public ME_Operation(multiplicativeExpression mE, String operator, basicExpression bE) {
         this.mE = mE;
@@ -44,6 +46,11 @@ public class ME_Operation extends multiplicativeExpression{
 
     public void setbE(basicExpression bE) {
         this.bE = bE;
+    }
+    
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
     }
 
     @Override

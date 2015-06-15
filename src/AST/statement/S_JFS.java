@@ -6,6 +6,7 @@
 package AST.statement;
 
 import AST.jumpFunctionStatement.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 /**
  *
@@ -14,6 +15,7 @@ import app.semanticAnalysis.Table.Node;
 public class S_JFS extends Statement{
     
     private jumpFunctionStatement jFS;
+    private Generate generateCode;
 
     public S_JFS(jumpFunctionStatement jFS) {
         this.jFS = jFS;
@@ -27,7 +29,11 @@ public class S_JFS extends Statement{
         this.jFS = jFS;
     }
     
-    
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
+        this.jFS.generateIC(this.generateCode);
+    }
     
     @Override
     public void printNode() {

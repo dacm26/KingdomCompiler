@@ -6,6 +6,7 @@
 
 package AST.multiplicativeExpression;
 
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -15,5 +16,5 @@ import app.semanticAnalysis.Table.Node;
 abstract public class multiplicativeExpression {
     abstract public void printNode();
     abstract public int getType(Node symbolTable);
-    
+    abstract public void generateIC(Generate gc);
 }

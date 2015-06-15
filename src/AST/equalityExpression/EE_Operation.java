@@ -6,6 +6,7 @@
 
 package AST.equalityExpression;
 import AST.relationalExpression.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 /**
  *
@@ -15,6 +16,7 @@ public class EE_Operation extends equalityExpression{
     private equalityExpression eE;
     private String operator;
     private relationalExpression rE;
+    private Generate generateCode;
 
     public EE_Operation(equalityExpression eE, String operator, relationalExpression rE) {
         this.eE = eE;
@@ -44,6 +46,11 @@ public class EE_Operation extends equalityExpression{
 
     public void setrE(relationalExpression rE) {
         this.rE = rE;
+    }
+    
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
     }
 
     @Override

@@ -6,6 +6,7 @@
 package AST.functionCallsDeclaration;
 
 import AST.parameterList.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 import app.semanticAnalysis.Table.Row;
 import app.semanticAnalysis.Types.FunctionType;
@@ -16,17 +17,18 @@ import java.util.ArrayList;
  *
  * @author C5220701
  */
-public class FCE_FunctionCallsDeclaration extends functionCallsDeclaration {
+public class FCD_FunctionCallsDeclaration extends functionCallsDeclaration {
 
     private String id;
     private parameterList pL;
+    private Generate generateCode;
 
-    public FCE_FunctionCallsDeclaration(String id, parameterList pL) {
+    public FCD_FunctionCallsDeclaration(String id, parameterList pL) {
         this.id = id;
         this.pL = pL;
     }
 
-    public FCE_FunctionCallsDeclaration(String id) {
+    public FCD_FunctionCallsDeclaration(String id) {
         this.id = id;
         this.pL = null;
     }
@@ -47,6 +49,18 @@ public class FCE_FunctionCallsDeclaration extends functionCallsDeclaration {
         this.pL = pL;
     }
 
+    @Override
+    public void generateIC(Generate gc, Node symbolNode){
+        this.generateCode = gc;
+        if (this.pL == null){
+            this.generateCode.generateFunctionCall(this.id, 0);
+        } else {
+            this.pL.generateIC(this.generateCode);
+            ArrayList<String> novo = this.convertToString(this.pL.getTypes(symbolNode));
+            this.generateCode.generateFunctionCall(this.id, novo.size());
+        }
+    }
+    
     @Override
     public void printNode() {
         System.out.println("FCE_FunctionCallsExpression");

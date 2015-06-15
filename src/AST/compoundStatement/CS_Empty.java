@@ -6,6 +6,7 @@
 
 package AST.compoundStatement;
 
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -17,6 +18,11 @@ public class CS_Empty extends compoundStatement{
     public CS_Empty() {
     }
 
+    @Override
+    public void generateIC(Generate gc){
+        
+    }
+    
     @Override
     public void printNode() {
         System.out.println("CS_Empty");

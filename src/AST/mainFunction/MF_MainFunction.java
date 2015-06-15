@@ -7,6 +7,7 @@ package AST.mainFunction;
 
 import AST.functionTypeSpecifier.*;
 import AST.compoundStatement.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Row;
 import app.semanticAnalysis.Table.Node;
 import app.semanticAnalysis.Types.FunctionType;
@@ -22,6 +23,7 @@ public class MF_MainFunction extends mainFunction {
 
     private functionTypeSpecifier tS;
     private compoundStatement cS;
+    private Generate generateCode;
 
     public MF_MainFunction(functionTypeSpecifier tS, compoundStatement cS) {
         this.tS = tS;
@@ -44,6 +46,13 @@ public class MF_MainFunction extends mainFunction {
         this.cS = cS;
     }
 
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
+        this.generateCode.generateTag("main");
+        this.cS.generateIC(this.generateCode);
+    }
+    
     @Override
     public void generateSymbolNode(Node symbolNode) {
         /*Function Type Specifier*/

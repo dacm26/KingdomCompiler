@@ -7,12 +7,14 @@
 package AST.mainFunctionDeclaration;
 import AST.mainFunction.*;
 import app.semanticAnalysis.Table.Node;
+import app.intermediateCode.Generate;
 /**
  *
  * @author Daniel
  */
 public class MFD_MainFunction extends mainFunctionDeclaration{
     private mainFunction mF;
+    private Generate generateCode;
 
     public MFD_MainFunction(mainFunction mF) {
         this.mF = mF;
@@ -26,7 +28,11 @@ public class MFD_MainFunction extends mainFunctionDeclaration{
         this.mF = mF;
     }
 
-
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;        
+        this.mF.generateIC(generateCode);
+    }
 
     @Override
     public void printNode() {
@@ -34,7 +40,6 @@ public class MFD_MainFunction extends mainFunctionDeclaration{
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
-
         this.mF.generateSymbolNode(symbolNode);
     }
     

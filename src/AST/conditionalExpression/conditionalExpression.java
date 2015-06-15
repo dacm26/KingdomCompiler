@@ -5,6 +5,7 @@
  */
 
 package AST.conditionalExpression;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 import java.util.ArrayList;
 
@@ -15,4 +16,5 @@ import java.util.ArrayList;
 abstract public class conditionalExpression {
   abstract public void printNode();
   abstract public ArrayList<Integer> getType(Node symbolTable);
+  abstract public void generateIC(Generate gc);
 }

@@ -6,6 +6,7 @@
 package AST.mainFunctionDeclaration;
 
 import AST.functionDefinition.functionDefinition;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -15,6 +16,7 @@ import app.semanticAnalysis.Table.Node;
 public class MFD_MainFunctionAndOthers extends mainFunctionDeclaration{
     private functionDefinition fD;
     private mainFunctionDeclaration mFD;
+    private Generate generateCode;
 
     public MFD_MainFunctionAndOthers(functionDefinition fD, mainFunctionDeclaration mFD) {
         this.fD = fD;
@@ -37,7 +39,13 @@ public class MFD_MainFunctionAndOthers extends mainFunctionDeclaration{
         this.mFD = mFD;
     }
     
-    
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
+        this.fD.generateIC(generateCode); 
+        this.mFD.generateIC(generateCode);
+               
+    }
 
     @Override
     public void printNode() {

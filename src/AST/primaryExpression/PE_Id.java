@@ -6,6 +6,7 @@
 
 package AST.primaryExpression;
 
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -14,6 +15,7 @@ import app.semanticAnalysis.Table.Node;
  */
 public class PE_Id extends primaryExpression{
     private String id;
+    private Generate generateCode;
 
     public PE_Id(String id) {
         this.id = id;
@@ -27,6 +29,11 @@ public class PE_Id extends primaryExpression{
         this.id = id;
     }
 
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
+    }
+    
     @Override
     public void printNode() {
         System.out.println("PE_Id");

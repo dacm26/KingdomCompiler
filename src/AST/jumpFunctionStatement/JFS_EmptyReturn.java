@@ -5,6 +5,7 @@
  */
 package AST.jumpFunctionStatement;
 
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -13,7 +14,14 @@ import app.semanticAnalysis.Table.Node;
  */
 public class JFS_EmptyReturn extends jumpFunctionStatement{
 
+    private Generate generateCode;
+    
     public JFS_EmptyReturn() {
+    }
+    
+    @Override
+    public void generateIC(Generate gc){
+       this.generateCode = gc;
     }
     
     @Override

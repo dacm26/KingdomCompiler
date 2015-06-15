@@ -6,6 +6,7 @@
 
 package AST.statement;
 import AST.compoundStatement.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 /**
  *
@@ -24,6 +25,11 @@ public class S_CompoundStatement extends Statement{
 
     public void setcS(compoundStatement cS) {
         this.cS = cS;
+    }
+    
+    @Override
+    public void generateIC(Generate gc){
+        this.cS.generateIC(gc);
     }
 
     @Override

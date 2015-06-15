@@ -6,6 +6,7 @@
 
 package AST.statementList;
 import AST.statement.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 /**
  *
@@ -13,6 +14,7 @@ import app.semanticAnalysis.Table.Node;
  */
 public class SL_Statement extends statementList{
     private Statement stm;
+    private Generate generateCode;
 
     public SL_Statement(Statement stm) {
         this.stm = stm;
@@ -26,6 +28,12 @@ public class SL_Statement extends statementList{
         this.stm = stm;
     }
 
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
+        this.stm.generateIC(this.generateCode); 
+    }
+    
     @Override
     public void printNode() {
         System.out.println("SL_Statement");

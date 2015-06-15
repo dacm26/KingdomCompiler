@@ -6,6 +6,7 @@
 
 package AST.primaryExpression;
 
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -23,6 +24,7 @@ public class PE_Content extends primaryExpression{
         */
     private Object content;
     private int type;
+    private Generate generateCode;
     
     public PE_Content(Object content, int type) {
         this.content = content;
@@ -37,7 +39,10 @@ public class PE_Content extends primaryExpression{
         this.type = type;
     }
     
-    
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
+    }
 
     public Object getContent() {
         return content;

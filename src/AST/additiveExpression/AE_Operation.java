@@ -6,6 +6,7 @@
 package AST.additiveExpression;
 
 import AST.multiplicativeExpression.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -17,6 +18,7 @@ public class AE_Operation extends additiveExpression {
     private additiveExpression aE;
     private String operator;
     private multiplicativeExpression mE;
+    private Generate generateCode;
 
     public AE_Operation(additiveExpression aE, String operator, multiplicativeExpression mE) {
         this.aE = aE;
@@ -48,6 +50,11 @@ public class AE_Operation extends additiveExpression {
         this.mE = mE;
     }
 
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
+    }
+    
     @Override
     public void printNode() {
         System.out.println("AE_Operation");

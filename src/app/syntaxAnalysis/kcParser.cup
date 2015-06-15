@@ -324,8 +324,8 @@ io_expressions ::= PRINT OPAR STRINGCONTENT:stringContent CPAR END              
     ;
 
 /*Function calls*/
-function_calls_declaration ::= ID:id OPAR CPAR END 													{: RESULT = new FCE_FunctionCallsDeclaration(id); :}
-	| ID:id OPAR parameter_list:pL CPAR END 														{: RESULT = new FCE_FunctionCallsDeclaration(id,pL); :} 																						
+function_calls_declaration ::= ID:id OPAR CPAR END 													{: RESULT = new FCD_FunctionCallsDeclaration(id); :}
+	| ID:id OPAR parameter_list:pL CPAR END 														{: RESULT = new FCD_FunctionCallsDeclaration(id,pL); :} 																						
 	;
 
 /*Function calls*/

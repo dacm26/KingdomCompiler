@@ -6,6 +6,7 @@
 
 package AST.conditionalExpression;
 import AST.equalityExpression.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 import java.util.ArrayList;
 /**
@@ -14,6 +15,7 @@ import java.util.ArrayList;
  */
 public class CE_equalityExpression extends conditionalExpression{
     private equalityExpression eE;
+    private Generate generateCode;
 
     public CE_equalityExpression(equalityExpression eE) {
         this.eE = eE;
@@ -25,6 +27,11 @@ public class CE_equalityExpression extends conditionalExpression{
 
     public void seteE(equalityExpression eE) {
         this.eE = eE;
+    }
+    
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
     }
 
     @Override

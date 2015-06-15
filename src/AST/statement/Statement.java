@@ -6,6 +6,7 @@
 
 package AST.statement;
 
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -15,4 +16,5 @@ import app.semanticAnalysis.Table.Node;
 abstract public class Statement {
     abstract public void printNode();
     abstract public void generateSymbolNode(Node symbolNode);
+    abstract public void generateIC(Generate gc);
 }

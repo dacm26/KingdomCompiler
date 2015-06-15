@@ -6,6 +6,7 @@
 package AST.parameterList;
 
 import AST.expression.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
  */
 public class PL_Expression extends parameterList{
     private Expression exp;
+    private Generate generateCode;
 
     public PL_Expression(Expression exp) {
         this.exp = exp;
@@ -26,6 +28,12 @@ public class PL_Expression extends parameterList{
 
     public void setExp(Expression exp) {
         this.exp = exp;
+    }
+    
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
+        this.exp.generateIC(this.generateCode);
     }
 
     @Override

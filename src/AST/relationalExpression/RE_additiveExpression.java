@@ -6,6 +6,7 @@
 
 package AST.relationalExpression;
 import AST.additiveExpression.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 /**
  *
@@ -13,6 +14,7 @@ import app.semanticAnalysis.Table.Node;
  */
 public class RE_additiveExpression extends relationalExpression{
     private additiveExpression aE;
+    private Generate generateCode;
 
     public RE_additiveExpression(additiveExpression aE) {
         this.aE = aE;
@@ -24,6 +26,11 @@ public class RE_additiveExpression extends relationalExpression{
 
     public void setaE(additiveExpression aE) {
         this.aE = aE;
+    }
+    
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
     }
 
     @Override

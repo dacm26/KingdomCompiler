@@ -6,6 +6,7 @@
 package AST.basicExpression;
 
 import AST.functionCallsExpression.functionCallsExpression;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -15,6 +16,7 @@ import app.semanticAnalysis.Table.Node;
 public class BE_FCE extends basicExpression{
     
     private functionCallsExpression fCE;
+    private Generate generateCode;
 
     public BE_FCE(functionCallsExpression fCE) {
         this.fCE = fCE;
@@ -28,7 +30,10 @@ public class BE_FCE extends basicExpression{
         this.fCE = fCE;
     }
     
-    
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
+    }
     
     @Override
     public void printNode() {

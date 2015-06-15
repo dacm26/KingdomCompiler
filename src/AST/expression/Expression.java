@@ -6,6 +6,7 @@
 package AST.expression;
 
 import AST.conditionalExpression.conditionalExpression;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 import java.util.ArrayList;
 
@@ -54,6 +55,10 @@ public class Expression {
         }else{
             return -1;
         }
+    }
+    
+    public void generateIC(Generate gc){
+        
     }
 
 }

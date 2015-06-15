@@ -12,6 +12,7 @@ import AST.jumpFunctionStatement.JFS_Return;
 import AST.statement.S_JFS;
 import AST.statementList.SL_StatementList;
 import AST.typeParameterList.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 import app.semanticAnalysis.Table.Row;
 import app.semanticAnalysis.Types.FunctionType;
@@ -29,6 +30,7 @@ public class FD_FunctionDefinition extends functionDefinition {
     private String id;
     private typeParameterList pL;
     private compoundStatement cS;
+    private Generate generateCode;
 
     public FD_FunctionDefinition(functionTypeSpecifier type, String id, compoundStatement cS) {
         this.type = type;
@@ -76,6 +78,13 @@ public class FD_FunctionDefinition extends functionDefinition {
         this.cS = cS;
     }
 
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
+        this.generateCode.addFunction(id);
+        this.cS.generateIC(this.generateCode);
+    }
+    
     @Override
     public void printNode() {
     }

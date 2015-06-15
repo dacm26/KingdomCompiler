@@ -8,6 +8,7 @@ import AST.mainFunctionDeclaration.*;
 import app.semanticAnalysis.Table.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import app.intermediateCode.*;
 /**
  *
  * @author C5220701
@@ -15,11 +16,14 @@ import java.util.logging.Logger;
 public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
     private mainFunctionDeclaration mFD;
     private Node symbolNode;
+    private Generate generateCode;
 
     public ATD_ASTTreeDeclaration(mainFunctionDeclaration mFD) {
         this.mFD = mFD;
         this.symbolNode= new Node();
+        this.generateCode = new Generate();        
         this.generateSymbolNode();
+        this.generateIC();
     }
 
     public Node getSymbolNode() {
@@ -38,6 +42,18 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
     public void setmFD(mainFunctionDeclaration mFD) {
         this.mFD = mFD;
     }
+    
+    @Override
+    public void generateIC(){
+        this.mFD.generateIC(generateCode);
+        try {
+            Thread.sleep(2500);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+        this.generateCode.printIC();
+    }
+    
     @Override
     public void generateSymbolNode(){
         this.mFD.generateSymbolNode(symbolNode);
@@ -46,7 +62,7 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
         } catch (InterruptedException ex) {
             Logger.getLogger(ATD_ASTTreeDeclaration.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.symbolNode.printTables();
+        this.generateCode.printIC();
     }
 
     @Override

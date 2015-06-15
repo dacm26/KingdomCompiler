@@ -6,6 +6,7 @@
 package AST.jumpFunctionStatement;
 
 import AST.conditionalExpression.conditionalExpression;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -14,6 +15,7 @@ import app.semanticAnalysis.Table.Node;
  */
 public class JFS_Return extends jumpFunctionStatement{
     private conditionalExpression cS;
+    private Generate generateCode;
 
     public JFS_Return(conditionalExpression cS) {
         this.cS = cS;
@@ -25,6 +27,12 @@ public class JFS_Return extends jumpFunctionStatement{
 
     public void setcS(conditionalExpression cS) {
         this.cS = cS;
+    }
+    
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
+        this.cS.generateIC(this.generateCode);
     }
     
     @Override

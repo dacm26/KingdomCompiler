@@ -6,6 +6,7 @@
 package AST.primaryExpression;
 
 import AST.expression.Expression;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -14,6 +15,7 @@ import app.semanticAnalysis.Table.Node;
  */
 public class PE_Expression extends primaryExpression{
     private Expression expression;
+    private Generate generateCode;
 
     public PE_Expression(Expression expression) {
         this.expression = expression;
@@ -25,6 +27,11 @@ public class PE_Expression extends primaryExpression{
 
     public void setExpression(Expression expression) {
         this.expression = expression;
+    }
+    
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
     }
 
     @Override

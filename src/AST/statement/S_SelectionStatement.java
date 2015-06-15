@@ -6,6 +6,7 @@
 
 package AST.statement;
 import AST.selectionStatement.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 /**
  *
@@ -26,6 +27,11 @@ public class S_SelectionStatement extends Statement{
         this.sS = sS;
     }
 
+    @Override
+    public void generateIC(Generate gc){
+        
+    }
+    
     @Override
     public void printNode() {
         System.out.println("S_SelectionStatement");
