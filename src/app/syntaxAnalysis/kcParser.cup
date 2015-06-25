@@ -149,8 +149,11 @@ non terminal jumpFunctionStatement jump_function_statement ;
 
 
 /* Precedences */
+precedence right ASSIGN;
 precedence left ADD, MIN;
 precedence left MUL, DIV;
+precedence left GREATER, LESS;
+precedence left GREATEREQ, LESSEQ;
 precedence nonassoc ELSE;
 
 /*AST Declaration*/
@@ -262,7 +265,7 @@ variable_type_specifier ::= CHAR                                                
 	;
 
 /*Global Variable Declarations*/
-/*global_declaration ::= variable_type_specifier:vTS identifier_list:iL END      						{: RESULT = new GD_identifierList(vTS,iL);:}                             
+/*global_declaration ::= variable_type_specifier:vTS identifier_list:iL END      					{: RESULT = new GD_identifierList(vTS,iL);:}                             
 	| variable_type_specifier:vTS  ID:stringValue ASSIGN expression:exp END 						{: RESULT = new GD_Assign(vTS,stringValue,exp); :}
 	;
 */

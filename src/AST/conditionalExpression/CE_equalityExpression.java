@@ -15,10 +15,13 @@ import java.util.ArrayList;
  */
 public class CE_equalityExpression extends conditionalExpression{
     private equalityExpression eE;
+    private String stringContent;
+    private int result;
     private Generate generateCode;
 
     public CE_equalityExpression(equalityExpression eE) {
         this.eE = eE;
+        this.setStringContent();
     }
 
     public equalityExpression geteE() {
@@ -27,6 +30,26 @@ public class CE_equalityExpression extends conditionalExpression{
 
     public void seteE(equalityExpression eE) {
         this.eE = eE;
+    }
+
+    public void setStringContent(){
+        if (eE instanceof EE_relationalExpression){
+            EE_relationalExpression rEO = (EE_relationalExpression)eE;
+            this.stringContent = rEO.getStringContent();
+            this.result = rEO.getResult();
+        } else {
+            EE_Operation rEO = (EE_Operation)eE;
+            this.stringContent = rEO.getStringContent();
+            this.result = rEO.getResult();
+        }
+    }
+
+    public String getStringContent(){
+        return this.stringContent;
+    }
+
+    public int getResult(){
+        return result;
     }
     
     @Override

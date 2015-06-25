@@ -16,12 +16,15 @@ public class ME_Operation extends multiplicativeExpression{
     private multiplicativeExpression mE;
     private String operator;
     private basicExpression bE;
+    private int result;
+    private String stringContent;
     private Generate generateCode;
 
     public ME_Operation(multiplicativeExpression mE, String operator, basicExpression bE) {
         this.mE = mE;
         this.operator = operator;
         this.bE = bE;
+        this.setStringContent();
     }
 
     public multiplicativeExpression getmE() {
@@ -42,6 +45,55 @@ public class ME_Operation extends multiplicativeExpression{
 
     public basicExpression getbE() {
         return bE;
+    }
+
+    public void setStringContent(){       
+        if (mE instanceof ME_basicExpression){
+            BE_primaryExpression bEP = (BE_primaryExpression)bE;
+            String right = bEP.getStringContent();
+            String left = "";
+            ME_basicExpression mEB = (ME_basicExpression)mE;
+            left = mEB.getStringContent();  
+            this.stringContent = left + "" + this.operator + "" + right;
+            if (mEB.getResult() == Integer.MAX_VALUE || bEP.getResult() == Integer.MAX_VALUE){
+                if (operator == "*")
+                    this.result = Integer.parseInt(left) * Integer.parseInt(right);
+                else 
+                    this.result = Integer.parseInt(left) / Integer.parseInt(right);
+            } else {
+                if (operator == "*")
+                    this.result = mEB.getResult() * bEP.getResult();
+                else 
+                    this.result = mEB.getResult() / bEP.getResult();
+            }
+        } else {
+            System.out.println("hola");
+            BE_primaryExpression bEP = (BE_primaryExpression)bE;
+            String right = bEP.getStringContent();
+            String left = "";
+            ME_Operation mEB = (ME_Operation)mE;
+            left = mEB.getStringContent();  
+            this.stringContent = left + "" + this.operator + "" + right;
+            if (mEB.getResult() == Integer.MAX_VALUE){
+                if (operator == "*")
+                    this.result = mEB.getResult() * bEP.getResult();
+                else 
+                    this.result = mEB.getResult() / bEP.getResult();
+            } else {
+                if (operator == "*")
+                    this.result = mEB.getResult() * bEP.getResult();
+                else 
+                    this.result = mEB.getResult() / bEP.getResult();
+            }
+        }
+    }
+
+    public String getStringContent(){
+        return this.stringContent;
+    }
+
+    public int getResult(){
+        return result;
     }
 
     public void setbE(basicExpression bE) {

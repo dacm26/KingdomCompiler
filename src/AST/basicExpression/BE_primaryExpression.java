@@ -14,10 +14,13 @@ import app.semanticAnalysis.Table.Node;
  */
 public class BE_primaryExpression extends basicExpression{
     private primaryExpression pE;
+    private int result;
+    private String stringContent; 
     private Generate generateCode;
 
     public BE_primaryExpression(primaryExpression pE) {
         this.pE = pE;
+        this.setStringContent();
     }
 
     public primaryExpression getpE() {
@@ -26,6 +29,30 @@ public class BE_primaryExpression extends basicExpression{
 
     public void setpE(primaryExpression pE) {
         this.pE = pE;
+    }
+
+    public void setStringContent(){
+        if (pE instanceof PE_Content){
+            PE_Content pEC = (PE_Content)pE;
+            this.stringContent = pEC.stringContent();
+            this.result = Integer.MAX_VALUE;
+        } else if (pE instanceof PE_Id) {
+            PE_Id pEI = (PE_Id)pE;
+            this.stringContent = pEI.getId();
+            this.result = Integer.MAX_VALUE;
+        } else {
+            PE_Expression pEE = (PE_Expression)pE;
+            this.stringContent = pEE.getStringContent();
+            this.result = pEE.getResult();
+        }
+    }
+
+    public String getStringContent(){
+        return this.stringContent;
+    }
+
+    public int getResult(){
+        return result;
     }
     
     @Override

@@ -16,10 +16,13 @@ import app.semanticAnalysis.Table.Node;
 public class ME_basicExpression extends multiplicativeExpression {
 
     private basicExpression bE;
+    private String stringContent;
+    private int result;
     private Generate generateCode;
 
     public ME_basicExpression(basicExpression bE) {
         this.bE = bE;
+        this.setStringContent();
     }
 
     public basicExpression getbE() {
@@ -28,6 +31,28 @@ public class ME_basicExpression extends multiplicativeExpression {
 
     public void setbE(basicExpression bE) {
         this.bE = bE;
+    }
+
+    public void setStringContent(){
+        BE_primaryExpression bEP = (BE_primaryExpression) bE;
+        this.stringContent = bEP.getStringContent();
+        if (bEP.getResult() == Integer.MAX_VALUE){
+            if (stringContent != "false" && stringContent != "true"){
+                result = Integer.parseInt(stringContent);
+            } else {
+                result = (stringContent.equals("true"))?1:0;
+            }
+        } else {
+            result = bEP.getResult();
+        }
+    }
+
+    public int getResult(){
+        return result;
+    }
+
+    public String getStringContent(){
+        return this.stringContent;
     }
     
     @Override

@@ -14,6 +14,8 @@ import java.util.ArrayList;
  * @author Daniel
  */
 public class CE_Operation extends conditionalExpression{
+    private String stringContent;
+    private int result;
     private conditionalExpression cE;
     private String operator;
     private equalityExpression eE;
@@ -47,6 +49,54 @@ public class CE_Operation extends conditionalExpression{
 
     public void seteE(equalityExpression eE) {
         this.eE = eE;
+    }
+
+    public void setStringContent(){
+        String left = "";
+        int leftResult;
+        String right = "";
+        int rightResult;
+        if (eE instanceof EE_relationalExpression){
+            EE_relationalExpression eER = (EE_relationalExpression)eE;
+            right = eER.getStringContent();
+        } else {
+            EE_Operation eEO = (EE_Operation)eE;
+            right = eEO.getStringContent();
+        }
+        if (cE instanceof CE_equalityExpression){
+            CE_equalityExpression cEE = (CE_equalityExpression)cE;
+            left = cEE.getStringContent();
+            stringContent = left + "" + operator + "" + right;
+            switch(operator){
+                case "&&":{
+
+                    break;
+                }
+                case "||":{
+                    break;
+                }
+            }
+        } else {
+            CE_Operation cEE = (CE_Operation)cE;
+            left = cEE.getStringContent();
+            stringContent = left + "" + operator + "" + right;
+            switch(operator){
+                case "&&":{
+                    break;
+                }
+                case "||":{
+                    break;
+                }
+            }
+        }
+    }
+
+    public String getStringContent(){
+        return this.stringContent;
+    }
+
+    public int getResult(){
+        return result;
     }
     
     @Override

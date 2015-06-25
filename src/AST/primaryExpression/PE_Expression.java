@@ -15,10 +15,13 @@ import app.semanticAnalysis.Table.Node;
  */
 public class PE_Expression extends primaryExpression{
     private Expression expression;
+    private String stringContent;
+    private int result;
     private Generate generateCode;
 
     public PE_Expression(Expression expression) {
         this.expression = expression;
+        this.setStringContent();
     }
 
     public Expression getExpression() {
@@ -27,6 +30,19 @@ public class PE_Expression extends primaryExpression{
 
     public void setExpression(Expression expression) {
         this.expression = expression;
+    }
+
+    public void setStringContent(){
+        this.stringContent = expression.getStringContent();
+        this.result = expression.getResult();
+    }
+
+    public String getStringContent(){
+        return this.stringContent;
+    }
+
+    public int getResult(){
+        return this.result; 
     }
     
     @Override

@@ -38,6 +38,28 @@ public class PE_Content extends primaryExpression{
     public void setType(int type) {
         this.type = type;
     }
+
+    public String stringContent(){
+        switch(type){
+            case 1:{
+                return Character.toString((char)content);
+            }
+            case 2:{
+                return Integer.toString((int)content);
+            }
+            case 3:{
+                return Double.toString((double)content);
+            }
+            case 4:{
+                return (String)content;
+            }
+            case 5:{
+                return stringify((boolean)content);
+            }
+            default:
+                return "";
+        }
+    }
     
     @Override
     public void generateIC(Generate gc){
@@ -46,6 +68,10 @@ public class PE_Content extends primaryExpression{
 
     public Object getContent() {
         return content;
+    }
+    
+    public String stringify(boolean value) {
+        return value ? "true" : "false";
     }
 
     public void setContent(Object content) {

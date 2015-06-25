@@ -15,6 +15,8 @@ import app.semanticAnalysis.Table.Node;
 public class EE_Operation extends equalityExpression{
     private equalityExpression eE;
     private String operator;
+    private String stringContent;
+    private int result;
     private relationalExpression rE;
     private Generate generateCode;
 
@@ -22,6 +24,7 @@ public class EE_Operation extends equalityExpression{
         this.eE = eE;
         this.operator = operator;
         this.rE = rE;
+        this.setStringContent();
     }
 
     public equalityExpression geteE() {
@@ -46,6 +49,46 @@ public class EE_Operation extends equalityExpression{
 
     public void setrE(relationalExpression rE) {
         this.rE = rE;
+    }
+    public void setStringContent(){
+        String right = "";
+        int rightResult;
+        String left = "";
+        int leftResult;
+        if (rE instanceof RE_additiveExpression){
+            RE_additiveExpression rEO = (RE_additiveExpression)rE;
+            right = rEO.getStringContent();
+        } else {
+            RE_Operation rEO = (RE_Operation)rE;
+            right = rEO.getStringContent();
+        }
+        if(eE instanceof EE_relationalExpression){
+            EE_relationalExpression eER = (EE_relationalExpression)eE;
+            left = eER.getStringContent();
+            this.stringContent = left + "" + operator + "" + right;
+            switch (operator){
+                case "==":{
+                    this.result = (Integer.parseInt(left) == Integer.parseInt(right))?1:0;
+                    break;
+                }
+                case "!=":{
+                    this.result = (Integer.parseInt(left) != Integer.parseInt(right))?1:0;
+                    break;
+                }
+            }
+        } else {
+            EE_Operation eEO = (EE_Operation)eE;
+            this.stringContent = left + "" + operator + "" + right;
+            this.result = eEO.getResult();
+        }
+    }
+
+    public String getStringContent(){
+        return this.stringContent;
+    }
+
+    public int getResult(){
+        return result;
     }
     
     @Override

@@ -16,14 +16,17 @@ import app.semanticAnalysis.Table.Node;
 public class AE_Operation extends additiveExpression {
 
     private additiveExpression aE;
+    private String stringContent;
     private String operator;
     private multiplicativeExpression mE;
     private Generate generateCode;
+    private int result;
 
     public AE_Operation(additiveExpression aE, String operator, multiplicativeExpression mE) {
         this.aE = aE;
         this.operator = operator;
         this.mE = mE;
+        this.setStringContent();
     }
 
     public additiveExpression getaE() {
@@ -48,6 +51,39 @@ public class AE_Operation extends additiveExpression {
 
     public void setmE(multiplicativeExpression mE) {
         this.mE = mE;
+    }
+
+    public void setStringContent(){
+        String right = "";
+        String left = "";
+        if (mE instanceof ME_basicExpression){
+            ME_basicExpression mEB = (ME_basicExpression)mE;
+            right = mEB.getStringContent();
+            result = mEB.getResult();
+        } else {
+            ME_Operation mEO = (ME_Operation)mE;
+            right = mEO.getStringContent();
+            result = mEO.getResult();
+        }
+        if (aE instanceof AE_multiplicativeExpression){
+            AE_multiplicativeExpression aEM = (AE_multiplicativeExpression)aE;
+            left = aEM.getStringContent();
+            this.stringContent = left + "" + operator + "" + right;
+            result = aEM.getResult() + result;
+        } else{
+            AE_Operation aEO = (AE_Operation)aE;
+            left = aEO.getStringContent();
+            this.stringContent = left + "" + operator + "" + right;
+            result = aEO.getResult() + result;
+        }
+    }
+
+    public int getResult(){
+        return this.result;
+    }
+
+    public String getStringContent(){
+        return this.stringContent;
     }
 
     @Override

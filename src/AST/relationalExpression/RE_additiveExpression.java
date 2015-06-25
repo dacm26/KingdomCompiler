@@ -14,10 +14,13 @@ import app.semanticAnalysis.Table.Node;
  */
 public class RE_additiveExpression extends relationalExpression{
     private additiveExpression aE;
+    private String stringContent;
+    private int result;
     private Generate generateCode;
 
     public RE_additiveExpression(additiveExpression aE) {
         this.aE = aE;
+        this.setStringContent();
     }
 
     public additiveExpression getaE() {
@@ -28,6 +31,26 @@ public class RE_additiveExpression extends relationalExpression{
         this.aE = aE;
     }
     
+    public void setStringContent(){
+        if (aE instanceof AE_Operation){
+            AE_Operation aEO = (AE_Operation)aE;
+            this.stringContent = aEO.getStringContent();
+            this.result = aEO.getResult();
+        } else {
+            AE_multiplicativeExpression aEM = (AE_multiplicativeExpression)aE;
+            this.stringContent = aEM.getStringContent();
+            this.result = aEM.getResult();
+        }
+    }
+
+    public String getStringContent(){
+        return this.stringContent;
+    }
+
+    public int getResult(){
+        return result;
+    }
+
     @Override
     public void generateIC(Generate gc){
         this.generateCode = gc;
