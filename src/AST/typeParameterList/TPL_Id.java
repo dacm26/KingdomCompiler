@@ -75,6 +75,7 @@ public class TPL_Id extends typeParameterList {
 
             default:
                 System.err.println("huh?");
+                symbolNode.setErrors();
                 return null;
         }
         a.add(pDT);

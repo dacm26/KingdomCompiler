@@ -111,6 +111,7 @@ public class IT_For extends iterationStatement {
             if (!symbolNode.search(id)) {
                 errorMsg = "Semantic Error: The id: \'" + id + "\' doesn't exists.";
                 System.err.println(errorMsg);
+                symbolNode.setErrors();
                 symbolNode.deleteLastNode();
                 return;
             } else {
@@ -120,10 +121,12 @@ public class IT_For extends iterationStatement {
                 if (type2 == -1) { //Si hay un error de operacion
                     errorMsg = "Semantic Error: Something is wrong with the Expression.";
                     System.err.println(errorMsg);
+                    symbolNode.setErrors();
                     symbolNode.deleteLastNode();
                     return;
                 } else if (type1 != type2) {//Si no son del mismo tipo
                     reportSemanticError(type1, type2);
+                    symbolNode.setErrors();
                     symbolNode.deleteLastNode();
                     return;
                 }
@@ -146,6 +149,7 @@ public class IT_For extends iterationStatement {
                 if (type3 != 5) {
                     errorMsg = "Semantic Error: Something is wrong with the Expression, need a Boolean.";
                     symbolNode.deleteLastNode();
+                    symbolNode.setErrors();
                     System.err.println(errorMsg);
                     return;
                 }
@@ -154,6 +158,7 @@ public class IT_For extends iterationStatement {
                     errorMsg = "Semantic Error: Something is wrong with the assignation.";
                     System.err.println(errorMsg);
                     symbolNode.deleteLastNode();
+                    symbolNode.setErrors();
                     return;
                 } else {
                     //No hay problema en la parte de arriba
@@ -168,6 +173,7 @@ public class IT_For extends iterationStatement {
                 //Ya existe una variable con ese id
                 errorMsg = "Semantic Error: The id: \'" + id + "\' already exists.";
                 System.err.println(errorMsg);
+                symbolNode.setErrors();
                 symbolNode.deleteLastNode();
             } else {
                 //No existe, toca verificar tipos para ver si se agrega a la tabla
@@ -176,6 +182,7 @@ public class IT_For extends iterationStatement {
                     //Error de operacion
                     errorMsg = "Semantic Error: Something is wrong with the Expression.";
                     System.err.println(errorMsg);
+                    symbolNode.setErrors();
                     symbolNode.deleteLastNode();
                     return;
                 } else if (type2 == initType) {
@@ -201,12 +208,14 @@ public class IT_For extends iterationStatement {
                         errorMsg = "Semantic Error: Something is wrong with the Expression, need a Boolean.";
                         symbolNode.deleteLastNode();
                         System.err.println(errorMsg);
+                        symbolNode.setErrors();
                         return;
                     }
                     //Si hay un problema en el ultimo argumento
                     if (!this.aE.generateSymbolNode(symbolNode.getSons().get(symbolNode.getSons().size() - 1))) {
                         errorMsg = "Semantic Error: Something is wrong with the assignation.";
                         System.err.println(errorMsg);
+                        symbolNode.setErrors();
                         symbolNode.deleteLastNode();
                         return;
                     } else {
@@ -217,6 +226,7 @@ public class IT_For extends iterationStatement {
                     //No son del mismo tipo
                     this.reportSemanticError(initType, type2);
                     symbolNode.deleteLastNode();
+                    symbolNode.setErrors();
                     return;
                 }
             }

@@ -21,7 +21,7 @@ public class CE_equalityExpression extends conditionalExpression{
 
     public CE_equalityExpression(equalityExpression eE) {
         this.eE = eE;
-        this.setStringContent();
+//        this.setStringContent();
     }
 
     public equalityExpression geteE() {

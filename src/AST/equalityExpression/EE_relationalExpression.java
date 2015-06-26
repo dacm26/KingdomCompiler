@@ -20,7 +20,7 @@ public class EE_relationalExpression extends equalityExpression{
 
     public EE_relationalExpression(relationalExpression rE) {
         this.rE = rE;
-        this.setStringContent();
+//        this.setStringContent();
     }
 
     public relationalExpression getrE() {

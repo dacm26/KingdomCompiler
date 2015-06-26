@@ -22,7 +22,7 @@ public class ME_basicExpression extends multiplicativeExpression {
 
     public ME_basicExpression(basicExpression bE) {
         this.bE = bE;
-        this.setStringContent();
+//        this.setStringContent();
     }
 
     public basicExpression getbE() {

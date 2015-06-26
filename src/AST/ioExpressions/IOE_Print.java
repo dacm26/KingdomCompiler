@@ -76,12 +76,14 @@ public class IOE_Print extends ioExpressions {
         if (!this.id.isEmpty() && !symbolNode.search(id)) {
             errorMsg = "Semantic Error: The id: \'" + id + "\' doesn\'t exists. Can't print an id that doesn\'t exists.";
             System.err.println(errorMsg);
+            symbolNode.setErrors();
             return;
         } 
         
         if (this.iL != null && !this.iL.validExpression(symbolNode)) {
             errorMsg = "Semantic Error: Something is wrong with the Expression. Can't print the expression. ";
             System.err.println(errorMsg);
+            symbolNode.setErrors();
             
         }
 

@@ -26,7 +26,7 @@ public class RE_Operation extends relationalExpression {
         this.rE = rE;
         this.operator = operator;
         this.aE = aE;
-        this.setStringContent();
+//        this.setStringContent();
     }
 
     public relationalExpression getrE() {

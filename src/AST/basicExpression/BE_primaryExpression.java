@@ -20,7 +20,7 @@ public class BE_primaryExpression extends basicExpression{
 
     public BE_primaryExpression(primaryExpression pE) {
         this.pE = pE;
-        this.setStringContent();
+//        this.setStringContent();
     }
 
     public primaryExpression getpE() {

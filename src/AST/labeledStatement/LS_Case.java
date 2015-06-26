@@ -67,6 +67,7 @@ public class LS_Case extends labeledStatement {
         int type1 = symbolNode.getNumericalIdType(id);
         if (this.contentType != type1) {
             reportSemanticError(this.contentType,type1);
+            symbolNode.setErrors();
             return false;
         }
         

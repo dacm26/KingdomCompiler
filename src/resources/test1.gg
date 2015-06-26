@@ -2,6 +2,7 @@ void PopeyeFuncion(int p, bool t){
 }
 
 void KingdomHearts(){
+        int x = "asd";
 	if ( 3>5 ){
         }
 }

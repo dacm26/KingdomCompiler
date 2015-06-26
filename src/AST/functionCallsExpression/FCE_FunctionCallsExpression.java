@@ -51,6 +51,7 @@ public class FCE_FunctionCallsExpression extends functionCallsExpression{
     public int generateSymbolNode(Node symbolNode) {
         if (!symbolNode.search(this.id)) {
             System.err.println("Semantic Error: The function \'"+this.id+"\' doesn't exists.");
+            symbolNode.setErrors();
             return -1;
         } else {
             if (this.pL == null) {
@@ -60,12 +61,14 @@ public class FCE_FunctionCallsExpression extends functionCallsExpression{
                     FunctionType type = (FunctionType) row.getType();
                     if (!type.getParameters().isEmpty()) {
                         System.err.println("Semantic Error: Params mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + "lambda");
+                        symbolNode.setErrors();
                         return -1;
                     }else{
                         return type.getReturnAsInt();
                     }
                 } else {
                     System.err.println("Semantic Error: Something is wrong with the call.");
+                    symbolNode.setErrors();
                     return -1;
                 }
             } else {
@@ -75,6 +78,7 @@ public class FCE_FunctionCallsExpression extends functionCallsExpression{
                     FunctionType type = (FunctionType) row.getType();
                     if (type.getParameters().isEmpty()) {
                         System.err.println("Semantic Error: Type mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + this.paramType(this.convertToString(this.pL.getTypes(symbolNode))));
+                        symbolNode.setErrors();
                         return -1;
                     } else {
                         //Comprobacion del envio de parametros
@@ -85,10 +89,12 @@ public class FCE_FunctionCallsExpression extends functionCallsExpression{
                         ArrayList<String> novo = this.convertToString(this.pL.getTypes(symbolNode));
                         if (type.getParameters().size() != novo.size()) {
                             System.err.println("Semantic Error: Type mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + this.paramType(novo));
+                            symbolNode.setErrors();
                             return -1;
                         } else {
                             if (!verifyParams(novo, type.getParameters())) {
                                 System.err.println("Semantic Error: Type mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + this.paramType(novo));
+                                symbolNode.setErrors();
                                 return -1;
                             }else{
                                 return type.getReturnAsInt();
@@ -99,6 +105,7 @@ public class FCE_FunctionCallsExpression extends functionCallsExpression{
                     }
                 } else {
                     System.err.println("Semantic Error: Something is wrong with the call.");
+                    symbolNode.setErrors();
                     return-1;
                 }
             }

@@ -48,6 +48,7 @@ public class SS_Switch extends selectionStatement {
         if (!symbolNode.search(id)) {
             errorMsg = "Semantic Error: The id: \'" + id + "\' doesn\'t exists";
             System.err.println(errorMsg);
+            symbolNode.setErrors();
             return;
         }
         Node novo = new Node();
@@ -55,6 +56,7 @@ public class SS_Switch extends selectionStatement {
         symbolNode.giffBaby(novo);
         if (!this.lS.generateSymbolNode(symbolNode.getSons().get(symbolNode.getSons().size()-1),id)) {
             symbolNode.deleteLastNode();
+            symbolNode.setErrors();
         }
     }
 

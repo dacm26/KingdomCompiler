@@ -26,7 +26,7 @@ public class AE_Operation extends additiveExpression {
         this.aE = aE;
         this.operator = operator;
         this.mE = mE;
-        this.setStringContent();
+//        this.setStringContent();
     }
 
     public additiveExpression getaE() {

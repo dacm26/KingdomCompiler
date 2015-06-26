@@ -20,7 +20,7 @@ public class AE_multiplicativeExpression extends additiveExpression{
 
     public AE_multiplicativeExpression(multiplicativeExpression mE) {
         this.mE = mE;
-        this.setStringContent();
+//        this.setStringContent();
     }
 
     public multiplicativeExpression getbE() {

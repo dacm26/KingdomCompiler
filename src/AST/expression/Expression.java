@@ -23,7 +23,7 @@ public class Expression {
 
     public Expression(conditionalExpression ConditionalExpression) {
         this.ConditionalExpression = ConditionalExpression;
-        this.setStringContent();
+//        this.setStringContent();
         System.out.println(stringContent);
         System.out.println(result);
     }

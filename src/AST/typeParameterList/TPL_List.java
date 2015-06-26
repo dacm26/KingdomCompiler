@@ -86,6 +86,7 @@ public class TPL_List extends typeParameterList {
 
                 default:
                     System.err.println("huh?");
+                    symbolNode.setErrors();
                     return null;
             }
             a.add(pDT);
@@ -93,6 +94,7 @@ public class TPL_List extends typeParameterList {
         } else {
             String errorMsg = "Semantic Error: The param: \'" + id + "\' already exists in the function.";
             System.err.println(errorMsg);
+            symbolNode.setErrors();
             return null;
         }
 

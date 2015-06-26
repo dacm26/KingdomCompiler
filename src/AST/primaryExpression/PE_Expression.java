@@ -21,7 +21,7 @@ public class PE_Expression extends primaryExpression{
 
     public PE_Expression(Expression expression) {
         this.expression = expression;
-        this.setStringContent();
+//        this.setStringContent();
     }
 
     public Expression getExpression() {

@@ -20,7 +20,7 @@ public class RE_additiveExpression extends relationalExpression{
 
     public RE_additiveExpression(additiveExpression aE) {
         this.aE = aE;
-        this.setStringContent();
+//        this.setStringContent();
     }
 
     public additiveExpression getaE() {
