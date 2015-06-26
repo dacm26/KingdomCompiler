@@ -2,14 +2,21 @@ void PopeyeFuncion(int p, bool t){
 }
 
 void KingdomHearts(){
-        KChain sd = "novo";
+        KChain n = "novo";
+        int x;
+        bool z;
+        char qq;
         print("texto1",n);
         print(n);
 	if ( 3>5 ){
+            int x1;
             print("texto2");
         }
         while(true){
             print("texto3");
+            munny d,i;
+            for(int hola=0; hola < 2; hola=hola+1){
+            }
         }
         print("texto4");
 }

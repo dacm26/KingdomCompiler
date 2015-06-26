@@ -63,17 +63,21 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
         } catch (InterruptedException ex) {
             Logger.getLogger(ATD_ASTTreeDeclaration.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Queue<String> e = symbolNode.getProgramStrings();
-        do{
-            System.out.println(e.poll());
-        }while(!e.isEmpty());
-        if (symbolNode.error()) {
+        
+        //symbolNode.printTables();
+        
+        if (symbolNode.error()) {//Se encontraron errores semanticos
             System.out.println("Can't proceed. Check the errors.");
         }else{
-            System.out.println("No sirve");
+            StringBuilder sB = new StringBuilder();
+            symbolNode.addMsgsFinalCode(sB);
+            symbolNode.addVariablsFinalCode(sB);
+            sB.append("\tzeroDouble:\t.double\t0.0\t");
+            System.out.println(sB.toString());
         }
         //this.generateCode.printIC();
     }
+   
 
     @Override
     public void printNode() {
