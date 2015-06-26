@@ -86,7 +86,10 @@ public class IOE_Print extends ioExpressions {
             symbolNode.setErrors();
             
         }
-
+        
+        if (!this.content.isEmpty()) {
+            symbolNode.addMsg(this.content);
+        }
         
 
     }

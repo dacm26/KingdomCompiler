@@ -9,6 +9,7 @@ import app.semanticAnalysis.Table.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import app.intermediateCode.*;
+import java.util.Queue;
 /**
  *
  * @author C5220701
@@ -58,12 +59,16 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
     public void generateSymbolNode(){
         this.mFD.generateSymbolNode(symbolNode);
         try {
-            Thread.sleep(2500);
+            Thread.sleep(1500);
         } catch (InterruptedException ex) {
             Logger.getLogger(ATD_ASTTreeDeclaration.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Queue<String> e = symbolNode.getProgramStrings();
+        do{
+            System.out.println(e.poll());
+        }while(!e.isEmpty());
         if (symbolNode.error()) {
-            System.err.println("Can't proceed. Check the errors.");
+            System.out.println("Can't proceed. Check the errors.");
         }else{
             System.out.println("No sirve");
         }

@@ -6,6 +6,8 @@
 package app.semanticAnalysis.Table;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  *
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 public class Node {
     
     private static boolean semanticErrors = false;
+    private static Queue<String> programStrings = new LinkedList<>();
 
     private Node imAmYourFather;
     private Table symbolTable;
@@ -40,6 +43,13 @@ public class Node {
         } else {
             return true;
         }
+    }
+    
+    public boolean addMsg(String msg){
+        return programStrings.add(msg);
+    }
+    public Queue<String> getProgramStrings(){
+        return programStrings;
     }
     
     public void setErrors(){
