@@ -19,4 +19,7 @@ public abstract class parameterList {
     abstract public boolean validExpression(Node symbolNode);
     abstract public ArrayList<Integer> getTypes(Node symbolNode);
     abstract public void generateIC(Generate gc);
+    abstract public void setLine(int line);
+    abstract public int getLine();
+    protected int line;
 }

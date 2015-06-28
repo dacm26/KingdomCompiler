@@ -3,16 +3,18 @@ void PopeyeFuncion(int p, bool t){
 
 void KingdomHearts(){
         KChain n = "novo";
+        int x = true;
+        bool z = 12;
+        char qq = true;
         int x;
-        bool z;
-        char qq;
         print("texto1",n);
         print(n);
+        print(a1);
 	if ( 3>5 ){
-            int x1;
+            int x;
             print("texto2");
         }
-        while(true){
+        while(z){
             print("texto3");
             munny d,i;
             for(int hola=0; hola < 2; hola=hola+1){

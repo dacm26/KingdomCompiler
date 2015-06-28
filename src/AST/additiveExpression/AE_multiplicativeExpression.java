@@ -68,4 +68,14 @@ public class AE_multiplicativeExpression extends additiveExpression{
         return this.mE.getType(symbolTable);
     }
     
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+    
 }

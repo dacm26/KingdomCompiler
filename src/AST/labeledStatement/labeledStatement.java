@@ -15,4 +15,7 @@ import app.semanticAnalysis.Table.Node;
 abstract public class labeledStatement {
     abstract public void printNode();
     abstract public boolean generateSymbolNode(Node symbolNode,String id);
+    abstract public void setLine(int line);
+    abstract public int getLine();
+    protected int line;
 }

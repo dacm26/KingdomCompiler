@@ -17,5 +17,8 @@ abstract public class additiveExpression {
     abstract public void printNode();
     abstract public int getType(Node symbolTable);
     abstract public void generateIC(Generate gc);
+    abstract public void setLine(int line);
+    abstract public int getLine();
+    protected int line;
 
 }

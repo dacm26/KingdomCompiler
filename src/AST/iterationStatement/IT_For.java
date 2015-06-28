@@ -109,7 +109,7 @@ public class IT_For extends iterationStatement {
         if (this.type == null) {
             //Ya existe la variable
             if (!symbolNode.search(id)) {
-                errorMsg = "Semantic Error: The id: \'" + id + "\' doesn't exists.";
+                errorMsg = "Semantic Error: The id: \'" + id + "\' doesn't exists."+"\n\tline: "+this.line;
                 System.err.println(errorMsg);
                 symbolNode.setErrors();
                 symbolNode.deleteLastNode();
@@ -119,7 +119,7 @@ public class IT_For extends iterationStatement {
                 type1 = symbolNode.getNumericalIdType(id);
                 type2 = this.idValue.getExpressionType(symbolNode);
                 if (type2 == -1) { //Si hay un error de operacion
-                    errorMsg = "Semantic Error: Something is wrong with the Expression.";
+                    errorMsg = "Semantic Error: Something is wrong with the Expression."+"\n\tline: "+this.line;
                     System.err.println(errorMsg);
                     symbolNode.setErrors();
                     symbolNode.deleteLastNode();
@@ -147,7 +147,7 @@ public class IT_For extends iterationStatement {
                 }
                 //Si no es una condicion booleana
                 if (type3 != 5) {
-                    errorMsg = "Semantic Error: Something is wrong with the Expression, need a Boolean.";
+                    errorMsg = "Semantic Error: Something is wrong with the Expression, need a Boolean."+"\n\tline: "+this.line;
                     symbolNode.deleteLastNode();
                     symbolNode.setErrors();
                     System.err.println(errorMsg);
@@ -155,7 +155,7 @@ public class IT_For extends iterationStatement {
                 }
                 //Si hay un problema en el ultimo argumento
                 if (!this.aE.generateSymbolNode(symbolNode)) {
-                    errorMsg = "Semantic Error: Something is wrong with the assignation.";
+                    errorMsg = "Semantic Error: Something is wrong with the assignation."+"\n\tline: "+this.line;
                     System.err.println(errorMsg);
                     symbolNode.deleteLastNode();
                     symbolNode.setErrors();
@@ -171,7 +171,7 @@ public class IT_For extends iterationStatement {
             int initType = this.type.getTypeAsNumber();
             if (symbolNode.getSons().get(symbolNode.getSons().size() - 1).search(id)) {
                 //Ya existe una variable con ese id
-                errorMsg = "Semantic Error: The id: \'" + id + "\' already exists.";
+                errorMsg = "Semantic Error: The id: \'" + id + "\' already exists."+"\n\tline: "+this.line;
                 System.err.println(errorMsg);
                 symbolNode.setErrors();
                 symbolNode.deleteLastNode();
@@ -180,7 +180,7 @@ public class IT_For extends iterationStatement {
                 type2 = this.idValue.getExpressionType(symbolNode.getSons().get(symbolNode.getSons().size() - 1));
                 if (type2 == -1) {
                     //Error de operacion
-                    errorMsg = "Semantic Error: Something is wrong with the Expression.";
+                    errorMsg = "Semantic Error: Something is wrong with the Expression."+"\n\tline: "+this.line;
                     System.err.println(errorMsg);
                     symbolNode.setErrors();
                     symbolNode.deleteLastNode();
@@ -205,7 +205,7 @@ public class IT_For extends iterationStatement {
                     }
                     //Si no es una condicion booleana
                     if (type3 != 5) {
-                        errorMsg = "Semantic Error: Something is wrong with the Expression, need a Boolean.";
+                        errorMsg = "Semantic Error: Something is wrong with the Expression, need a Boolean."+"\n\tline: "+this.line;
                         symbolNode.deleteLastNode();
                         System.err.println(errorMsg);
                         symbolNode.setErrors();
@@ -213,7 +213,7 @@ public class IT_For extends iterationStatement {
                     }
                     //Si hay un problema en el ultimo argumento
                     if (!this.aE.generateSymbolNode(symbolNode.getSons().get(symbolNode.getSons().size() - 1))) {
-                        errorMsg = "Semantic Error: Something is wrong with the assignation.";
+                        errorMsg = "Semantic Error: Something is wrong with the assignation."+"\n\tline: "+this.line;
                         System.err.println(errorMsg);
                         symbolNode.setErrors();
                         symbolNode.deleteLastNode();
@@ -319,8 +319,18 @@ public class IT_For extends iterationStatement {
                 typeExpected = "Wrong Operation";
                 break;
         }
-        String errorMsg = "Semantic Error: Type mismatch\n" + "\tExpected: " + typeExpected + " for the id: \'" + this.id + "\'.\n\tReceived: " + typeReceived;
+        String errorMsg = "Semantic Error: Type mismatch\n" + "\tExpected: " + typeExpected + " for the id: \'" + this.id + "\'.\n\tReceived: " + typeReceived+"\n\tline: "+this.line;
         System.err.println(errorMsg);
     }
 
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+    
 }

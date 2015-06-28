@@ -49,4 +49,14 @@ public class GD_identifierList extends globalDeclaration{
         
     }
     
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+    
 }

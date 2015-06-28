@@ -57,7 +57,7 @@ public class SS_IfSS extends selectionStatement {
     @Override
     public void generateSymbolNode(Node symbolNode) {
         int type1;
-        String errorMsg = "Semantic Error: Something is wrong with the expression.";
+        String errorMsg = "Semantic Error: Something is wrong with the expression."+"\n\tline: "+this.line;
         ArrayList<Integer> types = this.cE.getType(symbolNode);
         if (types.size() != 1) {
             for (Integer type : types) {
@@ -83,4 +83,14 @@ public class SS_IfSS extends selectionStatement {
         this.cS.generateSymbolNode(symbolNode.getSons().get(symbolNode.getSons().size() - 1));
         this.sS.generateSymbolNode(symbolNode);
     }
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+    
 }

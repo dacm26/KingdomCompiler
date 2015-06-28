@@ -85,4 +85,14 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
         this.symbolNode.toString();
     }
     
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+    
 }

@@ -74,14 +74,14 @@ public class IOE_Print extends ioExpressions {
     public void generateSymbolNode(Node symbolNode) {
         String errorMsg;
         if (!this.id.isEmpty() && !symbolNode.search(id)) {
-            errorMsg = "Semantic Error: The id: \'" + id + "\' doesn\'t exists. Can't print an id that doesn\'t exists.";
+            errorMsg = "Semantic Error: The id: \'" + id + "\' doesn\'t exists. Can't print an id that doesn\'t exists."+"\n\tline: "+this.line;
             System.err.println(errorMsg);
             symbolNode.setErrors();
             return;
         } 
         
         if (this.iL != null && !this.iL.validExpression(symbolNode)) {
-            errorMsg = "Semantic Error: Something is wrong with the Expression. Can't print the expression. ";
+            errorMsg = "Semantic Error: Something is wrong with the Expression. Can't print the expression. "+"\n\tline: "+this.line;
             System.err.println(errorMsg);
             symbolNode.setErrors();
             
@@ -94,4 +94,14 @@ public class IOE_Print extends ioExpressions {
 
     }
 
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+    
 }

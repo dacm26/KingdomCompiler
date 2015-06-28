@@ -16,4 +16,7 @@ import java.util.ArrayList;
 public abstract class typeParameterList {
     abstract public void printNode();
     abstract public ArrayList<Type> generateSymbolNode(Node symbolNode);
+    abstract public void setLine(int line);
+    abstract public int getLine();
+    protected int line;
 }

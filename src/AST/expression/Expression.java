@@ -19,10 +19,12 @@ public class Expression {
     private conditionalExpression ConditionalExpression;
     private String stringContent;
     private int result;
+    private int line;
     private Generate generateCode;
 
     public Expression(conditionalExpression ConditionalExpression) {
         this.ConditionalExpression = ConditionalExpression;
+        this.line=0;
 //        this.setStringContent();
         System.out.println(stringContent);
         System.out.println(result);
@@ -86,5 +88,14 @@ public class Expression {
             return -1;
         }
     }
+    public void setLine(int line) {
+        this.line = line+1;
+    }
 
+    public int getLine() {
+        return this.line;
+    }
+    
 }
+
+

@@ -13,4 +13,7 @@ import app.semanticAnalysis.Table.Node;
  */
 abstract public class functionCallsExpression {
     abstract public int generateSymbolNode(Node symbolNode);
+    abstract public void setLine(int line);
+    abstract public int getLine();
+    protected int line;
 }

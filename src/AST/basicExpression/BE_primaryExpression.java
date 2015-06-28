@@ -72,4 +72,14 @@ public class BE_primaryExpression extends basicExpression{
     }
 
     
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+    
 }
