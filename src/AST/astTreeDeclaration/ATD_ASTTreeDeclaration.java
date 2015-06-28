@@ -73,6 +73,7 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
             symbolNode.addMsgsFinalCode(sB);
             symbolNode.addVariablsFinalCode(sB);
             sB.append("\tzeroDouble:\t.double\t0.0\t");
+            sB.append(".text\n");
             System.out.println(sB.toString());
         }
         //this.generateCode.printIC();
