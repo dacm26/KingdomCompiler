@@ -13,9 +13,11 @@ import app.semanticAnalysis.Table.Node;
  */
 public class IOE_Scan extends ioExpressions{
     private String id;
+    private Generate generateCode;
 
     public IOE_Scan(String id) {
         this.id = id;
+        this.generateCode = generateCode;
     }
 
     public String getId() {
@@ -24,6 +26,10 @@ public class IOE_Scan extends ioExpressions{
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void generateIC(){
+        this.generateCode.generateScan(id);
     }
 
     @Override

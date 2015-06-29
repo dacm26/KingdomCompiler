@@ -1064,7 +1064,7 @@ class CUP$parser$actions {
 		int iEleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int iEright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		ioExpressions iE = (ioExpressions)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new S_IOExpression(iE); 
+		 RESULT = new S_IOExpression(iE,parser.generateCode); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("statement",20, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

@@ -14,4 +14,5 @@ import app.semanticAnalysis.Table.Node;
 abstract public class ioExpressions {
     abstract public void printNode();
     abstract public void generateSymbolNode(Node symbolNode);
+    abstract public void generateIC();
 }

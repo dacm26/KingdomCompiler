@@ -105,6 +105,18 @@ public class Generate {
         }
     }
 
+    public void generateSwitchStatement(String operation){
+
+    }
+
+    public void generatePrint(String id, String content){
+        if (id != ""){
+            cuadruplo.addRow("print",id,"","");
+        } else {
+            cuadruplo.addRow("print",content,"","");
+        }
+    }
+
     public ArrayList<RowIC> getCodeBlock(){
         return cuadruplo.getTempRow();
     }

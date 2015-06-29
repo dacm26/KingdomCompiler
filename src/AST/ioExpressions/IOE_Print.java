@@ -17,6 +17,7 @@ public class IOE_Print extends ioExpressions {
     private String content;
     private String id;
     private parameterList iL;
+    private Generate generateCode;
 
     public IOE_Print(String content, boolean isId) {
 
@@ -28,12 +29,14 @@ public class IOE_Print extends ioExpressions {
             this.id = "";
         }
         this.iL = null;
+        this.generateCode = generateCode;
     }
 
     public IOE_Print(String content, parameterList iL) {
         this.content = content;
         this.iL = iL;
         this.id = "";
+        this.generateCode = generateCode;
     }
 
     public String getContent() {
@@ -42,6 +45,12 @@ public class IOE_Print extends ioExpressions {
 
     public String getId() {
         return id;
+    }
+
+    @Override
+    public void generateIC(Generate generateCode){
+        this.generateCode = gc;
+        this.generateCode.generatePrint(id,content);
     }
 
     public void setId(String id) {

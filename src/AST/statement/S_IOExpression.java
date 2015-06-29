@@ -14,8 +14,10 @@ import app.semanticAnalysis.Table.Node;
  */
 public class S_IOExpression extends Statement{
     private ioExpressions ioExp;
+    private Generate generateCode;
 
-    public S_IOExpression(ioExpressions ioExp) {
+    public S_IOExpression(ioExpressions ioExp, Generate gc) {
+        this.generateCode = gc;
         this.ioExp = ioExp;
     }
 
@@ -29,6 +31,7 @@ public class S_IOExpression extends Statement{
 
     @Override
     public void generateIC(){
+        ioExp.generateIC(generateCode);
     }
     
     @Override
