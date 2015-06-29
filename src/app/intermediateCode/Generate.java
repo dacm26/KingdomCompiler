@@ -8,6 +8,7 @@ package app.intermediateCode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import AST.compoundStatement.*;
+import AST.selectionStatement.selectionStatement;
 import java.util.Stack;
 
 /**
@@ -88,7 +89,7 @@ public class Generate {
         cuadruplo.addTempRow("=",right, "", left);
     }
 
-    public void generateIfStatement(String operation, String tag, compoundStatement stm, compoundStatement stmElse){
+    public void generateIfStatement(String operation, String tag, compoundStatement stm, compoundStatement stmElse, selectionStatement sS){
         cuadruplo.addRow("IF",operation,"true",tag);
         cuadruplo.addRow("goto", "etiq"+tagIndex, "", "" );
         String falseTag = "etiq"+tagIndex;
@@ -98,6 +99,9 @@ public class Generate {
         generateTag(falseTag);
         if(stmElse != null){
             stmElse.generateIC();
+        } 
+        if(sS != null){
+            sS.generateIC();
         }
     }
 

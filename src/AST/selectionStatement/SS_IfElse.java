@@ -62,7 +62,7 @@ public class SS_IfElse extends selectionStatement {
     public void generateIC(){
         this.generateCode.flushCodeBlock(cE.getCodeBlock());
         String tag = generateCode.generateTag();
-        this.generateCode.generateIfStatement(cE.getStringContent(),tag,stmIf,stmElse);
+        this.generateCode.generateIfStatement(cE.getStringContent(),tag,stmIf,stmElse,null);
     }
 
     @Override

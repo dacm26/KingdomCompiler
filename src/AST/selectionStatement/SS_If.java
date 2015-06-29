@@ -52,7 +52,7 @@ public class SS_If extends selectionStatement {
     public void generateIC(){
         this.generateCode.flushCodeBlock(cE.getCodeBlock());
         String tag = generateCode.generateTag();
-        this.generateCode.generateIfStatement(cE.getStringContent(),tag,stm,null);
+        this.generateCode.generateIfStatement(cE.getStringContent(),tag,stm,null,null);
     }
 
     @Override
