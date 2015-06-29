@@ -1971,7 +1971,7 @@ class CUP$parser$actions {
 		int tleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int tright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Boolean t = (Boolean)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new PE_Content(true,5); RESULT.setLine(tleft);
+		 RESULT = new PE_Content("true",5); RESULT.setLine(tleft);
               CUP$parser$result = parser.getSymbolFactory().newSymbol("primary_expression",27, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1983,7 +1983,7 @@ class CUP$parser$actions {
 		int fleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int fright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Boolean f = (Boolean)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new PE_Content(false,5); RESULT.setLine(fleft);
+		 RESULT = new PE_Content("false",5); RESULT.setLine(fleft);
               CUP$parser$result = parser.getSymbolFactory().newSymbol("primary_expression",27, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

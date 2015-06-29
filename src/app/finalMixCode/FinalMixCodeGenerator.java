@@ -14,6 +14,43 @@ public class FinalMixCodeGenerator {
     public FinalMixCodeGenerator() {
     }
 
+    public String assign(String arg1, String result, String type) {
+        StringBuilder sB = new StringBuilder();
+        switch (type) {
+            case "int":
+                break;
+            case "char":
+                break;
+            case "double":
+                break;
+            case "boolean":
+                break;
+            case "String":
+                break;
+            default:
+                sB.append("Error assign");
+                break;
+        }
+        return sB.toString();
+
+    }
+
+    public String booleanOperation(String operation, String arg1, String arg2, String result, String type) {
+        StringBuilder sB = new StringBuilder();
+        switch (operation) {
+            case "&&":
+                break;
+            case "||":
+                break;
+            case "!":
+                break;
+            default:
+                sB.append("Error op booleana");
+                break;
+        }
+        return sB.toString();
+    }
+
     public String arithmeticOperation(String operation, String arg1, String arg2, String result, String type) {
         StringBuilder sB = new StringBuilder();
         if (type.equals("int")) {
@@ -27,7 +64,7 @@ public class FinalMixCodeGenerator {
                 case "/":
                     break;
                 default:
-                    sB.append("Error");
+                    sB.append("Error aritemetico");
                     break;
             }
 
@@ -42,7 +79,7 @@ public class FinalMixCodeGenerator {
                 case "/":
                     break;
                 default:
-                    sB.append("Error");
+                    sB.append("Error aritemetico");
                     break;
             }
         }
@@ -83,7 +120,7 @@ public class FinalMixCodeGenerator {
                 sB.append("\t\tsyscall\n");
                 break;
             default:
-                sB.append("Error");
+                sB.append("Error scan");
                 break;
         }
         return sB.toString();
@@ -129,7 +166,7 @@ public class FinalMixCodeGenerator {
                 sB.append("\t\tsyscall\n");
                 break;
             default:
-                sB.append("Error");
+                sB.append("Error print");
                 break;
         }
         return sB.toString();

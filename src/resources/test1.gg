@@ -10,4 +10,8 @@ void KingdomHearts(){
     print("aasd");
     char x = 'a'; 
     x = 'b';
+    int i = 2;
+    i =234;
+    bool aa = true;
+    aa = false;
 }

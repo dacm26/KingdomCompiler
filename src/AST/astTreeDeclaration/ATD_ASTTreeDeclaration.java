@@ -77,6 +77,8 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
             symbolNode.addVariablsFinalCode(sB);
             symbolNode.addDoublesFinalCode(sB);
             symbolNode.addCharsFinalCode(sB);
+            symbolNode.addBoolsFinalCode(sB);
+            symbolNode.addIntsFinalCode(sB);
             sB.append("\t_zeroDouble:\t.double\t0.0\t\n");
             sB.append("\t_charBuffer:\t.space\t2\t\n");
             /*sB.append(".text\n");

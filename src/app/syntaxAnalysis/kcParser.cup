@@ -352,7 +352,7 @@ primary_expression ::=  ID:identifierValue                              							{
 	|   STRINGCONTENT:stringContent                                   								{: RESULT = new PE_Content(stringContent,4); RESULT.setLine(stringContentleft);:}
 	|   DOUBLEVALUE:doubleContent                                     								{: RESULT = new PE_Content(doubleContent,3); RESULT.setLine(doubleContentleft);:}
 	|   CHARCONTENT:charContent                                       								{: RESULT = new PE_Content(charContent,1); RESULT.setLine(charContentleft);:}
-	|   TRUE:t                                            											{: RESULT = new PE_Content(true,5); RESULT.setLine(tleft);:}
-	|   FALSE:f                                       												{: RESULT = new PE_Content(false,5); RESULT.setLine(fleft);:}
+	|   TRUE:t                                            											{: RESULT = new PE_Content("true",5); RESULT.setLine(tleft);:}
+	|   FALSE:f                                       												{: RESULT = new PE_Content("false",5); RESULT.setLine(fleft);:}
 	|   OPAR expression:exp CPAR																	{: RESULT = new PE_Expression(exp); RESULT.setLine(expleft);:}
 	;

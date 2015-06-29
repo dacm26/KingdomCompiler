@@ -112,6 +112,19 @@ public class PE_Content extends primaryExpression{
             symbolNode.addChar(this.content.toString());
             
         }
+        if (this.type == 2) {
+            symbolNode.addInt(this.content.toString());
+            
+        }
+        if (this.type == 5) {
+            if (this.content.equals("true")) {
+                symbolNode.addBool("1");
+            }else{
+                symbolNode.addBool("0");
+            }
+            
+            
+        }
     }
     
 }

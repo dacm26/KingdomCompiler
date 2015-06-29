@@ -21,6 +21,8 @@ public class Node {
     private static Queue<String> programStrings = new LinkedList<>();
     private static Queue<String> programDoubles = new LinkedList<>();
     private static Queue<String> programChars = new LinkedList<>();
+    private static Queue<String> programInts = new LinkedList<>();
+    private static Queue<String> programBools = new LinkedList<>();
 
     private Node iAmYourFather;
     private Table symbolTable;
@@ -112,6 +114,32 @@ public class Node {
         }
 
     }
+    
+    public void addIntsFinalCode(StringBuilder sB) {
+        if (!programInts.isEmpty()) {
+            int charCounter = 0;
+            String temp;
+            do {
+                temp = "\t_int" + charCounter + ":\t.word " + programInts.poll()+"\n";
+                sB.append(temp);
+                charCounter++;
+            } while (!programInts.isEmpty());
+        }
+
+    }
+    
+    public void addBoolsFinalCode(StringBuilder sB) {
+        if (!programBools.isEmpty()) {
+            int charCounter = 0;
+            String temp;
+            do {
+                temp = "\t_bool" + charCounter + ":\t.byte " + programBools.poll()+"\n";
+                sB.append(temp);
+                charCounter++;
+            } while (!programBools.isEmpty());
+        }
+
+    }
 
     public boolean search(String id) {
         if (!this.symbolTable.search(id)) {
@@ -131,6 +159,22 @@ public class Node {
 
     public Queue<String> getProgramStrings() {
         return programStrings;
+    }
+    
+    public boolean addInt(String msg) {
+        return programInts.add(msg);
+    }
+
+    public Queue<String> getProgramInts() {
+        return programInts;
+    }
+    
+    public boolean addBool(String msg) {
+        return programBools.add(msg);
+    }
+
+    public Queue<String> getProgramBools() {
+        return programBools;
     }
     
     public boolean addChar(String chr) {
