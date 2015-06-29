@@ -67,35 +67,51 @@ public class FinalMixCodeGenerator {
     public String arithmeticOperation(String operation, String arg1, String arg2, String result, String type) {
         StringBuilder sB = new StringBuilder();
         if (type.equals("int")) {
+            sB.append("\t\tlw $t0, ").append(arg1).append("\n");
+            sB.append("\t\tlw $t1, ").append(arg2).append("\n");
             switch (operation) {
                 case "+":
+                    sB.append("\t\tadd $t2, $t0, $t1\n");
                     break;
                 case "-":
+                    sB.append("\t\tsub $t2, $t0, $t1\n");
                     break;
                 case "*":
+                    sB.append("\t\tmul $t2, $t0, $t1\n");
                     break;
                 case "/":
+                    sB.append("\t\tdiv $t0, $t1\n");
+                    sB.append("\t\tmflo $t2\n");
+                    
                     break;
                 default:
                     sB.append("Error aritemetico");
                     break;
             }
-
+            sB.append("\t\tsw $t2, ").append(result).append("\n");
         } else {
+            sB.append("\t\tl.d $f0, ").append(arg1).append("\n");
+            sB.append("\t\tl.d $f2, ").append(arg2).append("\n");
             switch (operation) {
                 case "+":
+                    sB.append("\t\tadd.d $f4, $f0, $f2\n");
                     break;
                 case "-":
+                    sB.append("\t\tsub.d $f4, $f0, $f2\n");
                     break;
                 case "*":
+                    sB.append("\t\tmul.d $f4, $f0, $f2\n");
                     break;
                 case "/":
+                    sB.append("\t\tdiv.d $f4, $f0, $f2\n");
                     break;
                 default:
                     sB.append("Error aritemetico");
                     break;
             }
+            sB.append("\t\ts.d $f4, ").append(result).append("\n");
         }
+        
         return sB.toString();
     }
 
@@ -116,7 +132,7 @@ public class FinalMixCodeGenerator {
                 + "\t_string_copy_end:\n"
                 + "\t\tsb $zero, ($a1)\n"
                 + "\t\tjr $ra");
-        
+
         return sB.toString();
     }
 
@@ -166,7 +182,7 @@ public class FinalMixCodeGenerator {
         sB.append(this.printType(id, type));
         return sB.toString();
     }
-    
+
     public String print(String id, String type) {
         StringBuilder sB = new StringBuilder();
         sB.append(this.printType(id, type));

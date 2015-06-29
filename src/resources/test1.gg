@@ -2,14 +2,14 @@ void PopeyeFuncion(int p, bool t){
 }
 
 void KingdomHearts(){
-    int x = 2;
+    int x = 16;
     print("\n",x);
     char a = 'a';
     print("\n",a);
-    bool b = true;
+    bool b = false;
     print("\n",b);
-    munny c =3.14;
+    munny c =3.1415;
     print("\n",c);
-    KChain d = "hola";
+    KChain d = "Popeye";
     print("\n",d);
 }
