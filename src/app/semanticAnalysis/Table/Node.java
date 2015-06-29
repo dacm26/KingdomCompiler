@@ -62,7 +62,7 @@ public class Node {
             case "double":
                 return ".double\t0.0";
             case "boolean":
-                return ".word\t0";
+                return ".byte\t0";
             case "String":
                 return ".space\t255";
             default:
