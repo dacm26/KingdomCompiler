@@ -86,7 +86,7 @@ public class Generate {
     }
 
     public void generateAssign(String left, String right){
-        cuadruplo.addTempRow("=",right, "", left);
+        cuadruplo.addRow("=",right, "", left);
     }
 
     public void generateIfStatement(String operation, String tag, compoundStatement stm, compoundStatement stmElse, selectionStatement sS){
