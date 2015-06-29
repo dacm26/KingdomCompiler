@@ -20,5 +20,6 @@ abstract public class additiveExpression {
     abstract public void setLine(int line);
     abstract public int getLine();
     protected int line;
+     abstract public void generateConstants(Node symbolNode);
 
 }

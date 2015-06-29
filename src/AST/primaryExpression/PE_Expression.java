@@ -70,5 +70,10 @@ public class PE_Expression extends primaryExpression{
     public int getLine() {
         return this.line;
     }
+
+    @Override
+    public void generateConstants(Node symbolNode) {
+        this.expression.generateConstants(symbolNode);
+    }
     
 }

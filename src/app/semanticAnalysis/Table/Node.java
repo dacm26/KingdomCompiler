@@ -19,6 +19,8 @@ public class Node {
 
     private static boolean semanticErrors = false;
     private static Queue<String> programStrings = new LinkedList<>();
+    private static Queue<String> programDoubles = new LinkedList<>();
+    private static Queue<String> programChars = new LinkedList<>();
 
     private Node iAmYourFather;
     private Table symbolTable;
@@ -47,7 +49,7 @@ public class Node {
         String temp;
         for (Row row : rows) {
             if (!(row.getType() instanceof FunctionType || row.isParam())) {
-                temp = "\t_" + row.getId() + ":\t" + this.getFinalType((PrimitiveDataType) row.getType())+"\n";
+                temp = "\t_" + row.getId() + ":\t" + this.getFinalType((PrimitiveDataType) row.getType()) + "\n";
                 sB.append(temp);
             }
         }
@@ -72,13 +74,42 @@ public class Node {
 
     public void addMsgsFinalCode(StringBuilder sB) {
         sB.append(".data\n");
-        int msgCounter = 0;
-        String temp;
-        do {
-            temp = "\t_msg" + msgCounter + ":\t.asciiz \"" + programStrings.poll() + "\\n\"\n";
-            sB.append(temp);
-            msgCounter++;
-        } while (!programStrings.isEmpty());
+        if (!programStrings.isEmpty()) {
+
+            int msgCounter = 0;
+            String temp;
+            do {
+                temp = "\t_msg" + msgCounter + ":\t.asciiz \"" + programStrings.poll() + "\\n\"\n";
+                sB.append(temp);
+                msgCounter++;
+            } while (!programStrings.isEmpty());
+        }
+
+    }
+
+    public void addDoublesFinalCode(StringBuilder sB) {
+        if (!programDoubles.isEmpty()) {
+            int doubleCounter = 0;
+            String temp;
+            do {
+                temp = "\t_double" + doubleCounter + ":\t.double " + programDoubles.poll()+"\n";
+                sB.append(temp);
+                doubleCounter++;
+            } while (!programDoubles.isEmpty());
+        }
+
+    }
+    
+    public void addCharsFinalCode(StringBuilder sB) {
+        if (!programChars.isEmpty()) {
+            int charCounter = 0;
+            String temp;
+            do {
+                temp = "\t_char" + charCounter + ":\t.byte \'" + programChars.poll()+"\'\n";
+                sB.append(temp);
+                charCounter++;
+            } while (!programChars.isEmpty());
+        }
 
     }
 
@@ -100,6 +131,22 @@ public class Node {
 
     public Queue<String> getProgramStrings() {
         return programStrings;
+    }
+    
+    public boolean addChar(String chr) {
+        return programChars.add(chr);
+    }
+
+    public Queue<String> getProgramChars() {
+        return programChars;
+    }
+
+    public boolean addDouble(String doub) {
+        return programDoubles.add(doub);
+    }
+
+    public Queue<String> getProgramDoubles() {
+        return programDoubles;
     }
 
     public void setErrors() {

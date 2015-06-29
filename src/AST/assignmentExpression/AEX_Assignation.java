@@ -157,5 +157,10 @@ public class AEX_Assignation extends assignmentExpression {
     public int getLine() {
         return this.line;
     }
+
+    @Override
+    public void generateConstants(Node symbolNode) {
+        this.exp.generateConstants(symbolNode);
+    }
     
 }

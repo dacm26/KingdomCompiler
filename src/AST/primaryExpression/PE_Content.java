@@ -99,5 +99,19 @@ public class PE_Content extends primaryExpression{
     public int getLine() {
         return this.line;
     }
+
+    @Override
+    public void generateConstants(Node symbolNode) {
+        if (this.type == 4) {
+            symbolNode.addMsg(this.content.toString());
+        }
+        if (this.type == 3) {
+            symbolNode.addDouble(this.content.toString());
+        }
+        if (this.type == 1) {
+            symbolNode.addChar(this.content.toString());
+            
+        }
+    }
     
 }

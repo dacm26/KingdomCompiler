@@ -78,5 +78,10 @@ public class RE_additiveExpression extends relationalExpression{
     public int getLine() {
         return this.line;
     }
+
+    @Override
+    public void generateConstants(Node symbolNode) {
+        this.aE.generateConstants(symbolNode);
+    }
     
 }

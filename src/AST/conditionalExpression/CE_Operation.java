@@ -129,5 +129,11 @@ public class CE_Operation extends conditionalExpression{
     public int getLine() {
         return this.line;
     }
+
+    @Override
+    public void generateConstants(Node symbolNode) {
+        this.cE.generateConstants(symbolNode);
+        this.eE.generateConstants(symbolNode);
+    }
     
 }

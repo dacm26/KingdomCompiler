@@ -13,9 +13,46 @@ public class FinalMixCodeGenerator {
 
     public FinalMixCodeGenerator() {
     }
-    public String exit(){
+
+    public String arithmeticOperation(String operation, String arg1, String arg2, String result, String type) {
+        StringBuilder sB = new StringBuilder();
+        if (type.equals("int")) {
+            switch (operation) {
+                case "+":
+                    break;
+                case "-":
+                    break;
+                case "*":
+                    break;
+                case "/":
+                    break;
+                default:
+                    sB.append("Error");
+                    break;
+            }
+
+        } else {
+            switch (operation) {
+                case "+":
+                    break;
+                case "-":
+                    break;
+                case "*":
+                    break;
+                case "/":
+                    break;
+                default:
+                    sB.append("Error");
+                    break;
+            }
+        }
+        return sB.toString();
+    }
+
+    public String exit() {
         return "\t\tli $v0, 10\n\t\tsyscall";
     }
+
     public String scan(String id, String type) {
         StringBuilder sB = new StringBuilder();
         switch (type) {

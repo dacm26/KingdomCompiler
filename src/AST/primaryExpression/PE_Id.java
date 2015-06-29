@@ -82,5 +82,9 @@ public class PE_Id extends primaryExpression{
     public int getLine() {
         return this.line;
     }
+
+    @Override
+    public void generateConstants(Node symbolNode) {
+    }
     
 }

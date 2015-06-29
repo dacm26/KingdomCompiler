@@ -141,5 +141,11 @@ public class EE_Operation extends equalityExpression{
     public int getLine() {
         return this.line;
     }
+
+    @Override
+    public void generateConstants(Node symbolNode) {
+        this.eE.generateConstants(symbolNode);
+        this.rE.generateConstants(symbolNode);
+    }
     
 }

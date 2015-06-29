@@ -54,5 +54,11 @@ public class BE_FCE extends basicExpression{
     public int getLine() {
         return this.line;
     }
+
+    @Override
+    public void generateConstants(Node symbolNode) {
+        //asdadsa
+        System.err.println("not implemented yet");
+    }
     
 }

@@ -75,9 +75,11 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
             StringBuilder sB = new StringBuilder();
             symbolNode.addMsgsFinalCode(sB);
             symbolNode.addVariablsFinalCode(sB);
+            symbolNode.addDoublesFinalCode(sB);
+            symbolNode.addCharsFinalCode(sB);
             sB.append("\t_zeroDouble:\t.double\t0.0\t\n");
             sB.append("\t_charBuffer:\t.space\t2\t\n");
-            sB.append(".text\n");
+            /*sB.append(".text\n");
             sB.append("\tmain:\n");
             sB.append(FMCG.print("_msg0"));
             sB.append(FMCG.print("_msg1"));
@@ -94,7 +96,7 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
             sB.append(FMCG.print("_msg9","_d","double"));
             sB.append(FMCG.print("_msg10","_e","String"));
             sB.append(FMCG.exit());
-            try{
+            */try{
                 PrintWriter pW = new PrintWriter("./finalMix.s","UTF-8");
                 pW.println(sB.toString());
                 pW.close();

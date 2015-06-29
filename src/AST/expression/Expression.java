@@ -61,6 +61,9 @@ public class Expression {
     public int getResult(){
         return result;
     }
+    public void generateConstants(Node symbolNode){
+        this.ConditionalExpression.generateConstants(symbolNode);
+    }
     
     public int getExpressionType(Node symbolNode) {
         /*

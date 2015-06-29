@@ -81,5 +81,10 @@ public class BE_primaryExpression extends basicExpression{
     public int getLine() {
         return this.line;
     }
+
+    @Override
+    public void generateConstants(Node symbolNode) {
+        this.pE.generateConstants(symbolNode);
+    }
     
 }

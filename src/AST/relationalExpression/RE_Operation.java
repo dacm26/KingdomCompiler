@@ -148,5 +148,11 @@ public class RE_Operation extends relationalExpression {
     public int getLine() {
         return this.line;
     }
+
+    @Override
+    public void generateConstants(Node symbolNode) {
+        this.rE.generateConstants(symbolNode);
+        this.aE.generateConstants(symbolNode);
+    }
     
 }

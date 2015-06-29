@@ -18,5 +18,6 @@ abstract public class equalityExpression {
     abstract public void generateIC(Generate gc);
     abstract public void setLine(int line);
     abstract public int getLine();
+    abstract public void generateConstants(Node symbolNode);
     protected int line;
 }

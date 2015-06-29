@@ -2,25 +2,12 @@ void PopeyeFuncion(int p, bool t){
 }
 
 void KingdomHearts(){
-    print("Hola Mundo!");
-    int a;
-    bool b;
-    char c;
     munny d;
-    KChain e;
-    print("Ingrese int: ");
-    scan(a);
-    print("Ingrese bool: ");
-    scan(b);
-    print("Ingrese char: ");
-    scan(c);
-    print("Ingrese munny: ");
-    scan(d);
-    print("Ingrese KChain: ");
-    scan(e);
-    print("Soy un int: ",a);
-    print("Soy un bool: ",b);
-    print("Soy un char: ",c);
-    print("Soy un double: ",d);
-    print("Soy un e: ",e);
+    d = 3.14;
+    d = 3.15 * 2.1 + 3.1;
+    munny d1 = 1.0;
+    KChain q1 = "asd1";
+    print("aasd");
+    char x = 'a'; 
+    x = 'b';
 }

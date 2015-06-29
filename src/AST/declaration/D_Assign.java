@@ -94,6 +94,7 @@ public class D_Assign extends Declaration {
             } else {
                 type2 = this.exp.getExpressionType(symbolNode);
                 if ((type1 == type2)) {
+                    this.exp.generateConstants(symbolNode);
                 } else {
                     reportSemanticError(type1, type2);
                     symbolNode.setErrors();
@@ -109,6 +110,7 @@ public class D_Assign extends Declaration {
             } else {
                 if ((type1 == type2)) {
                     symbolNode.add(new Row(id, new PrimitiveDataType(((VTS_Type) this.type).getType(), ((VTS_Type) this.type).getSize()),false));
+                    this.exp.generateConstants(symbolNode);
                 } else {
                     reportSemanticError(type1, type2);
                     symbolNode.setErrors();
@@ -175,4 +177,8 @@ public class D_Assign extends Declaration {
         return this.line;
     }
     
+@Override
+    public void generateConstants(Node symbolNode) {
+        this.exp.generateConstants(symbolNode);
+    }
 }

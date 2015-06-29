@@ -78,5 +78,10 @@ public class EE_relationalExpression extends equalityExpression{
     public int getLine() {
         return this.line;
     }
+
+    @Override
+    public void generateConstants(Node symbolNode) {
+        this.rE.generateConstants(symbolNode);
+    }
     
 }

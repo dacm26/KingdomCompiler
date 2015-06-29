@@ -66,4 +66,8 @@ public class D_identifierList extends Declaration{
         return this.line;
     }
     
+
+@Override
+    public void generateConstants(Node symbolNode) {
+    }
 }

@@ -122,5 +122,11 @@ public class AE_Operation extends additiveExpression {
     public int getLine() {
         return this.line;
     }
+
+    @Override
+    public void generateConstants(Node symbolNode) {
+        this.aE.generateConstants(symbolNode);
+        this.mE.generateConstants(symbolNode);
+    }
     
 }
