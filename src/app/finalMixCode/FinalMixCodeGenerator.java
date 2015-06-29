@@ -18,14 +18,25 @@ public class FinalMixCodeGenerator {
         StringBuilder sB = new StringBuilder();
         switch (type) {
             case "int":
+                sB.append("\t\tlw $t0, ").append(arg1).append("\n");
+                sB.append("\t\tsw $t0, ").append(result).append("\n");
                 break;
             case "char":
+                sB.append("\t\tlb $t0, ").append(arg1).append("\n");
+                sB.append("\t\tsb $t0, ").append(result).append("\n");
                 break;
             case "double":
+                sB.append("\t\tl.d $f0, ").append(arg1).append("\n");
+                sB.append("\t\ts.d $f0, ").append(result).append("\n");
                 break;
             case "boolean":
+                sB.append("\t\tlb $t0, ").append(arg1).append("\n");
+                sB.append("\t\tsb $t0, ").append(result).append("\n");
                 break;
             case "String":
+                sB.append("\t\tla $a0, ").append(arg1).append("\n");
+                sB.append("\t\tla $a1, ").append(result).append("\n");
+                sB.append("\t\tjal _string_copy\n");
                 break;
             default:
                 sB.append("Error assign");
@@ -42,7 +53,9 @@ public class FinalMixCodeGenerator {
                 break;
             case "||":
                 break;
-            case "!":
+            case "==":
+                break;
+            case "!=":
                 break;
             default:
                 sB.append("Error op booleana");
@@ -87,7 +100,24 @@ public class FinalMixCodeGenerator {
     }
 
     public String exit() {
-        return "\t\tli $v0, 10\n\t\tsyscall";
+        StringBuilder sB = new StringBuilder();
+        sB.append("\t\tli $v0, 10\n\t\tsyscall\n\n");
+        sB.append("\t_string_copy:\n"
+                + "\t\tlb $s0, ($a0)\n"
+                + "\t\tbeqz $s0, _string_copy_end\n"
+                + "\t\tb _string_copy_char\n"
+                + "\n"
+                + "\t\t_string_copy_char:\n"
+                + "\t\tsb $s0, ($a1)\n"
+                + "\t\taddi $a0, $a0, 1\n"
+                + "\t\taddi $a1, $a1, 1\n"
+                + "\t\tb _string_copy\n"
+                + "\n"
+                + "\t_string_copy_end:\n"
+                + "\t\tsb $zero, ($a1)\n"
+                + "\t\tjr $ra");
+        
+        return sB.toString();
     }
 
     public String scan(String id, String type) {
@@ -133,6 +163,12 @@ public class FinalMixCodeGenerator {
     public String print(String msg, String id, String type) {
         StringBuilder sB = new StringBuilder();
         sB.append(this.printType(msg, "String"));
+        sB.append(this.printType(id, type));
+        return sB.toString();
+    }
+    
+    public String print(String id, String type) {
+        StringBuilder sB = new StringBuilder();
         sB.append(this.printType(id, type));
         return sB.toString();
     }

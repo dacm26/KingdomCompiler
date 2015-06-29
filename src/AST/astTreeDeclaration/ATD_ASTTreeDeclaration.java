@@ -81,9 +81,19 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
             symbolNode.addIntsFinalCode(sB);
             sB.append("\t_zeroDouble:\t.double\t0.0\t\n");
             sB.append("\t_charBuffer:\t.space\t2\t\n");
-            /*sB.append(".text\n");
+            sB.append(".text\n");
             sB.append("\tmain:\n");
-            sB.append(FMCG.print("_msg0"));
+            sB.append(FMCG.assign("_int0", "_x", "int"));
+            sB.append(FMCG.print("_x", "int"));
+            sB.append(FMCG.assign("_char0", "_a", "char"));
+            sB.append(FMCG.print("_a", "char"));
+            sB.append(FMCG.assign("_bool0", "_b", "boolean"));
+            sB.append(FMCG.print("_b", "boolean"));
+            sB.append(FMCG.assign("_double0", "_c", "double"));
+            sB.append(FMCG.print("_c", "double"));
+            sB.append(FMCG.assign("_msg5", "_d", "String"));
+            sB.append(FMCG.print("_d", "String"));
+            /*sB.append(FMCG.print("_msg0"));
             sB.append(FMCG.print("_msg1"));
             sB.append(FMCG.scan("_a","int"));
             sB.append(FMCG.print("_msg3"));
@@ -97,8 +107,8 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
             sB.append(FMCG.print("_msg8","_c","char"));
             sB.append(FMCG.print("_msg9","_d","double"));
             sB.append(FMCG.print("_msg10","_e","String"));
-            sB.append(FMCG.exit());
-            */try{
+            */sB.append(FMCG.exit());
+            try{
                 PrintWriter pW = new PrintWriter("./finalMix.s","UTF-8");
                 pW.println(sB.toString());
                 pW.close();
