@@ -62,6 +62,34 @@
 		li $v0, 10
 		syscall
 
+	_greater:
+				bgt $a0, $a1, _true
+				li $v0, 0
+				jr $ra
+		_greaterEquals:
+				bge $a0, $a1, _true
+				li $v0, 0
+				jr $ra
+		_less:
+				blt $a0, $a1, _true
+				li $v0, 0
+				jr $ra
+		_lessEquals:
+				ble $a0, $a1, _true
+				li $v0, 0
+				jr $ra		
+		_notEquals:
+				bne $a0, $a1, _true
+				li $v0, 0
+				jr $ra 
+		_equals:
+				beq $a0, $a1, _true
+				li $v0, 0
+				jr $ra 
+		_true:
+				li $v0, 1
+				jr $ra
+
 	_string_copy:
 		lb $s0, ($a0)
 		beqz $s0, _string_copy_end

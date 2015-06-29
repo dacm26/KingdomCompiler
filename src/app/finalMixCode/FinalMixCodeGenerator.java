@@ -48,19 +48,58 @@ public class FinalMixCodeGenerator {
 
     public String booleanOperation(String operation, String arg1, String arg2, String result, String type) {
         StringBuilder sB = new StringBuilder();
+        sB.append("\t\tlb $t0, ").append(arg1).append("\n");
+        sB.append("\t\tlb $t1, ").append(arg1).append("\n");
         switch (operation) {
             case "&&":
+                sB.append("\t\tand $t2, $t0, $t1\n");
+                sB.append("\t\tsb $t2, ").append(result).append("\n");
                 break;
             case "||":
+                sB.append("\t\tor $t2, $t0, $t1\n");
+                sB.append("\t\tsb $t2, ").append(result).append("\n");
                 break;
             case "==":
+                sB.append("\t\tmove $a0, $t0\n");
+                sB.append("\t\tmove $a1, $t1\n");
+                sB.append("\t\tjal _equals\n");
+                sB.append("\t\tsb $v0, ").append(result).append("\n");
                 break;
             case "!=":
+                sB.append("\t\tmove $a0, $t0\n");
+                sB.append("\t\tmove $a1, $t1\n");
+                sB.append("\t\tjal _notEquals\n");
+                sB.append("\t\tsb $v0, ").append(result).append("\n");
+                break;
+            case ">":
+                sB.append("\t\tmove $a0, $t0\n");
+                sB.append("\t\tmove $a1, $t1\n");
+                sB.append("\t\tjal _greater\n");
+                sB.append("\t\tsb $v0, ").append(result).append("\n");
+                break;
+            case ">=":
+                sB.append("\t\tmove $a0, $t0\n");
+                sB.append("\t\tmove $a1, $t1\n");
+                sB.append("\t\tjal _greaterEquals\n");
+                sB.append("\t\tsb $v0, ").append(result).append("\n");
+                break;
+            case "<":
+                sB.append("\t\tmove $a0, $t0\n");
+                sB.append("\t\tmove $a1, $t1\n");
+                sB.append("\t\tjal _less\n");
+                sB.append("\t\tsb $v0, ").append(result).append("\n");
+                break;
+            case "<=":
+                sB.append("\t\tmove $a0, $t0\n");
+                sB.append("\t\tmove $a1, $t1\n");
+                sB.append("\t\tjal _lessEquals\n");
+                sB.append("\t\tsb $v0, ").append(result).append("\n");
                 break;
             default:
                 sB.append("Error op booleana");
                 break;
         }
+        
         return sB.toString();
     }
 
@@ -118,6 +157,34 @@ public class FinalMixCodeGenerator {
     public String exit() {
         StringBuilder sB = new StringBuilder();
         sB.append("\t\tli $v0, 10\n\t\tsyscall\n\n");
+        sB.append("\t_greater:\n" +
+"		\t\tbgt $a0, $a1, _true\n" +
+"		\t\tli $v0, 0\n" +
+"		\t\tjr $ra\n" +
+"	\t_greaterEquals:\n" +
+"		\t\tbge $a0, $a1, _true\n" +
+"		\t\tli $v0, 0\n" +
+"		\t\tjr $ra\n" +
+"	\t_less:\n" +
+"		\t\tblt $a0, $a1, _true\n" +
+"		\t\tli $v0, 0\n" +
+"		\t\tjr $ra\n" +
+"	\t_lessEquals:\n" +
+"		\t\tble $a0, $a1, _true\n" +
+"		\t\tli $v0, 0\n" +
+"		\t\tjr $ra		\n" +
+"	\t_notEquals:\n" +
+"		\t\tbne $a0, $a1, _true\n" +
+"		\t\tli $v0, 0\n" +
+"		\t\tjr $ra \n" +
+"	\t_equals:\n" +
+"		\t\tbeq $a0, $a1, _true\n" +
+"		\t\tli $v0, 0\n" +
+"		\t\tjr $ra \n" +
+"	\t_true:\n" +
+"		\t\tli $v0, 1\n" +
+"		\t\tjr $ra\n\n");
+        
         sB.append("\t_string_copy:\n"
                 + "\t\tlb $s0, ($a0)\n"
                 + "\t\tbeqz $s0, _string_copy_end\n"
