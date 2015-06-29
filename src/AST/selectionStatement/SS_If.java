@@ -20,13 +20,14 @@ public class SS_If extends selectionStatement {
     private conditionalExpression cE;
     private compoundStatement stm;
     private Generate generateCode;
-    private ArrayList<Row> cER;
+    private ArrayList<RowIC> cER;
 
     public SS_If(conditionalExpression cE, compoundStatement stm, Generate generateCode) {
         this.cE = cE;
         this.stm = stm;
         this.generateCode = generateCode;
-        this.cER = new ArrayList<Row>(this.generateCode.getCodeBlock());
+        cE.generateIC();
+        this.cER = new ArrayList<RowIC>(this.generateCode.getCodeBlock());
         this.generateCode.emptyTemp();
         this.cE.setCodeBlock(cER);
     }
@@ -51,7 +52,7 @@ public class SS_If extends selectionStatement {
     public void generateIC(){
         this.generateCode.flushCodeBlock(cE.getCodeBlock());
         String tag = generateCode.generateTag();
-        this.generateCode.generateIfStatement(cE.getStringContent(),tag,stm);
+        this.generateCode.generateIfStatement(cE.getStringContent(),tag,stm,null);
     }
 
     @Override

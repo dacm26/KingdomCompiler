@@ -25,9 +25,9 @@ public class ME_Operation extends multiplicativeExpression{
         this.mE = mE;
         this.operator = operator;
         this.bE = bE;
-        this.generateCode = generateCode;  
-        this.generateIC(); 
-        this.setStringContent();
+        this.generateCode = generateCode;
+        //this.generateIC();
+        //this.setStringContent();
     }
 
     public multiplicativeExpression getmE() {
@@ -70,7 +70,10 @@ public class ME_Operation extends multiplicativeExpression{
     
     @Override
     public void generateIC(){
+        mE.generateIC();
+        bE.generateIC();
         this.tempInUse = this.generateCode.generateOperation(mE.getStringContent(), operator, bE.getStringContent());
+        this.setStringContent();
     }
 
     @Override

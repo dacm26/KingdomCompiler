@@ -9,7 +9,7 @@ package app.intermediateCode;
  *
  * @author douglasortega
  */
-public class Row {
+public class RowIC {
     
     private String op;
     private String arg1;
@@ -48,7 +48,7 @@ public class Row {
         this.op = op;
     }
 
-    public Row(String op, String arg1, String arg2, String res) {
+    public RowIC(String op, String arg1, String arg2, String res) {
         this.op = op;
         this.arg1 = arg1;
         this.arg2 = arg2;

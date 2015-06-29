@@ -56,7 +56,6 @@ public class Generate {
     
     public void generateTag(String tag){
         cuadruplo.addRow("ETIQ", tag, "", "");
-        tagIndex++;
     }
 
     public String generateTag(){
@@ -89,21 +88,24 @@ public class Generate {
         cuadruplo.addTempRow("=",right, "", left);
     }
 
-    public void generateIfStatement(String operation, String tag, compoundStatement stm){
+    public void generateIfStatement(String operation, String tag, compoundStatement stm, compoundStatement stmElse){
         cuadruplo.addRow("IF",operation,"true",tag);
         cuadruplo.addRow("goto", "etiq"+tagIndex, "", "" );
         String falseTag = "etiq"+tagIndex;
+        tagIndex++;
         generateTag(tag);
         stm.generateIC();
         generateTag(falseTag);
-        tagIndex++;
+        if(stmElse != null){
+            stmElse.generateIC();
+        }
     }
 
-    public ArrayList<Row> getCodeBlock(){
+    public ArrayList<RowIC> getCodeBlock(){
         return cuadruplo.getTempRow();
     }
 
-    public void flushCodeBlock(ArrayList<Row> t){
+    public void flushCodeBlock(ArrayList<RowIC> t){
         cuadruplo.flushRows(t);
     }
 

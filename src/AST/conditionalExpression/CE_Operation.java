@@ -21,16 +21,14 @@ public class CE_Operation extends conditionalExpression{
     private equalityExpression eE;
     private Generate generateCode;
     private String tempInUse;
-    private ArrayList<Row> rows;
+    private ArrayList<RowIC> rows;
 
     public CE_Operation(conditionalExpression cE, String operator, equalityExpression eE, Generate generateCode) {
         this.cE = cE;
         this.operator = operator;
         this.eE = eE;
         this.generateCode = generateCode;
-        this.generateIC();
-        this.setStringContent();
-        System.out.println("cE");
+        //this.generateIC();
     }
 
     public conditionalExpression getcE() {
@@ -41,15 +39,15 @@ public class CE_Operation extends conditionalExpression{
         this.cE = cE;
     }
 
-    public void setRows(ArrayList<Row> t){
+    public void setRows(ArrayList<RowIC> t){
         rows = t;
     }
     
-    public void setCodeBlock(ArrayList<Row> t){
+    public void setCodeBlock(ArrayList<RowIC> t){
         rows = t;
     }
 
-    public ArrayList<Row> getCodeBlock(){
+    public ArrayList<RowIC> getCodeBlock(){
         return rows;
     }
 
@@ -81,7 +79,10 @@ public class CE_Operation extends conditionalExpression{
     
     @Override
     public void generateIC(){
+        eE.generateIC();
+        cE.generateIC();
         this.tempInUse = this.generateCode.generateOperation(cE.getStringContent(), operator, eE.getStringContent());
+        this.setStringContent();
     }
 
     @Override

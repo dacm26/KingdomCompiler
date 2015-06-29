@@ -44,6 +44,10 @@ public class BE_primaryExpression extends basicExpression{
         }
     }
 
+    public void generateIC(){
+        this.setStringContent();
+    }
+
     public String getStringContent(){
         return this.stringContent;
     }

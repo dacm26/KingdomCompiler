@@ -21,7 +21,7 @@ public class AE_multiplicativeExpression extends additiveExpression{
     public AE_multiplicativeExpression(multiplicativeExpression mE, Generate generateCode) {
         this.mE = mE;
         this.generateCode = generateCode;
-        this.setStringContent();
+        //this.setStringContent();
     }
 
     public multiplicativeExpression getbE() {
@@ -55,6 +55,8 @@ public class AE_multiplicativeExpression extends additiveExpression{
     
     @Override
     public void generateIC(){
+        mE.generateIC();
+        this.setStringContent();
     }
 
     @Override

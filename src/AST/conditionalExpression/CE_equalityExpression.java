@@ -9,6 +9,7 @@ import AST.equalityExpression.*;
 import app.intermediateCode.*;
 import app.semanticAnalysis.Table.Node;
 import java.util.ArrayList;
+import java.util.Queue;
 /**
  *
  * @author Daniel
@@ -18,12 +19,12 @@ public class CE_equalityExpression extends conditionalExpression{
     private String stringContent;
     private int result;
     private Generate generateCode;
-    private ArrayList<Row> row;
+    private ArrayList<RowIC> row;
+    private Queue<ArrayList<RowIC>> queue;
 
     public CE_equalityExpression(equalityExpression eE, Generate generateCode) {
         this.generateCode = generateCode;
         this.eE = eE;
-        this.setStringContent();
         this.row = new ArrayList<>();
     }
 
@@ -35,11 +36,11 @@ public class CE_equalityExpression extends conditionalExpression{
         this.eE = eE;
     }
 
-    public ArrayList<Row> getCodeBlock(){
+    public ArrayList<RowIC> getCodeBlock(){
         return row;
     }
 
-    public void setCodeBlock(ArrayList<Row> t){
+    public void setCodeBlock(ArrayList<RowIC> t){
         row = t;
     }
 
@@ -61,6 +62,8 @@ public class CE_equalityExpression extends conditionalExpression{
     
     @Override
     public void generateIC(){
+        eE.generateIC();
+        this.setStringContent();
     }
 
     @Override

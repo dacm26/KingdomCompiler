@@ -28,8 +28,8 @@ public class RE_Operation extends relationalExpression {
         this.operator = operator;
         this.aE = aE;
         this.generateCode = generateCode;
-        this.generateIC();
-        this.setStringContent();
+        //this.generateIC();
+        //this.setStringContent();
     }
 
     public relationalExpression getrE() {
@@ -72,7 +72,11 @@ public class RE_Operation extends relationalExpression {
 
     @Override
     public void generateIC() {
+        aE.generateIC();
+        rE.generateIC();
+        
         this.tempInUse = this.generateCode.generateOperation(rE.getStringContent(), operator, aE.getStringContent());
+        this.setStringContent();
     }
 
     @Override

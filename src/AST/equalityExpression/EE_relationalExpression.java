@@ -50,6 +50,8 @@ public class EE_relationalExpression extends equalityExpression{
 
     @Override
     public void generateIC(){
+        rE.generateIC();
+        this.setStringContent();
     }
     
     @Override

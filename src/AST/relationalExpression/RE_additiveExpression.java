@@ -50,6 +50,8 @@ public class RE_additiveExpression extends relationalExpression{
 
     @Override
     public void generateIC(){
+        aE.generateIC();
+        this.setStringContent();
     }
 
     @Override

@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class Cuadruplo {
     
-    private ArrayList<Row> rows;
-    private ArrayList<Row> temprows;
+    private ArrayList<RowIC> rows;
+    private ArrayList<RowIC> temprows;
     private int currentIndex;
 
     public Cuadruplo() {
@@ -23,30 +23,30 @@ public class Cuadruplo {
         temprows = new ArrayList<>();
     }
 
-    public ArrayList<Row> getRows() {
+    public ArrayList<RowIC> getRows() {
         return rows;
     }
 
-    public void setRows(ArrayList<Row> rows) {
+    public void setRows(ArrayList<RowIC> rows) {
         this.rows = rows;
     }
     
     public void addRow(String op, String arg1, String arg2, String res){
-        rows.add(new Row(op, arg1, arg2, res));
+        rows.add(new RowIC(op, arg1, arg2, res));
         currentIndex++;
     }
 
-    public void addRow(Row row){
+    public void addRow(RowIC row){
         rows.add(row);
         currentIndex++;
     }
 
     public void addTempRow(String op, String arg1, String arg2, String res){
-        temprows.add(new Row(op, arg1, arg2, res));
+        temprows.add(new RowIC(op, arg1, arg2, res));
     }
 
-    public void flushRows(ArrayList<Row> rowsArray){
-        for(Row x: rowsArray){
+    public void flushRows(ArrayList<RowIC> rowsArray){
+        for(RowIC x: rowsArray){
             addRow(x);
         }
     }
@@ -55,7 +55,7 @@ public class Cuadruplo {
         temprows.clear();
     }
 
-    public ArrayList<Row> getTempRow(){
+    public ArrayList<RowIC> getTempRow(){
         return temprows;
     }
 
@@ -64,12 +64,9 @@ public class Cuadruplo {
     }
 
     public void print() {
-        for (Row x: rows){
+        for (RowIC x: rows){
             System.out.println(x.toString());
         }
     }
 
-    public void complete(int index){
-        
-    }
 }

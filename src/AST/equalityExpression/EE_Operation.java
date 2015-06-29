@@ -26,8 +26,8 @@ public class EE_Operation extends equalityExpression{
         this.operator = operator;
         this.rE = rE;
         this.generateCode = generateCode;
-        this.generateIC();
-        this.setStringContent();
+        //this.generateIC();
+        //this.setStringContent();
     }
 
     public equalityExpression geteE() {
@@ -66,7 +66,10 @@ public class EE_Operation extends equalityExpression{
     
     @Override
     public void generateIC(){
+        eE.generateIC();
+        rE.generateIC();
         this.tempInUse = this.generateCode.generateOperation(eE.getStringContent(), operator, rE.getStringContent());
+        this.setStringContent();
     }
 
     @Override

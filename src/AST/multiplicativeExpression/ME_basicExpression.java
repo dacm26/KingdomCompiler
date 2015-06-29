@@ -23,7 +23,7 @@ public class ME_basicExpression extends multiplicativeExpression {
     public ME_basicExpression(basicExpression bE, Generate generateCode) {
         this.bE = bE;
         this.generateCode = generateCode;
-        this.setStringContent();
+        //this.setStringContent();
     }
 
     public basicExpression getbE() {
@@ -51,6 +51,8 @@ public class ME_basicExpression extends multiplicativeExpression {
     
     @Override
     public void generateIC(){
+        bE.generateIC();
+        this.setStringContent();
     }
 
     @Override

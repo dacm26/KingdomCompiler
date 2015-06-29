@@ -17,4 +17,5 @@ abstract public class basicExpression {
     abstract public int getType(Node symbolTable);
     abstract public void setStringContent();
     abstract public String getStringContent();
+    abstract public void generateIC();
 }

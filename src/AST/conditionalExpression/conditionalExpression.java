@@ -19,6 +19,6 @@ abstract public class conditionalExpression {
   abstract public void generateIC();
   abstract public void setStringContent();
   abstract public String getStringContent();
-  abstract public void setCodeBlock(ArrayList<Row> t);
-  abstract public ArrayList<Row> getCodeBlock();
+  abstract public void setCodeBlock(ArrayList<RowIC> t);
+  abstract public ArrayList<RowIC> getCodeBlock();
 }
