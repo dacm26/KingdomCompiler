@@ -28,7 +28,8 @@ public class IOE_Scan extends ioExpressions{
         this.id = id;
     }
 
-    public void generateIC(){
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
         this.generateCode.generateScan(id);
     }
 
@@ -43,7 +44,6 @@ public class IOE_Scan extends ioExpressions{
         if (!symbolNode.search(id)) {
             String errorMsg = "Semantic Error: The id: \'"+id+"\' doesn\'t exists";
             System.err.println(errorMsg);
-            symbolNode.setErrors();
         }
     }
     
