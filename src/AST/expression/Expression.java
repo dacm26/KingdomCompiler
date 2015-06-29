@@ -21,11 +21,10 @@ public class Expression {
     private int result;
     private Generate generateCode;
 
-    public Expression(conditionalExpression ConditionalExpression) {
+    public Expression(conditionalExpression ConditionalExpression, Generate generateCode) {
         this.ConditionalExpression = ConditionalExpression;
+        this.generateCode = generateCode;
         this.setStringContent();
-        System.out.println(stringContent);
-        System.out.println(result);
     }
 
     public conditionalExpression getConditionalExpression() {
@@ -36,19 +35,16 @@ public class Expression {
         this.ConditionalExpression = ConditionalExpression;
     }
 
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
+    public void generateIC(){
     }
 
     public void setStringContent(){
         if (ConditionalExpression instanceof CE_equalityExpression){
             CE_equalityExpression cE = (CE_equalityExpression) ConditionalExpression;
             this.stringContent = cE.getStringContent();
-            this.result = cE.getResult();
         } else {
             CE_Operation cE = (CE_Operation) ConditionalExpression;
             this.stringContent = cE.getStringContent();
-            this.result = cE.getResult();
         }
     }
 

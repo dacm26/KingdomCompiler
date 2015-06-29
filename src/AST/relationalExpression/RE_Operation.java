@@ -21,11 +21,14 @@ public class RE_Operation extends relationalExpression {
     private int result;
     private additiveExpression aE;
     private Generate generateCode;
+    private String tempInUse;
 
-    public RE_Operation(relationalExpression rE, String operator, additiveExpression aE) {
+    public RE_Operation(relationalExpression rE, String operator, additiveExpression aE, Generate generateCode) {
         this.rE = rE;
         this.operator = operator;
         this.aE = aE;
+        this.generateCode = generateCode;
+        this.generateIC();
         this.setStringContent();
     }
 
@@ -53,48 +56,12 @@ public class RE_Operation extends relationalExpression {
         this.aE = aE;
     }
 
+    @Override
     public void setStringContent(){
-        String right = "";
-        int rightResult;
-        String left = "";
-        int leftResult;
-        if (aE instanceof AE_multiplicativeExpression){
-            AE_multiplicativeExpression aEM = (AE_multiplicativeExpression)aE;
-            right = aEM.getStringContent();
-        } else {
-            AE_Operation aEO = (AE_Operation)aE;
-            right = aEO.getStringContent();
-        }
-        if (rE instanceof RE_additiveExpression){
-            RE_additiveExpression rEA = (RE_additiveExpression)rE;
-            left = rEA.getStringContent();
-            this.stringContent = left + "" + operator + "" + right;
-            switch(operator){
-                case ">":{
-                    this.result = (Integer.parseInt(left) > Integer.parseInt(right))?1:0;
-                    break;
-                }
-                case "<":{
-                    this.result = (Integer.parseInt(left) < Integer.parseInt(right))?1:0;
-                    break;
-                }
-                case ">=":{
-                    this.result = (Integer.parseInt(left) >= Integer.parseInt(right))?1:0;
-                    break;
-                }
-                case "<=":{
-                    this.result = (Integer.parseInt(left) <= Integer.parseInt(right))?1:0;
-                    break;
-                }
-            }
-        } else {
-            RE_Operation rEO = (RE_Operation)rE;
-            left = rEO.getStringContent();
-            this.stringContent = left + "" + operator + "" + right;
-            this.result = rEO.getResult();
-        }
+        stringContent = tempInUse;
     }
 
+    @Override
     public String getStringContent(){
         return this.stringContent;
     }
@@ -104,8 +71,8 @@ public class RE_Operation extends relationalExpression {
     }
 
     @Override
-    public void generateIC(Generate gc) {
-        this.generateCode = gc;
+    public void generateIC() {
+        this.tempInUse = this.generateCode.generateOperation(rE.getStringContent(), operator, aE.getStringContent());
     }
 
     @Override

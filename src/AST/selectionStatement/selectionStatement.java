@@ -15,4 +15,5 @@ import app.semanticAnalysis.Table.Node;
 abstract public class selectionStatement {
     abstract public void printNode();
     abstract public void generateSymbolNode(Node symbolNode);
+    abstract public void generateIC();
 }

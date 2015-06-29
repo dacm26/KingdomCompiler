@@ -6,6 +6,7 @@
 package AST.functionCallsExpression;
 
 import AST.parameterList.parameterList;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 import app.semanticAnalysis.Table.Row;
 import app.semanticAnalysis.Types.FunctionType;
@@ -19,10 +20,12 @@ import java.util.ArrayList;
 public class FCE_FunctionCallsExpression extends functionCallsExpression{
      private String id;
     private parameterList pL;
+    private Generate generateCode;
 
-    public FCE_FunctionCallsExpression(String id, parameterList pL) {
+    public FCE_FunctionCallsExpression(String id, parameterList pL, Generate generateCode) {
         this.id = id;
         this.pL = pL;
+        this.generateCode = generateCode;
     }
 
     public FCE_FunctionCallsExpression(String id) {
@@ -46,6 +49,20 @@ public class FCE_FunctionCallsExpression extends functionCallsExpression{
         this.pL = pL;
     }
 
+    @Override
+    public String getStringContent(){
+        return "";
+    }
+
+    @Override
+    public void setStringContent(){
+
+    }
+
+    @Override
+    public void generateIC(){
+        
+    }
 
     @Override
     public int generateSymbolNode(Node symbolNode) {

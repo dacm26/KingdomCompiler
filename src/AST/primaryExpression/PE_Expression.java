@@ -19,8 +19,9 @@ public class PE_Expression extends primaryExpression{
     private int result;
     private Generate generateCode;
 
-    public PE_Expression(Expression expression) {
+    public PE_Expression(Expression expression,Generate generateCode) {
         this.expression = expression;
+        this.generateCode = generateCode;
         this.setStringContent();
     }
 
@@ -34,20 +35,14 @@ public class PE_Expression extends primaryExpression{
 
     public void setStringContent(){
         this.stringContent = expression.getStringContent();
-        this.result = expression.getResult();
     }
 
     public String getStringContent(){
         return this.stringContent;
     }
-
-    public int getResult(){
-        return this.result; 
-    }
     
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
+    public void generateIC(){
     }
 
     @Override

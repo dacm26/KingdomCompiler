@@ -14,6 +14,7 @@ import app.semanticAnalysis.Table.Node;
  */
 public class S_Declaration extends Statement{
     private Declaration declaration;
+    private Generate generateCode;
 
     public S_Declaration(Declaration declaration) {
         this.declaration = declaration;
@@ -28,8 +29,8 @@ public class S_Declaration extends Statement{
     }
     
     @Override
-    public void generateIC(Generate gc){
-        
+    public void generateIC(){
+        this.declaration.generateIC();
     }
     
     @Override

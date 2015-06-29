@@ -31,9 +31,7 @@ public class PL_Expression extends parameterList{
     }
     
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
-        this.exp.generateIC(this.generateCode);
+    public void generateIC(){
     }
 
     @Override

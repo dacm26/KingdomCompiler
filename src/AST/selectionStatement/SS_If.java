@@ -7,6 +7,7 @@ package AST.selectionStatement;
 
 import AST.conditionalExpression.*;
 import AST.compoundStatement.*;
+import app.intermediateCode.*;
 import app.semanticAnalysis.Table.Node;
 import java.util.ArrayList;
 
@@ -18,10 +19,16 @@ public class SS_If extends selectionStatement {
 
     private conditionalExpression cE;
     private compoundStatement stm;
+    private Generate generateCode;
+    private ArrayList<Row> cER;
 
-    public SS_If(conditionalExpression cE, compoundStatement stm) {
+    public SS_If(conditionalExpression cE, compoundStatement stm, Generate generateCode) {
         this.cE = cE;
         this.stm = stm;
+        this.generateCode = generateCode;
+        this.cER = new ArrayList<Row>(this.generateCode.getCodeBlock());
+        this.generateCode.emptyTemp();
+        this.cE.setCodeBlock(cER);
     }
 
     public conditionalExpression getcE() {
@@ -38,6 +45,13 @@ public class SS_If extends selectionStatement {
 
     public void setStm(compoundStatement stm) {
         this.stm = stm;
+    }
+
+    @Override
+    public void generateIC(){
+        this.generateCode.flushCodeBlock(cE.getCodeBlock());
+        String tag = generateCode.generateTag();
+        this.generateCode.generateIfStatement(cE.getStringContent(),tag,stm);
     }
 
     @Override

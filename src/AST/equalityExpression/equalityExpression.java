@@ -15,5 +15,7 @@ import app.semanticAnalysis.Table.Node;
 abstract public class equalityExpression {
     abstract public void printNode();
     abstract public int getType(Node symbolTable);
-    abstract public void generateIC(Generate gc);
+    abstract public void generateIC();
+    abstract public void setStringContent();
+    abstract public String getStringContent();
 }

@@ -55,7 +55,7 @@ public class FCD_FunctionCallsDeclaration extends functionCallsDeclaration {
         if (this.pL == null){
             this.generateCode.generateFunctionCall(this.id, 0);
         } else {
-            this.pL.generateIC(this.generateCode);
+            //this.pL.generateIC(this.generateCode);
             ArrayList<String> novo = this.convertToString(this.pL.getTypes(symbolNode));
             this.generateCode.generateFunctionCall(this.id, novo.size());
         }

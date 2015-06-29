@@ -19,11 +19,14 @@ public class ME_Operation extends multiplicativeExpression{
     private int result;
     private String stringContent;
     private Generate generateCode;
+    private String tempInUse;
 
-    public ME_Operation(multiplicativeExpression mE, String operator, basicExpression bE) {
+    public ME_Operation(multiplicativeExpression mE, String operator, basicExpression bE, Generate generateCode) {
         this.mE = mE;
         this.operator = operator;
         this.bE = bE;
+        this.generateCode = generateCode;  
+        this.generateIC(); 
         this.setStringContent();
     }
 
@@ -47,47 +50,12 @@ public class ME_Operation extends multiplicativeExpression{
         return bE;
     }
 
+    @Override
     public void setStringContent(){       
-        if (mE instanceof ME_basicExpression){
-            BE_primaryExpression bEP = (BE_primaryExpression)bE;
-            String right = bEP.getStringContent();
-            String left = "";
-            ME_basicExpression mEB = (ME_basicExpression)mE;
-            left = mEB.getStringContent();  
-            this.stringContent = left + "" + this.operator + "" + right;
-            if (mEB.getResult() == Integer.MAX_VALUE || bEP.getResult() == Integer.MAX_VALUE){
-                if (operator == "*")
-                    this.result = Integer.parseInt(left) * Integer.parseInt(right);
-                else 
-                    this.result = Integer.parseInt(left) / Integer.parseInt(right);
-            } else {
-                if (operator == "*")
-                    this.result = mEB.getResult() * bEP.getResult();
-                else 
-                    this.result = mEB.getResult() / bEP.getResult();
-            }
-        } else {
-            System.out.println("hola");
-            BE_primaryExpression bEP = (BE_primaryExpression)bE;
-            String right = bEP.getStringContent();
-            String left = "";
-            ME_Operation mEB = (ME_Operation)mE;
-            left = mEB.getStringContent();  
-            this.stringContent = left + "" + this.operator + "" + right;
-            if (mEB.getResult() == Integer.MAX_VALUE){
-                if (operator == "*")
-                    this.result = mEB.getResult() * bEP.getResult();
-                else 
-                    this.result = mEB.getResult() / bEP.getResult();
-            } else {
-                if (operator == "*")
-                    this.result = mEB.getResult() * bEP.getResult();
-                else 
-                    this.result = mEB.getResult() / bEP.getResult();
-            }
-        }
+        stringContent = tempInUse;
     }
 
+    @Override
     public String getStringContent(){
         return this.stringContent;
     }
@@ -101,8 +69,8 @@ public class ME_Operation extends multiplicativeExpression{
     }
     
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
+    public void generateIC(){
+        this.tempInUse = this.generateCode.generateOperation(mE.getStringContent(), operator, bE.getStringContent());
     }
 
     @Override

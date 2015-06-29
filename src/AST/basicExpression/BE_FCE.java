@@ -16,10 +16,12 @@ import app.semanticAnalysis.Table.Node;
 public class BE_FCE extends basicExpression{
     
     private functionCallsExpression fCE;
+    private String stringContent;
     private Generate generateCode;
 
-    public BE_FCE(functionCallsExpression fCE) {
+    public BE_FCE(functionCallsExpression fCE, Generate generateCode) {
         this.fCE = fCE;
+        this.generateCode = generateCode;
     }
 
     public functionCallsExpression getfCE() {
@@ -29,10 +31,18 @@ public class BE_FCE extends basicExpression{
     public void setfCE(functionCallsExpression fCE) {
         this.fCE = fCE;
     }
-    
+
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
+    public void setStringContent(){
+
+    }
+
+    @Override
+    public String getStringContent(){
+        return this.stringContent;
+    }
+
+    public void generateIC(){
     }
     
     @Override

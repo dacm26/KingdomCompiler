@@ -7,6 +7,7 @@ package AST.declaration;
 
 import AST.expression.Expression;
 import AST.variableTypeSpecifier.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 import app.semanticAnalysis.Table.Row;
 import app.semanticAnalysis.Types.PrimitiveDataType;
@@ -18,19 +19,24 @@ import app.semanticAnalysis.Types.PrimitiveDataType;
 public class D_Assign extends Declaration {
 
     private variableTypeSpecifier type;
+    private Generate generateCode;
     private String id;
     private Expression exp;
 
-    public D_Assign(String id, Expression exp) {
+    public D_Assign(String id, Expression exp, Generate generateCode) {
         this.type = null;
         this.id = id;
         this.exp = exp;
+        this.generateCode = generateCode;
+        generateIC();
     }
 
-    public D_Assign(variableTypeSpecifier type, String id, Expression exp) {
+    public D_Assign(variableTypeSpecifier type, String id, Expression exp, Generate generateCode) {
         this.type = type;
         this.id = id;
         this.exp = exp;
+        this.generateCode = generateCode;
+        generateIC();
     }
 
     public variableTypeSpecifier getType() {
@@ -55,6 +61,11 @@ public class D_Assign extends Declaration {
 
     public void setExp(Expression exp) {
         this.exp = exp;
+    }
+
+    @Override
+    public void generateIC() {
+        //this.generateCode.generateAssign(this.id, this.exp.getStringContent());
     }
 
     @Override
@@ -105,7 +116,7 @@ public class D_Assign extends Declaration {
                 reportSemanticError(type1, type2);
             } else {
                 if ((type1 == type2)) {
-                    symbolNode.add(new Row(id, new PrimitiveDataType(((VTS_Type) this.type).getType(), ((VTS_Type) this.type).getSize()),false));
+                    symbolNode.add(new Row(id, new PrimitiveDataType(((VTS_Type) this.type).getType(), ((VTS_Type) this.type).getSize()), false));
                 } else {
                     reportSemanticError(type1, type2);
                 }
