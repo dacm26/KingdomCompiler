@@ -10,6 +10,8 @@ void KingdomHearts(){
         print("texto1",n);
         print(n);
         print(a1);
+        for(int k=0; x<10; x=k+1){
+        }
 	if ( 3>5 ){
             int x;
             print("texto2");
