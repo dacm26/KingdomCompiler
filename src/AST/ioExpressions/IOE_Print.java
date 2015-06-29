@@ -29,14 +29,12 @@ public class IOE_Print extends ioExpressions {
             this.id = "";
         }
         this.iL = null;
-        this.generateCode = generateCode;
     }
 
     public IOE_Print(String content, parameterList iL) {
         this.content = content;
         this.iL = iL;
         this.id = "";
-        this.generateCode = generateCode;
     }
 
     public String getContent() {
