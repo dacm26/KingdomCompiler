@@ -1064,6 +1064,7 @@ class CUP$parser$actions {
 		int iEleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int iEright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		ioExpressions iE = (ioExpressions)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+<<<<<<< HEAD
 		 RESULT = new S_IOExpression(iE,parser.generateCode); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("statement",20, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -1073,6 +1074,17 @@ class CUP$parser$actions {
           case 32: // statement ::= function_calls_declaration 
             {
               Statement RESULT =null;
+=======
+		 RESULT = new S_IOExpression(iE); 
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("statement",20, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+            }
+          return CUP$parser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 32: // statement ::= function_calls_declaration 
+            {
+              Statement RESULT =null;
+>>>>>>> 6b68787f4bd5042549edc817559886f041633984
 		int fcdleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int fcdright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		functionCallsDeclaration fcd = (functionCallsDeclaration)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;

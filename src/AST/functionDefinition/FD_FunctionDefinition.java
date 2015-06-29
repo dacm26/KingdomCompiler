@@ -164,6 +164,7 @@ public class FD_FunctionDefinition extends functionDefinition {
             }
         } else {
             System.err.println("Semantic Error: The function: \'" + id + "\' already exists.");
+            symbolNode.setErrors();
         }
 
     }

@@ -111,11 +111,13 @@ public class D_Assign extends Declaration {
             }
             if (type1 == -1) {
                 System.err.println("Error, Type mismatch (D_Assign1)");
+                symbolNode.setErrors();
             } else {
                 type2 = this.exp.getExpressionType(symbolNode);
                 if ((type1 == type2)) {
                 } else {
                     reportSemanticError(type1, type2);
+                    symbolNode.setErrors();
                 }
             }
         } else {
@@ -124,11 +126,13 @@ public class D_Assign extends Declaration {
             type2 = this.exp.getExpressionType(symbolNode);
             if (type2 == -1) {
                 reportSemanticError(type1, type2);
+                symbolNode.setErrors();
             } else {
                 if ((type1 == type2)) {
                     symbolNode.add(new Row(id, new PrimitiveDataType(((VTS_Type) this.type).getType(), ((VTS_Type) this.type).getSize()), false));
                 } else {
                     reportSemanticError(type1, type2);
+                    symbolNode.setErrors();
                 }
             }
 

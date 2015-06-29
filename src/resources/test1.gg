@@ -1,4 +1,7 @@
 void KingdomHearts(){
+        int x = 2;
+	if ( 3>5 ){
+        }
 	int i = 3*5;
 	if (3>5){
 		i = 6*7+2;

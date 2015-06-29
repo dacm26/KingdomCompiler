@@ -71,6 +71,7 @@ public class AEX_Assignation extends assignmentExpression {
                 //No se encuentra la variable
                 errorMsg = "Semantic Error: The id: \'" + id + "\' doesn't exists.";
                 System.err.println(errorMsg);
+                symbolNode.setErrors();
                 return false;
             } else {
                 //Se encontro la variable
@@ -79,10 +80,12 @@ public class AEX_Assignation extends assignmentExpression {
                     //Error en la expression
                     errorMsg = "Semantic Error: Something is wrong with the expression.";
                     System.err.println(errorMsg);
+                    symbolNode.setErrors();
                     return false;
                 } else if (type1 != type2) {
                     //No son del mismo tipo
                     reportSemanticError(type1, type2);
+                    symbolNode.setErrors();
                     return false;
                 } else {
                     //Todo suave
@@ -93,6 +96,7 @@ public class AEX_Assignation extends assignmentExpression {
         } else {
             errorMsg = "Semantic Error: You can't create a variable there!";
             System.err.println(errorMsg);
+            symbolNode.setErrors();
             return false;
         }
     }

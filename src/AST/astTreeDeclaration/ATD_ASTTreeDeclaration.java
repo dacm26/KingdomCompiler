@@ -57,6 +57,12 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
         } catch (InterruptedException ex) {
             Logger.getLogger(ATD_ASTTreeDeclaration.class.getName()).log(Level.SEVERE, null, ex);
         }
+        if (symbolNode.error()) {
+            System.err.println("Can't proceed. Check the errors.");
+        }else{
+            System.out.println("No sirve");
+        }
+        //this.generateCode.printIC();
     }
 
     @Override

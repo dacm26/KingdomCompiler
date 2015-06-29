@@ -79,6 +79,7 @@ public class SS_IfSS extends selectionStatement {
             for (Integer type : types) {
                 if (type == -1) {
                     System.err.println(errorMsg);
+                    symbolNode.setErrors();
                     return;
                 } else if (type == 5) {
                     type1 = 5;
@@ -89,6 +90,7 @@ public class SS_IfSS extends selectionStatement {
             type1 = types.get(0);
         } else {
             System.err.println(errorMsg);
+            symbolNode.setErrors();
             return;
         }
         Node novo = new Node();

@@ -28,8 +28,6 @@ public class AE_Operation extends additiveExpression {
         this.operator = operator;
         this.mE = mE;
         this.generateCode = generateCode;
-        //this.generateIC();
-        //this.setStringContent();
     }
 
     public additiveExpression getaE() {

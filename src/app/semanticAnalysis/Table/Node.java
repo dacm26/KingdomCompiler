@@ -12,6 +12,8 @@ import java.util.ArrayList;
  * @author Daniel
  */
 public class Node {
+    
+    private static boolean semanticErrors = false;
 
     private Node imAmYourFather;
     private Table symbolTable;
@@ -39,10 +41,19 @@ public class Node {
             return true;
         }
     }
+    
+    public void setErrors(){
+        semanticErrors = true;
+    }
+    
+    public boolean error(){
+        return semanticErrors;
+    }
 
     public boolean add(Row t) {
         if (this.search(t.getId())) {
             System.err.println("Semantic Error: the id: \"" + t.getId() + "\" already exists.");
+            semanticErrors = true;
             return false;
         } else {
             this.symbolTable.add(t);
