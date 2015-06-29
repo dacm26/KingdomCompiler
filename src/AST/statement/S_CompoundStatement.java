@@ -28,8 +28,8 @@ public class S_CompoundStatement extends Statement{
     }
     
     @Override
-    public void generateIC(Generate gc){
-        this.cS.generateIC(gc);
+    public void generateIC(){
+        this.cS.generateIC();
     }
 
     @Override

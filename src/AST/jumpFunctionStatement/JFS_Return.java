@@ -30,9 +30,7 @@ public class JFS_Return extends jumpFunctionStatement{
     }
     
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
-        this.cS.generateIC(this.generateCode);
+    public void generateIC(){
     }
     
     @Override

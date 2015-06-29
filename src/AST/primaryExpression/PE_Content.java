@@ -62,8 +62,7 @@ public class PE_Content extends primaryExpression{
     }
     
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
+    public void generateIC(){
     }
 
     public Object getContent() {

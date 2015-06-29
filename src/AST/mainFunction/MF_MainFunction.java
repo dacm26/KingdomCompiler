@@ -25,9 +25,10 @@ public class MF_MainFunction extends mainFunction {
     private compoundStatement cS;
     private Generate generateCode;
 
-    public MF_MainFunction(functionTypeSpecifier tS, compoundStatement cS) {
+    public MF_MainFunction(functionTypeSpecifier tS, compoundStatement cS, Generate generateCode) {
         this.tS = tS;
         this.cS = cS;
+        this.generateCode = generateCode;
     }
 
     public functionTypeSpecifier gettS() {
@@ -47,10 +48,8 @@ public class MF_MainFunction extends mainFunction {
     }
 
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
-        this.generateCode.generateTag("main");
-        this.cS.generateIC(this.generateCode);
+    public void generateIC(){
+        this.cS.generateIC();
     }
     
     @Override

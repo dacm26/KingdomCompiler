@@ -21,12 +21,13 @@ public class AE_Operation extends additiveExpression {
     private multiplicativeExpression mE;
     private Generate generateCode;
     private int result;
+    private String tempInUse;
 
-    public AE_Operation(additiveExpression aE, String operator, multiplicativeExpression mE) {
+    public AE_Operation(additiveExpression aE, String operator, multiplicativeExpression mE, Generate generateCode) {
         this.aE = aE;
         this.operator = operator;
         this.mE = mE;
-//        this.setStringContent();
+        this.generateCode = generateCode;
     }
 
     public additiveExpression getaE() {
@@ -54,41 +55,24 @@ public class AE_Operation extends additiveExpression {
     }
 
     public void setStringContent(){
-        String right = "";
-        String left = "";
-        if (mE instanceof ME_basicExpression){
-            ME_basicExpression mEB = (ME_basicExpression)mE;
-            right = mEB.getStringContent();
-            result = mEB.getResult();
-        } else {
-            ME_Operation mEO = (ME_Operation)mE;
-            right = mEO.getStringContent();
-            result = mEO.getResult();
-        }
-        if (aE instanceof AE_multiplicativeExpression){
-            AE_multiplicativeExpression aEM = (AE_multiplicativeExpression)aE;
-            left = aEM.getStringContent();
-            this.stringContent = left + "" + operator + "" + right;
-            result = aEM.getResult() + result;
-        } else{
-            AE_Operation aEO = (AE_Operation)aE;
-            left = aEO.getStringContent();
-            this.stringContent = left + "" + operator + "" + right;
-            result = aEO.getResult() + result;
-        }
+        stringContent = tempInUse;
     }
 
     public int getResult(){
         return this.result;
     }
 
+    @Override
     public String getStringContent(){
         return this.stringContent;
     }
 
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
+    public void generateIC(){
+        aE.generateIC();
+        mE.generateIC();
+        this.tempInUse = this.generateCode.generateOperation(aE.getStringContent(), operator, mE.getStringContent());
+        this.setStringContent();
     }
     
     @Override

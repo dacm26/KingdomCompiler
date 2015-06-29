@@ -16,8 +16,9 @@ public class CS_StatementList extends compoundStatement{
     private statementList sL = null;
     private Generate generateCode;
 
-    public CS_StatementList(statementList sL) {
+    public CS_StatementList(statementList sL, Generate generateCode) {
         this.sL = sL;
+        this.generateCode = generateCode;
     }
 
     public statementList getsL() {
@@ -29,9 +30,8 @@ public class CS_StatementList extends compoundStatement{
     }
 
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
-        this.sL.generateIC(this.generateCode);
+    public void generateIC(){
+        this.sL.generateIC();
     }
     
     @Override

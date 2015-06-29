@@ -6,7 +6,7 @@
 
 package AST.conditionalExpression;
 import AST.equalityExpression.*;
-import app.intermediateCode.Generate;
+import app.intermediateCode.*;
 import app.semanticAnalysis.Table.Node;
 import java.util.ArrayList;
 /**
@@ -20,11 +20,15 @@ public class CE_Operation extends conditionalExpression{
     private String operator;
     private equalityExpression eE;
     private Generate generateCode;
+    private String tempInUse;
+    private ArrayList<RowIC> rows;
 
-    public CE_Operation(conditionalExpression cE, String operator, equalityExpression eE) {
+    public CE_Operation(conditionalExpression cE, String operator, equalityExpression eE, Generate generateCode) {
         this.cE = cE;
         this.operator = operator;
         this.eE = eE;
+        this.generateCode = generateCode;
+        //this.generateIC();
     }
 
     public conditionalExpression getcE() {
@@ -33,6 +37,18 @@ public class CE_Operation extends conditionalExpression{
 
     public void setcE(conditionalExpression cE) {
         this.cE = cE;
+    }
+
+    public void setRows(ArrayList<RowIC> t){
+        rows = t;
+    }
+    
+    public void setCodeBlock(ArrayList<RowIC> t){
+        rows = t;
+    }
+
+    public ArrayList<RowIC> getCodeBlock(){
+        return rows;
     }
 
     public String getOperator() {
@@ -51,57 +67,22 @@ public class CE_Operation extends conditionalExpression{
         this.eE = eE;
     }
 
+    @Override
     public void setStringContent(){
-        String left = "";
-        int leftResult;
-        String right = "";
-        int rightResult;
-        if (eE instanceof EE_relationalExpression){
-            EE_relationalExpression eER = (EE_relationalExpression)eE;
-            right = eER.getStringContent();
-        } else {
-            EE_Operation eEO = (EE_Operation)eE;
-            right = eEO.getStringContent();
-        }
-        if (cE instanceof CE_equalityExpression){
-            CE_equalityExpression cEE = (CE_equalityExpression)cE;
-            left = cEE.getStringContent();
-            stringContent = left + "" + operator + "" + right;
-            switch(operator){
-                case "&&":{
-
-                    break;
-                }
-                case "||":{
-                    break;
-                }
-            }
-        } else {
-            CE_Operation cEE = (CE_Operation)cE;
-            left = cEE.getStringContent();
-            stringContent = left + "" + operator + "" + right;
-            switch(operator){
-                case "&&":{
-                    break;
-                }
-                case "||":{
-                    break;
-                }
-            }
-        }
+        stringContent = tempInUse;
     }
 
+    @Override
     public String getStringContent(){
         return this.stringContent;
     }
-
-    public int getResult(){
-        return result;
-    }
     
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
+    public void generateIC(){
+        eE.generateIC();
+        cE.generateIC();
+        this.tempInUse = this.generateCode.generateOperation(cE.getStringContent(), operator, eE.getStringContent());
+        this.setStringContent();
     }
 
     @Override

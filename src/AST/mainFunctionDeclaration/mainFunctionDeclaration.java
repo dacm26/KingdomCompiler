@@ -16,5 +16,5 @@ import app.intermediateCode.Generate;
 abstract public class mainFunctionDeclaration {
     abstract public void printNode();
     abstract public void generateSymbolNode(Node symbolNode);
-    abstract public void generateIC(Generate gc);
+    abstract public void generateIC();
 }

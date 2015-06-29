@@ -18,5 +18,5 @@ public abstract class parameterList {
     abstract public void generateSymbolNode(Node symbolNode);
     abstract public boolean validExpression(Node symbolNode);
     abstract public ArrayList<Integer> getTypes(Node symbolNode);
-    abstract public void generateIC(Generate gc);
+    abstract public void generateIC();
 }

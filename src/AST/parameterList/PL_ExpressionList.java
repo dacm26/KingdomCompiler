@@ -42,10 +42,7 @@ public class PL_ExpressionList extends parameterList {
     }
     
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
-        this.pL.generateIC(this.generateCode);
-        this.exp.generateIC(this.generateCode);
+    public void generateIC(){
     }
     
     @Override

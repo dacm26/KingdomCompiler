@@ -18,9 +18,9 @@ public class AE_multiplicativeExpression extends additiveExpression{
     private int result;
     private Generate generateCode;
 
-    public AE_multiplicativeExpression(multiplicativeExpression mE) {
+    public AE_multiplicativeExpression(multiplicativeExpression mE, Generate generateCode) {
         this.mE = mE;
-//        this.setStringContent();
+        this.generateCode = generateCode;
     }
 
     public multiplicativeExpression getbE() {
@@ -35,11 +35,11 @@ public class AE_multiplicativeExpression extends additiveExpression{
         if (mE instanceof ME_basicExpression){
             ME_basicExpression mEB = (ME_basicExpression)mE;
             this.stringContent = mEB.getStringContent();
-            this.result = mEB.getResult();
+            //this.result = mEB.getResult();
         } else {
             ME_Operation mEO = (ME_Operation)mE;
             this.stringContent = mEO.getStringContent();
-            this.result = mEO.getResult();
+            //this.result = mEO.getResult();
         }
     }
 
@@ -47,13 +47,15 @@ public class AE_multiplicativeExpression extends additiveExpression{
         return result;
     }
 
+    @Override
     public String getStringContent(){
         return this.stringContent;
     }
     
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
+    public void generateIC(){
+        mE.generateIC();
+        this.setStringContent();
     }
 
     @Override

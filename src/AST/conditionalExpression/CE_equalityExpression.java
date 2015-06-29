@@ -6,9 +6,10 @@
 
 package AST.conditionalExpression;
 import AST.equalityExpression.*;
-import app.intermediateCode.Generate;
+import app.intermediateCode.*;
 import app.semanticAnalysis.Table.Node;
 import java.util.ArrayList;
+import java.util.Queue;
 /**
  *
  * @author Daniel
@@ -18,10 +19,13 @@ public class CE_equalityExpression extends conditionalExpression{
     private String stringContent;
     private int result;
     private Generate generateCode;
+    private ArrayList<RowIC> row;
+    private Queue<ArrayList<RowIC>> queue;
 
-    public CE_equalityExpression(equalityExpression eE) {
+    public CE_equalityExpression(equalityExpression eE, Generate generateCode) {
+        this.generateCode = generateCode;
         this.eE = eE;
-//        this.setStringContent();
+        this.row = new ArrayList<>();
     }
 
     public equalityExpression geteE() {
@@ -32,29 +36,34 @@ public class CE_equalityExpression extends conditionalExpression{
         this.eE = eE;
     }
 
+    public ArrayList<RowIC> getCodeBlock(){
+        return row;
+    }
+
+    public void setCodeBlock(ArrayList<RowIC> t){
+        row = t;
+    }
+
+    @Override
     public void setStringContent(){
         if (eE instanceof EE_relationalExpression){
             EE_relationalExpression rEO = (EE_relationalExpression)eE;
             this.stringContent = rEO.getStringContent();
-            this.result = rEO.getResult();
         } else {
             EE_Operation rEO = (EE_Operation)eE;
             this.stringContent = rEO.getStringContent();
-            this.result = rEO.getResult();
         }
     }
 
+    @Override
     public String getStringContent(){
         return this.stringContent;
     }
-
-    public int getResult(){
-        return result;
-    }
     
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
+    public void generateIC(){
+        eE.generateIC();
+        this.setStringContent();
     }
 
     @Override

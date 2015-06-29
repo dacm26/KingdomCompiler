@@ -7,6 +7,7 @@ package AST.expression;
 
 import AST.conditionalExpression.*;
 import app.intermediateCode.Generate;
+import app.intermediateCode.RowIC;
 import app.semanticAnalysis.Table.Node;
 import java.util.ArrayList;
 
@@ -20,35 +21,41 @@ public class Expression {
     private String stringContent;
     private int result;
     private Generate generateCode;
+    private ArrayList<RowIC> row;
 
-    public Expression(conditionalExpression ConditionalExpression) {
+    public Expression(conditionalExpression ConditionalExpression, Generate generateCode) {
         this.ConditionalExpression = ConditionalExpression;
-//        this.setStringContent();
-        System.out.println(stringContent);
-        System.out.println(result);
+        this.generateCode = generateCode;
     }
 
     public conditionalExpression getConditionalExpression() {
         return ConditionalExpression;
     }
 
+    public ArrayList<RowIC> getCodeBlock(){
+        return row;
+    }
+
+    public void setCodeBlock(ArrayList<RowIC> t){
+        row = t;
+    }
+
     public void setConditionalExpression(conditionalExpression ConditionalExpression) {
         this.ConditionalExpression = ConditionalExpression;
     }
 
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
+    public void generateIC(){
+        ConditionalExpression.generateIC();
+        this.setStringContent();
     }
 
     public void setStringContent(){
         if (ConditionalExpression instanceof CE_equalityExpression){
             CE_equalityExpression cE = (CE_equalityExpression) ConditionalExpression;
             this.stringContent = cE.getStringContent();
-            this.result = cE.getResult();
         } else {
             CE_Operation cE = (CE_Operation) ConditionalExpression;
             this.stringContent = cE.getStringContent();
-            this.result = cE.getResult();
         }
     }
 
