@@ -32,18 +32,20 @@ public class FD_FunctionDefinition extends functionDefinition {
     private compoundStatement cS;
     private Generate generateCode;
 
-    public FD_FunctionDefinition(functionTypeSpecifier type, String id, compoundStatement cS) {
+    public FD_FunctionDefinition(functionTypeSpecifier type, String id, compoundStatement cS, Generate generateCode) {
         this.type = type;
         this.id = id;
         this.pL = null;
         this.cS = cS;
+        this.generateCode = generateCode;
     }
 
-    public FD_FunctionDefinition(functionTypeSpecifier type, String id, typeParameterList pL, compoundStatement cS) {
+    public FD_FunctionDefinition(functionTypeSpecifier type, String id, typeParameterList pL, compoundStatement cS, Generate generateCode) {
         this.type = type;
         this.id = id;
         this.pL = pL;
         this.cS = cS;
+        this.generateCode = generateCode;
     }
 
     public functionTypeSpecifier getType() {
@@ -80,6 +82,8 @@ public class FD_FunctionDefinition extends functionDefinition {
 
     @Override
     public void generateIC(){
+        this.generateCode.generateTag(id);
+        this.cS.generateIC();
     }
     
     @Override

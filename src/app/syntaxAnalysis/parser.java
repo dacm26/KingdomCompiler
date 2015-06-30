@@ -689,7 +689,7 @@ class CUP$parser$actions {
 		int cSleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int cSright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		compoundStatement cS = (compoundStatement)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new FD_FunctionDefinition(tS,id,cS);RESULT.setLine(tSleft); 
+		 RESULT = new FD_FunctionDefinition(tS,id,cS,parser.generateCode);RESULT.setLine(tSleft); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("function_definition",3, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -710,7 +710,7 @@ class CUP$parser$actions {
 		int cSleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int cSright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		compoundStatement cS = (compoundStatement)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new FD_FunctionDefinition(tS,id,pL,cS);RESULT.setLine(tSleft); 
+		 RESULT = new FD_FunctionDefinition(tS,id,pL,cS,parser.generateCode);RESULT.setLine(tSleft); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("function_definition",3, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

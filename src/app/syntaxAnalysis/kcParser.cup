@@ -178,9 +178,9 @@ main_function ::= VOID MAIN OPAR CPAR compound_statement:cS											{: RESULT 
 
 /*Function Declaration*/
 function_definition ::= function_type_specifier:tS ID:id OPAR CPAR 
-	compound_statement:cS 															    			{: RESULT = new FD_FunctionDefinition(tS,id,cS);RESULT.setLine(tSleft); :}  
+	compound_statement:cS 															    			{: RESULT = new FD_FunctionDefinition(tS,id,cS,parser.generateCode);RESULT.setLine(tSleft); :}  
 	| function_type_specifier:tS ID:id OPAR type_parameter_list:pL CPAR
-	compound_statement:cS 						 													{: RESULT = new FD_FunctionDefinition(tS,id,pL,cS);RESULT.setLine(tSleft); :}  
+	compound_statement:cS 						 													{: RESULT = new FD_FunctionDefinition(tS,id,pL,cS,parser.generateCode);RESULT.setLine(tSleft); :}  
 	;
 
 /*Jump Statements*/
