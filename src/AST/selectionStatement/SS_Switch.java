@@ -6,6 +6,7 @@
 package AST.selectionStatement;
 
 import AST.labeledStatement.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -16,10 +17,12 @@ public class SS_Switch extends selectionStatement {
 
     private String id;
     private labeledStatement lS;
+    private Generate generateCode;
 
-    public SS_Switch(String id, labeledStatement lS) {
+    public SS_Switch(String id, labeledStatement lS, Generate generateCode) {
         this.id = id;
         this.lS = lS;
+        this.generateCode = generateCode;
     }
 
     public String getid() {
@@ -36,6 +39,11 @@ public class SS_Switch extends selectionStatement {
 
     public void setlS(labeledStatement lS) {
         this.lS = lS;
+    }
+
+    @Override
+    public void generateIC(){
+
     }
 
     @Override

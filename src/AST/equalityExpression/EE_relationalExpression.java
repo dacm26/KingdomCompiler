@@ -18,9 +18,10 @@ public class EE_relationalExpression extends equalityExpression{
     private int result;
     private Generate generateCode;
 
-    public EE_relationalExpression(relationalExpression rE) {
+    public EE_relationalExpression(relationalExpression rE, Generate generateCode) {
         this.rE = rE;
-//        this.setStringContent();
+        this.generateCode = generateCode;
+        this.setStringContent();
     }
 
     public relationalExpression getrE() {
@@ -31,29 +32,26 @@ public class EE_relationalExpression extends equalityExpression{
         this.rE = rE;
     }
 
+    @Override
     public void setStringContent(){
         if (rE instanceof RE_additiveExpression){
             RE_additiveExpression rEO = (RE_additiveExpression)rE;
             this.stringContent = rEO.getStringContent();
-            this.result = rEO.getResult();
         } else {
             RE_Operation rEO = (RE_Operation)rE;
             this.stringContent = rEO.getStringContent();
-            this.result = rEO.getResult();
         }
     }
 
+    @Override
     public String getStringContent(){
         return this.stringContent;
     }
 
-    public int getResult(){
-        return result;
-    }
-
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
+    public void generateIC(){
+        rE.generateIC();
+        this.setStringContent();
     }
     
     @Override

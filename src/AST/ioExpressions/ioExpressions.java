@@ -17,4 +17,5 @@ abstract public class ioExpressions {
     abstract public void setLine(int line);
     abstract public int getLine();
     protected int line;
+    abstract public void generateIC();
 }

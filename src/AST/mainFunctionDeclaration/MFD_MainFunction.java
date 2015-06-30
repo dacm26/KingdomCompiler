@@ -16,8 +16,9 @@ public class MFD_MainFunction extends mainFunctionDeclaration{
     private mainFunction mF;
     private Generate generateCode;
 
-    public MFD_MainFunction(mainFunction mF) {
+    public MFD_MainFunction(mainFunction mF, Generate generateCode) {
         this.mF = mF;
+        this.generateCode = generateCode;
     }
 
     public mainFunction getmF() {
@@ -29,9 +30,9 @@ public class MFD_MainFunction extends mainFunctionDeclaration{
     }
 
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;        
-        this.mF.generateIC(generateCode);
+    public void generateIC(){
+        this.generateCode.generateTag("main:");
+        this.mF.generateIC();
     }
 
     @Override

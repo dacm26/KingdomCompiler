@@ -1,6 +1,3 @@
-void PopeyeFuncion(int p, bool t){
-}
-
 void KingdomHearts(){
     int x = 16;
     print("\n",x);

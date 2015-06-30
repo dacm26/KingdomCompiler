@@ -16,8 +16,9 @@ import app.semanticAnalysis.Table.Node;
 abstract public class Statement {
     abstract public void printNode();
     abstract public void generateSymbolNode(Node symbolNode);
-    abstract public void generateIC(Generate gc);
     abstract public void setLine(int line);
     abstract public int getLine();
     protected int line;
+
+    abstract public void generateIC();
 }

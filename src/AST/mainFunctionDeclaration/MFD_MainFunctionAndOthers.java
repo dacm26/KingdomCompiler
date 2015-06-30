@@ -18,9 +18,10 @@ public class MFD_MainFunctionAndOthers extends mainFunctionDeclaration{
     private mainFunctionDeclaration mFD;
     private Generate generateCode;
 
-    public MFD_MainFunctionAndOthers(functionDefinition fD, mainFunctionDeclaration mFD) {
+    public MFD_MainFunctionAndOthers(functionDefinition fD, mainFunctionDeclaration mFD, Generate generateCode) {
         this.fD = fD;
         this.mFD = mFD;
+        this.generateCode = generateCode;
     }
 
     public functionDefinition getfD() {
@@ -40,11 +41,9 @@ public class MFD_MainFunctionAndOthers extends mainFunctionDeclaration{
     }
     
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
-        this.fD.generateIC(generateCode); 
-        this.mFD.generateIC(generateCode);
-               
+    public void generateIC(){
+        this.mFD.generateIC();
+        this.fD.generateIC();
     }
 
     @Override

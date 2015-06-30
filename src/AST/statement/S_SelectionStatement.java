@@ -14,9 +14,11 @@ import app.semanticAnalysis.Table.Node;
  */
 public class S_SelectionStatement extends Statement{
     private selectionStatement sS;
+    private Generate generateCode;
 
-    public S_SelectionStatement(selectionStatement sS) {
+    public S_SelectionStatement(selectionStatement sS, Generate generateCode) {
         this.sS = sS;
+        this.generateCode = generateCode;
     }
 
     public selectionStatement getsS() {
@@ -28,8 +30,8 @@ public class S_SelectionStatement extends Statement{
     }
 
     @Override
-    public void generateIC(Generate gc){
-        
+    public void generateIC(){
+        this.sS.generateIC();
     }
     
     @Override

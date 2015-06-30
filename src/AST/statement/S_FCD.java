@@ -31,9 +31,7 @@ public class S_FCD extends Statement{
     }
     
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
-        this.fCD.generateIC(this.generateCode, this.symbolN);
+    public void generateIC(){
     }
 
     @Override

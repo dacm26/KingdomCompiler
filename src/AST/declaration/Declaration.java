@@ -5,6 +5,7 @@
  */
 
 package AST.declaration;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -18,4 +19,5 @@ abstract public class Declaration {
     abstract public int getLine();
     protected int line;
     abstract public void generateConstants(Node symbolNode);
+    abstract public void generateIC();
 }

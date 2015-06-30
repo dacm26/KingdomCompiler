@@ -15,8 +15,8 @@ import app.semanticAnalysis.Table.Node;
 public abstract class jumpFunctionStatement {
     public abstract void printNode();
     abstract public int generateSymbolNode(Node symbolNode);
-    abstract public void generateIC(Generate gc);
     abstract public void setLine(int line);
     abstract public int getLine();
     protected int line;
+    abstract public void generateIC();
 }

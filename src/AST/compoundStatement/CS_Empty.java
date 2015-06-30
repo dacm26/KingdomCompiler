@@ -19,9 +19,8 @@ public class CS_Empty extends compoundStatement{
     }
 
     @Override
-    public void generateIC(Generate gc){
-        
-    }
+    public void generateIC(){
+    }    
     
     @Override
     public void printNode() {

@@ -7,9 +7,12 @@ package AST.declaration;
 
 import AST.expression.Expression;
 import AST.variableTypeSpecifier.*;
+import app.intermediateCode.Generate;
+import app.intermediateCode.RowIC;
 import app.semanticAnalysis.Table.Node;
 import app.semanticAnalysis.Table.Row;
 import app.semanticAnalysis.Types.PrimitiveDataType;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,19 +21,31 @@ import app.semanticAnalysis.Types.PrimitiveDataType;
 public class D_Assign extends Declaration {
 
     private variableTypeSpecifier type;
+    private Generate generateCode;
     private String id;
     private Expression exp;
+    private ArrayList<RowIC> cER;
 
-    public D_Assign(String id, Expression exp) {
+    public D_Assign(String id, Expression exp, Generate generateCode) {
         this.type = null;
         this.id = id;
         this.exp = exp;
+        this.generateCode = generateCode;
+        exp.generateIC();
+        this.cER = new ArrayList<RowIC>(this.generateCode.getCodeBlock());
+        this.generateCode.emptyTemp();
+        this.exp.setCodeBlock(cER);
     }
 
-    public D_Assign(variableTypeSpecifier type, String id, Expression exp) {
+    public D_Assign(variableTypeSpecifier type, String id, Expression exp, Generate generateCode) {
         this.type = type;
         this.id = id;
         this.exp = exp;
+        this.generateCode = generateCode;
+        exp.generateIC();
+        this.cER = new ArrayList<RowIC>(this.generateCode.getCodeBlock());
+        this.generateCode.emptyTemp();
+        this.exp.setCodeBlock(cER);
     }
 
     public variableTypeSpecifier getType() {
@@ -55,6 +70,12 @@ public class D_Assign extends Declaration {
 
     public void setExp(Expression exp) {
         this.exp = exp;
+    }
+
+    @Override
+    public void generateIC() {
+        this.generateCode.flushCodeBlock(exp.getCodeBlock());
+        this.generateCode.generateAssign(this.id, this.exp.getStringContent());
     }
 
     @Override

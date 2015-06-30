@@ -20,8 +20,7 @@ public class JFS_EmptyReturn extends jumpFunctionStatement{
     }
     
     @Override
-    public void generateIC(Generate gc){
-       this.generateCode = gc;
+    public void generateIC(){
     }
     
     @Override

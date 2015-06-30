@@ -20,9 +20,9 @@ public class ME_basicExpression extends multiplicativeExpression {
     private int result;
     private Generate generateCode;
 
-    public ME_basicExpression(basicExpression bE) {
+    public ME_basicExpression(basicExpression bE, Generate generateCode) {
         this.bE = bE;
-//        this.setStringContent();
+        this.generateCode = generateCode;
     }
 
     public basicExpression getbE() {
@@ -33,31 +33,25 @@ public class ME_basicExpression extends multiplicativeExpression {
         this.bE = bE;
     }
 
+    /*public void getGenerateCode(){
+        return generateCode;
+    }*/
+
+    @Override
     public void setStringContent(){
         BE_primaryExpression bEP = (BE_primaryExpression) bE;
         this.stringContent = bEP.getStringContent();
-        if (bEP.getResult() == Integer.MAX_VALUE){
-            if (stringContent != "false" && stringContent != "true"){
-                result = Integer.parseInt(stringContent);
-            } else {
-                result = (stringContent.equals("true"))?1:0;
-            }
-        } else {
-            result = bEP.getResult();
-        }
     }
 
-    public int getResult(){
-        return result;
-    }
-
+    @Override
     public String getStringContent(){
         return this.stringContent;
     }
     
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
+    public void generateIC(){
+        bE.generateIC();
+        this.setStringContent();
     }
 
     @Override

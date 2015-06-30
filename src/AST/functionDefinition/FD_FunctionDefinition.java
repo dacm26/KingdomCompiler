@@ -79,10 +79,7 @@ public class FD_FunctionDefinition extends functionDefinition {
     }
 
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
-        this.generateCode.addFunction(id);
-        this.cS.generateIC(this.generateCode);
+    public void generateIC(){
     }
     
     @Override

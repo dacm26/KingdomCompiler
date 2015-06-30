@@ -21,12 +21,14 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
     private Node symbolNode;
     private Generate generateCode;
 
-    public ATD_ASTTreeDeclaration(mainFunctionDeclaration mFD) {
+    public ATD_ASTTreeDeclaration(mainFunctionDeclaration mFD, Generate generateCode) {
         this.mFD = mFD;
         this.symbolNode= new Node();
-        this.generateCode = new Generate();        
+        //this.generateCode = new Generate();       
         this.generateSymbolNode();
-        this.generateIC();
+        this.generateCode = generateCode;
+        this.mFD.generateIC();
+        this.generateCode.printIC();
     }
 
     public Node getSymbolNode() {
@@ -48,13 +50,6 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
     
     @Override
     public void generateIC(){
-        this.mFD.generateIC(generateCode);
-        try {
-            Thread.sleep(2500);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-        this.generateCode.printIC();
     }
     
     @Override

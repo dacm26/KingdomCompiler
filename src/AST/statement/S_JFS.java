@@ -30,9 +30,7 @@ public class S_JFS extends Statement{
     }
     
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
-        this.jFS.generateIC(this.generateCode);
+    public void generateIC(){
     }
     
     @Override

@@ -5,7 +5,7 @@
  */
 package AST.conditionalExpression;
 
-import app.intermediateCode.Generate;
+import app.intermediateCode.*;
 import app.semanticAnalysis.Table.Node;
 import java.util.ArrayList;
 
@@ -19,12 +19,20 @@ abstract public class conditionalExpression {
 
     abstract public ArrayList<Integer> getType(Node symbolTable);
 
-    abstract public void generateIC(Generate gc);
-
     abstract public void setLine(int line);
-    
+
     abstract public void generateConstants(Node symbolNode);
-    
+
     abstract public int getLine();
     protected int line;
+
+    abstract public void generateIC();
+
+    abstract public void setStringContent();
+
+    abstract public String getStringContent();
+
+    abstract public void setCodeBlock(ArrayList<RowIC> t);
+
+    abstract public ArrayList<RowIC> getCodeBlock();
 }

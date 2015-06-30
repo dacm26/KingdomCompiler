@@ -7,6 +7,8 @@ package app.intermediateCode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import AST.compoundStatement.*;
+import AST.selectionStatement.selectionStatement;
 import java.util.Stack;
 
 /**
@@ -15,22 +17,26 @@ import java.util.Stack;
  */
 public class Generate {
 
-    ArrayList<String> tempList;
+    int tempIndex;
+    int tagIndex;
     HashMap<String, StringBuilder> functionCode;
-    StringBuilder intermediateCode;
+    Cuadruplo cuadruplo;
+    String tempInUse;
     
     public Generate() {
-        tempList = new ArrayList<>();
+        tempIndex = 0;
+        tagIndex = 0;
         functionCode = new HashMap<>();
-        intermediateCode = new StringBuilder();
+        cuadruplo = new Cuadruplo();
+        tempInUse = "";
     }
 
-    public ArrayList<String> getTempList() {
-        return tempList;
+    public int getTempIndex() {
+        return tempIndex;
     }
 
-    public void setTempList(ArrayList<String> tempList) {
-        this.tempList = tempList;
+    public void addTempIndex() {
+        this.tempIndex++;
     }
     
     public void addFunction(String id){
@@ -44,38 +50,70 @@ public class Generate {
     public void setFunctionCode(String id, StringBuilder fC){
         this.functionCode.put(id, fC);
     }
-
-    public StringBuilder getintermediateCode() {
-        return intermediateCode;
-    }
-
-    public void setintermediateCode(StringBuilder intermediateCode) {
-        this.intermediateCode = intermediateCode;
-    }
     
     public void printIC(){
-        System.out.println(intermediateCode.toString());
+        cuadruplo.print();
     }
     
     public void generateTag(String tag){
-        intermediateCode.append(tag+":\n");
+        cuadruplo.addRow("ETIQ", tag, "", "");
+    }
+
+    public String generateTag(){
+        String tag = "etiq"+tagIndex;
+        tagIndex++;
+        return tag;
     }
     
     public void generateFunctionCall(String id, int parameterQuantity){
-        intermediateCode.append("call "+id+", "+parameterQuantity+"\n");
-        intermediateCode.append(functionCode.get((String)id));
+        cuadruplo.addRow("call", id, Integer.toString(parameterQuantity), "");
     }
     
     public void generateTypeParameterList(ArrayList<String> parameters){
         for (String x: parameters){
-            intermediateCode.append("param "+x+"\n");
+            cuadruplo.addRow("param", x, "", "");
         }
     }
     
-    public void generateGOTO(String tag, Boolean peekFromStack){
+    public void generateGOTO(String tag){
     }
-    
-//    public void temporalNuevo(){
-//        
-//    }
+
+    public String generateOperation(String left, String operator, String right){
+        cuadruplo.addTempRow(operator,left,right,"t"+tempIndex);
+        this.tempInUse= "t"+tempIndex;
+        tempIndex++;
+        return tempInUse;
+    }
+
+    public void generateAssign(String left, String right){
+        cuadruplo.addTempRow("=",right, "", left);
+    }
+
+    public void generateIfStatement(String operation, String tag, compoundStatement stm, compoundStatement stmElse, selectionStatement sS){
+        cuadruplo.addRow("IF",operation,"true",tag);
+        cuadruplo.addRow("goto", "etiq"+tagIndex, "", "" );
+        String falseTag = "etiq"+tagIndex;
+        tagIndex++;
+        generateTag(tag);
+        stm.generateIC();
+        generateTag(falseTag);
+        if(stmElse != null){
+            stmElse.generateIC();
+        } 
+        if(sS != null){
+            sS.generateIC();
+        }
+    }
+
+    public ArrayList<RowIC> getCodeBlock(){
+        return cuadruplo.getTempRow();
+    }
+
+    public void flushCodeBlock(ArrayList<RowIC> t){
+        cuadruplo.flushRows(t);
+    }
+
+    public void emptyTemp(){
+        cuadruplo.emptyTemp();
+    }
 }

@@ -7,6 +7,7 @@
 package AST.declaration;
 import AST.variableTypeSpecifier.*;
 import AST.identifierList.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 import app.semanticAnalysis.Table.Row;
 import app.semanticAnalysis.Types.PrimitiveDataType;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
  */
 public class D_identifierList extends Declaration{
     private variableTypeSpecifier tS;
+    private Generate generateCode;
     private identifierList iL;
 
     public D_identifierList(variableTypeSpecifier tS, identifierList iL) {
@@ -38,6 +40,10 @@ public class D_identifierList extends Declaration{
 
     public void setiL(identifierList iL) {
         this.iL = iL;
+    }
+
+    @Override
+    public void generateIC(){
     }
 
     @Override

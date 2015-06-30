@@ -4,6 +4,8 @@ import java_cup.runtime.*;
 import app.lexicAnalysis.*;
 
 /*AST Imports*/
+
+import app.intermediateCode.*;
 import AST.primaryExpression.*;
 import AST.conditionalExpression.*;
 import AST.equalityExpression.*;
@@ -38,10 +40,13 @@ import AST.astTreeDeclaration.*;
 
 parser code {:
     public static kcScanner s;
+    public static Generate generateCode;
+    public static int p = 0;
     public static int errors=0;
     public static boolean print=true;
    	public parser(java.io.Reader input) {
-        super(s=new kcScanner(input));
+   		super(s=new kcScanner(input));
+   		generateCode = new Generate();
     }
     public void report_error(String message, Object info) {
     	if (info instanceof String){
@@ -157,18 +162,18 @@ precedence left GREATEREQ, LESSEQ;
 precedence nonassoc ELSE;
 
 /*AST Declaration*/
-ast_tree_declaration ::= main_function_declaration:mFD        										{: RESULT = new ATD_ASTTreeDeclaration(mFD); RESULT.setLine(mFDleft);:}                                                                      
+ast_tree_declaration ::= main_function_declaration:mFD        										{: RESULT = new ATD_ASTTreeDeclaration(mFD,parser.generateCode); RESULT.setLine(mFDleft);:}                                                                      
 	;
 
 /*Main Function Declaration*/
 /*Por los momentos, se ignora las variables globales*/
 main_function_declaration ::= /*global_declaration:d main_function_declaration:mFD       			{: RESULT = new MFD_GlobalDeclaration(d,mFD); :}
-    |*/ function_definition:fD main_function_declaration:mF  										{: RESULT = new MFD_MainFunctionAndOthers(fD,mF); RESULT.setLine(mFleft);:}                            						
-    |  	main_function:mF																			{: RESULT = new MFD_MainFunction(mF); RESULT.setLine(mFleft);:}												
+    |*/ function_definition:fD main_function_declaration:mF  										{: RESULT = new MFD_MainFunctionAndOthers(fD,mF,parser.generateCode); RESULT.setLine(mFleft);:}                            						
+    |  	main_function:mF																			{: RESULT = new MFD_MainFunction(mF,parser.generateCode); RESULT.setLine(mFleft);:}												
     ;
 
 /*Main Function*/
-main_function ::= VOID MAIN OPAR CPAR compound_statement:cS											{: RESULT = new MF_MainFunction(new FTS_Type(Void.TYPE),cS);RESULT.setLine(cSleft); :}				
+main_function ::= VOID MAIN OPAR CPAR compound_statement:cS											{: RESULT = new MF_MainFunction(new FTS_Type(Void.TYPE),cS,parser.generateCode);RESULT.setLine(cSleft); :}				
 	;
 
 /*Function Declaration*/
@@ -197,21 +202,21 @@ iteration_statement ::=   WHILE OPAR conditional_expression:cE CPAR compound_sta
     ;
 
 /*Selection Statements*/
-selection_statement ::=   IF OPAR conditional_expression:cE CPAR compound_statement:cS		        {: RESULT = new SS_If(cE,cS); RESULT.setLine(cSleft);:}     
+selection_statement ::=   IF OPAR conditional_expression:cE CPAR compound_statement:cS		        {: RESULT = new SS_If(cE,cS,parser.generateCode); RESULT.setLine(cSleft);:}     
     | IF OPAR conditional_expression:cE CPAR compound_statement:cS 
-    ELSE compound_statement:cSE			               												{: RESULT = new SS_IfElse(cE,cS,cSE); RESULT.setLine(cSleft);:}
-    | IF OPAR conditional_expression:cE CPAR compound_statement:cS ELSE selection_statement:sS 		{: RESULT = new SS_IfSS(cE,cS,sS); RESULT.setLine(cSleft);:}
-    | SWITCH OPAR ID:id CPAR OCBRA labeled_statement:lS CCBRA                   					{: RESULT = new SS_Switch(id,lS);RESULT.setLine(idleft); :}
+    ELSE compound_statement:cSE			               												{: RESULT = new SS_IfElse(cE,cS,cSE,parser.generateCode); RESULT.setLine(cSleft);:}
+    | IF OPAR conditional_expression:cE CPAR compound_statement:cS ELSE selection_statement:sS 		{: RESULT = new SS_IfSS(cE,cS,sS,parser.generateCode); RESULT.setLine(cSleft);:}
+    | SWITCH OPAR ID:id CPAR OCBRA labeled_statement:lS CCBRA                   					{: RESULT = new SS_Switch(id,lS,parser.generateCode);RESULT.setLine(idleft); :}
 	;
 
 /*Statement List*/
-statement_list ::=   statement:stm                                           						{: RESULT = new SL_Statement(stm); RESULT.setLine(stmleft);:}
-	| statement_list:sL statement:stm                                       						{: RESULT = new SL_StatementList(sL,stm); RESULT.setLine(stmleft);:}
+statement_list ::=   statement:stm                                           						{: RESULT = new SL_Statement(stm,parser.generateCode); RESULT.setLine(stmleft);:}
+	| statement_list:sL statement:stm                                       						{: RESULT = new SL_StatementList(sL,stm,parser.generateCode); RESULT.setLine(stmleft);:}
 	;
 
 /*Compound Statements*/
 compound_statement ::=   OCBRA CCBRA:t                                 								{: RESULT = new CS_Empty(); RESULT.setLine(tleft);:}
-	| OCBRA statement_list:sL CCBRA                                     							{: RESULT = new CS_StatementList(sL); RESULT.setLine(sLleft);:}
+	| OCBRA statement_list:sL CCBRA                                     							{: RESULT = new CS_StatementList(sL,parser.generateCode); RESULT.setLine(sLleft);:}
 	;
 
 /*Label Statement*/
@@ -224,10 +229,10 @@ labeled_statement ::=   CASE INT:integerContent COLON compound_statement:cS labe
 
 /*Statement Generalization*/
 statement ::=   compound_statement:cS                                            					{: RESULT = new S_CompoundStatement(cS); RESULT.setLine(cSleft);:}		//Done
-	| selection_statement:sS 																		{: RESULT = new S_SelectionStatement(sS);RESULT.setLine(sSleft); :}    //Done                                 										
+	| selection_statement:sS 																		{: RESULT = new S_SelectionStatement(sS,parser.generateCode);RESULT.setLine(sSleft); :}    //Done                                 										
 	| iteration_statement:iS                                           								{: RESULT = new S_IterationStatement(iS); RESULT.setLine(iSleft);:}	//Done
 	| declaration:d                                                                                 {: RESULT = new S_Declaration(d); RESULT.setLine(dleft);:}			//Done
-	| io_expressions:iE                                                                             {: RESULT = new S_IOExpression(iE); RESULT.setLine(iEleft);:}			//Done
+	| io_expressions:iE                                                                             {: RESULT = new S_IOExpression(iE,parser.generateCode); RESULT.setLine(iEleft);:}			//Done
 	| function_calls_declaration:fcd                                                                {: RESULT = new S_FCD(fcd); RESULT.setLine(fcdleft);:}					//Done				
 	| jump_iteration_statement:jis																	{: RESULT = new S_JIS(jis); RESULT.setLine(jisleft);:}					//Not Today
 	| jump_function_statement:jfs																	{: RESULT = new S_JFS(jfs); RESULT.setLine(jfsleft);:}					//Not Today
@@ -271,8 +276,8 @@ variable_type_specifier ::= CHAR:t                                              
 */
 /*Variable Declarations*/
 declaration ::= variable_type_specifier:vTS identifier_list:iL END                                  {: RESULT = new D_identifierList(vTS,iL); RESULT.setLine(iLleft);:} 
-	| variable_type_specifier:vTS  ID:stringValue ASSIGN expression:exp END                         {: RESULT = new D_Assign(vTS,stringValue,exp); RESULT.setLine(expleft);:}
-	| ID:stringValue ASSIGN expression:exp END                                                      {: RESULT = new D_Assign(stringValue,exp); RESULT.setLine(expleft);:}
+	| variable_type_specifier:vTS  ID:stringValue ASSIGN expression:exp END                         {: RESULT = new D_Assign(vTS,stringValue,exp,parser.generateCode); RESULT.setLine(expleft);:}
+	| ID:stringValue ASSIGN expression:exp END                                                      {: RESULT = new D_Assign(stringValue,exp,parser.generateCode); RESULT.setLine(expleft);:}
 	;
 
 /*Assignment Expression*/
@@ -281,34 +286,34 @@ assignment_expression ::= variable_type_specifier:tS ID:stringValue ASSIGN expre
 	;
 
 /*Conditional Expression*/
-conditional_expression ::= 	equality_expression:eE													{: RESULT = new CE_equalityExpression(eE); RESULT.setLine(eEleft);:}
-	| conditional_expression:cE AND equality_expression:eE											{: RESULT = new CE_Operation(cE,"&&",eE); RESULT.setLine(eEleft);:}
-	| conditional_expression:cE OR equality_expression:eE											{: RESULT = new CE_Operation(cE,"||",eE); RESULT.setLine(eEleft);:}
+conditional_expression ::= 	equality_expression:eE													{: RESULT = new CE_equalityExpression(eE,parser.generateCode); RESULT.setLine(eEleft);:}
+	| conditional_expression:cE AND equality_expression:eE											{: RESULT = new CE_Operation(cE,"&&",eE,parser.generateCode); RESULT.setLine(eEleft);:}
+	| conditional_expression:cE OR equality_expression:eE											{: RESULT = new CE_Operation(cE,"||",eE,parser.generateCode); RESULT.setLine(eEleft);:}
 	;
 
-equality_expression ::= relational_expression:rE 													{: RESULT = new EE_relationalExpression(rE); RESULT.setLine(rEleft);:}
-	| equality_expression:eE EQU relational_expression:rE          									{: RESULT = new EE_Operation(eE,"==",rE); RESULT.setLine(rEleft);:}
-	| equality_expression:eE NEQU relational_expression:rE 											{: RESULT = new EE_Operation(eE,"!=",rE); RESULT.setLine(rEleft);:}
+equality_expression ::= relational_expression:rE 													{: RESULT = new EE_relationalExpression(rE,parser.generateCode); RESULT.setLine(rEleft);:}
+	| equality_expression:eE EQU relational_expression:rE          									{: RESULT = new EE_Operation(eE,"==",rE,parser.generateCode); RESULT.setLine(rEleft);:}
+	| equality_expression:eE NEQU relational_expression:rE 											{: RESULT = new EE_Operation(eE,"!=",rE,parser.generateCode); RESULT.setLine(rEleft);:}
 	;
 
 /*Relational Expressions*/
-relational_expression ::=   additive_expression:aE                         							{: RESULT = new RE_additiveExpression(aE); RESULT.setLine(aEleft);:}
-	| relational_expression:rE LESS additive_expression:aE                							{: RESULT = new RE_Operation(rE,"<",aE); RESULT.setLine(aEleft);:} 
-	| relational_expression:rE GREATER additive_expression:aE             							{: RESULT = new RE_Operation(rE,">",aE); RESULT.setLine(aEleft);:} 
-	| relational_expression:rE LESSEQ additive_expression:aE              							{: RESULT = new RE_Operation(rE,"<=",aE); RESULT.setLine(aEleft);:}
-	| relational_expression:rE GREATEREQ additive_expression:aE           							{: RESULT = new RE_Operation(rE,">=",aE); RESULT.setLine(aEleft);:} 
+relational_expression ::=   additive_expression:aE                         							{: RESULT = new RE_additiveExpression(aE,parser.generateCode); RESULT.setLine(aEleft);:}
+	| relational_expression:rE LESS additive_expression:aE                							{: RESULT = new RE_Operation(rE,"<",aE,parser.generateCode); RESULT.setLine(aEleft);:} 
+	| relational_expression:rE GREATER additive_expression:aE             							{: RESULT = new RE_Operation(rE,">",aE,parser.generateCode); RESULT.setLine(aEleft);:} 
+	| relational_expression:rE LESSEQ additive_expression:aE              							{: RESULT = new RE_Operation(rE,"<=",aE,parser.generateCode); RESULT.setLine(aEleft);:}
+	| relational_expression:rE GREATEREQ additive_expression:aE           							{: RESULT = new RE_Operation(rE,">=",aE,parser.generateCode); RESULT.setLine(aEleft);:} 
 	;
 
 /*Additive Expression*/
-additive_expression ::=   multiplicative_expression:mE                     							{: RESULT = new AE_multiplicativeExpression(mE); RESULT.setLine(mEleft);:} 
-	| additive_expression:aE ADD multiplicative_expression:mE            							{: RESULT = new AE_Operation(aE,"+",mE); RESULT.setLine(mEleft);:} 
-	| additive_expression:aE MIN multiplicative_expression:mE             							{: RESULT = new AE_Operation(aE,"-",mE); RESULT.setLine(mEleft);:} 
+additive_expression ::=   multiplicative_expression:mE                     							{: RESULT = new AE_multiplicativeExpression(mE,parser.generateCode); RESULT.setLine(mEleft);:} 
+	| additive_expression:aE ADD multiplicative_expression:mE            							{: RESULT = new AE_Operation(aE,"+",mE,parser.generateCode); RESULT.setLine(mEleft);:} 
+	| additive_expression:aE MIN multiplicative_expression:mE             							{: RESULT = new AE_Operation(aE,"-",mE,parser.generateCode); RESULT.setLine(mEleft);:} 
 	;
 
 /*Multiplicative Expression*/
-multiplicative_expression ::=   basic_expression:bE                    								{: RESULT = new ME_basicExpression(bE); RESULT.setLine(bEleft);:}
-	| multiplicative_expression:mE MUL basic_expression:bE                							{: RESULT = new ME_Operation(mE,"*",bE); RESULT.setLine(bEleft);:} 
-	| multiplicative_expression:mE DIV basic_expression:bE                							{: RESULT = new ME_Operation(mE,"/",bE); RESULT.setLine(bEleft);:}               
+multiplicative_expression ::=   basic_expression:bE                    								{: RESULT = new ME_basicExpression(bE,parser.generateCode); RESULT.setLine(bEleft);:}
+	| multiplicative_expression:mE MUL basic_expression:bE                							{: RESULT = new ME_Operation(mE,"*",bE,parser.generateCode); RESULT.setLine(bEleft);:} 
+	| multiplicative_expression:mE DIV basic_expression:bE                							{: RESULT = new ME_Operation(mE,"/",bE,parser.generateCode); RESULT.setLine(bEleft);:}               
 	;
 
 /*IO Expressions*/
@@ -333,16 +338,16 @@ function_calls_declaration ::= ID:id OPAR CPAR END 													{: RESULT = new 
 
 /*Function calls*/
 function_calls_expression ::= ID:id OPAR CPAR	 													{: RESULT = new FCE_FunctionCallsExpression(id); RESULT.setLine(idleft);:}
-	| ID:id OPAR parameter_list:pL CPAR 															{: RESULT = new FCE_FunctionCallsExpression(id,pL); RESULT.setLine(idleft);:}
+	| ID:id OPAR parameter_list:pL CPAR 															{: RESULT = new FCE_FunctionCallsExpression(id,pL,parser.generateCode); RESULT.setLine(idleft);:}
 	;
 
 /*Expression*/
-expression ::= conditional_expression:cE															{: RESULT = new Expression(cE); RESULT.setLine(cEleft);:}
+expression ::= conditional_expression:cE															{: RESULT = new Expression(cE,parser.generateCode); RESULT.setLine(cEleft);:}
 	;
 
 /*Basic Expressions*/
-basic_expression ::= primary_expression:pE                           								{: RESULT = new BE_primaryExpression(pE); RESULT.setLine(pEleft);:}
-	| function_calls_expression:fCE 																{: RESULT = new BE_FCE(fCE); RESULT.setLine(fCEleft);:}
+basic_expression ::= primary_expression:pE                           								{: RESULT = new BE_primaryExpression(pE,parser.generateCode); RESULT.setLine(pEleft);:}
+	| function_calls_expression:fCE 																{: RESULT = new BE_FCE(fCE,parser.generateCode); RESULT.setLine(fCEleft);:}
     ;
 
 
@@ -354,5 +359,5 @@ primary_expression ::=  ID:identifierValue                              							{
 	|   CHARCONTENT:charContent                                       								{: RESULT = new PE_Content(charContent,1); RESULT.setLine(charContentleft);:}
 	|   TRUE:t                                            											{: RESULT = new PE_Content("true",5); RESULT.setLine(tleft);:}
 	|   FALSE:f                                       												{: RESULT = new PE_Content("false",5); RESULT.setLine(fleft);:}
-	|   OPAR expression:exp CPAR																	{: RESULT = new PE_Expression(exp); RESULT.setLine(expleft);:}
+	|   OPAR expression:exp CPAR																	{: RESULT = new PE_Expression(exp,parser.generateCode); RESULT.setLine(expleft);:}
 	;

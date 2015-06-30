@@ -28,8 +28,7 @@ public class S_IterationStatement extends Statement{
     }
 
     @Override
-    public void generateIC(Generate gc){
-        
+    public void generateIC(){
     }
     
     @Override

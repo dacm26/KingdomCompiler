@@ -29,8 +29,7 @@ public class S_JIS extends Statement{
     }
 
     @Override
-    public void generateIC(Generate gc){
-        
+    public void generateIC(){
     }
     
     @Override

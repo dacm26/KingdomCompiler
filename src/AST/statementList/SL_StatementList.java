@@ -17,9 +17,10 @@ public class SL_StatementList extends statementList{
     private Statement stm;
     private Generate generateCode;
 
-    public SL_StatementList(statementList sL, Statement stm) {
+    public SL_StatementList(statementList sL, Statement stm, Generate generateCode) {
         this.sL = sL;
         this.stm = stm;
+        this.generateCode = generateCode;
     }
 
     public statementList getsL() {
@@ -39,10 +40,9 @@ public class SL_StatementList extends statementList{
     }
     
     @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
-        this.sL.generateIC(this.generateCode);
-        this.stm.generateIC(this.generateCode);
+    public void generateIC(){
+        this.sL.generateIC();
+        this.stm.generateIC();
     }
 
     @Override
