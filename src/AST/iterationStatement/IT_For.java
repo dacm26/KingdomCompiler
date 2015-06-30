@@ -47,6 +47,11 @@ public class IT_For extends iterationStatement {
         this.stm = stm;
     }
 
+    @Override
+    public void generateIC(){
+        
+    }
+    
     public variableTypeSpecifier getType() {
         return type;
     }

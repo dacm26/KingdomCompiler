@@ -7,6 +7,8 @@ package AST.iterationStatement;
 
 import AST.conditionalExpression.*;
 import AST.compoundStatement.*;
+import app.intermediateCode.Generate;
+import app.intermediateCode.RowIC;
 import app.semanticAnalysis.Table.Node;
 import java.util.ArrayList;
 
@@ -18,10 +20,17 @@ public class IT_While extends iterationStatement {
 
     private conditionalExpression cE;
     private compoundStatement stm;
+    private Generate generateCode;
+    private ArrayList<RowIC> cER;
 
-    public IT_While(conditionalExpression cE, compoundStatement stm) {
+    public IT_While(conditionalExpression cE, compoundStatement stm, Generate generateCode) {
         this.cE = cE;
         this.stm = stm;
+        this.generateCode = generateCode;
+        cE.generateIC();
+        this.cER = new ArrayList<RowIC>(this.generateCode.getCodeBlock());
+        this.generateCode.emptyTemp();
+        this.cE.setCodeBlock(cER);
     }
 
     public conditionalExpression getcE() {
@@ -38,6 +47,15 @@ public class IT_While extends iterationStatement {
 
     public void setStm(compoundStatement stm) {
         this.stm = stm;
+    }
+
+    @Override
+    public void generateIC(){
+        String tag = generateCode.generateTag();
+        this.generateCode.generateTag(tag);
+        this.generateCode.flushCodeBlock(cE.getCodeBlock());
+        String tag2 = generateCode.generateTag();
+        this.generateCode.generateWhileStatement(cE.getStringContent(),tag,tag2,stm);
     }
 
     @Override

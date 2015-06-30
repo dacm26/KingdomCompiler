@@ -74,6 +74,7 @@ public class Generate {
     }
     
     public void generateGOTO(String tag){
+        cuadruplo.addRow("goto", tag, "","");
     }
 
     public String generateOperation(String left, String operator, String right){
@@ -85,6 +86,19 @@ public class Generate {
 
     public void generateAssign(String left, String right){
         cuadruplo.addRow("=",right, "", left);
+    }
+
+    public void generateWhileStatement(String operation, String tag, String tag2, compoundStatement stm){
+        cuadruplo.addRow("IF",operation,"true",tag2);
+        cuadruplo.addRow("goto", "etiq"+tagIndex, "", "" );
+        String falseTag = "etiq"+tagIndex;
+        tagIndex++;
+        stm.generateIC();
+        generateGOTO(tag);
+        generateTag(falseTag);
+        if(stm != null){
+            stm.generateIC();
+        } 
     }
 
     public void generateIfStatement(String operation, String tag, compoundStatement stm, compoundStatement stmElse, selectionStatement sS){

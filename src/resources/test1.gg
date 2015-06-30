@@ -4,4 +4,8 @@ void KingdomHearts(){
     int x = 2*3+1;
     if(x> 32){
     }
+    while(3>6){
+    	int i = 3;
+    }
+    int k = 4;
 }
