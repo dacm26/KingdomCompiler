@@ -184,8 +184,12 @@ function_definition ::= function_type_specifier:tS ID:id OPAR CPAR
 	;
 
 /*Jump Statements*/
-jump_iteration_statement ::= CONTINUE END :t                                    					    {: RESULT = new JIS_Continue();RESULT.setLine(tleft); :}
-	| BREAK END :t                                                      								{: RESULT = new JIS_Break();RESULT.setLine(tleft); :}
+jump_iteration_statement ::= CONTINUE END :t                                    					{: RESULT = new JIS_Continue();RESULT.setLine(tleft); :}
+	| BREAK END :t                                                      							{: RESULT = new JIS_Break();RESULT.setLine(tleft); :}
+	| CONTINUE error 																				{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+	END:t 																							{: RESULT = new JIS_Continue();RESULT.setLine(tleft); :}
+	| BREAK error 																					{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+	END:t 																							{: RESULT = new JIS_Break();RESULT.setLine(tleft); :}
 	;
 
 jump_function_statement ::= RETURN END:t                                                      		{: RESULT = new JFS_EmptyReturn(); RESULT.setLine(tleft);:}
