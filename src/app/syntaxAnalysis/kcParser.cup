@@ -190,6 +190,10 @@ jump_iteration_statement ::= CONTINUE END :t                                    
 
 jump_function_statement ::= RETURN END:t                                                      		{: RESULT = new JFS_EmptyReturn(); RESULT.setLine(tleft);:}
 	| RETURN conditional_expression:cE END                                           				{: RESULT = new JFS_Return(cE); RESULT.setLine(cEleft);:}
+	| RETURN error 																					{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+	END:t 																							{: RESULT = new JFS_EmptyReturn(); RESULT.setLine(tleft);:}
+	| RETURN conditional_expression:cE error 														{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+	END 																							{: RESULT = new JFS_Return(cE); RESULT.setLine(cEleft);:}
 	;
 
 /*Iteration Statements*/
@@ -217,6 +221,8 @@ statement_list ::=   statement:stm                                           			
 /*Compound Statements*/
 compound_statement ::=   OCBRA CCBRA:t                                 								{: RESULT = new CS_Empty(); RESULT.setLine(tleft);:}
 	| OCBRA statement_list:sL CCBRA                                     							{: RESULT = new CS_StatementList(sL,parser.generateCode); RESULT.setLine(sLleft);:}
+	| OCBRA error 																					{: parser.report_error("You forgot a }","End of statement Syntax Error"); :}
+	CCBRA:t																							{: RESULT = new CS_Empty(); RESULT.setLine(tleft);:}
 	| OCBRA statement_list:sL error 																{: parser.report_error("You forgot a }","End of statement Syntax Error"); :}
 	CCBRA																							{: RESULT = new CS_StatementList(sL,parser.generateCode); RESULT.setLine(sLleft);:}
 	;
@@ -255,7 +261,7 @@ type_parameter_list ::=   variable_type_specifier:vTS ID:id                     
 	;
 
 /*Function Type specifiers*/
-function_type_specifier ::= CHAR  :t                                                                  {: RESULT = new FTS_Type(Character.TYPE); RESULT.setLine(tleft);:}
+function_type_specifier ::= CHAR  :t                                                                {: RESULT = new FTS_Type(Character.TYPE); RESULT.setLine(tleft);:}
 	| INTEGER 	:t																					{: RESULT = new FTS_Type(Integer.TYPE); RESULT.setLine(tleft);:}
 	| DOUBLE 	:t																					{: RESULT = new FTS_Type(Double.TYPE); RESULT.setLine(tleft);:}
 	| STRING  	:t																					{: RESULT = new FTS_Type(String.class.getSimpleName()); RESULT.setLine(tleft);:}
@@ -264,8 +270,8 @@ function_type_specifier ::= CHAR  :t                                            
 	;
 
 /*Variable Type specifiers*/
-variable_type_specifier ::= CHAR:t                                                                    {: RESULT = new VTS_Type(Character.TYPE,Character.SIZE/8);RESULT.setLine(tleft); :}                                               					
-	| INTEGER :t                                                                                      {: RESULT = new VTS_Type(Integer.TYPE,Integer.SIZE/8);RESULT.setLine(tleft); :}                                								
+variable_type_specifier ::= CHAR:t                                                                  {: RESULT = new VTS_Type(Character.TYPE,Character.SIZE/8);RESULT.setLine(tleft); :}                                               					
+	| INTEGER :t                                                                                    {: RESULT = new VTS_Type(Integer.TYPE,Integer.SIZE/8);RESULT.setLine(tleft); :}                                								
 	| DOUBLE :t                                                       								{: RESULT = new VTS_Type(Double.TYPE,Double.SIZE/8); RESULT.setLine(tleft);:}
 	| STRING  :t                                                      								{: RESULT = new VTS_Type(String.class.getSimpleName(),255);RESULT.setLine(tleft); :}
     | BOOLEAN :t                                                      							    {: RESULT = new VTS_Type(Boolean.TYPE,1);RESULT.setLine(tleft); :}
