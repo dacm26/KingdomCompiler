@@ -54,7 +54,7 @@ public class PE_Content extends primaryExpression{
                 return (String)content;
             }
             case 5:{
-                return stringify((boolean)content);
+                return stringify((String)content);
             }
             default:
                 return "";
@@ -69,8 +69,8 @@ public class PE_Content extends primaryExpression{
         return content;
     }
     
-    public String stringify(boolean value) {
-        return value ? "true" : "false";
+    public String stringify(String value) {
+        return value;
     }
 
     public void setContent(Object content) {

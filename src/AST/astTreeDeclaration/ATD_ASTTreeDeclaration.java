@@ -98,7 +98,7 @@ public class ATD_ASTTreeDeclaration extends astTreeDeclaration{
             }
             
             
-            System.out.println(sB.toString());
+            //System.out.println(sB.toString());
         }
         //this.generateCode.printIC();
     }

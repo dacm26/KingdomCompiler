@@ -1,33 +1,15 @@
-int $x = 3;
-bool $y = true;
-munny z = 3.5;
-KChain t = "Kampai";
-
-int KingdomHearts(int i, int j, int k){
-    print ("Hola Mu$ndo");
-    scan (i);
-    print  ("Hola Mundo", i,j,k);
-    giff 0;
-
+void PopeyeFuncion(int p, bool t){
 }
-void functionOne () {
-   if ( i == 3){
-      switch (i){
-         case 1:{
-                 ragnarok;
-         }
-         case 2:{
-                secondChance;
-         }
-         default: {
-                
-         }
-      }
-   } else if ( i > 3 && true){
-          int x;
-          x  =  3;
-          x = i;
-   } else {
 
-   }
+void KingdomHearts(){
+    int x = 16;
+    print("\n",x);
+    char a = 'a';
+    print("\n",a);
+    bool b = false;
+    print("\n",b);
+    munny c =3.1415;
+    print("\n",c);
+    KChain d = "Popeye";
+    print("\n",d);
 }

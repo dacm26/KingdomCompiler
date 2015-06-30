@@ -57,6 +57,6 @@ public class RowIC {
 
     @Override
     public String toString() {
-        return "Row{" + op + "=" + arg1 + "" +arg2+ "" + res+ '}';
+        return "Row{" + op + "=" + arg1 + ", " +arg2+ ", " + res+ '}';
     }
 }
