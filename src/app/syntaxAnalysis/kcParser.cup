@@ -217,6 +217,8 @@ statement_list ::=   statement:stm                                           			
 /*Compound Statements*/
 compound_statement ::=   OCBRA CCBRA:t                                 								{: RESULT = new CS_Empty(); RESULT.setLine(tleft);:}
 	| OCBRA statement_list:sL CCBRA                                     							{: RESULT = new CS_StatementList(sL,parser.generateCode); RESULT.setLine(sLleft);:}
+	| OCBRA statement_list:sL error 																{: parser.report_error("You forgot a }","End of statement Syntax Error"); :}
+	CCBRA																							{: RESULT = new CS_StatementList(sL,parser.generateCode); RESULT.setLine(sLleft);:}
 	;
 
 /*Label Statement*/
