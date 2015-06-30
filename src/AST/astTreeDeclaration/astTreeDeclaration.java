@@ -13,4 +13,7 @@ abstract public class astTreeDeclaration {
     abstract public void printNode();
     abstract public void generateSymbolNode();
     abstract public void generateIC();
+    abstract public void setLine(int line);
+    abstract public int getLine();
+    protected int line;
 }

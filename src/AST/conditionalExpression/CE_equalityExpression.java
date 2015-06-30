@@ -80,4 +80,19 @@ public class CE_equalityExpression extends conditionalExpression{
         return temp;
     }
     
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+
+    @Override
+    public void generateConstants(Node symbolNode) {
+        this.eE.generateConstants(symbolNode);
+    }
+    
 }

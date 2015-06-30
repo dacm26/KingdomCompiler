@@ -20,6 +20,7 @@ public class Expression {
     private conditionalExpression ConditionalExpression;
     private String stringContent;
     private int result;
+    private int line;
     private Generate generateCode;
     private ArrayList<RowIC> row;
 
@@ -66,6 +67,9 @@ public class Expression {
     public int getResult(){
         return result;
     }
+    public void generateConstants(Node symbolNode){
+        this.ConditionalExpression.generateConstants(symbolNode);
+    }
     
     public int getExpressionType(Node symbolNode) {
         /*
@@ -93,5 +97,14 @@ public class Expression {
             return -1;
         }
     }
+    public void setLine(int line) {
+        this.line = line+1;
+    }
 
+    public int getLine() {
+        return this.line;
+    }
+    
 }
+
+

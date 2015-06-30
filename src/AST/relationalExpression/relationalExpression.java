@@ -16,6 +16,10 @@ import app.semanticAnalysis.Table.Node;
 abstract public class relationalExpression {
    abstract public void printNode(); 
    abstract public int getType(Node symbolTable);
+   abstract public void setLine(int line);
+    abstract public int getLine();
+    protected int line;
+    abstract public void generateConstants(Node symbolNode);
    abstract public void generateIC();
    abstract public void setStringContent();
    abstract public String getStringContent();

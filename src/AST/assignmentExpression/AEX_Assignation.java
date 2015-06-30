@@ -69,7 +69,7 @@ public class AEX_Assignation extends assignmentExpression {
             type1 = symbolNode.getNumericalIdType(this.id);
             if (type1 == -1) {
                 //No se encuentra la variable
-                errorMsg = "Semantic Error: The id: \'" + id + "\' doesn't exists.";
+                errorMsg = "Semantic Error: The id: \'" + id + "\' doesn't exists."+"\n\tline: "+this.line;
                 System.err.println(errorMsg);
                 symbolNode.setErrors();
                 return false;
@@ -78,7 +78,7 @@ public class AEX_Assignation extends assignmentExpression {
                 type2 = this.exp.getExpressionType(symbolNode);
                 if (type2 == -1) {
                     //Error en la expression
-                    errorMsg = "Semantic Error: Something is wrong with the expression.";
+                    errorMsg = "Semantic Error: Something is wrong with the expression."+"\n\tline: "+this.line;
                     System.err.println(errorMsg);
                     symbolNode.setErrors();
                     return false;
@@ -94,7 +94,7 @@ public class AEX_Assignation extends assignmentExpression {
             }
 
         } else {
-            errorMsg = "Semantic Error: You can't create a variable there!";
+            errorMsg = "Semantic Error: You can't create a variable there!"+"\n\tline: "+this.line;
             System.err.println(errorMsg);
             symbolNode.setErrors();
             return false;
@@ -144,8 +144,23 @@ public class AEX_Assignation extends assignmentExpression {
                 typeExpected = "Wrong Operation";
                 break;
         }
-        String errorMsg = "Semantic Error: Type mismatch\n" + "\tExpected: " + typeExpected + " for the id: \'" + this.id + "\'.\n\tReceived: " + typeReceived;
+        String errorMsg = "Semantic Error: Type mismatch\n" + "\tExpected: " + typeExpected + " for the id: \'" + this.id + "\'.\n\tReceived: " + typeReceived+"\n\tline: "+this.line;
         System.err.println(errorMsg);
     }
 
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+
+    @Override
+    public void generateConstants(Node symbolNode) {
+        this.exp.generateConstants(symbolNode);
+    }
+    
 }

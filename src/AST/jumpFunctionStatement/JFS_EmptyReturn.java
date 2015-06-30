@@ -32,4 +32,14 @@ public class JFS_EmptyReturn extends jumpFunctionStatement{
         return 6;
     }
     
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+    
 }

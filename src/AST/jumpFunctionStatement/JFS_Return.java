@@ -43,4 +43,14 @@ public class JFS_Return extends jumpFunctionStatement{
         return this.cS.getType(symbolNode).get(0);
     }
     
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+    
 }

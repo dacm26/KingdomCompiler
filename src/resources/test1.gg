@@ -1,4 +1,17 @@
 
 void KingdomHearts(){
+<<<<<<< HEAD
     popeye(1,2);
+=======
+    int x = 16;
+    print("\n",x);
+    char a = 'a';
+    print("\n",a);
+    bool b = false;
+    print("\n",b);
+    munny c =3.1415;
+    print("\n",c);
+    KChain d = "Popeye";
+    print("\n",d);
+>>>>>>> 88af1c8396e3793634698e9a97f424bc212c87bc
 }

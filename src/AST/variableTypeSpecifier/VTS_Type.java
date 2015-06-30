@@ -15,10 +15,12 @@ import app.semanticAnalysis.Table.Node;
 public class VTS_Type extends variableTypeSpecifier{
     private Object type;
     private int size;
+    
 
     public VTS_Type(Object type, int size) {
         this.type = type;
         this.size=size;
+        
     }
 
     public int getSize() {
@@ -64,6 +66,16 @@ public class VTS_Type extends variableTypeSpecifier{
     public void printNode() {
         System.out.println("VTS_Type");
         System.out.println(this.type);
+    }
+
+    @Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
     }
     
 }

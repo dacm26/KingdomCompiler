@@ -115,6 +115,7 @@ public class D_Assign extends Declaration {
             } else {
                 type2 = this.exp.getExpressionType(symbolNode);
                 if ((type1 == type2)) {
+                    this.exp.generateConstants(symbolNode);
                 } else {
                     reportSemanticError(type1, type2);
                     symbolNode.setErrors();
@@ -129,7 +130,8 @@ public class D_Assign extends Declaration {
                 symbolNode.setErrors();
             } else {
                 if ((type1 == type2)) {
-                    symbolNode.add(new Row(id, new PrimitiveDataType(((VTS_Type) this.type).getType(), ((VTS_Type) this.type).getSize()), false));
+                    symbolNode.add(new Row(id, new PrimitiveDataType(((VTS_Type) this.type).getType(), ((VTS_Type) this.type).getSize()),false));
+                    this.exp.generateConstants(symbolNode);
                 } else {
                     reportSemanticError(type1, type2);
                     symbolNode.setErrors();
@@ -182,8 +184,22 @@ public class D_Assign extends Declaration {
                 typeExpected = "Wrong Operation";
                 break;
         }
-        String errorMsg = "Semantic Error: Type mismatch\n" + "\tExpected: " + typeExpected + " for the id: \'" + this.id + "\'.\n\tReceived: " + typeReceived;
+        String errorMsg = "Semantic Error: Type mismatch\n" + "\tExpected: " + typeExpected + " for the id: \'" + this.id + "\'.\n\tReceived: " + typeReceived+"\n\tline: "+this.line;
         System.err.println(errorMsg);
     }
 
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+    
+@Override
+    public void generateConstants(Node symbolNode) {
+        this.exp.generateConstants(symbolNode);
+    }
 }

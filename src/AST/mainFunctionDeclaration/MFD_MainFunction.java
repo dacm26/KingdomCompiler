@@ -44,4 +44,14 @@ public class MFD_MainFunction extends mainFunctionDeclaration{
         this.mF.generateSymbolNode(symbolNode);
     }
     
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+    
 }

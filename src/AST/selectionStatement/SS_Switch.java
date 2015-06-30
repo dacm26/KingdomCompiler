@@ -54,7 +54,7 @@ public class SS_Switch extends selectionStatement {
     public void generateSymbolNode(Node symbolNode) {
         String errorMsg;
         if (!symbolNode.search(id)) {
-            errorMsg = "Semantic Error: The id: \'" + id + "\' doesn\'t exists";
+            errorMsg = "Semantic Error: The id: \'" + id + "\' doesn\'t exists"+"\n\tline: "+this.line;
             System.err.println(errorMsg);
             symbolNode.setErrors();
             return;
@@ -68,4 +68,14 @@ public class SS_Switch extends selectionStatement {
         }
     }
 
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+    
 }

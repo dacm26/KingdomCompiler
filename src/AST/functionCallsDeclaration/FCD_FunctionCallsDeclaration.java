@@ -77,7 +77,7 @@ public class FCD_FunctionCallsDeclaration extends functionCallsDeclaration {
     public void generateSymbolNode(Node symbolNode) {
         node = symbolNode;
         if (!symbolNode.search(this.id)) {
-            System.err.println("Semantic Error: The function \'"+this.id+"\' doesn't exists.");
+            System.err.println("Semantic Error: The function \'"+this.id+"\' doesn't exists."+"\n\tline: "+this.line);
             symbolNode.setErrors();
             return;
         } else {
@@ -87,12 +87,12 @@ public class FCD_FunctionCallsDeclaration extends functionCallsDeclaration {
                 if (row.getType() instanceof FunctionType) {
                     FunctionType type = (FunctionType) row.getType();
                     if (!type.getParameters().isEmpty()) {
-                        System.err.println("Semantic Error: Params mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + "lambda");
+                        System.err.println("Semantic Error: Params mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + "lambda"+"\n\tline: "+this.line);
                         symbolNode.setErrors();
                         return;
                     }
                 } else {
-                    System.err.println("Semantic Error: Something is wrong with the call.");
+                    System.err.println("Semantic Error: Something is wrong with the call."+"\n\tline: "+this.line);
                     symbolNode.setErrors();
                     return;
                 }
@@ -102,7 +102,7 @@ public class FCD_FunctionCallsDeclaration extends functionCallsDeclaration {
                 if (row.getType() instanceof FunctionType) {
                     FunctionType type = (FunctionType) row.getType();
                     if (type.getParameters().isEmpty()) {
-                        System.err.println("Semantic Error: Type mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + this.paramType(this.convertToString(this.pL.getTypes(symbolNode))));
+                        System.err.println("Semantic Error: Type mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + this.paramType(this.convertToString(this.pL.getTypes(symbolNode)))+"\n\tline: "+this.line);
                         symbolNode.setErrors();
                         return;
                     } else {
@@ -113,12 +113,12 @@ public class FCD_FunctionCallsDeclaration extends functionCallsDeclaration {
                          } else {*/
                         ArrayList<String> novo = this.convertToString(this.pL.getTypes(symbolNode));
                         if (type.getParameters().size() != novo.size()) {
-                            System.err.println("Semantic Error: Type mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + this.paramType(novo));
+                            System.err.println("Semantic Error: Type mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + this.paramType(novo)+"\n\tline: "+this.line);
                             symbolNode.setErrors();
                             return;
                         } else {
                             if (!verifyParams(novo, type.getParameters())) {
-                                System.err.println("Semantic Error: Type mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + this.paramType(novo));
+                                System.err.println("Semantic Error: Type mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + this.paramType(novo)+"\n\tline: "+this.line);
                                 symbolNode.setErrors();
                                 return;
                             }
@@ -127,7 +127,7 @@ public class FCD_FunctionCallsDeclaration extends functionCallsDeclaration {
 
                     }
                 } else {
-                    System.err.println("Semantic Error: Something is wrong with the call.");
+                    System.err.println("Semantic Error: Something is wrong with the call."+"\n\tline: "+this.line);
                     symbolNode.setErrors();
                     return;
                 }
@@ -187,5 +187,14 @@ public class FCD_FunctionCallsDeclaration extends functionCallsDeclaration {
         }
         return retVal;
     }
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
 
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+    
 }

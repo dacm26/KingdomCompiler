@@ -163,7 +163,7 @@ public class FD_FunctionDefinition extends functionDefinition {
                 //returnType(cS, functionType, symbolNode.getSons().get(symbolNode.getSons().size() - 1));
             }
         } else {
-            System.err.println("Semantic Error: The function: \'" + id + "\' already exists.");
+            System.err.println("Semantic Error: The function: \'" + id + "\' already exists."+"\n\tline: "+this.line);
             symbolNode.setErrors();
         }
 
@@ -208,24 +208,24 @@ public class FD_FunctionDefinition extends functionDefinition {
                         if (t.get(0) == type) {
                             return true;
                         } else {
-                            System.err.println("Semantic Error: Missing a return clause.");
+                            System.err.println("Semantic Error: Missing a return clause."+"\n\tline: "+this.line);
                             return false;
                         }
                     } else if (t.size() > 1) {
                         System.out.println("Toca revisar argumentos del return");
                         return true;
                     } else {
-                        System.err.println("Semantic Error: Missing a return clause.");
+                        System.err.println("Semantic Error: Missing a return clause."+"\n\tline: "+this.line);
                         return false;
                     }
 
                 } else {
-                    System.err.println("Semantic Error: Missing a return clause.");
+                    System.err.println("Semantic Error: Missing a return clause."+"\n\tline: "+this.line);
                     return false;
                 }
             } else {
                 System.out.println("No es un stmt List");
-                System.err.println("Semantic Error: Missing a return clause.");
+                System.err.println("Semantic Error: Missing a return clause."+"\n\tline: "+this.line);
                 return false;
             }
         }
@@ -233,4 +233,14 @@ public class FD_FunctionDefinition extends functionDefinition {
         return true;
     }
 
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+    
 }
