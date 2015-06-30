@@ -5,6 +5,7 @@
  */
 package AST.ioExpressions;
 
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -30,7 +31,7 @@ public class IOE_Scan extends ioExpressions{
 
     public void generateIC(Generate gc){
         this.generateCode = gc;
-        this.generateCode.generateScan(id);
+        //this.generateCode.generateScan(id);
     }
 
     @Override
@@ -45,6 +46,16 @@ public class IOE_Scan extends ioExpressions{
             String errorMsg = "Semantic Error: The id: \'"+id+"\' doesn\'t exists";
             System.err.println(errorMsg);
         }
+    }
+    
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
     }
     
 }

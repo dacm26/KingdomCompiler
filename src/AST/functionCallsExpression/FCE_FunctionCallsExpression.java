@@ -67,7 +67,7 @@ public class FCE_FunctionCallsExpression extends functionCallsExpression{
     @Override
     public int generateSymbolNode(Node symbolNode) {
         if (!symbolNode.search(this.id)) {
-            System.err.println("Semantic Error: The function \'"+this.id+"\' doesn't exists.");
+            System.err.println("Semantic Error: The function \'"+this.id+"\' doesn't exists."+"\n\tline: "+this.line);
             symbolNode.setErrors();
             return -1;
         } else {
@@ -77,14 +77,14 @@ public class FCE_FunctionCallsExpression extends functionCallsExpression{
                 if (row.getType() instanceof FunctionType) {
                     FunctionType type = (FunctionType) row.getType();
                     if (!type.getParameters().isEmpty()) {
-                        System.err.println("Semantic Error: Params mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + "lambda");
+                        System.err.println("Semantic Error: Params mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + "lambda"+"\n\tline: "+this.line);
                         symbolNode.setErrors();
                         return -1;
                     }else{
                         return type.getReturnAsInt();
                     }
                 } else {
-                    System.err.println("Semantic Error: Something is wrong with the call.");
+                    System.err.println("Semantic Error: Something is wrong with the call."+"\n\tline: "+this.line);
                     symbolNode.setErrors();
                     return -1;
                 }
@@ -94,7 +94,7 @@ public class FCE_FunctionCallsExpression extends functionCallsExpression{
                 if (row.getType() instanceof FunctionType) {
                     FunctionType type = (FunctionType) row.getType();
                     if (type.getParameters().isEmpty()) {
-                        System.err.println("Semantic Error: Type mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + this.paramType(this.convertToString(this.pL.getTypes(symbolNode))));
+                        System.err.println("Semantic Error: Type mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + this.paramType(this.convertToString(this.pL.getTypes(symbolNode)))+"\n\tline: "+this.line);
                         symbolNode.setErrors();
                         return -1;
                     } else {
@@ -105,12 +105,12 @@ public class FCE_FunctionCallsExpression extends functionCallsExpression{
                          } else {*/
                         ArrayList<String> novo = this.convertToString(this.pL.getTypes(symbolNode));
                         if (type.getParameters().size() != novo.size()) {
-                            System.err.println("Semantic Error: Type mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + this.paramType(novo));
+                            System.err.println("Semantic Error: Type mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + this.paramType(novo)+"\n\tline: "+this.line);
                             symbolNode.setErrors();
                             return -1;
                         } else {
                             if (!verifyParams(novo, type.getParameters())) {
-                                System.err.println("Semantic Error: Type mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + this.paramType(novo));
+                                System.err.println("Semantic Error: Type mismatch\n" + "\tExpected: " + type.getParamsType() + " for the function: \'" + this.id + "\'.\n\tReceived: " + this.paramType(novo)+"\n\tline: "+this.line);
                                 symbolNode.setErrors();
                                 return -1;
                             }else{
@@ -121,7 +121,7 @@ public class FCE_FunctionCallsExpression extends functionCallsExpression{
 
                     }
                 } else {
-                    System.err.println("Semantic Error: Something is wrong with the call.");
+                    System.err.println("Semantic Error: Something is wrong with the call."+"\n\tline: "+this.line);
                     symbolNode.setErrors();
                     return-1;
                 }
@@ -182,4 +182,14 @@ public class FCE_FunctionCallsExpression extends functionCallsExpression{
         return retVal;
     }
 
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+    
 }

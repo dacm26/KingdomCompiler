@@ -89,4 +89,41 @@ public class PE_Content extends primaryExpression{
     }
 
     
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+
+    @Override
+    public void generateConstants(Node symbolNode) {
+        if (this.type == 4) {
+            symbolNode.addMsg(this.content.toString());
+        }
+        if (this.type == 3) {
+            symbolNode.addDouble(this.content.toString());
+        }
+        if (this.type == 1) {
+            symbolNode.addChar(this.content.toString());
+            
+        }
+        if (this.type == 2) {
+            symbolNode.addInt(this.content.toString());
+            
+        }
+        if (this.type == 5) {
+            if (this.content.equals("true")) {
+                symbolNode.addBool("1");
+            }else{
+                symbolNode.addBool("0");
+            }
+            
+            
+        }
+    }
+    
 }

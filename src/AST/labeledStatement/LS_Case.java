@@ -121,8 +121,18 @@ public class LS_Case extends labeledStatement {
                 typeExpected = "Wrong Operation";
                 break;
         }
-        String errorMsg = "Semantic Error: Type mismatch\n" + "\tExpected: " + typeExpected + " for the switch.\n\tReceived: " + typeReceived;
+        String errorMsg = "Semantic Error: Type mismatch\n" + "\tExpected: " + typeExpected + " for the switch.\n\tReceived: " + typeReceived+"\n\tline: "+this.line;
         System.err.println(errorMsg);
     }
 
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+    
 }

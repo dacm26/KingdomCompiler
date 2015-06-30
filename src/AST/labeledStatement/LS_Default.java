@@ -42,4 +42,14 @@ public class LS_Default extends labeledStatement {
         return true;
     }
 
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+    
 }

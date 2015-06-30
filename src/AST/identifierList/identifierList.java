@@ -15,4 +15,7 @@ import java.util.ArrayList;
 abstract public class identifierList {
     abstract public void printNode();
     abstract public ArrayList<String> getIds();
+   abstract public void setLine(int line);
+    abstract public int getLine();
+    protected int line;
 }

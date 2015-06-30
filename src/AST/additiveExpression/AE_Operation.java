@@ -97,4 +97,20 @@ public class AE_Operation extends additiveExpression {
         }
     }
 
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+
+    @Override
+    public void generateConstants(Node symbolNode) {
+        this.aE.generateConstants(symbolNode);
+        this.mE.generateConstants(symbolNode);
+    }
+    
 }

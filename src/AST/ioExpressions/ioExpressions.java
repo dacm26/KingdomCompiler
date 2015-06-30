@@ -5,6 +5,7 @@
  */
 package AST.ioExpressions;
 
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -14,5 +15,9 @@ import app.semanticAnalysis.Table.Node;
 abstract public class ioExpressions {
     abstract public void printNode();
     abstract public void generateSymbolNode(Node symbolNode);
-    abstract public void generateIC();
+
+    abstract public void setLine(int line);
+    abstract public int getLine();
+    protected int line;
+    abstract public void generateIC(Generate generateCode);
 }

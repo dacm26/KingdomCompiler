@@ -6,6 +6,7 @@
 package AST.ioExpressions;
 
 import AST.parameterList.*;
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**
@@ -45,11 +46,6 @@ public class IOE_Print extends ioExpressions {
         return id;
     }
 
-    @Override
-    public void generateIC(Generate generateCode){
-        this.generateCode = gc;
-        this.generateCode.generatePrint(id,content);
-    }
 
     public void setId(String id) {
         this.id = id;
@@ -81,21 +77,42 @@ public class IOE_Print extends ioExpressions {
     public void generateSymbolNode(Node symbolNode) {
         String errorMsg;
         if (!this.id.isEmpty() && !symbolNode.search(id)) {
-            errorMsg = "Semantic Error: The id: \'" + id + "\' doesn\'t exists. Can't print an id that doesn\'t exists.";
+            errorMsg = "Semantic Error: The id: \'" + id + "\' doesn\'t exists. Can't print an id that doesn\'t exists."+"\n\tline: "+this.line;
             System.err.println(errorMsg);
             symbolNode.setErrors();
             return;
         } 
         
         if (this.iL != null && !this.iL.validExpression(symbolNode)) {
-            errorMsg = "Semantic Error: Something is wrong with the Expression. Can't print the expression. ";
+            errorMsg = "Semantic Error: Something is wrong with the Expression. Can't print the expression. "+"\n\tline: "+this.line;
             System.err.println(errorMsg);
             symbolNode.setErrors();
             
         }
-
+        
+        if (!this.content.isEmpty()) {
+            symbolNode.addMsg(this.content);
+        }
         
 
     }
 
+@Override
+    public void setLine(int line) {
+        this.line = line+1;
+    }
+
+    @Override
+    public int getLine() {
+        return this.line;
+    }
+
+    @Override
+    public void generateIC(Generate gc){
+        this.generateCode = gc;
+        this.generateCode.generatePrint(id,content);
+    }
+
+
+    
 }
