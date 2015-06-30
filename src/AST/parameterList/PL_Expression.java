@@ -22,6 +22,7 @@ public class PL_Expression extends parameterList{
 
     public PL_Expression(Expression exp, Generate generateCode) {
         this.exp = exp;
+        this.generateCode = generateCode;
         exp.generateIC();
         this.cER = new ArrayList<RowIC>(this.generateCode.getCodeBlock());
         this.generateCode.emptyTemp();
