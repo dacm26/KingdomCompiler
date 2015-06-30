@@ -7,6 +7,7 @@ package AST.ioExpressions;
 
 import AST.parameterList.*;
 import app.semanticAnalysis.Table.Node;
+import app.intermediateCode.*;
 
 /**
  *
@@ -47,7 +48,7 @@ public class IOE_Print extends ioExpressions {
 
     @Override
     public void generateIC(Generate generateCode){
-        this.generateCode = gc;
+        this.generateCode = generateCode;
         this.generateCode.generatePrint(id,content);
     }
 

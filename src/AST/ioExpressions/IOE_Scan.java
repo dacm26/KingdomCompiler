@@ -5,6 +5,7 @@
  */
 package AST.ioExpressions;
 
+import app.intermediateCode.Generate;
 import app.semanticAnalysis.Table.Node;
 
 /**

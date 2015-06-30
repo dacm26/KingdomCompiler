@@ -32,6 +32,7 @@ public class S_FCD extends Statement{
     
     @Override
     public void generateIC(){
+        fCD.generateIC();
     }
 
     @Override

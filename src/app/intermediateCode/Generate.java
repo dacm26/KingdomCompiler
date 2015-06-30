@@ -69,10 +69,8 @@ public class Generate {
         cuadruplo.addRow("call", id, Integer.toString(parameterQuantity), "");
     }
     
-    public void generateTypeParameterList(ArrayList<String> parameters){
-        for (String x: parameters){
-            cuadruplo.addRow("param", x, "", "");
-        }
+    public void generateParameter(String x){
+        cuadruplo.addRow("param", x, "", "");
     }
     
     public void generateGOTO(String tag){
@@ -115,6 +113,10 @@ public class Generate {
         } else {
             cuadruplo.addRow("print",content,"","");
         }
+    }
+
+    public void generateScan(String id){
+        cuadruplo.addRow("scan",id,"","");
     }
 
     public ArrayList<RowIC> getCodeBlock(){

@@ -22,15 +22,18 @@ public class FCD_FunctionCallsDeclaration extends functionCallsDeclaration {
     private String id;
     private parameterList pL;
     private Generate generateCode;
+    private Node node;
 
-    public FCD_FunctionCallsDeclaration(String id, parameterList pL) {
+    public FCD_FunctionCallsDeclaration(String id, parameterList pL, Generate generateCode) {
         this.id = id;
         this.pL = pL;
+        this.generateCode = generateCode;
     }
 
-    public FCD_FunctionCallsDeclaration(String id) {
+    public FCD_FunctionCallsDeclaration(String id, Generate generateCode) {
         this.id = id;
         this.pL = null;
+        this.generateCode = generateCode;
     }
 
     public String getId() {
@@ -50,13 +53,12 @@ public class FCD_FunctionCallsDeclaration extends functionCallsDeclaration {
     }
 
     @Override
-    public void generateIC(Generate gc, Node symbolNode){
-        this.generateCode = gc;
+    public void generateIC(){
         if (this.pL == null){
             this.generateCode.generateFunctionCall(this.id, 0);
         } else {
-            //this.pL.generateIC(this.generateCode);
-            ArrayList<String> novo = this.convertToString(this.pL.getTypes(symbolNode));
+            this.pL.generateIC();
+            ArrayList<String> novo = this.convertToString(this.pL.getTypes(node));
             this.generateCode.generateFunctionCall(this.id, novo.size());
         }
     }
@@ -73,6 +75,7 @@ public class FCD_FunctionCallsDeclaration extends functionCallsDeclaration {
 
     @Override
     public void generateSymbolNode(Node symbolNode) {
+        node = symbolNode;
         if (!symbolNode.search(this.id)) {
             System.err.println("Semantic Error: The function \'"+this.id+"\' doesn't exists.");
             symbolNode.setErrors();

@@ -15,5 +15,5 @@ import app.semanticAnalysis.Table.Node;
 abstract public class functionCallsDeclaration {
     abstract public void printNode();
     abstract public void generateSymbolNode(Node symbolNode);
-    abstract public void generateIC(Generate gc, Node symbolNode);
+    abstract public void generateIC();
 }

@@ -243,8 +243,8 @@ identifier_list ::=   ID:id                                                     
 	| identifier_list:iL COMMA ID:id 																{: RESULT = new IL_IdentifierList(iL,id); :}
 	;
 /*Parameter List*/
-parameter_list ::=   expression:exp 																{: RESULT = new PL_Expression(exp); :}
-	| parameter_list:pL COMMA expression:exp 														{: RESULT = new PL_ExpressionList(pL,exp); :}
+parameter_list ::=   expression:exp 																{: RESULT = new PL_Expression(exp,parser.generateCode); :}
+	| parameter_list:pL COMMA expression:exp 														{: RESULT = new PL_ExpressionList(pL,exp,parser.generateCode); :}
 	;
 
 /*Parameter List with Variable Types*/
@@ -332,8 +332,8 @@ io_expressions ::= PRINT OPAR STRINGCONTENT:stringContent CPAR END              
     ;
 
 /*Function calls*/
-function_calls_declaration ::= ID:id OPAR CPAR END 													{: RESULT = new FCD_FunctionCallsDeclaration(id); :}
-	| ID:id OPAR parameter_list:pL CPAR END 														{: RESULT = new FCD_FunctionCallsDeclaration(id,pL); :} 																						
+function_calls_declaration ::= ID:id OPAR CPAR END 													{: RESULT = new FCD_FunctionCallsDeclaration(id,parser.generateCode); :}
+	| ID:id OPAR parameter_list:pL CPAR END 														{: RESULT = new FCD_FunctionCallsDeclaration(id,pL,parser.generateCode); :} 																						
 	;
 
 /*Function calls*/
