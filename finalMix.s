@@ -1,19 +1,8 @@
 .data
-	_msg0:	.asciiz "\n\n"
-	_msg1:	.asciiz "\n\n"
-	_msg2:	.asciiz "\n\n"
-	_msg3:	.asciiz "\n\n"
-	_msg4:	.asciiz "Popeye\n"
-	_msg5:	.asciiz "\n\n"
-	_x:	.word	0
-	_a:	.byte	'0'
-	_b:	.byte	0
-	_c:	.double	0.0
-	_d:	.space	255
-	_double0:	.double 3.1415
-	_char0:	.byte 'a'
-	_bool0:	.byte 0
-	_int0:	.word 16
+	_k:	.word	0
+	_i:	.word	0
+	_int0:	.word 3
+	_int1:	.word 4
 	_zeroDouble:	.double	0.0	
 	_charBuffer:	.space	2	
 .text

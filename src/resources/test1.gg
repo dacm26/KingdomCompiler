@@ -1,4 +1,7 @@
 
 void KingdomHearts(){
-    popeye("hola");
+    while(3>6){
+    	int i = 3;
+    }
+    int k = 4;
 }

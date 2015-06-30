@@ -773,7 +773,7 @@ class CUP$parser$actions {
 		int cSleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int cSright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		compoundStatement cS = (compoundStatement)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new IT_While(cE,cS); RESULT.setLine(cEleft); 
+		 RESULT = new IT_While(cE,cS, parser.generateCode); RESULT.setLine(cEleft); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("iteration_statement",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

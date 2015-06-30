@@ -193,7 +193,7 @@ jump_function_statement ::= RETURN END:t                                        
 	;
 
 /*Iteration Statements*/
-iteration_statement ::=   WHILE OPAR conditional_expression:cE CPAR compound_statement:cS			{: RESULT = new IT_While(cE,cS); RESULT.setLine(cEleft); :}
+iteration_statement ::=   WHILE OPAR conditional_expression:cE CPAR compound_statement:cS			{: RESULT = new IT_While(cE,cS, parser.generateCode); RESULT.setLine(cEleft); :}
 	| FOR OPAR variable_type_specifier:tS ID:id ASSIGN expression:exp END                        
       conditional_expression:cE1 END assignment_expression:aE CPAR 
       compound_statement:cS 																		{: RESULT = new IT_For(tS,id,exp,cE1,aE,cS);  RESULT.setLine(cE1left);:}

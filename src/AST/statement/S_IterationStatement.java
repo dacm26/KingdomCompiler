@@ -29,6 +29,7 @@ public class S_IterationStatement extends Statement{
 
     @Override
     public void generateIC(){
+        iS.generateIC();
     }
     
     @Override
