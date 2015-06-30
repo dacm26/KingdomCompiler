@@ -1,13 +1,16 @@
 .data
 	_msg0:	.asciiz "hola\n"
+	_i:	.word	0
 	_x:	.word	0
 	_k:	.word	0
 	_i:	.word	0
-	_int0:	.word 3
-	_int1:	.word 2
-	_int2:	.word 1
-	_int3:	.word 3
-	_int4:	.word 4
+	_int0:	.word 6
+	_int1:	.word 3
+	_int2:	.word 3
+	_int3:	.word 2
+	_int4:	.word 1
+	_int5:	.word 3
+	_int6:	.word 4
 	_zeroDouble:	.double	0.0	
 	_charBuffer:	.space	2	
 .text

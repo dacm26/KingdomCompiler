@@ -278,6 +278,12 @@ variable_type_specifier ::= CHAR:t                                              
 declaration ::= variable_type_specifier:vTS identifier_list:iL END                                  {: RESULT = new D_identifierList(vTS,iL); RESULT.setLine(iLleft);:} 
 	| variable_type_specifier:vTS  ID:stringValue ASSIGN expression:exp END                         {: RESULT = new D_Assign(vTS,stringValue,exp,parser.generateCode); RESULT.setLine(expleft);:}
 	| ID:stringValue ASSIGN expression:exp END                                                      {: RESULT = new D_Assign(stringValue,exp,parser.generateCode); RESULT.setLine(expleft);:}
+	| variable_type_specifier:vTS identifier_list:iL error 											{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+	END 																							{: RESULT = new D_identifierList(vTS,iL); RESULT.setLine(iLleft);:}
+	| variable_type_specifier:vTS ID:stringValue ASSIGN expression:exp error 						{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+	END 																							{: RESULT = new D_Assign(vTS,stringValue,exp,parser.generateCode); RESULT.setLine(expleft);:}
+	| ID:stringValue ASSIGN expression:exp error 													{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+	END 																							{: RESULT = new D_Assign(stringValue,exp,parser.generateCode); RESULT.setLine(expleft);:}
 	;
 
 /*Assignment Expression*/
@@ -333,12 +339,20 @@ io_expressions ::= PRINT OPAR STRINGCONTENT:stringContent CPAR END              
 
 /*Function calls*/
 function_calls_declaration ::= ID:id OPAR CPAR END 													{: RESULT = new FCD_FunctionCallsDeclaration(id, parser.generateCode); RESULT.setLine(idleft);:}
-	| ID:id OPAR parameter_list:pL CPAR END 														{: RESULT = new FCD_FunctionCallsDeclaration(id,pL, parser.generateCode); RESULT.setLine(idleft);:} 																						
-;
+	| ID:id OPAR parameter_list:pL CPAR END 														{: RESULT = new FCD_FunctionCallsDeclaration(id,pL, parser.generateCode); RESULT.setLine(idleft);:}
+	| ID:id OPAR CPAR error 																		{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+	END 																						    {: RESULT = new FCD_FunctionCallsDeclaration(id,parser.generateCode); RESULT.setLine(idleft);:}
+	| ID:id OPAR parameter_list:pL CPAR error 														{: parser.report_error("You forgot a ;","End of statement Syntax Error"); :}
+	END 																							{: RESULT = new FCD_FunctionCallsDeclaration(id,pL, parser.generateCode); RESULT.setLine(idleft);:}
+	;
 
 /*Function calls*/
 function_calls_expression ::= ID:id OPAR CPAR	 													{: RESULT = new FCE_FunctionCallsExpression(id); RESULT.setLine(idleft);:}
 	| ID:id OPAR parameter_list:pL CPAR 															{: RESULT = new FCE_FunctionCallsExpression(id,pL,parser.generateCode); RESULT.setLine(idleft);:}
+	| ID:id OPAR error 																				{: parser.report_error("You forgot a )","End of statement Syntax Error");:}
+	  CPAR																							{: RESULT = new FCE_FunctionCallsExpression(id); RESULT.setLine(idleft);:}
+	| ID:id OPAR parameter_list:pL error 																{: parser.report_error("You forgot a )","End of statement Syntax Error"); :}
+	  CPAR																							{: RESULT = new FCE_FunctionCallsExpression(id,pL,parser.generateCode); RESULT.setLine(idleft);:}
 	;
 
 /*Expression*/

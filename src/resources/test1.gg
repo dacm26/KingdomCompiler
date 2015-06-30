@@ -1,6 +1,11 @@
+int popeye(int ix, bool k, KChain h) {
+	int i = 3*6;
+	giff i;
+}
 
 void KingdomHearts(){
     print("hola");
+    popeye(2,true,"hola perros");
     int x = 2*3+1;
     if(x> 32){
     }
