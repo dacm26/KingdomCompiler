@@ -228,16 +228,6 @@ labeled_statement ::=   CASE INT:integerContent COLON compound_statement:cS labe
 	;
 
 /*Statement Generalization*/
-<<<<<<< HEAD
-statement ::=   compound_statement:cS                                            					{: RESULT = new S_CompoundStatement(cS); :}		//Done
-	| selection_statement:sS 																		{: RESULT = new S_SelectionStatement(sS, parser.generateCode);:}    //Done                                 										
-	| iteration_statement:iS                                           								{: RESULT = new S_IterationStatement(iS); :}	//Done
-	| declaration:d                                                                                 {: RESULT = new S_Declaration(d); :}			//Done
-	| io_expressions:iE                                                                             {: RESULT = new S_IOExpression(iE,parser.generateCode); :}			//Done
-	| function_calls_declaration:fcd                                                                {: RESULT = new S_FCD(fcd); :}					//Done				
-	| jump_iteration_statement:jis																	{: RESULT = new S_JIS(jis); :}					//Not Today
-	| jump_function_statement:jfs																	{: RESULT = new S_JFS(jfs); :}					//Not Today
-=======
 statement ::=   compound_statement:cS                                            					{: RESULT = new S_CompoundStatement(cS); RESULT.setLine(cSleft);:}		//Done
 	| selection_statement:sS 																		{: RESULT = new S_SelectionStatement(sS,parser.generateCode);RESULT.setLine(sSleft); :}    //Done                                 										
 	| iteration_statement:iS                                           								{: RESULT = new S_IterationStatement(iS); RESULT.setLine(iSleft);:}	//Done
@@ -246,7 +236,6 @@ statement ::=   compound_statement:cS                                           
 	| function_calls_declaration:fcd                                                                {: RESULT = new S_FCD(fcd); RESULT.setLine(fcdleft);:}					//Done				
 	| jump_iteration_statement:jis																	{: RESULT = new S_JIS(jis); RESULT.setLine(jisleft);:}					//Not Today
 	| jump_function_statement:jfs																	{: RESULT = new S_JFS(jfs); RESULT.setLine(jfsleft);:}					//Not Today
->>>>>>> finalTest
 	;
 
 /*Identifier List*/
@@ -254,13 +243,8 @@ identifier_list ::=   ID:id                                                     
 	| identifier_list:iL COMMA ID:id 																{: RESULT = new IL_IdentifierList(iL,id); RESULT.setLine(idleft);:}
 	;
 /*Parameter List*/
-<<<<<<< HEAD
-parameter_list ::=   expression:exp 																{: RESULT = new PL_Expression(exp,parser.generateCode); :}
-	| parameter_list:pL COMMA expression:exp 														{: RESULT = new PL_ExpressionList(pL,exp,parser.generateCode); :}
-=======
-parameter_list ::=   expression:exp 																{: RESULT = new PL_Expression(exp); RESULT.setLine(expleft);:}
-	| parameter_list:pL COMMA expression:exp 														{: RESULT = new PL_ExpressionList(pL,exp); RESULT.setLine(expleft);:}
->>>>>>> 88af1c8396e3793634698e9a97f424bc212c87bc
+parameter_list ::=   expression:exp 																{: RESULT = new PL_Expression(exp,parser.generateCode); RESULT.setLine(expleft);:}
+	| parameter_list:pL COMMA expression:exp 														{: RESULT = new PL_ExpressionList(pL,exp,parser.generateCode); RESULT.setLine(expleft);:}
 	;
 
 /*Parameter List with Variable Types*/
@@ -348,14 +332,9 @@ io_expressions ::= PRINT OPAR STRINGCONTENT:stringContent CPAR END              
     ;
 
 /*Function calls*/
-<<<<<<< HEAD
-function_calls_declaration ::= ID:id OPAR CPAR END 													{: RESULT = new FCD_FunctionCallsDeclaration(id,parser.generateCode); :}
-	| ID:id OPAR parameter_list:pL CPAR END 														{: RESULT = new FCD_FunctionCallsDeclaration(id,pL,parser.generateCode); :} 																						
-=======
-function_calls_declaration ::= ID:id OPAR CPAR END 													{: RESULT = new FCD_FunctionCallsDeclaration(id); RESULT.setLine(idleft);:}
-	| ID:id OPAR parameter_list:pL CPAR END 														{: RESULT = new FCD_FunctionCallsDeclaration(id,pL); RESULT.setLine(idleft);:} 																						
->>>>>>> 88af1c8396e3793634698e9a97f424bc212c87bc
-	;
+function_calls_declaration ::= ID:id OPAR CPAR END 													{: RESULT = new FCD_FunctionCallsDeclaration(id, parser.generateCode); RESULT.setLine(idleft);:}
+	| ID:id OPAR parameter_list:pL CPAR END 														{: RESULT = new FCD_FunctionCallsDeclaration(id,pL, parser.generateCode); RESULT.setLine(idleft);:} 																						
+;
 
 /*Function calls*/
 function_calls_expression ::= ID:id OPAR CPAR	 													{: RESULT = new FCE_FunctionCallsExpression(id); RESULT.setLine(idleft);:}

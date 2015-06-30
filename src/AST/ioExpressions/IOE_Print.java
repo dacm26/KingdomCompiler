@@ -47,14 +47,10 @@ public class IOE_Print extends ioExpressions {
         return id;
     }
 
-<<<<<<< HEAD
-    @Override
     public void generateIC(Generate generateCode){
         this.generateCode = generateCode;
         this.generateCode.generatePrint(id,content);
     }
-=======
->>>>>>> 88af1c8396e3793634698e9a97f424bc212c87bc
 
     public void setId(String id) {
         this.id = id;
@@ -114,14 +110,5 @@ public class IOE_Print extends ioExpressions {
     @Override
     public int getLine() {
         return this.line;
-    }
-
-    @Override
-    public void generateIC(Generate gc){
-        this.generateCode = gc;
-        this.generateCode.generatePrint(id,content);
-    }
-
-
-    
+    }  
 }
